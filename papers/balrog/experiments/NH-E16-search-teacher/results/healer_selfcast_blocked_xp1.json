@@ -1,0 +1,13 @@
+{
+ "seed": 825,
+ "role": "Healer",
+ "kind": "verb-mechanics-probe",
+ "probe": "healer_selfcast_reachability",
+ "observed": "Healer Xp1 starts Pw 4/4; healing costs 5 Pw ('You don't have enough energy', Pw menu shows healing lvl1 0% fail + extra healing lvl3 54%); 300 rest turns -> Pw still 4/4 (ceiling). Self-direction candidates: 'down' aborts ('can't go down here'), 'wait' consumed silently without casting (direction prompt likely dismissed) - self-target key '.' absence still unresolved.",
+ "knowledge": [
+  "Healer heal is UNCASTABLE at Xp1 (pwmax 4 < 5 cost) - capability-map cell verdict: heal-at-low-HP only Xp2+",
+  "self-cast direction answer in BALROG action space UNRESOLVED (probe again at Xp2+ with real Pw)"
+ ],
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T17:10:15Z"
+}

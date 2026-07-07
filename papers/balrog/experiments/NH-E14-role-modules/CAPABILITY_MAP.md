@@ -20,7 +20,7 @@ in a role profile.
 | MELEE_OTHER (+2.09, 13 d) | HYP — Force Bolt d6+ per cast, fail%-gated | HYP | HYP — !oGL/healing mid-fight | HYP — remove curse rarely; teleport escape | HYP | HYP — best-found weapon vs dwarf king etc. | HYP | — |
 | SPIDER_ANT (+1.92, 10 d) | HYP — kill-before-contact is THE answer to speed-18 poison | HYP — sleep/striking | HYP — cure sickness class | — | HYP — primary historical counter, needs ammo economy | HYP | HYP | — |
 | STARVATION (+1.40, 14 d) | — (Pw is not food) | — | HYP — fruit juice marginal | — | — | — | — | — |
-| PRAY_DEATH (+0.51, 5 d) | HYP — Healer heal-self replaces desperation prayer | HYP | HYP — healing potion before prayer window | — | — | — | — | HYP |
+| PRAY_DEATH (+0.51, 5 d) | VERDICT(partial): Healer heal-self BLOCKED at Xp1 (pwmax 4 < 5 cost; probe healer_selfcast_blocked_xp1) — heal doctrine only Xp2+; self-direction key still unresolved | HYP | HYP — healing potion before prayer window | — | — | — | — | HYP |
 | RANGED (+0.40, 4 d) | HYP — outrange the wand-zapper | HYP — return fire | — | — | HYP | — | HYP — AC vs bolts | — |
 | EXPLODE/SLEEP/TRAP (+0.33) | — | — | — | HYP — magic mapping vs traps marginal | — | — | — | — |
 
@@ -35,5 +35,5 @@ controlled), (3) NetHack dev transfer check (paired block) — then WIN cells
 ship into role profiles (NH-E14) and the row's remaining ceiling is
 re-estimated. Verdicts recorded here + ledger + report.
 
-**Status 2026-07-07:** 0/34 relevant cells resolved (map just built).
+**Status 2026-07-07 late:** 2/34 cells with evidence — cast column: CAST-1/2 dev verdict (Wizard rows); Healer-heal cell part-resolved (Xp1-blocked). Verb grammars pinned for the whole cast/zap/quaff/read/wield columns (probe battery).
 Priority per operator: spellcast doctrine column + D5-6 melee rows first.
