@@ -167,3 +167,23 @@ See NH-E24 (curiosity framings compared) — the formula must earn its way in.**
    the whole learning system).
 4. Banner: "RECOGNIZED: ant-pack corridor [seen 7×, strat pinned] →
    engaging choke+throw".
+
+## 9b. RECOGNITION YIELDS AN OPTION MENU (operator refinement)
+
+A recognized scenario has MULTIPLE good options — FIGHT (practiced strat,
++xp +loot, risk), RUN (safe, forfeits), SPRINT-THROUGH ("book it": cross
+without engaging — movement-through-danger as a first-class practiced
+skill: door-to-door pathing, don't stop, eat the opportunity attacks),
+FIGHT-AND-LOOT, SNEAK/WAIT.
+1. Each fingerprint stores an OPTION SET with outcome history per GOAL
+   DIMENSION (survival% / loot / xp / time / HP cost) from gym reps + wild
+   outcomes.
+2. Selection = goal-list weights × option outcome vectors; felt-sense
+   breaks ties or overrides with a why ("weights say fight, but we're one
+   hit from veto range — booking it").
+3. SPRINT-THROUGH gets its own lab reps — probably the most under-used
+   option in our history (we fight or flee; we never just run past).
+4. Log menu + choice + outcome per recognition event; each scenario's menu
+   ranks itself per goal profile over time.
+Banner: "RECOGNIZED: ant pack [menu: fight .72 / sprint .85 / retreat .95]
+→ goal weights favor sprint → booking it".
