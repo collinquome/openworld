@@ -1,0 +1,328 @@
+{
+ "episodes": [
+  {
+   "file": "NetHackChallenge-v0__ep700.jsonl.gz",
+   "steps_checked": 7828,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep701.jsonl.gz",
+   "steps_checked": 2115,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep702.jsonl.gz",
+   "steps_checked": 6851,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep703.jsonl.gz",
+   "steps_checked": 1908,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep704.jsonl.gz",
+   "steps_checked": 19460,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep705.jsonl.gz",
+   "steps_checked": 4199,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep706.jsonl.gz",
+   "steps_checked": 247,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep707.jsonl.gz",
+   "steps_checked": 627,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep708.jsonl.gz",
+   "steps_checked": 321,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep709.jsonl.gz",
+   "steps_checked": 916,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep710.jsonl.gz",
+   "steps_checked": 3039,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep711.jsonl.gz",
+   "steps_checked": 558,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep712.jsonl.gz",
+   "steps_checked": 1444,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep713.jsonl.gz",
+   "steps_checked": 599,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep714.jsonl.gz",
+   "steps_checked": 592,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep715.jsonl.gz",
+   "steps_checked": 6725,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep716.jsonl.gz",
+   "steps_checked": 5186,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep717.jsonl.gz",
+   "steps_checked": 1710,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep718.jsonl.gz",
+   "steps_checked": 227,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep719.jsonl.gz",
+   "steps_checked": 736,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep720.jsonl.gz",
+   "steps_checked": 152,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep721.jsonl.gz",
+   "steps_checked": 1492,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep722.jsonl.gz",
+   "steps_checked": 4170,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep723.jsonl.gz",
+   "steps_checked": 1938,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep724.jsonl.gz",
+   "steps_checked": 1238,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep725.jsonl.gz",
+   "steps_checked": 86,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep726.jsonl.gz",
+   "steps_checked": 1391,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep727.jsonl.gz",
+   "steps_checked": 9288,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep728.jsonl.gz",
+   "steps_checked": 5549,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep729.jsonl.gz",
+   "steps_checked": 3075,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep730.jsonl.gz",
+   "steps_checked": 1198,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep731.jsonl.gz",
+   "steps_checked": 1085,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep732.jsonl.gz",
+   "steps_checked": 851,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep733.jsonl.gz",
+   "steps_checked": 8485,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep734.jsonl.gz",
+   "steps_checked": 7257,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep735.jsonl.gz",
+   "steps_checked": 898,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep736.jsonl.gz",
+   "steps_checked": 130,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep737.jsonl.gz",
+   "steps_checked": 1131,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep738.jsonl.gz",
+   "steps_checked": 2390,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  },
+  {
+   "file": "NetHackChallenge-v0__ep739.jsonl.gz",
+   "steps_checked": 1965,
+   "violations": 0,
+   "rate": 0.0,
+   "by_rule": {},
+   "samples": []
+  }
+ ],
+ "total_violations": 0,
+ "total_steps": 119057,
+ "rate": 0.0,
+ "criterion_v_pass": true
+}

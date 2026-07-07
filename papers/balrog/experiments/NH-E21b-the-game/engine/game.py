@@ -367,8 +367,13 @@ class Game:
             "hp": a.hp,
             "pos": [a.x, a.y],
             "zone": a.zone_id(self.world),
+            # ANTI-CONTAMINATION FIX (Fable 5 max, session 2, found live in
+            # T1_s0 consult 4): item_class is a GROUND-TRUTH mechanic label
+            # ("hazard_fruit") — serving it in obs leaks exactly what the
+            # game exists to make discoverable. Obs carries display_name
+            # only; internals keep item_class via agent.inventory directly.
             "inventory": [
-                {"letter": it.inventory_letter, "item_class": it.item_class,
+                {"letter": it.inventory_letter,
                  "display_name": it.display_name}
                 for it in a.inventory
             ],

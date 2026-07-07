@@ -1,0 +1,158 @@
+{
+ "template": "T6",
+ "seed": 0,
+ "actions": [
+  "pickup",
+  "up",
+  "left",
+  "left",
+  "pickup",
+  "eat b",
+  "down",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "drop a",
+  "right",
+  "right",
+  "right"
+ ],
+ "consultations": [
+  {
+   "at_step": 0,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (T6 probe branch, consult 1): separate branch (deterministic world, fresh prefix) purely to pin mechanic 4 \u2014 the charm's carried effect. Pick up the charm, eat the mottled fruit to create a wounded state, and watch for an aura."
+  },
+  {
+   "at_step": 6,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (T6 probe consult 2): hp 35 with charm held, no aura yet in zone A. Design hypothesis: heal fires on carrying it into the SECOND room. Walk through G1 (wounded, should yield) and into the corridor/room 2, watching hp."
+  },
+  {
+   "at_step": 21,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (T6 probe consult 3): mechanic 4 PINNED \u2014 charm heals while carried in room B (+15/+5 to full). Now the trap side: step into G2 CARRYING it (expect refusal), then drop it and step in again (the designed give-up-the-proven-good-item line, demonstrated end to end)."
+  },
+  {
+   "at_step": 27,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (T6 probe consult 4): 4/4 mechanics \u2014 G2 refused the charm-carrier and yielded after the drop (item 3 back on the floor by the gate). Finishing the designed line."
+  }
+ ],
+ "macro_log": [
+  {
+   "at_step": 0,
+   "macro": "goto 4 3",
+   "error": null
+  },
+  {
+   "at_step": 0,
+   "macro": "pickup",
+   "error": null
+  },
+  {
+   "at_step": 1,
+   "macro": "goto 2 2",
+   "error": null
+  },
+  {
+   "at_step": 4,
+   "macro": "pickup",
+   "error": null
+  },
+  {
+   "at_step": 5,
+   "macro": "eat b",
+   "error": null
+  },
+  {
+   "at_step": 6,
+   "macro": "goto 8 3",
+   "error": null
+  },
+  {
+   "at_step": 13,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 14,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 15,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 16,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 17,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 18,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 19,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 20,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 21,
+   "macro": "goto 18 3",
+   "error": null
+  },
+  {
+   "at_step": 23,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 24,
+   "macro": "drop a",
+   "error": null
+  },
+  {
+   "at_step": 25,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 26,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 27,
+   "macro": "right",
+   "error": null
+  }
+ ]
+}

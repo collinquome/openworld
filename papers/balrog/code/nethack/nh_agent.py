@@ -78,6 +78,7 @@ C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
 C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
 C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
+C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-nutrition doctrine
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
@@ -85,11 +86,12 @@ PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
-              C2_E15, C2_REPEAT))
+              C2_E15, C2_REPEAT, C2_CASTHUNGER))
 WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
 WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
 CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
+REPEAT_BUDGET = int(_os.environ.get("NH_REPEAT_BUDGET", "150"))  # env steps/level
 
 # Elbereth is ignored by these (offline source facts, disclosed):
 ELBERETH_IGNORES = {"minotaur", "shopkeeper", "watchman", "watch captain",
@@ -183,6 +185,7 @@ class DiveAgent:
         if _os.environ.get("NH_STORE", "1") == "1":
             import nh_store
             self.store = nh_store.Store()
+        self.repeat_budget = {}     # level key -> REPEAT2 routing steps used
         # ---- Phase L NH_REPEAT state (inert unless C2_REPEAT) ----
         self.prev_level_key = None
         self._cur_level_key = None
@@ -202,6 +205,9 @@ class DiveAgent:
         self.cast_step = -99        # step the cast was issued (staleness)
         self.cast_unavailable = False
         self.cast_fires = 0
+        # Phase L NH_CASTHUNGER state (tracking always on; behavior gated)
+        self.cast_hunger_blocked = False
+        self.cast_hunger_events = 0
         self.rest_budget = {}                   # level key -> turns rested
         self.dig_attempts = {}                  # level key -> attempts
         self.no_dig_cells = set()               # (key, cell)
@@ -369,6 +375,29 @@ class DiveAgent:
         if C2_CAST and "You don't know any spells" in msg:
             self.cast_unavailable = True
             self.cast_dir = None
+        # RULE CARD [CAST_HUNGER_V1] (layer: PROCEDURE; model: Fable 5 max;
+        # provenance: OPERATOR-OBSERVED — spotted "too hungry to cast" live
+        # in the c22 GIF reel, 2026-07-07; the human-observer→hypothesis
+        # loop the reel exists for): casting debits NUTRITION as well as Pw,
+        # and the env refuses casts when too hungry. Ungated, the cast layer
+        # retried the refused cast EVERY step: seed 839 logged 2759 refusals
+        # (24% of the episode) and starved; 2 of 4 affected CAST-block
+        # Wizards died of hunger. Doctrine: (a) the refusal message is a
+        # PRE-FAIL signal — latch cast_hunger_blocked until fed back to
+        # NotHungry, letting melee/throw doctrine take over mid-fight;
+        # (b) casters eat at HUNGRY tier, not Weak (see _decide eat-early
+        # branch). Status: provisional pending paired dev (ref=cast2).
+        # Evidence: 4/12 CAST-block Wizard seeds affected (839/912/940/980).
+        if C2_CAST and "too hungry to cast" in msg:
+            if not self.cast_hunger_blocked:
+                self.cast_hunger_blocked = True
+                self.cast_hunger_events += 1
+                self.cast_dir = None
+                self._ev(f"CAST_HUNGER: refusal at hunger {A.hunger} "
+                         f"(event {self.cast_hunger_events})")
+        elif self.cast_hunger_blocked and A.hunger <= 1:
+            self.cast_hunger_blocked = False
+            self._ev("CAST_HUNGER: unblocked (fed to NotHungry)")
         # harness-audit item 4: welcome-message parse can miss (message
         # scrolled past under skip_more). Fallback: the status line always
         # carries "<Name> the <RankTitle>" — map via C.RANK_TO_ROLE
@@ -1184,6 +1213,21 @@ class DiveAgent:
                     self.queue = ["y"]
                     self.queue_tag = "eat_corpse"
                     return "eat"
+            if C2_CASTHUNGER and self._caster_active():
+                # CAST_HUNGER_V1(b): casters treat HUNGRY as the eat
+                # trigger, not Weak — the "too hungry to cast" failure
+                # arrives mid-fight, precisely when the bolt was the plan.
+                # Same walk-to-corpse search as the Weak branch.
+                cells = [k[0] for k in self.fresh_kills
+                         if k[1] in C.SAFE_CORPSES and not
+                         self._cannibal(k[1]) and k[0] != A.agent]
+                if cells:
+                    path = A.level.bfs(A.agent, cells,
+                                       avoid=self._suspects() |
+                                       self._mcells())
+                    if path and len(path) <= 12:
+                        self._goal("eat", "caster eat-early at Hungry")
+                        return self._step_path(path)
 
         # held by a sticky monster: kill it, fleeing is impossible
         if "cannot escape from" in msg:
@@ -1319,17 +1363,48 @@ class DiveAgent:
                 self.queue_tag = "pickup"
                 return "pickup"
 
-        # ---- P8.9: repeated-layout stair hint (REPEAT_LAYOUT_STAIRS) -------
-        # checked every step (cheap: internally rate-limited); on FIRST
-        # detection the hint overrides the current explore target once —
-        # subsequent target churn is left to normal explore logic.
+        # ---- P8.9: repeated-layout stair goal (REPEAT_LAYOUT_STAIRS V2) ----
+        # V1 (explore_target hint) was INERT: _explore only honors a target
+        # already in the frontier set, and a cross-map stair prediction
+        # never is — REPEAT-1 paired block read exact-0.00 on all 20 seeds
+        # while detections fired 5/5 (fires≠effect, the ARMOR-bug pattern).
+        # V2 makes the prediction a FIRST-CLASS GOAL: route to the frontier
+        # cell nearest the predicted stair cell under a bounded per-level
+        # budget; refute the prediction if the cell explores to non-stairs.
         if C2_REPEAT:
-            already = self.repeat_pred
             hint = self._repeat_hint()
-            if hint is not None and already is None and \
-                    not A.level.explored[hint[1]][hint[0]]:
-                self.explore_target = hint
-                self._goal("find-stairs", f"repeat-layout hint {hint}")
+            if hint is not None:
+                hx, hy = hint
+                if A.level.explored[hy][hx]:
+                    if hint not in (A.level.stairs_down | A.level.holes):
+                        self._ev(f"REPEAT2: prediction {hint} refuted "
+                                 f"(explored, no stairs)")
+                        self.repeat_pred = False
+                    # else: stairs known — descent layer takes over
+                else:
+                    used = self.repeat_budget.get(A.key, 0)
+                    if used >= REPEAT_BUDGET:
+                        if used == REPEAT_BUDGET:
+                            self._ev("REPEAT2: budget exhausted, "
+                                     "normal explore resumes")
+                            self.repeat_budget[A.key] = used + 1
+                    else:
+                        frontier = A.level.frontier_cells()
+                        if frontier:
+                            tgt = min(frontier,
+                                      key=lambda c: max(abs(c[0] - hx),
+                                                        abs(c[1] - hy)))
+                            path = A.level.bfs(A.agent, [tgt],
+                                               avoid=self._travel_avoid())
+                            if path:
+                                if used == 0:
+                                    self._ev(f"REPEAT2: routing to "
+                                             f"predicted stairs {hint} "
+                                             f"via frontier {tgt}")
+                                self._goal("find-stairs",
+                                           f"repeat-layout goal {hint}")
+                                self.repeat_budget[A.key] = used + 1
+                                return self._step_path(path)
 
         # ---- P9: explore ----------------------------------------------------
         act = self._explore(obs)
@@ -1522,8 +1597,20 @@ class DiveAgent:
             self.note(f"cast menu: no usable attack spell "
                       f"{self.cast_spells}")
 
+    def _caster_active(self):
+        """True when this episode is actually using the cast repertoire
+        (CAST_HUNGER_V1 scope guard: doctrine must not touch non-casters)."""
+        return C2_CAST and not self.cast_unavailable and \
+            (self.cast_choice is not None or self.cast_fires > 0 or
+             self.role == "Wizard")
+
     def _cast_ready(self):
         if not C2_CAST or self.cast_unavailable:
+            return False
+        # CAST_HUNGER_V1(a): a hunger-refused cast stays blocked until fed
+        # — stops the refusal-retry loop (2759 wasted steps, seed 839) and
+        # lets melee/throw doctrine take the fight over.
+        if C2_CASTHUNGER and self.cast_hunger_blocked:
             return False
         if self.cast_spells is None and self.role != "Wizard":
             return False        # discovery restricted to Wizard (carded)

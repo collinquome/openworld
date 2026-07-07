@@ -1,0 +1,132 @@
+{
+ "template": "T1",
+ "seed": 0,
+ "actions": [
+  "right",
+  "right",
+  "right",
+  "right",
+  "interact",
+  "right",
+  "interact",
+  "left",
+  "down",
+  "pickup",
+  "up",
+  "up",
+  "left",
+  "left",
+  "left",
+  "left",
+  "pickup",
+  "eat a",
+  "down",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right",
+  "right"
+ ],
+ "consultations": [
+  {
+   "at_step": 0,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (felt-sense, consult 1): A small antechamber, two fruits (one 'mottled' \u2014 mottled reads as spoiled/dubious; one 'sweet-smelling' \u2014 advertised-pleasant), and a single gate east. Curiosity pull: the gate is the only exit, so its opening condition is the world's puzzle. Plan: walk to the gate and interact BEFORE touching any fruit \u2014 learn the constraint first, then experiment to satisfy it. Also pick up both fruits on the way; portable options are options."
+  },
+  {
+   "at_step": 5,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (consult 2): interact acts on the standing cell; the gate must be entered or interacted with ON its cell. Step right INTO the '+' and see what the world says."
+  },
+  {
+   "at_step": 7,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (consult 3): Gate G1 refuses on 'something about your situation' \u2014 a STATE condition, not a key. My variables: hp=100, inventory=empty, position. The world offers exactly one lever over state: the two fruits. Hypothesis pair: eating changes hp (mottled = harm? sweet = heal or trap?). Experiment cheaply: pick up BOTH fruits (portable evidence), eat the mottled one first \u2014 if it damages, that plus a gate that refuses a FULL-hp visitor starts to smell like damage-as-key (a gate for the wounded). Rejected alternatives from the 10-sample: search walls for hidden exits (grid shows none), wait for timed opening (no evidence), drop items at gate (no items yet)."
+  },
+  {
+   "at_step": 17,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (consult 4): INSTRUMENT NOTE, flagged for the engine ledger: inventory exposes item_class='hazard_fruit'/'plain_fruit' \u2014 internal ground-truth labels leaking through a served channel. This weakens the anti-contamination masking for any arm that reads inventory; filing as an engine bug (fix: display_name only). Proceeding as if unseen, reasoning only from in-fiction evidence, but this run carries the disclosure. Experiment 1: eat the mottled fruit ('a') and watch hp."
+  },
+  {
+   "at_step": 18,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (consult 5): -68 HP, hp now 32, mechanics counter ticked 2/2 \u2014 both mechanics are now KNOWN: (M1) gate G1 = state-conditioned, (M2) mottled fruit = big self-damage. Composition: a world whose ONLY lever is self-damage and whose only gate wants a 'situation' \u2014 the damage IS the key (the gate is for the wounded; P-defeasible 'don't hurt yourself' consciously OVERRIDDEN, bounded: hp 32 is survivable, no other hazard visible). Re-test the gate now at hp 32. If it still refuses, the threshold is lower \u2014 but I hold no more damage sources; then I'd re-examine (does the sweet fruit heal? is there another mottled fruit spawn?)."
+  },
+  {
+   "at_step": 25,
+   "model": "claude-fable-5 (max)",
+   "text": "INTUITION (consult 6): Gate yielded at hp 32 \u2014 damage-as-key CONFIRMED by play (hypothesis->override->confirmation chain complete). Walk out east."
+  }
+ ],
+ "macro_log": [
+  {
+   "at_step": 0,
+   "macro": "goto 8 3",
+   "error": null
+  },
+  {
+   "at_step": 4,
+   "macro": "interact",
+   "error": null
+  },
+  {
+   "at_step": 5,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 6,
+   "macro": "interact",
+   "error": null
+  },
+  {
+   "at_step": 7,
+   "macro": "goto 7 4",
+   "error": null
+  },
+  {
+   "at_step": 9,
+   "macro": "pickup",
+   "error": null
+  },
+  {
+   "at_step": 10,
+   "macro": "goto 3 2",
+   "error": null
+  },
+  {
+   "at_step": 16,
+   "macro": "pickup",
+   "error": null
+  },
+  {
+   "at_step": 17,
+   "macro": "eat a",
+   "error": null
+  },
+  {
+   "at_step": 18,
+   "macro": "goto 8 3",
+   "error": null
+  },
+  {
+   "at_step": 24,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 25,
+   "macro": "right",
+   "error": null
+  },
+  {
+   "at_step": 26,
+   "macro": "right",
+   "error": null
+  }
+ ]
+}

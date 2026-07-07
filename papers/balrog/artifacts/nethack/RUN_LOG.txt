@@ -1984,3 +1984,23 @@ d36c8d289d1d5b1745e4db7db019fef9  c2_env.sh
 15:33:09     step 10000 depth 1 (max 1) hp 36/36 xp 5 t=10216 wall=936s
 15:33:15   [c2block80/w0] seed 4076: prog 0.0291 depth 1 role Tourist end DEATH: starved to death.
 15:33:15 c2block80 chunk w0 complete (20 eps)
+3af2683f49b2599cbb89c96a71d21d4c  nh_agent.py
+fbd41993bffdaf47cb45dc063acbf9ea  nh_common.py
+f9250e958cef21150c13e6d0d8bd41a0  nh_runner.py
+16:25:44 PHASE-L CAST-1 paired block pre-registered: ref=frozen(NH_FOOD2,PRAYFIX,LOS,TOPO,GUARD) vs cast=frozen+NH_CAST; seeds 12 Wizard (839 845 847 850 860 912 918 940 957 980 982 990) + 8 guard (801 803 809 814 815 818 821 822); metric: paired delta Wizard block primary, guard block expected exact-0; drop-if-unclear
+92a0eda2139bb1ea26f47f977de9bea9  nh_agent.py
+16:55:15 CAST-2 revalidation pre-registered: CAST_ATTACK_V1.1 (+CAST_NEVER peaceful-class guard) vs same cast1ref; 12 Wizard seeds only (guards exact-0 in CAST-1); criteria: shop-death class returns to 0, Wizard paired delta not clearly negative
+4f9adf4a3df99fdfa6304c7acc5bb9a5  nh_agent.py
+17:05:26 REPEAT-1 paired block pre-registered: test=frozen+NH_REPEAT (REPEAT_LAYOUT_STAIRS hint) vs ref=cast1ref (same 20 seeds 839..990+801..822); criteria: paired delta not clearly negative, no death-class worsening, repeat_fires>0 mechanism evidence; drop-if-unclear
+17:24:22 c22 GIF batch rendered for coordinator email: cast2 seed918 showcase + ref contrast + first-forcebolt moment + cast1 29.25 best
+17:31:22 PHASE-L DEV-B1 pre-registered (session 2, MODEL Fable 5 max): first 40-ep measurement-cadence block, STANDING CONFIG = frozen(NH_FOOD2,NH_PRAYFIX,NH_LOS,NH_TOPO,NH_GUARD)+NH_CAST (shipped CAST-2); seeds 700-739 (matches predecessor trend-table rows); primary metric = c2_avoid avoidable-damage rate (exit criterion iii block 1/2); secondary = mean prog vs C2-ref 4.27 / navfood 5.30; NH_E15 deliberately OFF (clean shipping config; this block = paired ref for E15 validation)
+4e7fc4e5f2ceb4cda9e7e26e44026384  nh_agent.py
+fbd41993bffdaf47cb45dc063acbf9ea  nh_common.py
+d87818a370d5ebc375b1e6f51ff039ab  nh_runner.py
+17:56:29 CASTHUNGER flag-off regression: seed 801 old-code vs new-code — progression/steps/end_reason/xplvl/ev_fired ALL IDENTICAL (7346-step episode, prog 0.02081163581974355 both) => PASS. New md5:
+08a831e79e6dce0140670b0938d953aa  nh_agent.py
+17:59:37 CASTHUNGER-1 paired pre-registered: test=frozen+NH_CAST+NH_CASTHUNGER vs ref=cast2 results (12 Wizard seeds 839 845 847 850 860 912 918 940 957 980 982 990); criteria: hungry-cast refusal retry loops eliminated (transitions count), hunger-death class among affected seeds not worse, Wizard paired delta not clearly negative; drop-if-unclear. Doctrine: CAST_HUNGER_V1 (block-on-refusal + caster eat-early at Hungry).
+17:59:37 REPEAT-2 paired pre-registered: test=frozen+NH_REPEAT (V2 first-class goal routing, budget 150/level) vs ref=cast1ref (same 20 seeds as REPEAT-1); criteria: action divergence >0 (V1 was inert), paired delta not clearly negative, no death-class worsening; drop-if-unclear.
+42c4f1d18a49e2024ab4a2a2afc896b8  nh_agent.py
+fbd41993bffdaf47cb45dc063acbf9ea  nh_common.py
+d87818a370d5ebc375b1e6f51ff039ab  nh_runner.py

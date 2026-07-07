@@ -329,3 +329,107 @@ c22_cast1block__seed822_barb_dlvl14.gif (29.25 block-best).
   (whose log still shows the goal-inference wall). No action unless
   artifacts surface; if they do, cross-study their method vs our blind arm
   immediately.
+
+## Dev-metric trend table update (session 2)
+
+| block | config | n | mean prog | avoidable dmg % | violation rate | notes |
+|---|---|---|---|---|---|---|
+| DEV-B1 (700–739) | frozen+NH_CAST (standing) | 40 | 5.32 | **6%** | **0.00e0 (0/119,057)** | criterion-iii block 1/2; paired vs navfood ref: 39/40 EXACT 0.00, the single divergence = the block's one Wizard (+0.01 [+0.00,+0.04] overall) — session-1 code churn verified behavior-preserving |
+
+Avoidable-damage trend: 10% (v1.1) → 8% (settled/navfood) → **6% (DEV-B1)**.
+Plateau read needs DEV-B2 within 1 point (session 3, same config unless a
+lever ships paired-green first — then the new standing config restarts the
+2-block clock).
+
+## Criterion v instrument SHIPPED: c2_violations.py (play-time possibility-set checker)
+
+Ported from the blind arm's world_model predict/verify pair; runs OFFLINE
+over any transitions dir (every dev/gym block gets a violation read free).
+Rules V_TIME / V_MOVE / V_NONMOVE_POS / V_DEPTH / V_HP_BOUND / V_XP_MONO.
+First outing on DEV-B1 found rate 2.44e-4, ALL EXPLAINED: (1) confusion/
+stun random-walk movement (V_MOVE cluster inside a centipede fight), (2)
+level-teleport trap depth jump 7→3, (3) god-punishment xp loss on prayer
+(also seen on cast2 ep940). Each became a SCOPE on its rule (condition-mask
+gating for conf/stun; teleport/drain/god-voice message signatures) — the
+checker's first day did exactly what the criterion intends: it found three
+world-model scope gaps and they are now modeled. Post-scoping: **0/119,057
+— criterion (v) PASSES on DEV-B1.**
+
+## E-NH6 GYM HARVEST — scenario library LIVE (criterion ii start)
+
+e6_harvest.py over the full corpus: **794 death scenarios, 794 branchable**
+(transitions on disk ⇒ (seed,prefix) branch-explorable via nh_branch), 55
+retro-matched to E12 lessons. **Top-5 syllabus (death mass):** TRASH 313
+(118 distinct seeds) / MELEE+ 161 / STARV 160 / SPIDANT 80 / RANGED 43.
+PRAY 37 next. Every class has ≥14 distinct seeds — the ≥3-seed
+generalization gate has abundant material. Solve-or-UNWINNABLE work begins
+session 3 with TRASH (the 39% mass class).
+
+## COVERAGE MATRIX formalized (criterion i baseline)
+
+coverage_matrix.py: 16 rule-cards/mechanisms × 6 death classes,
+death-mass-weighted by the live syllabus; N/A cells excluded, PROVISIONAL
+counts half. **Baseline weighted fill: 16.4%** (VERIFIED: CAST_NEVER,
+TOUCH_KILL, FOOD2×STARV, PRAYFIX×PRAY). **28 open hypotheses
+auto-enumerated, top by mass: KITE_TO_CHOKE×TRASH, REST_GATES×TRASH,
+FLEE_GATE×TRASH, WIELD×TRASH, ARMOR×TRASH (0.394 each)** — the TRASH
+column is where criterion i will be won, and wield/armor doctrine (P2/P3)
+plus kite formalization are its levers. Artifact:
+results/coverage_matrix.json (renders the audit surface).
+
+## CAST-HUNGER retro (operator GIF observation) — LESSON CARD + fix BUILT
+
+Retro over the cast blocks: **4/12 Wizard seeds hit "too hungry to cast"
+(839/912/940/980); 2 of the 4 died of hunger** (839 starved, 980 fainted →
+iguana). Worse: the cast layer RETRIED the refused cast every step — seed
+839 logged **2,759 refusals = 24% of its episode** burned on a no-op loop
+while starving. Doctrine CAST_HUNGER_V1 (flag NH_CASTHUNGER, default off):
+(a) refusal message latches cast-blocked until fed to NotHungry (kills the
+retry loop, melee/throw doctrine takes the fight); (b) casters eat at
+HUNGRY tier, not Weak (the failure arrives mid-fight, when the bolt was
+the plan). Rule card provenance: OPERATOR-OBSERVED (GIF reel — the
+human-observer→hypothesis loop working as designed). P7 added to
+PRINCIPLES.md: EVERY NEW CAPABILITY IMPORTS NEW COSTS. Flag-off
+regression: seed 801 old-vs-new code result-identical (7346 steps,
+bit-identical progression). CASTHUNGER-1 paired block RUNNING (12 Wizard
+seeds vs cast2 ref; criteria pre-registered in RUN_LOG).
+
+## NH_REPEAT V2 — fires≠effect FIXED, paired block RUNNING
+
+Root cause found in code: _explore only honors explore_target if it is
+already a frontier cell; a cross-map stair prediction never is, so V1's
+hint was discarded every time (exact-0 ×20). V2 routes to the frontier
+cell NEAREST the predicted stair cell as a first-class goal (150-step
+per-level budget, refutation event if the cell explores to non-stairs).
+Smoke (seed 990): 2 routing engagements with real action divergence +
+budget-exhaust fallbacks logged. REPEAT-2 paired block RUNNING (same 20
+seeds vs cast1ref; criteria pre-registered).
+
+## ★★ NH-E21b LIVE INTUITION ARM — first live results (milestone — flag for coordinator)
+
+live_arm.py shipped (replay-based interactive protocol on the
+deterministic engine — nh_branch pattern; the live intuition layer for
+these runs IS Fable 5 max; every consultation logged VERBATIM in the state
+files, results/e21b_live/).
+
+- **T1 lettuce-door seed 0: WIN, 27 steps, 6 consultations, 2/2 mechanics**
+  — the canonical damage-as-key world the scripted baseline fails 0/10
+  structurally. Chain logged: probe gate at full HP → observe refusal →
+  eat mottled fruit (−68) → gate yields at hp 32 → win. The override
+  (deliberate self-harm under a bounded, justified read) is exactly the
+  NH-E19 defeasibility protocol in action.
+- **T6 double-override seed 0: WIN, 30 steps, 8 consultations** — via a
+  solution class the DESIGNER didn't script: the charm trap was defeated
+  by NEVER PICKING IT UP ("the cheapest counter to a possession trap is
+  non-possession"), so mechanics read 3/4 on the win line. A second
+  branch (probe, 4 consultations) then pinned mechanic 4 and demonstrated
+  the DESIGNED line end-to-end: charm heals in room B (+15/+5), G2
+  refuses the carrier, drop → pass (give-up-a-proven-good-item, the
+  second-solution rule honored).
+- **Engine integrity bug found live and FIXED: obs inventory leaked
+  item_class ("hazard_fruit") — ground-truth mechanic labels served to
+  the agent.** Caught in T1 consult 4, disclosed in that run's log,
+  fixed (display_name only), tests 9/9 green. T6 ran post-fix.
+- Baseline contrast stands: T1/T5/T6 = 0% scripted vs live-intuition
+  2/2 wins on first attempts. T5 + multi-seed statistics + the four-arm
+  ablation (incl. (d) no-override) are session 3's E21b block.
