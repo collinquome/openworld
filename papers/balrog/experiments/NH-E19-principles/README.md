@@ -51,3 +51,28 @@ keep all three complete enough to pass.
 
 ## Status log
 - 2026-07-07: registered (operator directive), folder created.
+
+## 5. DEFEASIBILITY model (operator directive 2026-07-07 — the intuition layer's authority)
+
+Principles and rules are DEFEASIBLE HEURISTICS, not constraints: each carries
+"generally true" status, and the intuition layer has OVERRIDE AUTHORITY — it
+may suspend a principle when a composed plan requires it ("avoid damage"
+suspended because damage IS the key to the <20HP door). Counterintuitive
+plans are exactly the intuition layer's job; code alone follows avoid-damage
+forever and never solves the world.
+
+OVERRIDE PROTOCOL (safe + measurable): every override is (a) EXPLICIT — names
+the suspended principle; (b) JUSTIFIED — the composed plan + retrieved
+memories that demand it; (c) BOUNDED — scope + duration + abort condition
+("suspend avoid-damage only for lettuce, only until HP<20, abort if HP<10");
+(d) LOGGED + OUTCOME-TRACKED — override win rate per principle is evidence
+(a principle overridden successfully often is mis-scoped → tighten scope).
+
+TWO-TIER SAFETY: preferences/heuristics are overridable; HARD VETOES are not
+(never take an action whose worst-case is certain death absent an explicit
+sacrifice plan). The retrieved memory's BOUND is what licenses an override
+(lettuce-at-100HP is safe BECAUSE damage is bounded at 80): no bound, no
+override.
+
+GIF banner: "OVERRIDE: avoid-damage suspended — damage is the key
+[bound: −80, plan: eat at 100HP]".

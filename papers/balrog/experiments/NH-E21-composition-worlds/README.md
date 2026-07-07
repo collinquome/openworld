@@ -69,3 +69,10 @@ door" → win) are expected to be the program's best demonstration material.
 ## Status log
 - 2026-07-07: registered (operator directive + 2 additions). Implementation
   queued behind the in-flight NH-E14 cast integration milestone.
+
+## Fourth ablation arm (operator, defeasibility directive)
+
+(d) full stack WITHOUT override authority (principles as hard constraints).
+Pre-registered prediction: (d) fails the lettuce-class worlds exactly like
+code-only — proving DEFEASIBILITY (not just LLM presence) is the necessary
+ingredient.

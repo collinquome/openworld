@@ -6,6 +6,12 @@ Invalidated principles are struck through (~~like this~~) with the refuting
 data cited — invalidations stay visible. This file ships IN the strategist
 prompt (Arm B / reflection passes) and is a first-class NH-E17 rebuild input.
 
+DEFEASIBILITY (operator 2026-07-07): every principle here is a defeasible
+heuristic — "generally true", suspendable by the intuition layer under the
+override protocol (explicit, justified, bounded by a retrieved memory's bound,
+logged + outcome-tracked). Hard vetoes are a separate non-overridable tier.
+See NH-E19 §5.
+
 Format per principle: statement · rationale+evidence · status
 (hypothesized / validated / invalidated) · provenance (who authored) ·
 validation plan.
