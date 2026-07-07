@@ -10,6 +10,13 @@ sessions 1-2 = Fable 5 (max reasoning); session 3+ = claude-opus-4-8
 CORRECTION at session-3 open: the cap reset before session 3 launched —
 session 3 = Fable 5 (max reasoning). The opus fallback was NOT used;
 the roster remains single-model (Fable 5) through session 3.
+PHASE BOUNDARY (session 4, 2026-07-07): Fable 5 at usage cap →
+session 4 = claude-opus-4-8[1m] (max thinking), the registered fallback,
+NOW ACTIVE. Runtime identity VERIFIED at session open per the provenance
+gotcha (system-prompt model id = claude-opus-4-8[1m]; self-report matches
+— NO label/runtime mismatch this time, logged in RUN_LOG). All session-4
+artifacts stamped claude-opus-4-8[1m]. The roster is thus Fable 5 (s1-3) →
+opus-4.8 (s4+); the program's binding synthesis-model variable changes here.
 
 Predecessor state: NH-C2.1 checkpoint 5.27 [4.22, 6.43] vs SOTA 6.8 — no beat;
 avoidability audit says deaths are CAPABILITY-bound (5–8% of damage
@@ -644,3 +651,97 @@ statement were registered per operator directives.
    blind intuition instance for clean statistics (subagent pattern).
 5. Zap doctrine probe-first (kb table + RAY_BOUNCE/CAST_NEVER guards).
 6. NH-E25(a) open-mode session + SAMPLE-10 at generative moments.
+
+## Session 4 open (2026-07-07, MODEL: claude-opus-4-8[1m] max thinking — FIRST opus session; Fable 5 at cap)
+
+Runtime identity verified first action (system-prompt id = claude-opus-4-8[1m];
+self-report matches) — no label/runtime mismatch (the s3 handoff's gotcha did
+not recur). Environment note logged for provenance: NLE runs in this sandbox
+only via the vendored `pylib/nle` (balrog_nle 0.9.0) on sys.path — a bare
+`import nle` fails; all runs use PYTHONPATH=pylib. Snapshot suite + determinism
+gate green here, so the full engine is available.
+
+### ★ Armor AC-column bug FIXED (data-quality; layer: PERCEPTION)
+
+nh_sheet.build_armor_table read the WRONG column: "first integer 0-10 in
+cells[1:6]" grabbed **Cost** (col 2) for cheap items and **Weight** (col 3)
+for light ones, hitting the true **AC (col 4)** only by luck for heavy armor
+(cost+weight both >10). **33 of 66 rows were wrong** — every cloak/helm/glove/
+boot/shield/shirt (leather jacket read 10, true AC 1; cloak of protection read
+10, true 3; helmet 10→1). Heavy body armor (plate 7, chain 5, scale 4) was
+right by coincidence. Verified against the frozen KB (NetHack 5.0.0 'List of
+armor', sha 25e1513d…). Fix: parse AC by column index 4; table rebuilt (range
+now 0-9, sane). Weapon table checked and CLEAN (davg-template parser has no
+column bug). This was load-bearing: ARMOR_DOCTRINE / counterfactual_power
+would have been built on garbage. Regression fixture A7 added (snapshot suite
+now 19/19 green) with a load-bearing regression-flip check.
+
+### THE KPI TREE formalized (operator directive via coordinator)
+
+KPI_TREE.md written: GOAL (ascension proxy = block-mean prog) ← DEPTH ←
+SURVIVAL-TO-DEPTH × DESCENT-RATE ← capability quartet (OFFENSE/DEFENSE/
+SUSTAIN/NAVIGATION); PERFORMANCE layer (avoidable-dmg %, RR@descent, verb
+util, retry counts, firsts) moves first/high-SNR. Values BACKFILLED from
+existing instruments (c2_cache DEV n=65): max-depth mean 6.0, survival@D8
+32.3%, descent 139 turns/level, final AC 7.1, agents die at ~35% HP;
+avoid 5%, hunger 3/40, watchdog 55%. New standing rule: **every lever
+declares its PROXIMAL KPI at pre-registration** (REST→survival-to-depth via
+TRASH-death; WIELD→offense/PI; ARMOR→defense); validation reads the proximal
+KPI primarily, terminal mean last. Per-block KPI-DASH line appended to
+RUN_LOG at each block close.
+
+### WIELD_DOCTRINE — role-scoped launcher lever (PROVISIONAL); ARMOR_DOCTRINE prerequisite met
+
+Sheet-measured OFFENSE headroom across 10 dev probes: **2/10, both Rangers**
+under-firing (723 bow+arrow 1.72 vs wielded dagger 1.15; 805 crossbow+bolt
+2.01 vs dagger 1.44; +40-50% dpt). Every melee role (Knight/Priest/Healer/
+Wizard/Priestess) already wields optimally → inert. So WIELD_DOCTRINE is a
+launcher-adoption lever, NOT a broad win — coverage filled conservatively as
+PROVISIONAL (role-scoped, offense-validated, survival pending). Coverage matrix
+**23.2% → 27.3%** (WIELD × TRASH+MELEE+ provisional; auto-generated).
+ARMOR_DOCTRINE stays UNBUILT: counterfactual_power returns 0 delta for armor
+(AC not yet in RR) — but its prerequisite (a correct AC table) is now MET;
+spec'd (fold AC into RR via monster-hit prob) for s5. Cards in DOCTRINE_CARDS_s4.md.
+
+### ★ REST/DISENGAGE lever — first solve-loop-sourced lever, paired block
+
+The e6_solve TRASH backtest (REST survives 10/20 deaths, 40-step backoffs)
+graduated to a paired dev block. DIAGNOSIS: the P3 crisis-flee thresholds were
+hardcoded 0.28 / ×2.0; the DEV death-shape KPI shows agents die at ~35% HP —
+ABOVE the 0.28 flee floor, i.e. lost in the 35→28% window while still trading
+blows. The lever is a THRESHOLD TUNE (handoff prediction confirmed), not new
+code, and complements NH_E15 L2 disengage (watchdog-reactive; this is the
+proactive per-exchange version). COMPILE: env knobs NH_CRISIS_HP (def 0.28) /
+NH_CRISIS_EXCH (def 2.0) — defaults reproduce prior behavior, **flag-off
+regression PASS** (seed 706 bit-identical). Paired block: REF (defaults) vs
+TEST (0.40/1.5), 11 e6_solve REST-win seeds + 5 fresh controls, step cap 1500
+(proximal KPI = early TRASH deaths; cap identical both arms, disclosed).
+VERDICT: **UNCLEAR → DROP** (drop-if-unclear). Mean paired prog delta
++0.004, CI95 [−0.004, +0.014] (spans 0); only **2/16 seeds diverged** (724
+D7→D10 +0.077 win; 725 D8→D7 −0.021 loss — a wash); **deaths 7/16 in BOTH
+arms** — the proximal KPI (TRASH-death rate) did NOT move; 14/16 bit-identical.
+DIAGNOSIS of the inertness: live TRASH deaths happen with a hostile ADJACENT
+(same-speed kittens/goblins), where `_rest_here_ok` forbids resting and
+`_flee` cannot disengage a same-speed mover — so a crisis-flee threshold tune
+never reaches the failure mode. The e6_solve "REST wins" were stand-and-heal
+lines (no hostile visible) — a DIFFERENT situation than the fatal one. So the
+knob tune is the wrong instrument; the CRISIS_HP/EXCH knobs stay in code
+(default = prior, regression-safe) but 0.40/1.5 is NOT shipped. The real REST
+lever is the e6_solve **v2 menu** (corridor-kite / stairs-escape vs same-speed
+hostiles) — session 5. Honest negative; first solve-loop-sourced lever now
+adjudicated, closing the loop the operator asked for. Same partial-inertness
+class as NH_E15 L2 and REPEAT-1 (a recurring finding: threshold tunes rarely
+reach adjacent-combat deaths; the fix is a new action, not a new number).
+
+### Exit-criteria scoreboard after session 4
+
+(i) coverage matrix: **27.3%** weighted fill (was 23.2%; WIELD × TRASH+MELEE+
+    provisional, role-scoped) — needs ≥70%, the long pole. ARMOR/KITE/ZAP ×
+    TRASH remain the top open cells; ARMOR now unblocked (AC table fixed).
+(ii) gym syllabus: TRASH solve-loop lever (REST) adjudicated → dropped as a
+    threshold tune; v2 menu is the next instrument. MELEE+/STARV/SPIDANT
+    untouched by the loop.
+(iii) avoidable-damage plateau: **MET** (unchanged this session).
+(iv) snapshot suite: **MET** (19/19 green — added A7 armor fixture).
+(v) violations: **MET and holding** (no new violations; no scored-loop
+    behavior change shipped — CRISIS knobs default-inert).

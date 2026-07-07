@@ -136,6 +136,16 @@ def build_armor_table():
                     "page_title='Armor'").fetchone()
     text, sha = wt
     table = {}
+    # FIXED (session 4, claude-opus-4-8[1m] max thinking): the KB 'List of
+    # armor' table (NetHack 5.0.0 source) has a FIXED column schema —
+    #   0:Item 1:Slot 2:Cost 3:Weight 4:AC 5:WeightPerAC 6:MaxAC ...
+    # AC is column index 4. The prior "first integer 0-10 in cells[1:6]"
+    # heuristic grabbed COST (cell 2) for cheap items and WEIGHT (cell 3)
+    # for light items, landing on AC only by luck for heavy armor where
+    # both cost and weight exceed 10. Impact: 33/66 rows wrong (every
+    # cloak/helm/glove/boot/shield/shirt — e.g. leather jacket read 10,
+    # true AC 1; cloak of protection read 10, true AC 3). Now parsed by
+    # the AC column position; fixture: snapshot_suite armor_ac_column.
     for row in text.split("|-"):
         cells = [c.strip() for c in row.strip().lstrip("|").split("||")]
         if len(cells) < 5:
@@ -144,21 +154,20 @@ def build_armor_table():
         if not m:
             continue
         name = m.group(1).strip().lower()
-        # find the first small integer cell after the name = AC column
-        ac = None
-        for c in cells[1:6]:
-            c2 = re.sub(r"<[^>]+>", "", _LINK.sub(lambda g: g.group(1), c))
-            mm = re.fullmatch(r"(\d+)", c2.strip())
-            if mm:
-                v = int(mm.group(1))
-                if 0 <= v <= 10:
-                    ac = v
-                    break
-        if ac is not None:
-            table[name] = {"ac": ac}
+        ac_raw = re.sub(r"<[^>]+>", "",
+                        _LINK.sub(lambda g: g.group(1), cells[4])).strip()
+        mm = re.fullmatch(r"(\d+)", ac_raw)
+        if not mm:
+            continue          # non-armor row (enchantment tables etc.)
+        v = int(mm.group(1))
+        if 0 <= v <= 12:      # base AC domain (dragon scale mail = 9)
+            table[name] = {"ac": v}
     doc = {"provenance": {"page": "Armor", "sha256": sha,
                           "extractor": "nh_sheet.build_armor_table",
-                          "model": "Fable 5 (max reasoning), s3"},
+                          "model": "Fable 5 (max reasoning) s3 build; "
+                                   "AC-column bug fixed by "
+                                   "claude-opus-4-8[1m] (max thinking) s4 "
+                                   "(33/66 rows corrected)"},
            "armor": table}
     json.dump(doc, open(ARMOR_FN, "w"), indent=1, sort_keys=True)
     return doc

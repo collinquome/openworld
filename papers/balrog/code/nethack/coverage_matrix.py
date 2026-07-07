@@ -90,8 +90,17 @@ M = {
     "TRASH": (NA, None), "MELEE+": (NA, None),
     "STARV": (None, None),  # descent speed vs food clock; REPEAT-2 running
     "SPIDANT": (NA, None), "RANGED": (NA, None), "PRAY": (NA, None)},
-  "WIELD_DOCTRINE (P2, unbuilt)": {
-    "TRASH": (None, None), "MELEE+": (None, None), "STARV": (NA, None),
+  "WIELD_DOCTRINE (P2, launcher-scope)": {
+    # s4 (opus-4.8): sheet-measured OFFENSE headroom = 2/10 dev probes,
+    # BOTH Rangers under-firing (723 bow+arrow 1.72 vs wielded dagger 1.15;
+    # 805 crossbow+bolt 2.01 vs dagger 1.44; +40-50% dpt). Every melee role
+    # probed (Knight/Priest/Healer/Wizard/Priestess) already wields best =
+    # inert. => role-scoped launcher-adoption lever. PROVISIONAL: proximal
+    # KPI (offense) validated; class-resolution/survival pending paired block.
+    "TRASH":   (P, "sheet s4: launcher-role under-fire, +40-50% dpt (2/2 "
+                   "Rangers probed); role-scoped, survival pending paired"),
+    "MELEE+":  (P, "sheet s4: same launcher headroom; deeper-fight offense"),
+    "STARV": (NA, None),
     "SPIDANT": (None, None), "RANGED": (NA, None), "PRAY": (NA, None)},
   "ARMOR_DOCTRINE (P3, unbuilt)": {
     "TRASH": (None, None), "MELEE+": (None, None), "STARV": (NA, None),

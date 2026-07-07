@@ -1,0 +1,157 @@
+{
+ "cond": "test",
+ "knobs": {
+  "CRISIS_HP": 0.4,
+  "CRISIS_EXCH": 1.5
+ },
+ "restwin_seeds": [
+  706,
+  709,
+  724,
+  725,
+  737,
+  738,
+  704,
+  721,
+  723,
+  733,
+  701
+ ],
+ "fresh_seeds": [
+  780,
+  781,
+  782,
+  783,
+  784
+ ],
+ "eps": {
+  "706": {
+   "role": "Priest",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 267,
+   "end_reason": "DEATH: died. Killed by a kitten.",
+   "death": true
+  },
+  "709": {
+   "role": "Healer",
+   "prog": 0.015392269075361172,
+   "depth_max": 2,
+   "steps": 548,
+   "end_reason": "DEATH: died. Killed by a goblin.",
+   "death": true
+  },
+  "724": {
+   "role": "Barbarian",
+   "prog": 0.12558597019922987,
+   "depth_max": 10,
+   "steps": 870,
+   "end_reason": "DEATH: died. Killed by a fire ant.",
+   "death": true
+  },
+  "725": {
+   "role": "Archeologist",
+   "prog": 0.04846098359243788,
+   "depth_max": 7,
+   "steps": 178,
+   "end_reason": "DEATH: died. Killed by a fog cloud.",
+   "death": true
+  },
+  "737": {
+   "role": "Rogue",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 870,
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "death": true
+  },
+  "738": {
+   "role": "Caveman",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "704": {
+   "role": "Knight",
+   "prog": 0.0,
+   "depth_max": 1,
+   "steps": 916,
+   "end_reason": "DEATH: was poisoned. Poisoned by a rotted newt corpse.",
+   "death": true
+  },
+  "721": {
+   "role": "Knight",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "723": {
+   "role": "Ranger",
+   "prog": 0.0,
+   "depth_max": 1,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "733": {
+   "role": "Ranger",
+   "prog": 0.021221378364235505,
+   "depth_max": 4,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "701": {
+   "role": "Knight",
+   "prog": 0.01847840456172601,
+   "depth_max": 3,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "780": {
+   "role": "Knight",
+   "prog": 0.12558597019922987,
+   "depth_max": 10,
+   "steps": 502,
+   "end_reason": "DEATH: died. Killed by a wolf.",
+   "death": true
+  },
+  "781": {
+   "role": "Priestess",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "782": {
+   "role": "Cavewoman",
+   "prog": 0.021221378364235505,
+   "depth_max": 4,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "783": {
+   "role": "Ranger",
+   "prog": 0.026482449457437766,
+   "depth_max": 5,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  },
+  "784": {
+   "role": "Barbarian",
+   "prog": 0.01847840456172601,
+   "depth_max": 3,
+   "steps": 1000,
+   "end_reason": "RUNNER_TRUNCATED@1000 (None)",
+   "death": false
+  }
+ }
+}

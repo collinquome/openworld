@@ -1,7 +1,7 @@
 {
  "armor": {
   "alchemy smock": {
-   "ac": 10
+   "ac": 1
   },
   "banded mail": {
    "ac": 6
@@ -13,25 +13,25 @@
    "ac": 5
   },
   "cloak of displacement": {
-   "ac": 10
+   "ac": 1
   },
   "cloak of invisibility": {
-   "ac": 10
+   "ac": 1
   },
   "cloak of magic resistance": {
-   "ac": 10
+   "ac": 1
   },
   "cloak of protection": {
-   "ac": 10
+   "ac": 3
   },
   "cornuthaum": {
-   "ac": 4
+   "ac": 0
   },
   "crystal plate mail": {
    "ac": 7
   },
   "dented pot": {
-   "ac": 8
+   "ac": 1
   },
   "dragon scale mail": {
    "ac": 9
@@ -40,10 +40,10 @@
    "ac": 3
   },
   "dunce cap": {
-   "ac": 1
+   "ac": 0
   },
   "dwarvish cloak": {
-   "ac": 10
+   "ac": 0
   },
   "dwarvish iron helm": {
    "ac": 2
@@ -52,40 +52,40 @@
    "ac": 6
   },
   "dwarvish roundshield": {
-   "ac": 10
+   "ac": 2
   },
   "elven boots": {
-   "ac": 8
+   "ac": 1
   },
   "elven cloak": {
-   "ac": 10
+   "ac": 1
   },
   "elven leather helm": {
-   "ac": 8
+   "ac": 1
   },
   "elven mithril-coat": {
    "ac": 5
   },
   "elven shield": {
-   "ac": 7
+   "ac": 2
   },
   "fedora": {
-   "ac": 1
+   "ac": 0
   },
   "fumble boots": {
    "ac": 1
   },
   "gauntlets of dexterity": {
-   "ac": 10
+   "ac": 1
   },
   "gauntlets of fumbling": {
-   "ac": 10
+   "ac": 1
   },
   "gauntlets of power": {
    "ac": 1
   },
   "hawaiian shirt": {
-   "ac": 3
+   "ac": 0
   },
   "helm of brilliance": {
    "ac": 1
@@ -100,7 +100,7 @@
    "ac": 1
   },
   "helmet": {
-   "ac": 10
+   "ac": 1
   },
   "high boots": {
    "ac": 2
@@ -112,49 +112,49 @@
    "ac": 1
   },
   "kicking boots": {
-   "ac": 8
+   "ac": 1
   },
   "large shield": {
-   "ac": 10
+   "ac": 2
   },
   "leather armor": {
-   "ac": 5
+   "ac": 2
   },
   "leather cloak": {
    "ac": 1
   },
   "leather gloves": {
-   "ac": 8
+   "ac": 1
   },
   "leather jacket": {
-   "ac": 10
+   "ac": 1
   },
   "levitation boots": {
    "ac": 1
   },
   "low boots": {
-   "ac": 8
+   "ac": 1
   },
   "mummy wrapping": {
-   "ac": 2
+   "ac": 0
   },
   "oilskin cloak": {
-   "ac": 10
+   "ac": 1
   },
   "orcish chain mail": {
    "ac": 4
   },
   "orcish cloak": {
-   "ac": 10
+   "ac": 0
   },
   "orcish helm": {
-   "ac": 10
+   "ac": 1
   },
   "orcish ring mail": {
    "ac": 2
   },
   "orcish shield": {
-   "ac": 7
+   "ac": 1
   },
   "plate mail": {
    "ac": 7
@@ -178,7 +178,7 @@
    "ac": 1
   },
   "small shield": {
-   "ac": 3
+   "ac": 1
   },
   "speed boots": {
    "ac": 1
@@ -190,10 +190,10 @@
    "ac": 3
   },
   "t-shirt": {
-   "ac": 2
+   "ac": 0
   },
   "uruk-hai shield": {
-   "ac": 7
+   "ac": 1
   },
   "water walking boots": {
    "ac": 1
@@ -201,7 +201,7 @@
  },
  "provenance": {
   "extractor": "nh_sheet.build_armor_table",
-  "model": "Fable 5 (max reasoning), s3",
+  "model": "Fable 5 (max reasoning) s3 build; AC-column bug fixed by claude-opus-4-8[1m] (max thinking) s4 (33/66 rows corrected)",
   "page": "Armor",
   "sha256": "25e1513da0676ce92df8a92e444328c5697bbfea7ce83427dbf570ceb627d215"
  }

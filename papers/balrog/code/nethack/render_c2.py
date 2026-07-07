@@ -33,6 +33,7 @@ COLS, ROWS = 80, 24
 MAPR = 21                 # map rows are tty rows 1..21
 MAXF = 420
 SIDE = 350                # sidebar width
+HDR = 22                  # dedicated top header strip (px); map drawn BELOW it (s4 opus-4.8, no-overlap fix)
 MCW, MCH = 4, 5           # mini-map cell size
 
 PALETTE = {
@@ -107,7 +108,7 @@ def render(traj_file, out_gif, title=""):
     hunger_arr = t.get("hunger") or []
     has_side = bool(beliefs)
     W = COLS * CW + 16 + (SIDE if has_side else 0)
-    H = (ROWS + 3) * CH + 12
+    H = (ROWS + 3) * CH + 12 + HDR
     n = len(frames)
     stride = max(1, (n + MAXF - 1) // MAXF)
     idxs = list(range(0, n, stride))
@@ -173,8 +174,8 @@ def render(traj_file, out_gif, title=""):
                 else:
                     k = min(1.0, dpt_of(name) / 5.0)
                     color = (255, int(120 * (1 - k)), 40, 90)
-                d.rectangle([8 + mx * CW - 1, (my + 1) * CH + 3,
-                             8 + (mx + 1) * CW, (my + 2) * CH + 3],
+                d.rectangle([8 + mx * CW - 1, (my + 1) * CH + 3 + HDR,
+                             8 + (mx + 1) * CW, (my + 2) * CH + 3 + HDR],
                             fill=color)
 
         # ---- planned path overlay (main map), fading past horizon
@@ -182,8 +183,8 @@ def render(traj_file, out_gif, title=""):
         if pl and pl[1]:
             for k, (px, py) in enumerate(pl[1][:24]):
                 alpha = 150 if k < 8 else max(30, 150 - (k - 8) * 15)
-                d.rectangle([8 + px * CW + 2, (py + 1) * CH + 6,
-                             8 + px * CW + CW - 3, (py + 2) * CH + 1],
+                d.rectangle([8 + px * CW + 2, (py + 1) * CH + 6 + HDR,
+                             8 + px * CW + CW - 3, (py + 2) * CH + 1 + HDR],
                             fill=(241, 250, 140, alpha))
 
         # ---- tty characters
@@ -195,14 +196,15 @@ def render(traj_file, out_gif, title=""):
                 if color is None:
                     color = MONSTER if ch.isalpha() and 1 <= r <= MAPR \
                         else DEFAULT
-                d.text((8 + c * CW, (r + 1) * CH + 4), ch, font=FONT_S,
+                d.text((8 + c * CW, (r + 1) * CH + 4 + HDR), ch, font=FONT_S,
                        fill=color)
 
-        # ---- header: title + step + bars
-        d.text((8, 2), f"{title}  step {step}  Dlvl {depth}  last:{act}",
+        # ---- header STRIP (dedicated; map is pushed below it, no overlap)
+        d.rectangle([0, 0, W, HDR], fill=(30, 30, 48))  # FULL-WIDTH header
+        d.text((8, 3), f"{title}  step {step}  Dlvl {depth}  last:{act}",
                font=FONT, fill=(255, 221, 51))
         # footer: message
-        d.text((8, (ROWS + 1) * CH + 8),
+        d.text((8, (ROWS + 1) * CH + 8 + HDR),
                (t["messages"][j][:96] if j >= 0 else ""),
                font=FONT_S, fill=(139, 233, 253))
 
@@ -211,27 +213,27 @@ def render(traj_file, out_gif, title=""):
         if has_side:
             x0 = COLS * CW + 24
             # subgoal + reason
-            d.text((x0, 4), "SUBGOAL", font=FONT_XS, fill=(120, 120, 140))
+            d.text((x0, 4 + HDR + 14), "SUBGOAL", font=FONT_XS, fill=(120, 120, 140))
             if sg:
-                d.text((x0 + 62, 2), f"{sg[1]}", font=FONT,
+                d.text((x0 + 62, 2 + HDR + 14), f"{sg[1]}", font=FONT,
                        fill=(255, 184, 108))
-                d.text((x0, 20), sg[2][:44], font=FONT_XS,
+                d.text((x0, 20 + HDR + 14), sg[2][:44], font=FONT_XS,
                        fill=(200, 200, 210))
             # bars
-            d.text((x0, 36), "HP", font=FONT_XS, fill=(120, 120, 140))
+            d.text((x0, 36 + HDR + 14), "HP", font=FONT_XS, fill=(120, 120, 140))
             frac = hp[0] / max(1, hp[1])
-            hbar(d, x0 + 24, 37, 200, 8, frac,
+            hbar(d, x0 + 24, 37 + HDR + 14, 200, 8, frac,
                  (80, 250, 123) if frac > 0.5 else
                  (255, 184, 108) if frac > 0.25 else (255, 85, 85))
-            d.text((x0 + 230, 34), f"{hp[0]}/{hp[1]}", font=FONT_XS,
+            d.text((x0 + 230, 34 + HDR + 14), f"{hp[0]}/{hp[1]}", font=FONT_XS,
                    fill=(200, 200, 210))
-            d.text((x0, 50), "HUN", font=FONT_XS, fill=(120, 120, 140))
-            hbar(d, x0 + 24, 51, 200, 8, 1.0 - hun / 6.0,
+            d.text((x0, 50 + HDR + 14), "HUN", font=FONT_XS, fill=(120, 120, 140))
+            hbar(d, x0 + 24, 51 + HDR + 14, 200, 8, 1.0 - hun / 6.0,
                  (139, 233, 253) if hun < 2 else
                  (255, 184, 108) if hun < 3 else (255, 85, 85))
             # belief mini-map
             bel = bel_by_step.get(step)
-            my0 = 68
+            my0 = 68 + HDR
             d.text((x0, my0 - 2), "BELIEF MAP  (plan in yellow, "
                    "suspects red)", font=FONT_XS, fill=(120, 120, 140))
             if bel:

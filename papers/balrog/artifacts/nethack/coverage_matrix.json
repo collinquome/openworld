@@ -354,14 +354,14 @@
     "evidence": null
    }
   },
-  "WIELD_DOCTRINE (P2, unbuilt)": {
+  "WIELD_DOCTRINE (P2, launcher-scope)": {
    "TRASH": {
-    "status": "UNTESTED",
-    "evidence": null
+    "status": "PROVISIONAL",
+    "evidence": "sheet s4: launcher-role under-fire, +40-50% dpt (2/2 Rangers probed); role-scoped, survival pending paired"
    },
    "MELEE+": {
-    "status": "UNTESTED",
-    "evidence": null
+    "status": "PROVISIONAL",
+    "evidence": "sheet s4: same launcher headroom; deeper-fight offense"
    },
    "STARV": {
     "status": "N/A",
@@ -440,11 +440,6 @@
    "weight": 0.394
   },
   {
-   "card": "WIELD_DOCTRINE (P2, unbuilt)",
-   "class": "TRASH",
-   "weight": 0.394
-  },
-  {
    "card": "ARMOR_DOCTRINE (P3, unbuilt)",
    "class": "TRASH",
    "weight": 0.394
@@ -471,11 +466,6 @@
   },
   {
    "card": "FLEE_GATE (A6)",
-   "class": "MELEE+",
-   "weight": 0.203
-  },
-  {
-   "card": "WIELD_DOCTRINE (P2, unbuilt)",
    "class": "MELEE+",
    "weight": 0.203
   },
@@ -530,7 +520,7 @@
    "weight": 0.101
   },
   {
-   "card": "WIELD_DOCTRINE (P2, unbuilt)",
+   "card": "WIELD_DOCTRINE (P2, launcher-scope)",
    "class": "SPIDANT",
    "weight": 0.101
   },
@@ -560,6 +550,6 @@
    "weight": 0.054
   }
  ],
- "weighted_fill": 0.23198275862068973,
+ "weighted_fill": 0.272844827586207,
  "criterion_i_pass": false
 }

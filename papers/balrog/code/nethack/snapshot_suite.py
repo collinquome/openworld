@@ -545,6 +545,60 @@ def fxB_replay(records):
 
 
 # ------------------------------------------------------------------- main
+# ---- Fixture 7: armor AC column (session 4, claude-opus-4-8[1m]) --------
+# RULE CARD [ARMOR_AC_COLUMN]: the KB 'List of armor' table has a fixed
+# schema (0:Item 1:Slot 2:Cost 3:Weight 4:AC ...). nh_sheet.build_armor_table
+# originally took "first integer 0-10 in cells[1:6]", which grabbed COST
+# (cell 2) for cheap items and WEIGHT (cell 3) for light ones, hitting AC
+# only by luck for heavy armor (cost+weight both >10). Impact: 33/66 rows
+# wrong (leather jacket read 10, true 1; cloak of protection read 10, true
+# 3) -- load-bearing for ARMOR_DOCTRINE / counterfactual_power. Fix: parse
+# AC by column index 4. This fixture exercises the REAL build_armor_table
+# against wiki_kb.sqlite and includes a regression-flip check: the OLD
+# heuristic must still produce the WRONG value (so the fixture discriminates).
+def fx7_armor_ac_column():
+    import re as _re
+    import nh_sheet as S
+    tbl = S.build_armor_table()["armor"]
+    truth = {"leather jacket": 1, "helmet": 1, "cloak of protection": 3,
+             "plate mail": 7, "dragon scale mail": 9, "small shield": 1,
+             "hawaiian shirt": 0, "leather armor": 2}
+    bad = {k: (tbl.get(k, {}).get("ac"), v) for k, v in truth.items()
+           if tbl.get(k, {}).get("ac") != v}
+    if bad:
+        return False, f"armor AC mismatches vs KB truth: {bad}"
+    # regression-flip: the OLD "first int 0-10 in cells[1:6]" heuristic must
+    # still MISREAD a light item -- proves this fixture catches the bug.
+    import sqlite3
+    db = sqlite3.connect(os.path.join(HERE, "wiki_kb.sqlite"))
+    text = db.execute("select wikitext from pages where "
+                      "page_title='Armor'").fetchone()[0]
+    _LINK = _re.compile(r"\[\[([^\]|]+)(?:\|[^\]]*)?\]\]")
+    old_lj = None
+    for row in text.split("|-"):
+        cells = [c.strip() for c in row.strip().lstrip("|").split("||")]
+        if len(cells) < 5:
+            continue
+        m = _LINK.search(cells[0])
+        if not m or m.group(1).strip().lower() != "leather jacket":
+            continue
+        for c in cells[1:6]:
+            c2 = _re.sub(r"<[^>]+>", "",
+                         _LINK.sub(lambda g: g.group(1), c)).strip()
+            mm = _re.fullmatch(r"(\d+)", c2)
+            if mm and 0 <= int(mm.group(1)) <= 10:
+                old_lj = int(mm.group(1))
+                break
+        break
+    if old_lj != 10:
+        return False, (f"regression-flip not discriminating: old heuristic "
+                       f"gave leather jacket AC={old_lj}, expected the buggy 10")
+    return True, (f"AC by column-4 correct for 8 probe items "
+                  f"(leather jacket=1, cloak of protection=3, plate mail=7, "
+                  f"dsm=9); old heuristic still misreads leather jacket as "
+                  f"{old_lj} (regression-flip holds); 33/66 rows fixed s4")
+
+
 def main():
     t0 = time.time()
     emit("=" * 78)
@@ -589,6 +643,8 @@ def main():
        fx5_pet_not_a_wall)
     run("A6 stale-door terrain correction",
        fx6_stale_door, H, AG, C, rec)
+    run("A7 armor AC column (build_armor_table col-4 vs KB truth)",
+       fx7_armor_ac_column)
 
     emit("")
     emit("---- Part B: E16 probe records as replay fixtures ----")

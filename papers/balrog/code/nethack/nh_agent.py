@@ -91,6 +91,17 @@ C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_E15, C2_REPEAT, C2_CASTHUNGER))
 WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
 WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
+# NH-E6 REST/disengage lever (session 4, claude-opus-4-8[1m] max thinking):
+# the crisis-disengage HP fraction and the "die within N exchanges" predictor
+# were hardcoded (0.28 / 2.0) at the P3 crisis gate. The e6_solve TRASH
+# backtest (REST/disengage survives 10/20 TRASH deaths, wins at 40-step
+# backoffs) + the DEV death-shape KPI (agents die at ~35% HP, ABOVE the 0.28
+# flee floor -> lost in the 35->28% window while still trading blows) both
+# say: break contact earlier. These knobs default to the PRIOR CONSTANTS, so
+# unset == bit-identical behavior (flag-off regression gate). Proximal KPI:
+# survival-to-depth via TRASH-death rate (see KPI_TREE.md). Paired-block gate.
+CRISIS_HP = float(_os.environ.get("NH_CRISIS_HP", "0.28"))    # flee below hp-frac
+CRISIS_EXCH = float(_os.environ.get("NH_CRISIS_EXCH", "2.0"))  # flee if maxhit*x>=hp
 CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
 CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
 REPEAT_BUDGET = int(_os.environ.get("NH_REPEAT_BUDGET", "150"))  # env steps/level
@@ -1149,8 +1160,9 @@ class DiveAgent:
         else:
             # crisis zone: below ~28% max HP, or worst recent hit could
             # kill us within two more exchanges -> disengage from slower
-            crisis = A.hp <= max(A.hpmax * 0.28, 6) or \
-                (self.recent_max_hit * 2 >= A.hp and self.recent_max_hit > 0)
+            crisis = A.hp <= max(A.hpmax * CRISIS_HP, 6) or \
+                (self.recent_max_hit * CRISIS_EXCH >= A.hp and
+                 self.recent_max_hit > 0)
             if crisis and adj:
                 act = self._flee(adj)
                 if act:
