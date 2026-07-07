@@ -1,5 +1,22 @@
 # NetHack arm — program conventions (Campaign 2 onward)
 
+## The four-layer architecture (operator naming decision 2026-07-07 — use everywhere: reports, paper sections, mechanism tags, GIF banners)
+
+1. **PERCEPTION** — perceptors: raw obs → typed structure (rooms, threats,
+   items, prices, monster states, branch signatures).
+2. **MEMORY** — dossiers, observation store, rule cards, lessons: what has
+   been seen and learned.
+3. **INTUITION** — the LLM: holistic judgment over map+memory+narrative;
+   connects dots, generates hypotheses ("I wonder if..."), senses where to
+   go, picks objectives. Slow, rare, expensive, irreplaceable.
+4. **PROCEDURE** — code: navigation, combat mechanics, state machine,
+   verified rules. Fast, constant, free, exact.
+
+**The program's claim, in these terms:** perception+memory+procedure alone
+plateau (Arm A ceiling); adding intuition is what breaks it (Arm B delta).
+Every mechanism/rule/GIF-banner is tagged with its layer; the four-layer
+diagram anchors the paper.
+
 ## Phase structure (TRAIN-THEN-EVALUATE, operator-ratified 2026-07-07)
 
 1. **NH-C2.1 midpoint checkpoint** — frozen levers-so-far, n=80 seeds
@@ -143,6 +160,7 @@ signatures).
 | PRIORS | versioned prior sets `papers/balrog/priors/` (GENERIC_VIDEOGAME v0.1, NETHACK_SPECIFIC v0.1) + PRIOR VERDICT TABLE (validated/invalidated/untested — invalidations recorded; already: Elbereth-panic INVALIDATED in-interface, XP-grind INVALIDATED for max-rung, loot-usually-good PARTIALLY INVALIDATED) ; feeds T388 K-ladder generic-vs-specific axis | cross-game | v0.1 committed | live |
 | NH-E13-KB | local wiki knowledge base: `wiki_kb.sqlite` (FTS5, per T312) + sha256 manifest; experiments query the LOCAL KB only; live WebFetch only ADDS pages (logged) — frozen corpus makes guide-following a controlled experiment | NH-E13 folder | spec committed | registered |
 | E-NH4b / E-NH6 / NH-E11 / matrix / suite | Phase-L workstreams | dev only | — | registered |
+| CONTEXT | strategist context package (operator 2026-07-07): every LLM consultation gets FULL world map (all visited levels, annotated ASCII from dossiers) + MEMORIES (E18 store: appearances/prices, relations, curiosity hypotheses, context-relevant cards, applicable lessons) + STORY SO FAR (code-maintained narrative) + CURRENT STATE (stats/inventory/strategy state); versioned CONTEXT_SPEC.md; every consultation logs the exact package verbatim | NH-E11-strategist/CONTEXT_SPEC.md v0.1 | — | registered |
 | ARM A final | pure-code exam | n=100; 6000–6099 | — | reserved |
 | ARM B final | LLM-strategist exam | n=25; 7000–7024 | — | reserved |
 

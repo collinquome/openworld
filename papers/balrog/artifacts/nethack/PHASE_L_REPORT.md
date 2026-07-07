@@ -15,6 +15,16 @@ avoidable-damage rate plateaued (<1-point change) over 2 consecutive 40-episode
 dev blocks; (iv) snapshot suite green; (v) play-time violation rate < 1e-4 with
 no unexplained novelty entries.
 
+## The four-layer architecture (operator naming, 2026-07-07 — structures this whole report)
+
+PERCEPTION (perceptors: obs → typed structure) · MEMORY (dossiers, observation
+store, cards, lessons) · INTUITION (the LLM: dot-connecting, curiosity
+hypotheses, objective selection over the full context package — slow, rare,
+expensive, irreplaceable) · PROCEDURE (code: navigation, combat, state machine,
+verified rules — fast, constant, free, exact). Program claim in these terms:
+perception+memory+procedure alone plateau (Arm A ceiling); adding intuition
+breaks it (Arm B delta). Every mechanism below carries its layer tag.
+
 ## Priority order (operator, 2026-07-07, incl. late reweight)
 
 1. PERCEPTORS + MEMORY (NH-E18 substrate + dot-connector; perceptor backlog:
