@@ -120,3 +120,8 @@ existing ledgers:
 - **Report artifact:** curiosity calibration curve + top realized-gain
   journeys ("CURIOSITY: unexplored NE room [2 open sockets] → FOUND: wand
   → SOCKET CLOSED: ranged option acquired").
+
+**AMENDMENT (operator, same day): §7's formula is DEMOTED to a baseline +
+explanation/logging layer. FELT-SENSE (intuition picks over the full context
+package, one-line why, choice logged) is the DEFAULT curiosity engine.
+See NH-E24 (curiosity framings compared) — the formula must earn its way in.**
