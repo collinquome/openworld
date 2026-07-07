@@ -1,5 +1,7 @@
 # CONTEXT_SPEC v0.1 — the strategist context package (operator directive 2026-07-07)
 
+MODEL: Fable 5 (max reasoning) — design + registration. (Handoffs logged here if a successor model continues this experiment.)
+
 Every LLM consultation — Arm B triggers, reflection passes, NH-E18 dot-connector
 scans — receives the FULL picture, not a summary of the current room. All
 content is obs-derived (clean protocol: built exclusively from served

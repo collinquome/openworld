@@ -1,5 +1,7 @@
 # NH-E17 — Clean-room rebuild from knowledge artifacts (REGISTERED; runs at Phase L exit, before/alongside Phase E)
 
+MODEL: Fable 5 (max reasoning) — design + registration. (Handoffs logged here if a successor model continues this experiment.)
+
 **Operator directive (2026-07-07).** Once Phase-L exit criteria are met and
 "what works" is known, a FRESH agent context (spawned by the operator/coordinator
 at that time — flag them when exit criteria are met) builds a NEW implementation

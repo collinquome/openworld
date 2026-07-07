@@ -1,5 +1,11 @@
 # FABLE NETHACK — PHASE L (extended learning campaign)
 
+MODEL ROSTER (methods line, per the model-provenance standing rule): Phase L
+session 1 design/synthesis/analysis = Fable 5 (max reasoning); registered
+fallback if capped = claude-opus-4-8 (max thinking) — any handoff will be
+logged here at its phase boundary. Workers/subagents where used: Sonnet 5
+(tagged per artifact).
+
 Predecessor state: NH-C2.1 checkpoint 5.27 [4.22, 6.43] vs SOTA 6.8 — no beat;
 avoidability audit says deaths are CAPABILITY-bound (5–8% of damage
 decision-avoidable); action audit says 50/248 actions ever used
@@ -58,3 +64,11 @@ NH-E17 (clean-room rebuild) runs at exit — every card written to pass it.
 - ~17:4x E18 refinement registered: hypothesis-driven exploration objectives
   (revaluation trigger → curiosity objectives; "LLM decides WHERE, procedures
   decide HOW"; curiosity hit rate metric; CURIOSITY GIF banners).
+- ~17:5x Registered in one batch as directives arrived: CONTEXT_SPEC v0.1
+  (strategist context package: full world map + memories + story-so-far +
+  current state, versioned + logged verbatim per consultation); four-layer
+  architecture naming (PERCEPTION/MEMORY/INTUITION/PROCEDURE); NH-E19
+  principles distillation + algorithm catalog/meta-selection (+ ablation
+  experiment); NH-E20 MiniHack scenario lab (des-file micro-scenarios,
+  transfer gate, priority: spellcast doctrine + D5-6 melee); model-provenance
+  standing rule (MODEL field stamped on all new artifacts).

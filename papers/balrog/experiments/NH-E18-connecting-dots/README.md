@@ -1,5 +1,7 @@
 # NH-E18 — Connecting-dots memory (REGISTERED, Phase L; operator directive 2026-07-07 — LEADS the Phase-L priority order together with the perceptor backlog)
 
+MODEL: Fable 5 (max reasoning) — design + registration. (Handoffs logged here if a successor model continues this experiment.)
+
 **Core insight (operator):** memory serves TWO functions. (1) Avoiding death —
 hazard ledgers, dossiers: we have this, it is code-shaped. (2) CONNECTING DOTS —
 relational inference over remembered observations, where facts jointly imply

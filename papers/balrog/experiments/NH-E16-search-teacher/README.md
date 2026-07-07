@@ -1,5 +1,7 @@
 # NH-E16 — Search-as-teacher (REGISTERED, Phase L; operator directive 2026-07-07, flagship writeup: "deterministic replay as an epistemic instrument")
 
+MODEL: Fable 5 (max reasoning) — design + registration. (Handoffs logged here if a successor model continues this experiment.)
+
 **Foundation (verified fact):** ref-vs-ref replay on this host/config is perfectly
 deterministic — same seed + same action prefix ⇒ identical state (n=20 control,
 all paired deltas exactly 0.00; NH-C2.1 report §E-NH2). A `(seed, action_prefix)`

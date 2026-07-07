@@ -161,6 +161,8 @@ signatures).
 | NH-E13-KB | local wiki knowledge base: `wiki_kb.sqlite` (FTS5, per T312) + sha256 manifest; experiments query the LOCAL KB only; live WebFetch only ADDS pages (logged) — frozen corpus makes guide-following a controlled experiment | NH-E13 folder | spec committed | registered |
 | E-NH4b / E-NH6 / NH-E11 / matrix / suite | Phase-L workstreams | dev only | — | registered |
 | CONTEXT | strategist context package (operator 2026-07-07): every LLM consultation gets FULL world map (all visited levels, annotated ASCII from dossiers) + MEMORIES (E18 store: appearances/prices, relations, curiosity hypotheses, context-relevant cards, applicable lessons) + STORY SO FAR (code-maintained narrative) + CURRENT STATE (stats/inventory/strategy state); versioned CONTEXT_SPEC.md; every consultation logs the exact package verbatim | NH-E11-strategist/CONTEXT_SPEC.md v0.1 | — | registered |
+| NH-E19 | principles distillation + algorithm selection (operator 2026-07-07): three knowledge artifacts per representation — world model (code), strategies (rules), PRINCIPLES (language, in the strategist prompt): priors/PRINCIPLES.md versioned + evidence-cited, invalidations struck through visibly; ALGORITHM_CATALOG.md (per-procedure card: what-for/preconditions/failure modes) with intuition-layer meta-selection at consultations (selections+outcomes logged → evidence-driven win rates); ablation experiment: strategist WITH vs WITHOUT principles+catalog on Arm-B-style dev blocks = measured value of articulated wisdom; principle-citation logging prunes dead principles; E17 rebuild now tests all three artifacts | folder NH-E19-principles | — | registered |
+| NH-E20 | MiniHack scenario lab (operator 2026-07-07, exploratory mode): des-file-authored micro-scenarios on the same NLE engine (spellcast doctrine, kiting, price-ID, target priority, D5-6 composition); falsification matrices become real-engine suites; learning mode = author scenario → run candidate strategies head-to-head n=50+ → winner becomes carded rule/principle; TRANSFER GATE: lab sets the prior, NetHack dev-block confirms before any role-profile ship; lab→wild transfer rate logged (feeds T387); reuse work/fable_minihack stack; priority: spellcasting + D5-6 melee | folder NH-E20-minihack-lab | — | registered |
 | ARM A final | pure-code exam | n=100; 6000–6099 | — | reserved |
 | ARM B final | LLM-strategist exam | n=25; 7000–7024 | — | reserved |
 
@@ -179,6 +181,18 @@ signatures).
 | gym harvest | any spent/dev seed via reset+action-prefix replay; NEVER scored ranges for score |
 
 ## Standing rules
+
+- **Model provenance (operator standing rule, 2026-07-07):** track WHICH model
+  did the work, per experiment and per artifact. Every experiment README +
+  ledger row carries a MODEL field (model + reasoning effort that designed/
+  synthesized/analyzed it); model handoffs mid-experiment are logged at the
+  phase boundary ("phases 1-2: Fable 5 max; phase 3+: Opus 4.8 max thinking").
+  Rule cards + principles carry model provenance (who inferred/authored).
+  Arm B consultation logs add the model id per consultation (strategist model
+  may differ from synthesis model). Reports state the model roster in their
+  methods line. Rationale: synthesis-model tier is the program's own binding
+  variable (Baba 65.8→100), and Opus-4.8-max is the registered fallback if
+  Fable caps.
 
 - **Clean protocol:** reset/step + served obs only in the scored loop;
   offline source-derived tables permitted and disclosed; no env internals.
