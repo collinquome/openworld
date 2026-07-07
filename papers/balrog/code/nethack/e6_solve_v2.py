@@ -152,6 +152,103 @@ def pol_kite(A, obs, ps):
     return [best[1]]
 
 
+def _doorways(L, ps):
+    """Cached set of KNOWN open-door / doorway cells (the diagonal-restricted
+    chokepoints). NLE enforces `no diagonal move into/out of a doorway` for BOTH
+    the player and monsters (nh_common.neighbors lines 366-370) — so routing a
+    same-speed pursuer through a door forces it onto an orthogonal step it would
+    otherwise cut diagonally, donating it a move and opening a gap."""
+    import nh_common as C
+    doors = ps.get("_doors")
+    if doors is None:
+        doors = set(L.find_terrain(C.DOORWAY)) | set(L.find_terrain(C.DOOR_OPEN))
+        ps["_doors"] = doors
+    return doors
+
+
+def pol_door_kite(A, obs, ps):
+    """DOOR-DIAGONAL KITE (wiki Standard_strategy): relaxed disengage that,
+    among the SAFEST steps (fewest adjacencies preserved as the primary gate,
+    identical to pol_kite), biases the flee toward / through a known doorway.
+    A same-speed pursuer cannot follow diagonally through the door, so it eats
+    an orthogonal penalty and loses ground. Reduces to pol_kite's behaviour when
+    no door is known (door term is constant), so the KITE-vs-DOOR_KITE self-play
+    delta isolates exactly the door-routing contribution.
+    insight-origin: OP via READ-WIKI (Standard_strategy); mechanism BORROW-FIELD.
+    """
+    L = A.level
+    ax, ay = A.agent
+    mob = _mobiles(A)
+    if not mob:
+        return ["search"]                 # safe -> heal
+    doors = _doorways(L, ps)
+
+    def door_dist(cx, cy):
+        if not doors:
+            return 0
+        return min(max(abs(cx - dx), abs(cy - dy)) for dx, dy in doors)
+
+    best = None
+    prev = ps.get("kdir")
+    for name, (nx, ny) in L.neighbors(ax, ay):
+        if any(m.x == nx and m.y == ny for m in L.monsters):
+            continue
+        d = min(max(abs(m.x - nx), abs(m.y - ny)) for m in mob)
+        adj = sum(1 for m in mob if max(abs(m.x - nx), abs(m.y - ny)) <= 1)
+        on_door = 0 if (nx, ny) in doors else 1     # step ONTO a door choke
+        dd = door_dist(nx, ny)                       # else route toward one
+        sticky = 0 if name == prev else 1
+        # SAFETY primary (adj) == pol_kite; then seek the door choke; then keep
+        # distance (-d); then momentum. Door-seeking sits ABOVE raw distance-max
+        # so the flee will accept a slightly-closer step to reach the door.
+        key = (adj, on_door, dd, -d, sticky)
+        if best is None or key < best[0]:
+            best = (key, name)
+    if best is None:
+        return ["search"]                 # boxed in
+    ps["kdir"] = best[1]
+    return [best[1]]
+
+
+def pol_door_kite_tb(A, obs, ps):
+    """DOOR-KITE variant B: door-proximity as a FREE TIEBREAKER only. Identical
+    safety (adj) AND distance-max (-d) gates to pol_kite; the door term breaks
+    ties among equally-safe, equally-distant steps (routes through the choke
+    only when it costs no ground). Fair test of 'the door tactic helps when it
+    is free' — isolates door-routing from the distance sacrifice that variant A
+    (pol_door_kite) pays to reach the door."""
+    L = A.level
+    ax, ay = A.agent
+    mob = _mobiles(A)
+    if not mob:
+        return ["search"]
+    doors = _doorways(L, ps)
+
+    def door_dist(cx, cy):
+        if not doors:
+            return 0
+        return min(max(abs(cx - dx), abs(cy - dy)) for dx, dy in doors)
+
+    best = None
+    prev = ps.get("kdir")
+    for name, (nx, ny) in L.neighbors(ax, ay):
+        if any(m.x == nx and m.y == ny for m in L.monsters):
+            continue
+        d = min(max(abs(m.x - nx), abs(m.y - ny)) for m in mob)
+        adj = sum(1 for m in mob if max(abs(m.x - nx), abs(m.y - ny)) <= 1)
+        on_door = 0 if (nx, ny) in doors else 1
+        dd = door_dist(nx, ny)
+        sticky = 0 if name == prev else 1
+        # distance-max (-d) stays PRIMARY (== pol_kite); door only breaks ties
+        key = (adj, -d, on_door, dd, sticky)
+        if best is None or key < best[0]:
+            best = (key, name)
+    if best is None:
+        return ["search"]
+    ps["kdir"] = best[1]
+    return [best[1]]
+
+
 def pol_throw(A, obs, ps):
     """Hurl ammo at nearest in-line hostile; kite when no clean line."""
     letter = throwable_letter(obs)

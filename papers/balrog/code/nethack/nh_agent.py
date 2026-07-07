@@ -95,12 +95,36 @@ C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 # attributable delta reported explicitly.
 C2_ROLE_PROFILE = _flag("NH_ROLE_PROFILE")
 HEAL_HP_FRAC = float(_os.environ.get("NH_HEAL_HP", "0.55"))  # heal below this
+# s7 refinement (fix the WHEN): heal in a MIDDLE HP band [LO,HI] UNDER THREAT.
+# s6 found crisis-heal fires too late (~hp 4/21 -> heal-a-sliver-and-die) and
+# proactive no-threat top-up perturbs good runs. The band's LO floor drops the
+# too-late crisis heal; requiring an adjacent threat drops the harmful proactive
+# top-up. HI == HEAL_HP_FRAC. Env-tunable: NH_HEAL_HP_LO / NH_HEAL_HP.
+HEAL_HP_LO = float(_os.environ.get("NH_HEAL_HP_LO", "0.30"))  # too-late floor
+# s7 kick-cost gate: kicking a locked door can break a leg -> slow -> death,
+# worst at low HP and for fragile/low-HD roles. Gate the kick on HP/role and
+# defer the door instead. Flag-off (default) == bit-identical (no kick change).
+C2_KICK_GATE = _flag("NH_KICK_GATE")
+# s7 HEADLINE: declarative survival rule base (nh_rulebase.py). Flag ON routes
+# the four migrated guard predicates (NEVER_MELEE / TOUCH_KILL / PRAYFIX / HEAL
+# band) through the base (behavior-preserving: rule conditions are exact ports).
+# Flag OFF -> base never consulted, bit-identical to the s6 baseline.
+C2_RULEBASE = _flag("NH_RULEBASE")
+KICK_MIN_HP = float(_os.environ.get("NH_KICK_MIN_HP", "0.5"))  # skip kick below
+KICK_FRAGILE_ROLES = set(filter(None, _os.environ.get(
+    "NH_KICK_FRAGILE", "Tourist,Wizard,Archeologist").split(",")))
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
 PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
-              C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE))
+              C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
+              C2_RULEBASE))
+if C2_RULEBASE:
+    import nh_rulebase as _RB_MOD
+    RULEBASE = _RB_MOD.build_default_base()
+else:
+    RULEBASE = None
 WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
 WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 # NH-E6 REST/disengage lever (session 4, claude-opus-4-8[1m] max thinking):
@@ -689,8 +713,19 @@ class DiveAgent:
                 if not m.pet and m.name not in C.IMMOBILE and
                 m.pos not in self.atlas.level.no_attack]
 
+    def _rb_state(self, monster_name=None, adj_mobile=None):
+        """Served-obs STATE VIEW for a rule-base check (no env internals)."""
+        A = self.atlas
+        return {"role": self.role, "hp": A.hp, "hpmax": A.hpmax,
+                "hunger": A.hunger, "wields_weapon": self._wields_weapon,
+                "monster_name": monster_name, "adj_mobile": adj_mobile}
+
     def _never_melee(self, m):
-        if m.name in C.NEVER_MELEE:
+        # MIGRATED to rule base [NEVER_MELEE] (s7). Flag-off path is the literal
+        # s6 predicate; flag-on delegates the membership check (exact port).
+        hit = (RULEBASE.check("NEVER_MELEE", self._rb_state(monster_name=m.name))
+               if C2_RULEBASE else m.name in C.NEVER_MELEE)
+        if hit:
             return True
         if m.name in self._mem_avoid and self.atlas.xplvl <= 6:
             return True
@@ -1184,6 +1219,16 @@ class DiveAgent:
             self.queue = ["y"]
             self.queue_tag = "pray"
             return "pray"
+        # NH-E13b Healer MIDDLE-BAND heal (s7 refinement — the WHEN-fix): when a
+        # threat is adjacent AND HP sits in the [LO,HI] band, cast-heal EARLY
+        # (before the hp-4 crisis that heals-a-sliver-and-dies, s6) instead of
+        # trading melee. Under-threat gate replaces the s6 proactive no-threat
+        # top-up that perturbed good runs. Band-gated in _cast_heal; no-op unless
+        # NH_ROLE_PROFILE + Healer (flag-off bit-identical).
+        if C2_ROLE_PROFILE and self.role == "Healer" and adj:
+            act = self._cast_heal(obs)
+            if act:
+                return act
         if C2_EXPMAX:
             if adj:
                 act = self._c2_combat(obs, adj)
@@ -1211,15 +1256,9 @@ class DiveAgent:
                 act = self._crisis_throw(obs)
                 if act:
                     return act
-        # NH-E13 Healer proactive top-up: cast-heal-to-survive when HP has
-        # slipped below HEAL_HP_FRAC and no threat is adjacent (safe window)
-        # and we are not starving (eat wins over cast then). No-op unless
-        # NH_ROLE_PROFILE + Healer.
-        if C2_ROLE_PROFILE and self.role == "Healer" and not adj and \
-                A.hunger < C.WEAK:
-            act = self._cast_heal(obs)
-            if act:
-                return act
+        # s6 proactive no-threat top-up REMOVED (s7): it healed when safe and
+        # perturbed otherwise-good runs (seed 900: D10 -> D4). The middle-band
+        # UNDER-THREAT heal above is the replacement WHEN-trigger.
 
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:
@@ -1251,8 +1290,12 @@ class DiveAgent:
             # PRAY_DEATH lever: praying with a mobile hostile adjacent
             # donates ~10+ free attacks; kill/escape first unless fainting
             pray_now = self._pray_ok() or fainting_ok
-            if C2_PRAYFIX and pray_now and A.hunger < C.FAINTING and \
-                    any(m.name not in C.IMMOBILE for m in adj):
+            # MIGRATED to rule base [PRAYFIX_DEFER] (s7): the mobile-adjacent
+            # trigger is the exact port `any(m.name not in IMMOBILE for m in adj)`.
+            _adj_mobile = (RULEBASE.check("PRAYFIX_DEFER", self._rb_state(
+                adj_mobile=any(m.name not in C.IMMOBILE for m in adj)))
+                if C2_RULEBASE else any(m.name not in C.IMMOBILE for m in adj))
+            if C2_PRAYFIX and pray_now and A.hunger < C.FAINTING and _adj_mobile:
                 pray_now = False
                 self._ev(f"PRAYFIX: deferring hunger prayer, "
                          f"{[m.name for m in adj]} adjacent")
@@ -1758,12 +1801,32 @@ class DiveAgent:
                   f"(pw {A.pw})")
         return "cast"
 
+    def _kick_ok(self):
+        """RULE CARD [KICK_COST_GATE] (layer: PROCEDURE; model:
+        claude-opus-4-8[1m] s7; provenance: inferred — break-leg death mode).
+        Kicking a locked door risks a broken leg (-> slowed -> death), a cost
+        the s6 audit found ungated (kicks fired up to 12x with no HP/role
+        check). Skip the kick when HP is below KICK_MIN_HP of max or the role is
+        fragile/low-HD (KICK_FRAGILE_ROLES); the caller defers the door instead.
+        Flag-off (NH_KICK_GATE unset) -> always True == bit-identical.
+        """
+        if not C2_KICK_GATE:
+            return True
+        A = self.atlas
+        if self.role in KICK_FRAGILE_ROLES:
+            return False
+        if A.hpmax and A.hp < KICK_MIN_HP * A.hpmax:
+            return False
+        return True
+
     def _cast_heal(self, obs):
         """RULE CARD [HEALER_CAST_HEAL] (layer: PROCEDURE; model:
-        claude-opus-4-8[1m] s6; provenance: wiki — nethackwiki Healer page,
-        "cast healing for survival"). When a Healer's HP falls below
-        HEAL_HP_FRAC, cast the healing spell (self-target, no direction) to
-        restore HP rather than trading melee or burning a prayer. A
+        claude-opus-4-8[1m] s6, WHEN-refined s7; provenance: wiki — nethackwiki
+        Healer page, "cast healing for survival"). When a Healer's HP sits in the
+        MIDDLE band [HEAL_HP_LO, HEAL_HP_FRAC] of max, cast the healing spell
+        (self-target, no direction) to restore HP rather than trading melee or
+        burning a prayer. s7: the band floor (LO) drops the s6 too-late crisis
+        heal; the caller's under-threat gate drops the s6 proactive top-up. A
         capability the agent has NEVER used (pure headroom). Fires only under
         NH_ROLE_PROFILE + role==Healer (flag-off == bit-identical). First
         cast opens + parses the spell menu; heal_choice/heal_unavailable are
@@ -1773,7 +1836,14 @@ class DiveAgent:
         if not (C2_ROLE_PROFILE and self.role == "Healer"):
             return None
         A = self.atlas
-        if A.hp > HEAL_HP_FRAC * A.hpmax:
+        # MIDDLE-BAND gate (s7): heal only inside [HEAL_HP_LO, HEAL_HP_FRAC] of
+        # max HP. Above HI: no need. Below LO: too late (s6: heal-a-sliver-and-
+        # die) -> defer to crisis-flee / prayer. This band IS the WHEN-fix.
+        # MIGRATED to rule base [HEAL_MIDBAND] (s7): exact port of the band gate.
+        in_band = (RULEBASE.check("HEAL_MIDBAND", self._rb_state())
+                   if C2_RULEBASE
+                   else HEAL_HP_LO * A.hpmax <= A.hp <= HEAL_HP_FRAC * A.hpmax)
+        if not in_band:
             return None
         if C2_CASTHUNGER and self.cast_hunger_blocked:
             return None
@@ -1944,7 +2014,12 @@ class DiveAgent:
             # (see RULE CARD [TOUCH_KILL_WEAPON_MELEE])
             if C2_ANY and self.role != "Monk" and self._wields_weapon:
                 for m in nm_threats:
-                    if m.name in TOUCH_KILL:
+                    # MIGRATED to rule base [TOUCH_KILL_WEAPON] (s7); flag-off ==
+                    # literal membership, flag-on delegates the exact port.
+                    tk = (RULEBASE.check("TOUCH_KILL_WEAPON",
+                                         self._rb_state(monster_name=m.name))
+                          if C2_RULEBASE else m.name in TOUCH_KILL)
+                    if tk:
                         step = self._melee_step(m)
                         if step:
                             self.note(f"cornered: weapon melee vs "
@@ -2484,6 +2559,15 @@ class DiveAgent:
                         self.kick_count = 0
                         self.note(f"giving up on locked door {door}")
                         return None
+                    if not self._kick_ok():
+                        # KICK_COST_GATE: too fragile to risk a broken leg ->
+                        # defer this door (re-approachable with a key later).
+                        self.door_giveup.add(door)
+                        self.kick_dir = None
+                        self.kick_count = 0
+                        self.note(f"kick-gate defer {door} "
+                                  f"(hp {A.hp}/{A.hpmax} role {self.role})")
+                        return None
                     self.queue = [dname]
                     self.queue_tag = "kick"
                     return "kick"
@@ -2583,6 +2667,14 @@ class DiveAgent:
                         self.suspect_walls.setdefault(A.key, set()).add((nx, ny))
                         self.kick_dir = None
                         self.kick_count = 0
+                        return "search"
+                    if not self._kick_ok():
+                        # KICK_COST_GATE: defer rather than risk a broken leg.
+                        self.door_giveup.add((nx, ny))
+                        self.kick_dir = None
+                        self.kick_count = 0
+                        self.note(f"kick-gate defer {(nx, ny)} "
+                                  f"(hp {A.hp}/{A.hpmax} role {self.role})")
                         return "search"
                     self.queue = [step]
                     self.queue_tag = "kick"

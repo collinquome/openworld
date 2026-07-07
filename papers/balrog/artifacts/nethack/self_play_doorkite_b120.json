@@ -1,0 +1,159 @@
+{
+ "model": "claude-opus-4-8[1m]",
+ "k": 8,
+ "backoff": 120,
+ "n_scenarios": 4,
+ "named_agg": {
+  "KITE": {
+   "alive": 0,
+   "esc": 4
+  },
+  "DOOR_KITE": {
+   "alive": 0,
+   "esc": 4
+  },
+  "THROW": {
+   "alive": 2,
+   "esc": 4
+  },
+  "STAIRS": {
+   "alive": 1,
+   "esc": 4
+  }
+ },
+ "mc_search_mean_surv": 0.46875,
+ "rows": [
+  {
+   "seed": 707,
+   "role": "Rogue",
+   "depth": 5,
+   "named": {
+    "KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "DOOR_KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "THROW": {
+     "alive": true,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "STAIRS": {
+     "alive": true,
+     "escaped": true,
+     "max_depth": 5
+    }
+   },
+   "mc_search": {
+    "k": 8,
+    "survived": 8,
+    "surv_rate": 1.0,
+    "escaped": 8
+   }
+  },
+  {
+   "seed": 714,
+   "role": "Tourist",
+   "depth": 4,
+   "named": {
+    "KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 4
+    },
+    "DOOR_KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 4
+    },
+    "THROW": {
+     "alive": true,
+     "escaped": true,
+     "max_depth": 4
+    },
+    "STAIRS": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 4
+    }
+   },
+   "mc_search": {
+    "k": 8,
+    "survived": 5,
+    "surv_rate": 0.625,
+    "escaped": 8
+   }
+  },
+  {
+   "seed": 727,
+   "role": "Valkyrie",
+   "depth": 5,
+   "named": {
+    "KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "DOOR_KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "THROW": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "STAIRS": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    }
+   },
+   "mc_search": {
+    "k": 8,
+    "survived": 2,
+    "surv_rate": 0.25,
+    "escaped": 8
+   }
+  },
+  {
+   "seed": 732,
+   "role": "Ranger",
+   "depth": 5,
+   "named": {
+    "KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "DOOR_KITE": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "THROW": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    },
+    "STAIRS": {
+     "alive": false,
+     "escaped": true,
+     "max_depth": 5
+    }
+   },
+   "mc_search": {
+    "k": 8,
+    "survived": 0,
+    "surv_rate": 0.0,
+    "escaped": 8
+   }
+  }
+ ]
+}

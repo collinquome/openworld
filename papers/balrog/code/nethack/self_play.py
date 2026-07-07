@@ -33,6 +33,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 MODEL = "claude-opus-4-8[1m]"
 
+# self-play strategy menu = the e6 named lines PLUS the s7 door-diagonal kite.
+# DOOR_KITE is placed next to KITE so the paired KITE-vs-DOOR_KITE per-scenario
+# outcome isolates the door-routing contribution (both share the safety gate).
+NAMED_SP = [("KITE", E.pol_kite), ("DOOR_KITE", E.pol_door_kite),
+            ("THROW", E.pol_throw), ("STAIRS", E.pol_stairs)]
+
 
 def load_scenarios(seeds):
     lib = json.load(open(os.path.join(RESULTS, "e6_scenarios.json")))
@@ -63,7 +69,7 @@ def selfplay_one(sc, k, backoff=120, window=600, budget=400):
     row = {"seed": seed, "role": sc.get("role"),
            "depth": start_depth, "named": {}}
     # fixed named strategies: one deterministic rollout each
-    for name, pol in E.NAMED:
+    for name, pol in NAMED_SP:
         r = E.run_policy(seed, prefix, pol, {}, stop_time, budget, start_depth)
         row["named"][name] = {"alive": r["alive"], "escaped": r["escaped"],
                               "max_depth": r["max_depth"]}
@@ -92,7 +98,7 @@ def main():
     print(f"self-play: {len(by)} trash-fight scenarios "
           f"seeds={sorted(by)} K={args.k} backoff={args.backoff}")
     rows = []
-    agg = {n: {"alive": 0, "esc": 0} for n, _ in E.NAMED}
+    agg = {n: {"alive": 0, "esc": 0} for n, _ in NAMED_SP}
     mc_rate_sum = 0.0
     for seed in sorted(by):
         row = selfplay_one(by[seed], args.k, backoff=args.backoff)
@@ -102,13 +108,13 @@ def main():
             agg[n]["esc"] += int(row["named"][n]["escaped"])
         mc_rate_sum += row["mc_search"]["surv_rate"]
         nm = " ".join(f"{n}={'S' if row['named'][n]['alive'] else '.'}"
-                      for n, _ in E.NAMED)
+                      for n, _ in NAMED_SP)
         print(f"  seed {seed:4d} {str(row['role'])[:9]:9} D{row['depth']}  "
               f"{nm}  MC={row['mc_search']['survived']}/{args.k} "
               f"({row['mc_search']['surv_rate']*100:.0f}%)", flush=True)
     ns = len(rows)
     print("\n=== in-model self-play survival on the trash-fight ===")
-    for n, _ in E.NAMED:
+    for n, _ in NAMED_SP:
         print(f"  {n:7} survive {agg[n]['alive']}/{ns}  "
               f"escape {agg[n]['esc']}/{ns}")
     print(f"  MC-SEARCH mean survival {mc_rate_sum/ns*100:.1f}% "

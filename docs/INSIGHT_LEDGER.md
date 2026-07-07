@@ -70,3 +70,13 @@ Format: {insight · knowledge-prov · insight-origin · mechanism · replication
 
 ## How to maintain
 Every new experiment README + rule card + principle records BOTH provenances: knowledge-source (existing tag) AND insight-origin (this ledger's codes) + discovery mechanism. Append here as insights land. This ledger IS the ground-truth for NH-E27 (can an autonomous agent rediscover these? tagged by who found them first).
+
+## Session 7 insights (claude-opus-4-8[1m] max thinking, 2026-07-07)
+| Insight | Origin | Mechanism | Became |
+|---|---|---|---|
+| Door-diagonal kite must be disposed by an in-model DISTANCE metric, not survival | OP+AG | NOTICE-ABSENCE | S7-1: door term fires 13/16 but opens NO gap (max-dist 24 vs 24/23; turns-adjacent worse) → DROP at the self-play gate, real-env block saved |
+| A positioning lever's proximal KPI is distance-gain (turns-adjacent, max-min-dist), NOT downstream survival | AG | INVERSION | door_kite_distance.py harness; the survival metric was dominated by downstream deaths and hid the null |
+| Scattered survival if-thens → one declarative rule base is the compile target for external knowledge | OP | QUESTION-FRAME | S7-2 nh_rulebase.py: {condition,severity,reminder,provenance×2}, two consumers, behavior-preserving migration |
+| Behavior-preserving migration is provable: unit-equiv (rule cond == predicate) + bit-identical trajectory (flag 0-vs-1) | AG | GENERALIZE-FIX | rulebase_equiv.py 130/130 + seed 706/831 bit-identical |
+| Heal WHEN is a middle HP band under threat, not a crisis floor or a proactive top-up | OP+DATA | ASK-WHY-ON-FAILURE | S7-3 HEALER middle-band block (s6 diagnosed both naive triggers net-negative) |
+| Kick recklessness is a break-leg death mode; gate on HP/role | DATA | NOTICE-ABSENCE | S7-4 KICK_COST_GATE (s6 audit: 12× ungated kicks) |

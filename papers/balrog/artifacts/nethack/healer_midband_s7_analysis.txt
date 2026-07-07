@@ -1,0 +1,29 @@
+ seed       role    ref   test       d fires  rD  tD end
+  825     Healer   0.00   0.00   +0.00     0   1   1 DEATH: died. Killed by a falling rock.
+  828     Healer   2.65   2.12   -0.53     1   5   4 DEATH: died. Killed by a coyote.
+  831     Healer   6.96   6.96   +0.00     2   8   8 DEATH: died. Killed by a giant spider.
+  833     Healer   2.65   2.65   +0.00     0   5   5 DEATH: died. Killed by a jackal.
+  844     Healer   2.65   2.65   +0.00     0   5   5 DEATH: died. Killed by a hobgoblin.
+  854     Healer   1.75   1.75   +0.00     0   3   3 DEATH: died. Killed by a giant rat.
+  867     Healer   1.75   1.75   +0.00     2   3   3 DEATH: died. Killed by a hobbit.
+  874     Healer   1.54   1.54   +0.00     0   2   2 DEATH: died. Killed by a falling rock.
+  879     Healer   2.65   2.12   -0.53     5   5   4 DEATH: died. Killed by a goblin.
+  886     Healer   1.75   1.75   +0.00     1   3   3 DEATH: died. Killed by a hobbit.
+  888     Healer   1.75   1.75   +0.00     0   3   3 DEATH: died. Killed by a sewer rat.
+  891     Healer   0.00   0.00   +0.00     0   1   1 DEATH: died. Killed by a jackal, while p
+  894     Healer   2.65   2.65   +0.00     0   5   5 DEATH: died. Killed by a werejackal.
+  895     Healer   0.00   0.00   +0.00     1   1   1 DEATH: died. Killed by a goblin, while p
+  900     Healer  12.56   2.12  -10.44     1  10   4 DEATH: died. Killed by a hobbit.
+  907     Healer   1.54   1.54   +0.00     0   2   2 DEATH: died. Killed by a small mimic.
+  911     Healer   1.85   1.85   +0.00     2   3   3 DEATH: died. Killed by a jackal.
+  927     Healer   1.54   1.54   +0.00     0   2   2 DEATH: was poisoned. Poisoned by a rotte
+  932     Healer   1.54   1.75   +0.21     2   2   3 DEATH: died. Killed by a fox.
+  935     Healer   3.54   2.12   -1.42     1   6   4 DEATH: died. Killed by a bat.
+
+[Healer middle-band s7] n=20  ref 2.57  test 1.93  delta -0.63  CI95 [-1.76,-0.02]
+  lever fires (test, 'HEALER_CAST_HEAL'): 18 total | bit-identical pairs: 15/20
+  survival@D5: ref 40.0%  test 20.0%
+  death-class ref:  {'TRASH': 14, 'MELEE+': 3, 'PRAY': 2, 'SPIDANT': 1}
+  death-class test: {'TRASH': 14, 'MELEE+': 3, 'PRAY': 2, 'SPIDANT': 1}
+  per-role mean (ref -> test):
+    Healer       n=20   2.57 ->   1.93 (-0.63)
