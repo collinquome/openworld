@@ -37,6 +37,13 @@ RE_PRICE = re.compile(r"(?:for sale|costs?)[,;]? +(\d+) +zorkmids?")
 RE_SEE = re.compile(r"You see here (?:an? |the )?([^.(]*?)(?:\s*\(([^)]*)\))?\.")
 RE_KILL = re.compile(r"You (?:kill|destroy) the ([a-zA-Z' -]+?)!")
 RE_HIT_US = re.compile(r"The ([a-z' -]+?) (?:bites|hits|kicks|butts|stings|touches|misses)")
+# our own attack effects + trap projectiles are not monsters (found by the
+# first reflection pass: "spell" logged as a species with hit_us=16 — that
+# was our Force Bolt)
+NON_MONSTERS = {"spell", "bolt", "force bolt", "bolt of lightning",
+                "bolt of fire", "bolt of cold", "death ray",
+                "magic missile", "arrow", "dart", "rock", "boulder",
+                "poison dart"}
 
 # unidentified appearance adjectives (potions/scrolls/wands/rings classes);
 # used to flag sightings worth remembering for price-ID. Source: object
@@ -82,7 +89,8 @@ class Store:
                 self.mon(m.group(1).strip())["killed"] += 1
                 self.event(step, t, "kill", m.group(0), story=True)
             m = RE_HIT_US.search(msg)
-            if m and "misses" not in m.group(0):
+            if m and "misses" not in m.group(0) and \
+                    m.group(1).strip() not in NON_MONSTERS:
                 self.mon(m.group(1).strip())["hit_us"] += 1
             m = RE_SEE.search(msg)
             if m:
@@ -132,6 +140,55 @@ class Store:
                 "monsters": self.monsters,
                 "features": self.features,
                 "story": self.story[-300:]}
+
+
+# -------------------------------------------------- exploration metrics
+# Operator directive 2026-07-07: spatial exploration as first-class
+# instrumentation. Estimators (report which one each analysis uses):
+#   (a) ONLINE PROXY: reachable frontier count; fully-explored == 0
+#       frontiers (crisp endpoint, no total-area guess);
+#   (b) RETROSPECTIVE: explored/final-explored per level (offline);
+#   (c) PRIOR-BASED: explored/expected-fill for cross-level comparability.
+# Dark-but-inferred (suspect walls etc.) is known-unknown, NOT explored.
+
+def level_explore_stats(level):
+    """(explored_nonwall_cells, frontier_count) for one belief level.
+    Frontier = explored passable cell with >=1 unexplored neighbor."""
+    import nh_common as C
+    explored = 0
+    frontiers = 0
+    for y in range(C.ROWS):
+        for x in range(C.COLS):
+            if not level.explored[y][x]:
+                continue
+            t = int(level.terrain[y][x])
+            if t == C.WALL:
+                continue
+            explored += 1
+            if t in (C.FLOOR, C.CORRIDOR, C.DOORWAY, C.DOOR_OPEN,
+                     C.STAIRS_UP, C.STAIRS_DOWN):
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < C.COLS and 0 <= ny < C.ROWS and \
+                                not level.explored[ny][nx]:
+                            frontiers += 1
+                            break
+                    else:
+                        continue
+                    break
+    return explored, frontiers
+
+
+def snapshot_exploration(store, agent):
+    """Record (explored, frontiers) for every visited level — called at
+    level transitions; departure-% analyses read consecutive snapshots."""
+    A = agent.atlas
+    snap = {}
+    for key, lvl in A.levels.items():
+        snap[str(key)] = list(level_explore_stats(lvl))
+    store.event(agent.steps, A.time, "explore_stats", json.dumps(snap))
+    return snap
 
 
 # ---------------------------------------------------------------- package

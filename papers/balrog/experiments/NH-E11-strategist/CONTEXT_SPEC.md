@@ -44,3 +44,26 @@ later.
 - v0.1 2026-07-07: registered. Builder lands with the NH-E18 substrate
   (`nh_memory` store + dossier renderer); first consumer = dot-connector
   reflection passes on dev episodes.
+
+## GOALS ARE A LIST (operator directive 2026-07-07 — amends the objective-stack contract)
+
+The agent holds MULTIPLE STANDING GOALS CONCURRENTLY — "get stronger" AND
+"progress downward" AND "stay fed" AND "close open sockets" — not one
+active objective with the rest queued.
+
+1. The strategist maintains the GOAL LIST with weights (role- and
+   situation-dependent; felt-sense sets/re-weights at consultations).
+2. Goal-market candidates are scored by combined contribution across ALL
+   standing goals — a detour fight scores on 'stronger' (xp) + 'sockets'
+   (species evidence) even while pausing 'downward'; stairs score
+   'downward' but may debit 'stronger' if under-ready (the readiness
+   principle becomes a WEIGHT INTERACTION, not a gate).
+3. The objective STACK remains the execution plan (the ordered how),
+   derived from the goal LIST (the standing what) — list persists, stack
+   turns over.
+4. Per-action goal-contribution vectors are logged — death retrospectives
+   then attribute deaths to goal overweighting ("died over-serving
+   'downward': 0.8 vs 'stronger' 0.1 at xp2/D5"), turning weight-tuning
+   into evidence.
+GIF HUD: goal list + weights; flash multi-goal wins ("+stronger +sockets:
+killed newt [xp, species pinned]").
