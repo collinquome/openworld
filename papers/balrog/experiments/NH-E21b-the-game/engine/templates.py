@@ -108,7 +108,7 @@ def _register_gate_mechanic(world, gate: "world_mod.Gate") -> None:
 def _rng(seed: int, template_id: str) -> random.Random:
     # mix template_id into the seed so different templates don't share a
     # PRNG stream even when called with the same integer seed.
-    return random.Random((seed, template_id))
+    return random.Random(f"{template_id}:{seed}")
 
 
 # =====================================================================
@@ -139,8 +139,8 @@ def build_T1(seed: int):
     hz = (ax0 + hazard_slot[0], ay0 + hazard_slot[1])
     sz = (ax0 + safe_slot[0], ay0 + safe_slot[1])
 
-    hazard_item = w.add_item("hazard_fruit", f"a {adjs[0]} fruit", *hz)
-    w.add_item("plain_fruit", f"a {adjs[1]} fruit", *sz)
+    hazard_item = w.add_item("hazard_fruit", f"{adjs[0]} fruit", *hz)
+    w.add_item("plain_fruit", f"{adjs[1]} fruit", *sz)
 
     mech = g.Mechanic(
         mechanic_id="eat_hazard_fruit",
@@ -180,7 +180,7 @@ def build_T2(seed: int):
     w.goal_zone_id = "B"
 
     ax0, ay0 = w.zones["A"].x0, w.zones["A"].y0
-    sign = w.add_interactable("sign", "a weathered sign", ax0 + 2, ay0 + 1)
+    sign = w.add_interactable("sign", "weathered sign", ax0 + 2, ay0 + 1)
     parity_word = "even" if k == 0 else "odd"
     mech = g.Mechanic(
         mechanic_id="sign_reveal",
@@ -228,12 +228,12 @@ def build_T3(seed: int):
     ax0, ay0 = w.zones["A"].x0, w.zones["A"].y0
     metal_pos = (ax0 + 2, ay0 + 1)
     metal_adj = rng.choice(METAL_ADJ)
-    w.add_item("metal", f"a {metal_adj} metal shard", *metal_pos)
+    w.add_item("metal", f"{metal_adj} metal shard", *metal_pos)
 
     bx0, by0 = w.zones["B"].x0, w.zones["B"].y0
     shrine_color = rng.choice(COLORS)
     shrine_noun = rng.choice(SHRINE_NOUN)
-    shrine = w.add_interactable("shrine", f"a glowing {shrine_color} {shrine_noun}",
+    shrine = w.add_interactable("shrine", f"glowing {shrine_color} {shrine_noun}",
                                  bx0 + 3, by0 + 2)
     shrine_mech = g.Mechanic(
         mechanic_id="shrine_teleport",
@@ -244,7 +244,7 @@ def build_T3(seed: int):
     w.register_mechanic(shrine_mech)
 
     cx0, cy0 = w.zones["C"].x0, w.zones["C"].y0
-    lever = w.add_interactable("lever", "a rusty lever", cx0 + 2, cy0 + 1)
+    lever = w.add_interactable("lever", "rusty lever", cx0 + 2, cy0 + 1)
     lever_mech = g.Mechanic(
         mechanic_id="lever_unlock",
         trigger=g.on_interact(lever.entity_id),
@@ -297,7 +297,7 @@ def build_T4(seed: int):
 
     bx0, by0 = w.zones["B"].x0, w.zones["B"].y0
     lamp_adj = rng.choice(LAMP_ADJ)
-    lamp = w.add_interactable("lamp", f"a {lamp_adj} lamp", bx0 + 3, by0 + 2)
+    lamp = w.add_interactable("lamp", f"{lamp_adj} lamp", bx0 + 3, by0 + 2)
     drain_mech = g.Mechanic(
         mechanic_id="lamp_drain",
         trigger=g.on_interact(lamp.entity_id),
@@ -352,8 +352,8 @@ def build_T5(seed: int):
     charm_pos = (ax0 + 5, ay0 + 3)
     seed_adj = rng.choice(SEED_ADJ)
     charm_adj = rng.choice(CHARM_ADJ)
-    w.add_item("seed", f"a {seed_adj} seed", *seed_pos)
-    w.add_item("charm", f"a {charm_adj} charm", *charm_pos)
+    w.add_item("seed", f"{seed_adj} seed", *seed_pos)
+    w.add_item("charm", f"{charm_adj} charm", *charm_pos)
 
     dmg = rng.randint(5, 15)
     eat_mech = g.Mechanic(
@@ -414,12 +414,12 @@ def build_T6(seed: int):
     hazard_slot, safe_slot = ((2, 1), (6, 3)) if rng.random() < 0.5 else ((6, 3), (2, 1))
     hz = (ax0 + hazard_slot[0], ay0 + hazard_slot[1])
     sz = (ax0 + safe_slot[0], ay0 + safe_slot[1])
-    w.add_item("hazard_fruit", f"a {adjs[0]} fruit", *hz)
-    w.add_item("plain_fruit", f"a {adjs[1]} fruit", *sz)
+    w.add_item("hazard_fruit", f"{adjs[0]} fruit", *hz)
+    w.add_item("plain_fruit", f"{adjs[1]} fruit", *sz)
 
     charm_pos = (ax0 + 4, ay0 + 2)
     charm_adj = rng.choice(CHARM_ADJ)
-    w.add_item("charm", f"a {charm_adj} charm", *charm_pos)
+    w.add_item("charm", f"{charm_adj} charm", *charm_pos)
 
     eat_mech = g.Mechanic(
         mechanic_id="eat_hazard_fruit",

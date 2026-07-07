@@ -1,4 +1,4 @@
-# CONTEXT_SPEC v0.1 — the strategist context package (operator directive 2026-07-07)
+# CONTEXT_SPEC v0.2 — the strategist context package (operator directive 2026-07-07)
 
 MODEL: Fable 5 (max reasoning) — design + registration. (Handoffs logged here if a successor model continues this experiment.)
 
@@ -31,6 +31,14 @@ later.
    the choke; found + wore ring mail (AC 4→3); descended via SE stairs...".
 4. **CURRENT STATE** — role/stats/HP/hunger/inventory/position + active
    strategy state (NH-E15 machine state + last transition).
+
+## v0.2 addition (operator reminder-loop directive): section 5 — REMINDERS
+
+5. **REMINDERS** — memories PUSHED by the cue→memory index for the current
+   situation (adversary strats, applicable lessons, price hits, branch
+   notes), each tagged with its cue and source artifact. The strategist
+   doesn't have to know what to ask for. Every reminder fire is logged with
+   whether it changed the decision.
 
 ## Versioning + logging contract
 

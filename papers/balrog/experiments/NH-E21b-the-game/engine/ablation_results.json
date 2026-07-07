@@ -1,0 +1,594 @@
+{
+  "per_template": {
+    "T1": {
+      "n_episodes": 10,
+      "solve_rate": 0.0,
+      "wins": 0,
+      "mean_mechanics_discovered_frac": 0.5,
+      "mean_steps": 200,
+      "median_steps": 200.0
+    },
+    "T2": {
+      "n_episodes": 10,
+      "solve_rate": 1.0,
+      "wins": 10,
+      "mean_mechanics_discovered_frac": 1.0,
+      "mean_steps": 52.4,
+      "median_steps": 52.0
+    },
+    "T3": {
+      "n_episodes": 10,
+      "solve_rate": 1.0,
+      "wins": 10,
+      "mean_mechanics_discovered_frac": 1.0,
+      "mean_steps": 105,
+      "median_steps": 105.0
+    },
+    "T4": {
+      "n_episodes": 10,
+      "solve_rate": 1.0,
+      "wins": 10,
+      "mean_mechanics_discovered_frac": 1.0,
+      "mean_steps": 128,
+      "median_steps": 128.0
+    },
+    "T5": {
+      "n_episodes": 10,
+      "solve_rate": 0.0,
+      "wins": 0,
+      "mean_mechanics_discovered_frac": 0.0,
+      "mean_steps": 200,
+      "median_steps": 200.0
+    },
+    "T6": {
+      "n_episodes": 10,
+      "solve_rate": 0.0,
+      "wins": 0,
+      "mean_mechanics_discovered_frac": 0.25,
+      "mean_steps": 200,
+      "median_steps": 200.0
+    }
+  },
+  "episodes": [
+    {
+      "template_id": "T1",
+      "seed": 0,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 1,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 2,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 3,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 4,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 5,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 6,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 7,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 8,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T1",
+      "seed": 9,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 0,
+      "win": true,
+      "loss": false,
+      "steps": 53,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 1,
+      "win": true,
+      "loss": false,
+      "steps": 53,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 2,
+      "win": true,
+      "loss": false,
+      "steps": 53,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 3,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 4,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 5,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 6,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 7,
+      "win": true,
+      "loss": false,
+      "steps": 53,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 8,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T2",
+      "seed": 9,
+      "win": true,
+      "loss": false,
+      "steps": 52,
+      "mechanics_discovered": 2,
+      "mechanics_total": 2
+    },
+    {
+      "template_id": "T3",
+      "seed": 0,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 1,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 2,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 3,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 4,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 5,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 6,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 7,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 8,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T3",
+      "seed": 9,
+      "win": true,
+      "loss": false,
+      "steps": 105,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 0,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 1,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 2,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 3,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 4,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 5,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 6,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 7,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 8,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T4",
+      "seed": 9,
+      "win": true,
+      "loss": false,
+      "steps": 128,
+      "mechanics_discovered": 3,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 0,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 1,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 2,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 3,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 4,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 5,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 6,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 7,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 8,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T5",
+      "seed": 9,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 0,
+      "mechanics_total": 3
+    },
+    {
+      "template_id": "T6",
+      "seed": 0,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 1,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 2,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 3,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 4,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 5,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 6,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 7,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 8,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    },
+    {
+      "template_id": "T6",
+      "seed": 9,
+      "win": false,
+      "loss": true,
+      "steps": 200,
+      "mechanics_discovered": 1,
+      "mechanics_total": 4
+    }
+  ]
+}

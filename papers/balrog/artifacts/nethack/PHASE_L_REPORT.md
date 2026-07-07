@@ -214,3 +214,28 @@ n=20 paired (12 Wizard + 8 non-caster guards), ref = frozen NH-C2.1 config:
 Wizard headroom context: Wizard block mean was 2.09–2.77 in every prior
 scored block; a +1.27 role-targeted lift on the worst role is exactly the
 capability-frontier thesis paying out — pending CAST-2 confirmation.
+
+## NH-E21b engine — DELIVERED (Sonnet build, Fable 5 spec + review)
+
+engine/ in the E21b folder: mechanic grammar (triggers × effects ×
+conditions, bindings sampled per seed, magnitudes discoverable only by
+experience), 6 templates of escalating composition depth, knowledge log,
+no-intuition baseline, ablation harness, 9/9 tests green (determinism;
+reference solver 120/120 template×seed solves; baseline STRUCTURALLY fails
+the counterintuitive worlds). Baseline ablation (10 seeds): T1
+lettuce-door 0%, T5 sacrifice-info 0%, T6 double-override 0% vs T2/T3/T4
+100% — the pre-registered design signature exactly: systematic exploration
+solves explore-worlds; only override-capable intuition can solve
+damage-as-key. LLM arms (a)/(c)/(d) stubs ready.
+
+## NH_REPEAT — repeated-layout stair predictor (BUILT; awaiting paired block)
+
+World-model discovery (E18 reflection R1 → corpus scan): the vendored NLE
+seeded generator repeats level layouts — 19/96 consecutive-level pairs in
+CAST-1 share >60% identical explored rows, many pixel-identical (seed 809
+D6=D7=D8). Disclosed as an eval-substrate fact (same for all BALROG
+agents). Lever: NH_REPEAT — ≥85% terrain match over ≥60 comparable cells
+⇒ predict down-stairs at the previous level's stair cell, bias exploration
+there (hint-only; normal give-up applies). Smoke on seed 990: 3 detections,
+all correctly predicting (63,4). Rule card REPEAT_LAYOUT_STAIRS. Paired
+dev block queued behind CAST-2.

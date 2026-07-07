@@ -77,6 +77,7 @@ C2_ELBERETH = _flag("NH_ELBERETH")  # E-NH5: weapon-engraved Elbereth panic
 C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
 C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
 C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
+C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
@@ -84,7 +85,7 @@ PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
-              C2_E15))
+              C2_E15, C2_REPEAT))
 WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
 WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
@@ -182,6 +183,12 @@ class DiveAgent:
         if _os.environ.get("NH_STORE", "1") == "1":
             import nh_store
             self.store = nh_store.Store()
+        # ---- Phase L NH_REPEAT state (inert unless C2_REPEAT) ----
+        self.prev_level_key = None
+        self._cur_level_key = None
+        self.repeat_pred = None       # predicted stairs cell or False
+        self.repeat_checked_exp = 0   # explored count at last check
+        self.repeat_fires = 0
         # ---- Phase L NH-E15 stall watchdog (inert unless C2_E15) ----
         self.wd_hist = []           # (game_time, explored, depth, xp)
         self.wd_level = 0           # escalation level
@@ -335,6 +342,14 @@ class DiveAgent:
                 self.race = m.group(2)
                 self.role_source = "welcome"
                 self.note(f"role={self.role} race={self.race}")
+        # Phase L NH_REPEAT: previous-level tracking + per-level reset
+        if A.level_changed or self._cur_level_key is None:
+            if self._cur_level_key is not None and \
+                    self._cur_level_key != A.key:
+                self.prev_level_key = self._cur_level_key
+            self._cur_level_key = A.key
+            self.repeat_pred = None
+            self.repeat_checked_exp = 0
         # Phase L NH-E18: feed the observation store (MEMORY layer)
         if self.store is not None:
             import nh_store
@@ -1303,6 +1318,18 @@ class DiveAgent:
                 self.queue_tag = "pickup"
                 return "pickup"
 
+        # ---- P8.9: repeated-layout stair hint (REPEAT_LAYOUT_STAIRS) -------
+        # checked every step (cheap: internally rate-limited); on FIRST
+        # detection the hint overrides the current explore target once —
+        # subsequent target churn is left to normal explore logic.
+        if C2_REPEAT:
+            already = self.repeat_pred
+            hint = self._repeat_hint()
+            if hint is not None and already is None and \
+                    not A.level.explored[hint[1]][hint[0]]:
+                self.explore_target = hint
+                self._goal("find-stairs", f"repeat-layout hint {hint}")
+
         # ---- P9: explore ----------------------------------------------------
         act = self._explore(obs)
         if act:
@@ -1329,6 +1356,65 @@ class DiveAgent:
         return a
 
     # ------------------------------------------------------------- prompts
+    # ------------------------------------- Phase L: repeated-layout predictor
+    # RULE CARD [REPEAT_LAYOUT_STAIRS] (layer: PROCEDURE + MEMORY; model:
+    # Fable 5 max): statement: when the current level's explored terrain
+    # matches the previous level's terrain at >=85% over >=60 comparable
+    # cells, predict the down-stairs at the previous level's down-stairs
+    # cell and bias exploration there (explore_target hint only — normal
+    # give-up logic applies if wrong/unreachable).
+    # mechanism: the vendored NLE seeded generator REPEATS level layouts:
+    # 19/96 consecutive-level pairs in the CAST-1 block share >60%
+    # identical explored rows, many pixel-identical (seed 809 D6=D7=D8;
+    # seed 990 D1-D3 with stair transits [63,4]->[14,15] three descents
+    # running — E18 reflection R1, validated within-episode). Score = depth
+    # before death; descent time is the currency; starvation deaths are
+    # descent-stalled episodes.
+    # evidence: offline corpus scan (96 pairs) + within-episode prediction
+    # hit. status: provisional until its paired dev block. scope: belief-
+    # derived, works on any level whose predecessor was partially mapped.
+    def _repeat_hint(self):
+        A = self.atlas
+        if self.repeat_pred is False or self.prev_level_key is None:
+            return None
+        if self.repeat_pred is not None:
+            return self.repeat_pred
+        L = A.level
+        P_ = A.levels.get(self.prev_level_key)
+        if P_ is None:
+            return None
+        explored = sum(1 for y in range(C.ROWS) for x in range(C.COLS)
+                       if L.explored[y][x])
+        if explored - self.repeat_checked_exp < 25:
+            return None                 # re-check every ~25 new cells
+        self.repeat_checked_exp = explored
+        comparable = match = 0
+        for y in range(C.ROWS):
+            for x in range(C.COLS):
+                if L.explored[y][x] and P_.explored[y][x]:
+                    comparable += 1
+                    if int(L.terrain[y][x]) == int(P_.terrain[y][x]):
+                        match += 1
+        if comparable < 60:
+            return None
+        if match / comparable < 0.85:
+            if comparable > 200:        # decisively different: stop checking
+                self.repeat_pred = False
+            return None
+        # find previous level's down-stairs
+        for y in range(C.ROWS):
+            for x in range(C.COLS):
+                if P_.explored[y][x] and \
+                        int(P_.terrain[y][x]) == C.STAIRS_DOWN:
+                    self.repeat_pred = (x, y)
+                    self.repeat_fires += 1
+                    self.note(f"REPEAT layout detected "
+                              f"({match}/{comparable}): predicting stairs "
+                              f"at {self.repeat_pred}")
+                    return self.repeat_pred
+        self.repeat_pred = False
+        return None
+
     # ---------------------------------------------- Phase L: stall watchdog
     # RULE CARD [STALL_WATCHDOG_V1] (layer: PROCEDURE; NH-E15; model:
     # Fable 5 max): statement: if over the last WD_WINDOW(150) game turns

@@ -125,3 +125,45 @@ existing ledgers:
 explanation/logging layer. FELT-SENSE (intuition picks over the full context
 package, one-line why, choice logged) is the DEFAULT curiosity engine.
 See NH-E24 (curiosity framings compared) — the formula must earn its way in.**
+
+## 8. REMINDER/RECALL LOOPS — the push mode (operator directive 2026-07-07; completes the retrieval triad: PUSH reminders / PULL questions / OFFLINE dot-connecting)
+
+1. **SCENARIO→REMINDER:** perceptual cues fire associative recall without
+   being asked — adversary sighted → boss strat + lessons + exchange stats
+   pushed; level type → branch dossier notes; item class → price table +
+   past outcomes; state pattern (low HP + pack) → applicable death lessons.
+   Implementation: cue→memory index (entity/situation/state-pattern tags on
+   every memory artifact; FTS5 on cue fire), top-k surfaced.
+2. **TWO CONSUMERS:** (a) procedures — implicit recall via rule matching,
+   made explicit + logged; (b) INTUITION — pushed REMINDERS section in the
+   context package (push finds what pull misses: you can't query for a
+   lesson you forgot you learned). CONTEXT_SPEC bumps to v0.2 with the
+   REMINDERS section.
+3. **LOG every reminder fire + whether it changed a decision**; reminder
+   hit-rate (fired→influenced) tunes the index; never-influencing reminders
+   get demoted (relevance learning).
+4. Banner: "REMEMBERED: last bat standoff wasted 400 turns [lesson #12] →
+   forcing transition".
+
+## 9. RECOGNITION AS A DECISION TRIGGER (operator sharpening — recognition-primed decision, not passive recall)
+
+1. **SCENARIO FINGERPRINTS:** every gym/lab scenario, death retro, notable
+   situation gets a situation signature (adversary set + terrain class +
+   HP band + xp band + resources); a RECOGNIZER matches the current
+   situation continuously (cheap feature match).
+2. **"I'VE SEEN THIS BEFORE" is a first-class event** that PROMPTS an
+   immediate strategy decision (state-machine interrupt + consultation
+   trigger where warranted): surface the scenario's OUTCOME HISTORY
+   ("seen 7×: choke+throw won 6, open-melee died 3") and force explicit
+   (re)selection through the resolution chain — recognized+pinned → apply
+   the practiced strat NOW; recognized+bad-history+no-answer → caution
+   posture + intuition consult ("we've died here twice — what's
+   different?"); recognized-mid-strategy → re-evaluate, don't just
+   continue.
+3. **The gym library doubles as the RECOGNITION CORPUS** — every practiced
+   scenario is a tripwire in live play; practice without recognition is
+   wasted. Metric: recognition→correct-strat application rate (the
+   PRACTICE-TRANSFER number — arguably the single most important metric of
+   the whole learning system).
+4. Banner: "RECOGNIZED: ant-pack corridor [seen 7×, strat pinned] →
+   engaging choke+throw".
