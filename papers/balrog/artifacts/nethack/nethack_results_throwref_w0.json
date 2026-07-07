@@ -1,0 +1,195 @@
+{
+ "label": "throwref",
+ "flags": {
+  "NH_CRISIS_THROW": "0",
+  "NH_STEPCAP": "6000",
+  "NH_CASTHUNGER": "1",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 6000,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 707,
+   "seed": 707,
+   "condition": "dev",
+   "steps": 628,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "depth_max_blstats": 5,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Rogue",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 332.4,
+   "transitions_file": "transitions/throwref/NetHackChallenge-v0__ep707.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7145,
+    "find-stairs": 0.2488,
+    "descend": 0.0367,
+    "_final": "explore",
+    "_final_reason": "13 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 714,
+   "seed": 714,
+   "condition": "dev",
+   "steps": 948,
+   "illegal": 0,
+   "progression": 0.0,
+   "highest_achievement": null,
+   "depth_max": 1,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a sewer rat.",
+   "depth_max_blstats": 1,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Tourist",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 736.2,
+   "transitions_file": "transitions/throwref/NetHackChallenge-v0__ep714.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.7518,
+    "explore": 0.2313,
+    "loot": 0.0042,
+    "survive": 0.0042,
+    "eat": 0.0042,
+    "rest": 0.0042,
+    "_final": "explore",
+    "_final_reason": "2 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 727,
+   "seed": 727,
+   "condition": "dev",
+   "steps": 6000,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "RUNNER_TRUNCATED@6000 (None)",
+   "depth_max_blstats": 5,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Valkyrie",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 879.6,
+   "transitions_file": "transitions/throwref/NetHackChallenge-v0__ep727.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.994,
+    "descend": 0.0028,
+    "eat": 0.0027,
+    "loot": 0.0005,
+    "survive": 0.0,
+    "_final": "explore",
+    "_final_reason": "10 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 732,
+   "seed": 732,
+   "condition": "dev",
+   "steps": 852,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a gas spore's explosion.",
+   "depth_max_blstats": 4,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Ranger",
+   "race": "orcish",
+   "role_source": "welcome",
+   "wallclock_s": 106.9,
+   "transitions_file": "transitions/throwref/NetHackChallenge-v0__ep732.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9318,
+    "descend": 0.0353,
+    "loot": 0.027,
+    "survive": 0.0035,
+    "eat": 0.0024,
+    "_final": "explore",
+    "_final_reason": "14 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  }
+ ]
+}

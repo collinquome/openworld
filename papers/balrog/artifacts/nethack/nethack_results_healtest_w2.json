@@ -1,0 +1,230 @@
+{
+ "label": "healtest",
+ "flags": {
+  "NH_ROLE_PROFILE": "1",
+  "NH_STEPCAP": "6000",
+  "NH_CASTHUNGER": "1",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 6000,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 888,
+   "seed": 888,
+   "condition": "dev",
+   "steps": 628,
+   "illegal": 0,
+   "progression": 0.017539535798967013,
+   "highest_achievement": "Dlvl:3",
+   "depth_max": 3,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a sewer rat.",
+   "depth_max_blstats": 3,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 195.1,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep888.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9203,
+    "loot": 0.0335,
+    "descend": 0.0319,
+    "survive": 0.0144,
+    "_final": "explore",
+    "_final_reason": "8 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 891,
+   "seed": 891,
+   "condition": "dev",
+   "steps": 87,
+   "illegal": 0,
+   "progression": 0.0,
+   "highest_achievement": null,
+   "depth_max": 1,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a jackal, while praying.",
+   "depth_max_blstats": 1,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 23.4,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep891.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9767,
+    "survive": 0.0233,
+    "_final": "survive",
+    "_final_reason": "pray hp 4/13"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 894,
+   "seed": 894,
+   "condition": "dev",
+   "steps": 585,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a werejackal.",
+   "depth_max_blstats": 5,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 122.4,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep894.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8339,
+    "loot": 0.0582,
+    "rest": 0.0497,
+    "descend": 0.0411,
+    "survive": 0.0171,
+    "_final": "survive",
+    "_final_reason": "cast-heal hp 2/14"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 1,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 895,
+   "seed": 895,
+   "condition": "dev",
+   "steps": 44,
+   "illegal": 0,
+   "progression": 0.0,
+   "highest_achievement": null,
+   "depth_max": 1,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a goblin, while praying.",
+   "depth_max_blstats": 1,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 7.1,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep895.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8605,
+    "survive": 0.1395,
+    "_final": "survive",
+    "_final_reason": "pray hp 4/12"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 1,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 900,
+   "seed": 900,
+   "condition": "dev",
+   "steps": 283,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a hobbit.",
+   "depth_max_blstats": 4,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 61.0,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep900.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7766,
+    "rest": 0.1099,
+    "descend": 0.0887,
+    "loot": 0.0142,
+    "survive": 0.0106,
+    "_final": "survive",
+    "_final_reason": "cast-heal hp 7/13"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 1,
+   "cast_fires": 0
+  }
+ ]
+}

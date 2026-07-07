@@ -209,6 +209,12 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         "subgoal_summary": _subgoal_summary(agent, steps),
         "ev_fired": len(agent.ev_log),
         "emergency_fired": agent.emergency_fired,
+        # lever-fire counts read off the agent's ev_log/counters (note()/_ev()
+        # append to lists, they do NOT print to log — count here, additively).
+        "throw_fires": sum(1 for _s, e in agent.ev_log
+                           if str(e).startswith("THROW_DISENGAGE")),
+        "heal_fires": getattr(agent, "heal_fires", 0),
+        "cast_fires": getattr(agent, "cast_fires", 0),
     }
     if memory is not None:
         memory.end_episode(result, steps)

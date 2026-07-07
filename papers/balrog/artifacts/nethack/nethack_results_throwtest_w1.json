@@ -1,0 +1,199 @@
+{
+ "label": "throwtest",
+ "flags": {
+  "NH_CRISIS_THROW": "1",
+  "NH_STEPCAP": "6000",
+  "NH_CASTHUNGER": "1",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 6000,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 780,
+   "seed": 780,
+   "condition": "dev",
+   "steps": 334,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant ant.",
+   "depth_max_blstats": 8,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Knight",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 46.6,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep780.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7958,
+    "descend": 0.1261,
+    "loot": 0.0721,
+    "find-stairs": 0.006,
+    "_final": "explore",
+    "_final_reason": "3 frontier cells"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 781,
+   "seed": 781,
+   "condition": "dev",
+   "steps": 1826,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 2,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a gecko, while fainted from lack of food.",
+   "depth_max_blstats": 2,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Priestess",
+   "race": "elven",
+   "role_source": "welcome",
+   "wallclock_s": 685.4,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep781.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.8258,
+    "explore": 0.1556,
+    "rest": 0.0082,
+    "eat": 0.0049,
+    "survive": 0.0027,
+    "descend": 0.0027,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 782,
+   "seed": 782,
+   "condition": "dev",
+   "steps": 246,
+   "illegal": 0,
+   "progression": 0.017539535798967013,
+   "highest_achievement": "Dlvl:3",
+   "depth_max": 3,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox.",
+   "depth_max_blstats": 3,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Cavewoman",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 31.9,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep782.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.627,
+    "rest": 0.168,
+    "descend": 0.127,
+    "survive": 0.0779,
+    "_final": "survive",
+    "_final_reason": "pray hp 3/15"
+   },
+   "ev_fired": 5,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 783,
+   "seed": 783,
+   "condition": "dev",
+   "steps": 1072,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by an imp.",
+   "depth_max_blstats": 5,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Ranger",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 200.4,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep783.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5994,
+    "find-stairs": 0.3109,
+    "descend": 0.0392,
+    "survive": 0.0243,
+    "loot": 0.0168,
+    "eat": 0.0093,
+    "_final": "survive",
+    "_final_reason": "pray hp 5/26"
+   },
+   "ev_fired": 8,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  }
+ ]
+}

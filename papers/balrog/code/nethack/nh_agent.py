@@ -83,12 +83,24 @@ C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
+# NH-E13 FLOOR-ROLE UPLIFT (session 6, claude-opus-4-8[1m] max thinking):
+# the WIKI-FED flagship — read the role at episode start and apply the
+# role's provenance:wiki playbook (DOCTRINE_CARDS_s5.md). HEALER first
+# (freq x headroom max): cast-heal-to-survive (SUSTAIN — a capability we
+# have NEVER used) + pacifist/avoid-melee (no proactive grind, disengage
+# early). Master flag NH_ROLE_PROFILE, default OFF => byte-identical when
+# unset (flag-off regression gate). Every profile branch is guarded on
+# C2_ROLE_PROFILE and the detected role, so non-target roles are untouched.
+# Proximal KPI = target-role mean + survival@D5 (KPI_TREE.md); wiki-
+# attributable delta reported explicitly.
+C2_ROLE_PROFILE = _flag("NH_ROLE_PROFILE")
+HEAL_HP_FRAC = float(_os.environ.get("NH_HEAL_HP", "0.55"))  # heal below this
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
 PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
-              C2_E15, C2_REPEAT, C2_CASTHUNGER))
+              C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE))
 WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
 WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 # NH-E6 REST/disengage lever (session 4, claude-opus-4-8[1m] max thinking):
@@ -231,6 +243,13 @@ class DiveAgent:
         self.cast_step = -99        # step the cast was issued (staleness)
         self.cast_unavailable = False
         self.cast_fires = 0
+        # ---- Phase L NH-E13 FLOOR-ROLE heal-casting (inert unless
+        # C2_ROLE_PROFILE + Healer). Tracked independently of the attack-cast
+        # state so a heal-only Healer (no attack spell) still casts. ----
+        self.heal_choice = None     # (letter, name, pw_cost) of a heal spell
+        self.heal_in_flight = False  # a heal cast issued, menu selection pends
+        self.heal_fires = 0
+        self.heal_scanned = False   # menu parsed at least once this episode
         # Phase L NH_CASTHUNGER state (tracking always on; behavior gated)
         self.cast_hunger_blocked = False
         self.cast_hunger_events = 0
@@ -1180,6 +1199,11 @@ class DiveAgent:
                 act = self._flee(adj)
                 if act:
                     return act
+                # NH-E13 Healer (trapped): _flee declined -> cast-heal to
+                # survive the trade rather than fall through to melee.
+                act = self._cast_heal(obs)
+                if act:
+                    return act
                 # _flee declined (same-speed/faster adjacent — the s4 REST
                 # failure mode). THROW_DISENGAGE: ranged strike instead of
                 # falling through to a stand-and-trade death (NH_CRISIS_THROW,
@@ -1187,6 +1211,15 @@ class DiveAgent:
                 act = self._crisis_throw(obs)
                 if act:
                     return act
+        # NH-E13 Healer proactive top-up: cast-heal-to-survive when HP has
+        # slipped below HEAL_HP_FRAC and no threat is adjacent (safe window)
+        # and we are not starving (eat wins over cast then). No-op unless
+        # NH_ROLE_PROFILE + Healer.
+        if C2_ROLE_PROFILE and self.role == "Healer" and not adj and \
+                A.hunger < C.WEAK:
+            act = self._cast_heal(obs)
+            if act:
+                return act
 
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:
@@ -1624,6 +1657,21 @@ class DiveAgent:
                 k = (f, lv)
                 if best is None or k < best[0]:
                     best = (k, l, n, 5 * lv)
+        # NH-E13 heal scan (ADDITIVE, independent of the attack path): a
+        # Healer's cast_unavailable=True (no attack spell) must NOT hide the
+        # healing spell. Pick the cheapest HP-restoring spell (name contains
+        # "healing"; "healing" lvl1/5pw is the bread-and-butter, always
+        # affordable and repeatable — Healers have a large Pw pool + regen).
+        if C2_ROLE_PROFILE and self.role == "Healer":
+            self.heal_scanned = True
+            hbest = None
+            for l, (n, lv, cat, f) in self.cast_spells.items():
+                if "healing" in n and f <= 40:
+                    if hbest is None or lv < hbest[0]:
+                        hbest = (lv, l, n, 5 * lv)
+            if hbest:
+                self.heal_choice = (hbest[1], hbest[2], hbest[3])
+                self.note(f"heal menu: choice {self.heal_choice}")
         if best:
             self.cast_choice = (best[1], best[2], best[3])
             self.note(f"cast menu: {self.cast_spells} -> choice "
@@ -1710,6 +1758,36 @@ class DiveAgent:
                   f"(pw {A.pw})")
         return "cast"
 
+    def _cast_heal(self, obs):
+        """RULE CARD [HEALER_CAST_HEAL] (layer: PROCEDURE; model:
+        claude-opus-4-8[1m] s6; provenance: wiki — nethackwiki Healer page,
+        "cast healing for survival"). When a Healer's HP falls below
+        HEAL_HP_FRAC, cast the healing spell (self-target, no direction) to
+        restore HP rather than trading melee or burning a prayer. A
+        capability the agent has NEVER used (pure headroom). Fires only under
+        NH_ROLE_PROFILE + role==Healer (flag-off == bit-identical). First
+        cast opens + parses the spell menu; heal_choice/heal_unavailable are
+        latched from the parse. Respects the CAST_HUNGER latch (no too-hungry
+        retry loop) and the Pw budget.
+        """
+        if not (C2_ROLE_PROFILE and self.role == "Healer"):
+            return None
+        A = self.atlas
+        if A.hp > HEAL_HP_FRAC * A.hpmax:
+            return None
+        if C2_CASTHUNGER and self.cast_hunger_blocked:
+            return None
+        if self.heal_scanned and self.heal_choice is None:
+            return None                 # no HP-restoring spell in the book
+        cost = self.heal_choice[2] if self.heal_choice else 5
+        if A.pw < cost:
+            return None
+        self.heal_in_flight = True
+        self._goal("survive", f"cast-heal hp {A.hp}/{A.hpmax}")
+        self.note(f"cast-heal (hp {A.hp}/{A.hpmax} pw {A.pw})")
+        self._ev(f"HEALER_CAST_HEAL: hp {A.hp}/{A.hpmax} pw {A.pw}")
+        return "cast"
+
     def _answer_prompt(self, obs, msg, in_yn, in_getlin, waitspace):
         A = self.atlas
         if in_getlin:
@@ -1757,9 +1835,18 @@ class DiveAgent:
         # Phase L NH_CAST: spell-selection menu. Parse once per episode,
         # pick the best attack spell (fail% gate), answer with its letter
         # if a cast is in flight, else dismiss.
-        if C2_CAST and ("Choose which spell to cast" in msg or
-                        self._tty_has(obs, "Choose which spell")):
+        if (C2_CAST or (C2_ROLE_PROFILE and self.heal_in_flight)) and \
+                ("Choose which spell to cast" in msg or
+                 self._tty_has(obs, "Choose which spell")):
             self._parse_cast_menu(obs, msg)
+            # NH-E13 heal-cast: self-target spell, NO direction prompt follows
+            if self.heal_in_flight and self.heal_choice:
+                self.heal_in_flight = False
+                self.heal_fires += 1
+                if self.store is not None:
+                    self.store.first(self.steps, A.time, "verb", "cast_heal")
+                return self.heal_choice[0]
+            self.heal_in_flight = False
             if self.cast_choice and self.cast_dir:
                 return self.cast_choice[0]
             self.cast_dir = None

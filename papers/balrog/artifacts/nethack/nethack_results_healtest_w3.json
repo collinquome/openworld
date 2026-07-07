@@ -1,0 +1,236 @@
+{
+ "label": "healtest",
+ "flags": {
+  "NH_ROLE_PROFILE": "1",
+  "NH_STEPCAP": "6000",
+  "NH_CASTHUNGER": "1",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 6000,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 907,
+   "seed": 907,
+   "condition": "dev",
+   "steps": 738,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a small mimic.",
+   "depth_max_blstats": 2,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 425.5,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep907.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7585,
+    "find-stairs": 0.2185,
+    "descend": 0.0149,
+    "survive": 0.0081,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 1,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 911,
+   "seed": 911,
+   "condition": "dev",
+   "steps": 753,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 3,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "depth_max_blstats": 3,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 126.1,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep911.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5612,
+    "descend": 0.4082,
+    "loot": 0.0173,
+    "survive": 0.0106,
+    "eat": 0.0027,
+    "_final": "descend",
+    "_final_reason": "to > at depth 3"
+   },
+   "ev_fired": 2,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 2,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 927,
+   "seed": 927,
+   "condition": "dev",
+   "steps": 964,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: was poisoned. Poisoned by a rotted jackal corpse.",
+   "depth_max_blstats": 2,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 53.3,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep927.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5244,
+    "loot": 0.4548,
+    "eat": 0.0156,
+    "descend": 0.0052,
+    "survive": 0.0,
+    "_final": "loot",
+    "_final_reason": "food: food ration d6"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 932,
+   "seed": 932,
+   "condition": "dev",
+   "steps": 197,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a newt.",
+   "depth_max_blstats": 2,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 14.6,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep932.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5408,
+    "rest": 0.2704,
+    "descend": 0.1071,
+    "survive": 0.0612,
+    "loot": 0.0204,
+    "_final": "descend",
+    "_final_reason": "to > at depth 2"
+   },
+   "ev_fired": 2,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 2,
+   "cast_fires": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 935,
+   "seed": 935,
+   "condition": "dev",
+   "steps": 486,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a bat.",
+   "depth_max_blstats": 4,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": null,
+   "role_source": "ttyrank",
+   "wallclock_s": 39.2,
+   "transitions_file": "transitions/healtest/NetHackChallenge-v0__ep935.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7598,
+    "find-stairs": 0.1532,
+    "descend": 0.0497,
+    "survive": 0.0269,
+    "loot": 0.0104,
+    "_final": "survive",
+    "_final_reason": "cast-heal hp 2/15"
+   },
+   "ev_fired": 2,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 2,
+   "cast_fires": 0
+  }
+ ]
+}

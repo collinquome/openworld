@@ -1,0 +1,192 @@
+{
+ "label": "throwtest",
+ "flags": {
+  "NH_CRISIS_THROW": "1",
+  "NH_STEPCAP": "6000",
+  "NH_CASTHUNGER": "1",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 6000,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 784,
+   "seed": 784,
+   "condition": "dev",
+   "steps": 3542,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a bat.",
+   "depth_max_blstats": 4,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Barbarian",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 1057.0,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep784.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8769,
+    "find-stairs": 0.0887,
+    "descend": 0.0285,
+    "loot": 0.0037,
+    "eat": 0.0023,
+    "survive": 0.0,
+    "_final": "explore",
+    "_final_reason": "13 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 785,
+   "seed": 785,
+   "condition": "dev",
+   "steps": 1318,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 1,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox.",
+   "depth_max_blstats": 1,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Barbarian",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 1380.2,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep785.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.6388,
+    "explore": 0.343,
+    "loot": 0.0152,
+    "survive": 0.0015,
+    "eat": 0.0015,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 786,
+   "seed": 786,
+   "condition": "dev",
+   "steps": 2868,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 3,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a gecko.",
+   "depth_max_blstats": 3,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Monk",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 628.0,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep786.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9927,
+    "descend": 0.0045,
+    "eat": 0.0014,
+    "loot": 0.0007,
+    "survive": 0.0007,
+    "_final": "explore",
+    "_final_reason": "5 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 787,
+   "seed": 787,
+   "condition": "dev",
+   "steps": 4367,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "depth_max_blstats": 2,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Samurai",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 341.7,
+   "transitions_file": "transitions/throwtest/NetHackChallenge-v0__ep787.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.4979,
+    "loot": 0.4702,
+    "explore": 0.027,
+    "descend": 0.0034,
+    "eat": 0.0014,
+    "survive": 0.0,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "throw_ev": 0
+  }
+ ]
+}
