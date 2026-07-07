@@ -69,3 +69,27 @@ provenance:source in the 3-way validation).
 
 ## Status log
 - 2026-07-07: registered (operator directive), folder + instrument spec created.
+
+## The MECHANIC DISCOVERY LOOP (operator directive 2026-07-07; protocol shared by E16 branch-probes, E20 lab, E21b The Game)
+
+1. **HYPOTHESIS QUEUE per unknown mechanic** — on encountering unknown
+   dynamics, enqueue explicit micro-hypotheses in question form: "How does
+   the cat move? (toward player within 5 tiles?)", "What happens if I water
+   the plant 3 times?", "Does the shrine effect stack?"
+2. **MINIMAL ISOLATED TEST per hypothesis** — the SMALLEST scenario that
+   answers it (unit-test scenario, not a full level); controlled initial
+   conditions via the lab/authoring channel; branch-probe (snapshot+try)
+   where the env supports it.
+3. **PREDICT-BEFORE-TEST** — each test declares its predicted possibility
+   set BEFORE running; observe, corroborate or revise, iterate until the
+   mechanic's violation rate ~0 → mechanic PINNED → rule card written.
+4. **THE KEY ARTIFACT: the successful micro-test IS the unit test.**
+   Discovery leaves the snapshot suite behind as its residue; the world
+   model and its test suite co-emerge; every pinned mechanic ships with the
+   test that pinned it. Log the discovery transcript per mechanic
+   (hypothesis → tests → revisions → pinned) — methods evidence + highlight
+   material ("HYPOTHESIS: cat chases within 5 → TEST → REFUTED: chases
+   within 3 → PINNED").
+5. **Metrics:** hypotheses-per-mechanic-until-pinned (discovery efficiency);
+   pinned-mechanic coverage before first serious world attempt (the
+   "study before the exam" curve).
