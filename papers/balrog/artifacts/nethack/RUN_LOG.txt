@@ -2004,3 +2004,9 @@ d87818a370d5ebc375b1e6f51ff039ab  nh_runner.py
 42c4f1d18a49e2024ab4a2a2afc896b8  nh_agent.py
 fbd41993bffdaf47cb45dc063acbf9ea  nh_common.py
 d87818a370d5ebc375b1e6f51ff039ab  nh_runner.py
+18:09:12 CASTHUNGER-1 VERDICT (11/12 in): eat-early component CLEARLY NEGATIVE (912 -2.43, 918 -9.91, 980 -1.69; resource-timing failure — early ration burn => empty inventory at Weak, 'while fainted' deaths) => V1b DROPPED per drop-rule (demoted to NH_CASTHUNGER_EAT lab sub-flag). CASTHUNGER-2 pre-registered: latch-only (NH_CASTHUNGER=V1a refusal latch) vs cast2 ref; 4 affected seeds only (839 912 940 980 — non-refusal seeds structurally exact-0, first divergent decision requires a refusal event); criteria: retry loops gone (transitions), delta not clearly negative, hunger-death class not worse.
+a09c27680e892eace5982bfb0fe1ef18  nh_agent.py
+18:11:15 E15-1 paired pre-registered: test=standing(FOOD2,PRAYFIX,LOS,TOPO,GUARD,CAST)+NH_E15 (stall watchdog v1) vs ref=DEV-B1 (same 40 seeds 700-739); criteria: wd fire-rate>0 with notes, paired delta not clearly negative, no death-class worsening; drop-if-unclear. Overnight rider — session 3 reads it.
+a09c27680e892eace5982bfb0fe1ef18  nh_agent.py
+18:22:24 REPEAT-2 VERDICT: +0.39 CI95 [-0.23,+1.28], 12/20 divergent (V1: 0/20), routing fired 19/20 eps, best +7.71 s818 D7->D10 — mechanism FIXED, effect UNCLEAR => NH_REPEAT stays default-off per drop rule.
+18:22:24 CASTHUNGER-1 FINAL: -1.10 CI95 [-2.94,+0.06], 1+/4- => V1b eat-early DROPPED (confirmed).

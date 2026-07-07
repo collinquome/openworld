@@ -78,7 +78,9 @@ C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
 C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
 C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
-C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-nutrition doctrine
+C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
+C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
+#   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
@@ -1213,11 +1215,14 @@ class DiveAgent:
                     self.queue = ["y"]
                     self.queue_tag = "eat_corpse"
                     return "eat"
-            if C2_CASTHUNGER and self._caster_active():
-                # CAST_HUNGER_V1(b): casters treat HUNGRY as the eat
-                # trigger, not Weak — the "too hungry to cast" failure
-                # arrives mid-fight, precisely when the bolt was the plan.
-                # Same walk-to-corpse search as the Weak branch.
+            if C2_CASTHUNGER_EAT and self._caster_active():
+                # CAST_HUNGER_V1(b) — DEMOTED to its own sub-flag after
+                # CASTHUNGER-1: eat-early at Hungry fired on every caster
+                # run (vs the rare refusal event), diverted mid-run
+                # (s918 -9.91) and burned rations early so Weak-tier
+                # found an empty inventory ("while fainted" deaths s912/
+                # s940). Resource-TIMING lesson: earlier consumption of a
+                # fixed stock is not more food. Latch (a) is the doctrine.
                 cells = [k[0] for k in self.fresh_kills
                          if k[1] in C.SAFE_CORPSES and not
                          self._cannibal(k[1]) and k[0] != A.agent]

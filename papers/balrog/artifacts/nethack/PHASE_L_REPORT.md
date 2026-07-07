@@ -4,7 +4,9 @@ MODEL ROSTER (methods line, per the model-provenance standing rule): Phase L
 session 1 design/synthesis/analysis = Fable 5 (max reasoning); registered
 fallback if capped = claude-opus-4-8 (max thinking) — any handoff will be
 logged here at its phase boundary. Workers/subagents where used: Sonnet 5
-(tagged per artifact).
+(tagged per artifact). PHASE BOUNDARY (logged per the provenance rule):
+sessions 1-2 = Fable 5 (max reasoning); session 3+ = claude-opus-4-8
+(max thinking) — forced handoff at Fable usage cap, 2026-07-07 evening.
 
 Predecessor state: NH-C2.1 checkpoint 5.27 [4.22, 6.43] vs SOTA 6.8 — no beat;
 avoidability audit says deaths are CAPABILITY-bound (5–8% of damage
@@ -433,3 +435,62 @@ files, results/e21b_live/).
 - Baseline contrast stands: T1/T5/T6 = 0% scripted vs live-intuition
   2/2 wins on first attempts. T5 + multi-seed statistics + the four-arm
   ablation (incl. (d) no-override) are session 3's E21b block.
+
+## CASTHUNGER-1 VERDICT: eat-early component DROPPED (honest negative, fast)
+
+Full read (12 Wizard seeds vs cast2 ref): **-1.10 [-2.94, +0.06], 1+/4−.**
+The eat-early-at-Hungry component fired on EVERY caster run (vs the rare
+refusal event it was meant to prevent), diverted mid-run trajectories
+(s918 -9.91, D10→D5), and — the real lesson — BURNED RATIONS EARLIER
+against a fixed stock, so Weak-tier eating found an empty inventory:
+"while fainted" deaths appeared (s912, s940-class). **Resource-TIMING
+lesson: eating earlier is not more food.** V1b demoted to lab sub-flag
+NH_CASTHUNGER_EAT; the refusal LATCH (V1a — kills the 2759-step retry
+loop) retests alone as CASTHUNGER-2 (4 affected seeds; others are
+structurally exact-0). This pairs with P7: the fix for an imported cost
+must itself be costed.
+
+## REPEAT-2 VERDICT: mechanism FIXED, effect UNCLEAR → stays default-off
+
+n=20 paired vs cast1ref: **+0.39 [-0.23, +1.28], 12/20 divergent
+(V1: 0/20), 6+/6−, best +7.71 (s818 D7→D10).** Routing engaged in 19/20
+episodes (layout repeats are ubiquitous at these depths). V2 did exactly
+what the rework intended — real action divergence via first-class goal
+routing — but the score effect does not clear the drop bar. Per the drop
+rule NH_REPEAT stays default-off; the world-model discovery stands, and
+the lever remains a candidate for a bigger block or for integration into
+the goal market proper (where stair-prediction competes with loot/xp
+goals instead of preempting them).
+
+## NH-E18 reflection pass #2 (devb1 s711) — R4–R6 proposed
+
+Verbatim consultation in NH-E18-connecting-dots/results/e18_reflection_711.md:
+R4 firsts-stream imbalance (depth-awards outrunning kill-awards in the
+first 400 turns) as a cheap arrival-constraint predictor — validate over
+the 794-scenario library; R5 passive-species evidence (acid blob
+passive_adj=4/hit_us=0) accumulates but is unconsumed — and counterattack
+damage is INVISIBLE to the store (add passive_counter when the
+monster-state perceptor lands); R6 the episode's lone novelty event
+(plains centaur, diff 6, xp1, D8, step 554) sits adjacent to the death —
+P6 + readiness ratio are its exact missing procedures. Instrument note:
+items_seen empty on a D8 run ⇒ floor-item sighting RE under-fires outside
+shops (filed for the item-appearance perceptor).
+
+## Registered this session (late batch): SHEET + HISTORY
+
+CHARACTER SHEET self-model + counterfactual power (operator; spec
+NH-E14-role-modules/CHARACTER_SHEET_SPEC.md — power index, readiness
+ratio makes P1 computable, item deltas upgrade the value perceptor;
+BUILD = top of session-3 queue). HISTORY BROWSER shipped
+(history_render.py): per-episode HISTORY.md + KNOWLEDGE_INDEX.md
+(committed examples: cast2 s918, devb1 s711).
+
+
+## Session 2 close (forced wrap at Fable usage cap)
+
+In flight at close: CASTHUNGER-2 (2/4 done: 839 + 912 both EXACT ref —
+latch kills the retry loop without behavior cost; 940/980 finishing;
+verdict lands in nethack_results_casthunger2_wa.json) and E15-1 paired
+overnight rider (40 eps vs DEV-B1 ref). Ledger harness on DEV-B1: one D1
+fire (loot-approach x50, seed 704 Knight) — known bounded class.
+HANDOFF_3.md carries the full state. Model handoff logged above.

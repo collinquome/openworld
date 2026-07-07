@@ -1,0 +1,128 @@
+# HISTORY — NetHackChallenge-v0 seed 918 (dev)
+
+MODEL provenance: render by history_render.py (Fable 5 max); data = logged trajectory channels.
+
+## Story so far (code-maintained)
+- T1: entered (0, 1) depth 1 (hp 11/11 xp 1)
+- T61: You kill the kobold!
+- T137: You kill the newt!
+- T164: You kill the goblin!
+- T376: entered (0, 2) depth 2 (hp 11/11 xp 1)
+- T606: You kill the sewer rat!
+- T622: You kill the jackal!
+- T671: You kill the newt!
+- T721: You kill the jackal!
+- T734: You kill the jackal!
+- T828: You kill the lichen!
+- T832: You kill the grid bug!
+- T836: entered (0, 3) depth 3 (hp 17/17 xp 2)
+- T1162: You kill the brown mold!
+- T1263: You kill the gecko!
+- T1265: You kill the lichen!
+- T1332: entered (0, 4) depth 4 (hp 16/17 xp 2)
+- T1377: entered (2, 1) depth 5 (hp 17/17 xp 2)
+- T1378: entered (0, 4) depth 4 (hp 17/17 xp 2)
+- T1535: You kill the gecko!
+- T1695: You kill the cave spider!
+- T1795: You kill the green mold!
+- T1907: You kill the newt!
+- T2010: You kill the kobold lord!
+- T2112: You kill the garter snake!
+- T2118: You kill the garter snake!
+- T2145: You kill the lichen!
+- T2207: entered (2, 1) depth 5 (hp 23/23 xp 3)
+- T2213: entered (2, 2) depth 6 (hp 23/23 xp 3)
+- T2219: entered (2, 3) depth 7 (hp 23/23 xp 3)
+- T2224: entered (2, 4) depth 8 (hp 23/23 xp 3)
+- T2267: You kill the gnome!
+- T2368: entered (2, 5) depth 9 (hp 21/23 xp 3)
+- T2370: You kill the dwarf!
+- T2375: entered (2, 6) depth 10 (hp 29/31 xp 4)
+- T2377: You kill the dwarf!
+- T2378: You kill the gnome!
+
+## Event ledger (decisions with reasons)
+- step 2328: NOVEL species adjacent: watchman (rows 0, diff 8)
+
+## Notes channel (last 80)
+- step 147: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 175: cast at goblin dir west (pw 5)
+- step 176: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 392: level -> (0, 2) depth=2
+- step 624: cast at sewer rat dir south (pw 8)
+- step 625: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 629: pray (hp 4/11)
+- step 648: cast at jackal dir northeast (pw 5)
+- step 649: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 693: crisis: fleeing newt (hp 6)
+- step 695: crisis: fleeing newt (hp 6)
+- step 697: crisis: fleeing newt (hp 4)
+- step 698: crisis: fleeing newt (hp 4)
+- step 699: cast at newt dir north (pw 5)
+- step 700: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 863: cast at lichen dir west (pw 16)
+- step 864: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 867: eat fresh corpse at Hungry (lichen)
+- step 869: cast at grid bug dir east (pw 13)
+- step 870: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 876: level -> (0, 3) depth=3
+- step 1078: pray (hunger 4)
+- step 1203: cast at brown mold dir southwest (pw 16)
+- step 1204: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1309: cast at gecko dir northwest (pw 16)
+- step 1310: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1313: cast at lichen dir west (pw 11)
+- step 1314: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1383: level -> (0, 4) depth=4
+- step 1429: learned Mines entrance at (0, 4):(67, 16)
+- step 1429: level -> (2, 1) depth=5
+- step 1430: Mines retreat: going up (xplvl 2)
+- step 1431: level -> (0, 4) depth=4
+- step 1588: cast at gecko dir east (pw 16)
+- step 1589: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1750: cast at cave spider dir east (pw 16)
+- step 1751: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1853: cast at green mold dir east (pw 16)
+- step 1854: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1967: cast at newt dir west (pw 30)
+- step 1968: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 1971: eat fresh corpse here (newt)
+- step 1973: eat fresh corpse here (newt)
+- step 2025: pray (hunger 4)
+- step 2068: cast at kobold lord dir south (pw 30)
+- step 2069: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2172: cast at garter snake dir west (pw 30)
+- step 2173: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2180: cast at garter snake dir west (pw 25)
+- step 2181: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2209: cast at lichen dir east (pw 25)
+- step 2210: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2245: Mines avoidance timed out: committing to Mines
+- step 2274: learned Mines entrance at (0, 4):(67, 16)
+- step 2274: level -> (2, 1) depth=5
+- step 2281: level -> (2, 2) depth=6
+- step 2288: level -> (2, 3) depth=7
+- step 2294: level -> (2, 4) depth=8
+- step 2329: peaceful at (31, 8): declining attack
+- step 2332: peaceful at (30, 8): declining attack
+- step 2343: cast at gnome dir southeast (pw 30)
+- step 2344: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2449: level -> (2, 5) depth=9
+- step 2449: cast at dwarf dir east (pw 30)
+- step 2450: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2452: cast at dwarf dir east (pw 25)
+- step 2453: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2461: level -> (2, 6) depth=10
+- step 2461: cast at dwarf dir east (pw 28)
+- step 2462: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2464: cast at dwarf dir east (pw 23)
+- step 2465: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2467: cast at gnome dir northeast (pw 18)
+- step 2468: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2470: cast at giant spider dir northwest (pw 13)
+- step 2471: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2473: cast at giant spider dir northwest (pw 8)
+- step 2474: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+- step 2476: cast at giant spider dir northwest (pw 5)
+- step 2477: cast menu: {'a': ('force bolt', 1, 'attack', 0), 'b': ('detect monsters', 1, 'divination', 0)} -> choice ('a', 'force bolt', 5)
+
