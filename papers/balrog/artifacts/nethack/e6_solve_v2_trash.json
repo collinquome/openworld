@@ -1,0 +1,1186 @@
+{
+ "model": "claude-opus-4-8[1m] (max thinking), s5",
+ "class": "TRASH",
+ "backoffs": [
+  40,
+  120,
+  300
+ ],
+ "window": 600,
+ "mc": 20,
+ "mc_budget": 250,
+ "verdicts": {
+  "MISPLAYED": 9
+ },
+ "wins_by_line": {
+  "MC": 4,
+  "THROW": 4,
+  "STAIRS": 1,
+  "KITE": 1
+ },
+ "results": [
+  {
+   "id": "c2dev_full_w0_712",
+   "seed": 712,
+   "role": "Samurai",
+   "depth_at_death": 7,
+   "end_reason": "DEATH: died. Killed by a rothe.",
+   "n_steps": 823,
+   "death_time": 601,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 7
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 82
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 32,
+      "escaped": false,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 32,
+      "escaped": false,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 73,
+      "escaped": true,
+      "max_depth": 7
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 6
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1,
+      "escaped": true,
+      "max_depth": 7
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 38
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 43
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 241,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 241,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 138,
+      "escaped": true,
+      "max_depth": 7
+     }
+    }
+   },
+   "mc": {
+    "n": 20,
+    "backoff": 300,
+    "survivors": 3,
+    "detail": [
+     {
+      "roll": 9,
+      "alive": true,
+      "time": 565,
+      "hp": 15,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     },
+     {
+      "roll": 14,
+      "alive": true,
+      "time": 570,
+      "hp": 15,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     },
+     {
+      "roll": 15,
+      "alive": true,
+      "time": 576,
+      "hp": 11,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     }
+    ]
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "MC"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 30.0
+  },
+  {
+   "id": "c2dev_full_w0_727",
+   "seed": 727,
+   "role": "Valkyrie",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a wererat.",
+   "n_steps": 780,
+   "death_time": 755,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 251
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 245
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 251,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": true,
+      "time": 1364,
+      "hp": 26,
+      "steps": 264,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 225,
+      "escaped": true,
+      "max_depth": 5
+     }
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "THROW"
+   ],
+   "winning_backoff": 40,
+   "escapes": [],
+   "wall_s": 6.6
+  },
+  {
+   "id": "c2dev_full_w0_739",
+   "seed": 739,
+   "role": "Barbarian",
+   "depth_at_death": 3,
+   "end_reason": "DEATH: died. Killed by a goblin.",
+   "n_steps": 1337,
+   "death_time": 1345,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 55
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 31
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 126,
+      "escaped": false,
+      "max_depth": 3
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 126,
+      "escaped": false,
+      "max_depth": 3
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 56,
+      "escaped": true,
+      "max_depth": 3
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 50
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 315
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 56,
+      "escaped": true,
+      "max_depth": 3
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 56,
+      "escaped": true,
+      "max_depth": 3
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 56,
+      "escaped": true,
+      "max_depth": 3
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 17
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 15
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 158,
+      "escaped": true,
+      "max_depth": 3
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 158,
+      "escaped": true,
+      "max_depth": 3
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 87,
+      "escaped": true,
+      "max_depth": 3
+     }
+    }
+   },
+   "mc": {
+    "n": 20,
+    "backoff": 300,
+    "survivors": 3,
+    "detail": [
+     {
+      "roll": 1,
+      "alive": true,
+      "time": 1285,
+      "hp": 16,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 3
+     },
+     {
+      "roll": 2,
+      "alive": true,
+      "time": 1285,
+      "hp": 7,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 3
+     },
+     {
+      "roll": 4,
+      "alive": true,
+      "time": 1285,
+      "hp": 15,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 3
+     }
+    ]
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "MC"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 29.4
+  },
+  {
+   "id": "c2dev_full_w1_707",
+   "seed": 707,
+   "role": "Rogue",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "n_steps": 654,
+   "death_time": 623,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 113
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 91
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 131,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 198,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 110,
+      "escaped": true,
+      "max_depth": 5
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 49
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 141
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 93,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": true,
+      "time": 957,
+      "hp": 12,
+      "steps": 400,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": true,
+      "time": 988,
+      "hp": 9,
+      "steps": 400,
+      "escaped": true,
+      "max_depth": 5
+     }
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "THROW",
+    "STAIRS"
+   ],
+   "winning_backoff": 120,
+   "escapes": [
+    "THROW",
+    "STAIRS"
+   ],
+   "wall_s": 12.1
+  },
+  {
+   "id": "c2dev_full_w2_708",
+   "seed": 708,
+   "role": "Rogue",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "n_steps": 1242,
+   "death_time": 1226,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 23
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 23
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 19,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 296,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 19,
+      "escaped": false,
+      "max_depth": 5
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 101
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 300
+     },
+     "KITE": {
+      "alive": true,
+      "time": 1830,
+      "hp": 20,
+      "steps": 310,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 290,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 115,
+      "escaped": true,
+      "max_depth": 5
+     }
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "KITE"
+   ],
+   "winning_backoff": 120,
+   "escapes": [],
+   "wall_s": 18.7
+  },
+  {
+   "id": "c2dev_full_w2_714",
+   "seed": 714,
+   "role": "Tourist",
+   "depth_at_death": 4,
+   "end_reason": "DEATH: died. Killed by a hobbit.",
+   "n_steps": 688,
+   "death_time": 658,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 277
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 214
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 275,
+      "escaped": true,
+      "max_depth": 4
+     },
+     "THROW": {
+      "alive": true,
+      "time": 1279,
+      "hp": 20,
+      "steps": 351,
+      "escaped": true,
+      "max_depth": 4
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 269,
+      "escaped": true,
+      "max_depth": 4
+     }
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "THROW"
+   ],
+   "winning_backoff": 40,
+   "escapes": [
+    "THROW"
+   ],
+   "wall_s": 7.5
+  },
+  {
+   "id": "c2dev_full_w2_732",
+   "seed": 732,
+   "role": "Ranger",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a kitten.",
+   "n_steps": 2157,
+   "death_time": 2061,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 78,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 140,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 51,
+      "escaped": true,
+      "max_depth": 5
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 11
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 19
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 29,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 298,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1,
+      "escaped": true,
+      "max_depth": 5
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 90
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 90
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 161,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": true,
+      "time": 2088,
+      "hp": 23,
+      "steps": 400,
+      "escaped": true,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 52,
+      "escaped": true,
+      "max_depth": 5
+     }
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "THROW"
+   ],
+   "winning_backoff": 300,
+   "escapes": [
+    "THROW"
+   ],
+   "wall_s": 46.9
+  },
+  {
+   "id": "c2dev_full_w2_735",
+   "seed": 735,
+   "role": "Caveman",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a kitten.",
+   "n_steps": 573,
+   "death_time": 553,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 63
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 165
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 104,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 194,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 104,
+      "escaped": false,
+      "max_depth": 5
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 140,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133,
+      "escaped": false,
+      "max_depth": 5
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 121
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 111
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 135,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133,
+      "escaped": false,
+      "max_depth": 5
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 135,
+      "escaped": false,
+      "max_depth": 5
+     }
+    }
+   },
+   "mc": {
+    "n": 20,
+    "backoff": 300,
+    "survivors": 3,
+    "detail": [
+     {
+      "roll": 2,
+      "alive": true,
+      "time": 510,
+      "hp": 16,
+      "steps": 250,
+      "escaped": false,
+      "max_depth": 5
+     },
+     {
+      "roll": 5,
+      "alive": true,
+      "time": 500,
+      "hp": 11,
+      "steps": 250,
+      "escaped": false,
+      "max_depth": 5
+     },
+     {
+      "roll": 11,
+      "alive": true,
+      "time": 504,
+      "hp": 10,
+      "steps": 250,
+      "escaped": false,
+      "max_depth": 5
+     }
+    ]
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "MC"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 78.4
+  },
+  {
+   "id": "c2g_armorR_wa_702",
+   "seed": 702,
+   "role": "Knight",
+   "depth_at_death": 7,
+   "end_reason": "DEATH: died. Killed by a rothe.",
+   "n_steps": 2757,
+   "death_time": 2669,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "ORIG": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 18
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 22
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 42,
+      "escaped": false,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 42,
+      "escaped": false,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 16,
+      "escaped": true,
+      "max_depth": 7
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 38
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 126
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 97,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 97,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 104,
+      "escaped": true,
+      "max_depth": 7
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 337
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 205
+     },
+     "KITE": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 226,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "THROW": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 226,
+      "escaped": true,
+      "max_depth": 7
+     },
+     "STAIRS": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 228,
+      "escaped": true,
+      "max_depth": 7
+     }
+    }
+   },
+   "mc": {
+    "n": 20,
+    "backoff": 300,
+    "survivors": 3,
+    "detail": [
+     {
+      "roll": 0,
+      "alive": true,
+      "time": 2616,
+      "hp": 25,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     },
+     {
+      "roll": 1,
+      "alive": true,
+      "time": 2616,
+      "hp": 8,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     },
+     {
+      "roll": 3,
+      "alive": true,
+      "time": 2616,
+      "hp": 8,
+      "steps": 250,
+      "escaped": true,
+      "max_depth": 7
+     }
+    ]
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "MC"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 59.2
+  }
+ ]
+}

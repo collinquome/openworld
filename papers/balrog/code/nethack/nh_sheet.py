@@ -325,6 +325,85 @@ THROWN_SKILLS = {"dagger", "knife", "spear", "javelin", "boomerang",
 UNARMED_AVG = {"Monk": 4.5}         # martial arts; others d2
 FORCE_BOLT_AVG = 13.0               # 2d12 (KB, s3)
 
+# ---------------------------------------------- DEFENSE model (AC in RR, s5)
+# MODEL: claude-opus-4-8[1m] (max thinking), session 5. Folds AC into the
+# readiness ratio via monster-hit probability, the prerequisite the s4
+# ARMOR_DOCTRINE card flagged UNBUILT ("AC does not enter PI yet").
+#
+# Physics (KB d20-vs-AC family, hitmon/mhitu): a monster hits a defender of
+# signed AC `a` with P ~ (a + mlev + BASE)/20 -- higher (worse) AC and
+# higher monster level raise the hit chance; better (lower/negative) AC
+# lowers it. The per-depth band's empirical `dpt_p75` is the damage-per-turn
+# the CORPUS actually took, measured at the corpus MEAN AC (AC_REF, 7.1 from
+# c2_cache / the KPI tree). So the sound counterfactual is a RATIO: scale the
+# empirical incoming dpt by P_hit(AC)/P_hit(AC_REF), which reproduces the
+# measured band value at AC_REF (ratio 1.0) and moves monotonically with AC.
+# eff_hp = hp / ratio (dodged hits buy survivable turns); PI_def = dpt x
+# eff_hp; RR_def = PI_def/TI. Wearing armor lowers AC by the piece's `ac`
+# bonus -> a real, non-zero delta_rr. This is a documented v0.2 approximation
+# (BASE/mlev to be calibrated against logged p_hit, exactly as the offense
+# to-hit is); its role here is a DIRECTIONAL, MONOTONE defense signal.
+AC_REF = 7.1                        # corpus mean final AC (c2_cache, KPI tree)
+_PHIT_BASE = 5.0                    # to-hit baseline (v0.2, uncalibrated)
+
+
+def _p_hit_on_us(our_ac, mlev, base=_PHIT_BASE):
+    """P(a band monster of level ~mlev hits a defender of signed AC our_ac).
+    Monotone: worse (higher) AC -> more hits. Clamped [0.05, 0.95]."""
+    return max(0.05, min(0.95, (our_ac + mlev + base) / 20.0))
+
+
+def defense_model(ac, hp, depth, best_dpt, mlev=None):
+    """AC-in-readiness defense sheet. mlev proxy = depth (early-game band
+    monster level ~ dungeon depth; documented). Returns the effective-HP
+    view used by ARMOR_DOCTRINE. Pure arithmetic over the frozen bands."""
+    b = band(depth)
+    if mlev is None:
+        mlev = depth
+    p_ac = _p_hit_on_us(ac, mlev)
+    p_ref = _p_hit_on_us(AC_REF, mlev)
+    ratio = p_ac / p_ref                       # 1.0 at AC_REF, <1 when better
+    dpt = max(0.05, b["dpt_p75"])
+    incoming_eff = dpt * ratio
+    eff_hp = hp / ratio
+    ti = dpt * b["hp_mean"]
+    pi_def = best_dpt * eff_hp
+    return {
+        "ac": ac, "mlev": mlev,
+        "p_hit_on_us": round(p_ac, 3), "p_hit_ref": round(p_ref, 3),
+        "hit_ratio_vs_ref": round(ratio, 3),
+        "incoming_dpt_eff": round(incoming_eff, 3),
+        "eff_hp": round(eff_hp, 1),
+        "power_index_def": round(pi_def, 1),
+        "threat_index": round(ti, 1),
+        "readiness_ratio_def": round(pi_def / ti, 2),
+        "survivable_turns_eff": round(hp / max(0.01, incoming_eff), 1),
+    }
+
+
+def counterfactual_armor(role, xplvl, ac, hp, hpmax, inventory, depth,
+                         item_desc, spells=None, pw=0):
+    """DEFENSE delta if we WORE item_desc: (delta_ac, delta_eff_hp, delta_rr,
+    note) or None if unknown. Wearing lowers signed AC by the piece's `ac`
+    bonus (better). Uses the current best_dpt so the RR is comparable to the
+    offense sheet. This is the armor analogue of counterfactual (wield)."""
+    al = armor_lookup(item_desc)
+    if not al:
+        return None
+    name, row = al
+    opts = attack_options(role, xplvl, inventory, spells, pw)
+    best = opts[0][3] if opts else 1.0
+    base = defense_model(ac, hp, depth, best)
+    new_ac = max(-20, ac - row["ac"])          # AC improves (lowers) by bonus
+    alt = defense_model(new_ac, hp, depth, best)
+    return ("wear",
+            row["ac"],
+            round(alt["eff_hp"] - base["eff_hp"], 1),
+            round(alt["readiness_ratio_def"] - base["readiness_ratio_def"], 2),
+            f"{name}: AC {ac}->{new_ac} | eff_hp {base['eff_hp']}->"
+            f"{alt['eff_hp']} | RR_def {base['readiness_ratio_def']}->"
+            f"{alt['readiness_ratio_def']}")
+
 
 def _p_hit_melee(xplvl, role, target_ac=6.0):
     """Source-flavored to-hit: d20 <= 10 + target_AC_neg... simplified
@@ -433,11 +512,14 @@ def counterfactual_power(role, xplvl, ac, hp, hpmax, inventory, depth,
                 f"{name}: dpt {base['best_dpt']} -> {alt['best_dpt']}")
     al = armor_lookup(item_desc)
     if al:
-        name, row = al
-        # v0.1: AC delta only (worn-slot replacement not modeled); AC
-        # does not enter PI yet -> report as defense note
-        return ("wear", 0.0, 0.0,
-                f"{name}: AC bonus {row['ac']} (slot economics v0.2)")
+        # v0.2 (s5): AC now enters the readiness ratio via defense_model.
+        # Delegate to counterfactual_armor for a REAL delta_rr (the s4 card's
+        # UNBUILT blocker: "AC does not enter PI yet" -> now it does).
+        ca = counterfactual_armor(role, xplvl, ac, hp, hpmax, inventory,
+                                  depth, item_desc, spells, pw)
+        if ca:
+            _, _dac, _dhp, drr, note = ca
+            return ("wear", _dhp, drr, note)
     return None
 
 

@@ -102,6 +102,19 @@ WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 # survival-to-depth via TRASH-death rate (see KPI_TREE.md). Paired-block gate.
 CRISIS_HP = float(_os.environ.get("NH_CRISIS_HP", "0.28"))    # flee below hp-frac
 CRISIS_EXCH = float(_os.environ.get("NH_CRISIS_EXCH", "2.0"))  # flee if maxhit*x>=hp
+# NH-E6 THROW-DISENGAGE lever (session 5, claude-opus-4-8[1m] max thinking):
+# the s4 REST-lever paired block DROPPED because the crisis-flee threshold
+# tune never reaches the failure mode — fatal TRASH deaths carry a SAME-SPEED
+# (or faster) hostile ADJACENT, where _flee returns None (its slower-only +
+# full-disengage gates refuse) and the agent falls through to trade blows.
+# The e6_solve v2 menu re-adjudicated all 9 s3-UNRESOLVED TRASH deaths as
+# MISPLAYED (0 UNWINNABLE) and THROW-DISENGAGE won >=3 on >=3 distinct seeds
+# (class-solve rule, criterion ii). This lever fires a ranged throw at the
+# nearest in-line hostile in the crisis branch AFTER _flee declines — a NEW
+# ACTION (per-exchange ranged disengage), not a threshold tune. Default OFF
+# => unset == bit-identical (flag-off regression gate). Proximal KPI:
+# survival-to-depth via TRASH-death rate (KPI_TREE.md). Paired-block gate.
+CRISIS_THROW = _os.environ.get("NH_CRISIS_THROW", "0") == "1"
 CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
 CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
 REPEAT_BUDGET = int(_os.environ.get("NH_REPEAT_BUDGET", "150"))  # env steps/level
@@ -1167,6 +1180,13 @@ class DiveAgent:
                 act = self._flee(adj)
                 if act:
                     return act
+                # _flee declined (same-speed/faster adjacent — the s4 REST
+                # failure mode). THROW_DISENGAGE: ranged strike instead of
+                # falling through to a stand-and-trade death (NH_CRISIS_THROW,
+                # default off => this block is a no-op when unset).
+                act = self._crisis_throw(obs)
+                if act:
+                    return act
 
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:
@@ -1893,6 +1913,66 @@ class DiveAgent:
             self.note(f"crisis: fleeing {mobile[0].name} (hp {A.hp})")
             return best[1]
         return None
+
+    def _crisis_throw(self, obs):
+        """RULE CARD [THROW_DISENGAGE] (layer: PROCEDURE; model:
+        claude-opus-4-8[1m] s5; provenance: e6_solve v2 class-solve rule —
+        THROW won >=3 of the 9 s3-UNRESOLVED TRASH deaths on >=3 distinct
+        seeds, criterion ii). When the crisis-flee (_flee) declines because
+        the adjacent threat is SAME-SPEED or faster (its slower-only +
+        full-disengage gates), a stand-and-trade death follows. The v2 menu
+        showed the winning line is a RANGED throw: hurl carried ammo at the
+        nearest hostile on a clear straight ray, dealing damage without
+        donating a melee turn. Fires only under NH_CRISIS_THROW (default
+        off; flag-off == bit-identical). Any MOBILE hostile is a target here
+        (unlike _throw_at_blocker, which is scoped to never-melee blockers).
+        """
+        if not CRISIS_THROW:
+            return None
+        letter = self._throwable_letter(obs)
+        if not letter:
+            return None
+        A = self.atlas
+        L = A.level
+        ax, ay = A.agent
+        cands = []
+        for m in L.monsters:
+            if m.pet or m.pos in L.no_attack or m.name in C.IMMOBILE:
+                continue
+            dx, dy = m.x - ax, m.y - ay
+            dist = max(abs(dx), abs(dy))
+            if dist < 1 or dist > 7:
+                continue
+            if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+                continue
+            key = (A.key, m.pos)
+            if self.throws_at.get(key, 0) >= 8:
+                continue
+            sx, sy = (dx > 0) - (dx < 0), (dy > 0) - (dy < 0)
+            cx, cy = ax + sx, ay + sy
+            clear = True
+            while (cx, cy) != m.pos:
+                if not L.passable(cx, cy, bad_traps_ok=True) or \
+                        any(mm.pos == (cx, cy) for mm in L.monsters):
+                    clear = False
+                    break
+                cx, cy = cx + sx, cy + sy
+            if not clear:
+                continue
+            cands.append((dist, sx, sy, m))
+        if not cands:
+            return None
+        cands.sort(key=lambda c: c[0])
+        _, sx, sy, m = cands[0]
+        self.throws_at[(A.key, m.pos)] = \
+            self.throws_at.get((A.key, m.pos), 0) + 1
+        self.note(f"crisis-throw {letter} at {m.name} at {m.pos} "
+                  f"(hp {A.hp})")
+        self._ev(f"THROW_DISENGAGE: {letter}->{m.name} dist "
+                 f"{cands[0][0]} (hp {A.hp}/{A.hpmax})")
+        self.queue = [letter, DIR_OF[(sx, sy)]]
+        self.queue_tag = "throw"
+        return "throw"
 
     def _throwable_letter(self, obs):
         for letter, desc, oc in self._inv(obs):

@@ -163,5 +163,27 @@
     "added_by": "A001-phaseL-session1 (Fable 5)",
     "added_when": "2026-07-07T16:15:48.520936+00:00",
     "reason": "shop mechanics/price mechanics (NH-E18)"
+  },
+  {
+    "page": "Tourist",
+    "requested_title": "Tourist",
+    "url": "https://nethackwiki.com/wiki/Tourist",
+    "revision_id": 198082,
+    "revision_date": "2026-01-23T23:15:42Z",
+    "sha256": "3872d029950cabd24d96c49b2a5deecec8b7b2da5fe896232e53c502238023d8",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T20:58:04.223496+00:00",
+    "reason": "FLOOR-ROLE uplift page (NH-E13 flagship, s5): avoid-combat / starting-items / Magic Marker / price-ID doctrine"
+  },
+  {
+    "page": "Cleric",
+    "requested_title": "Priest",
+    "url": "https://nethackwiki.com/wiki/Cleric",
+    "revision_id": 204305,
+    "revision_date": "2026-05-20T18:35:19Z",
+    "sha256": "b0c9a58b4932e08a00f0c966ec36d6e886506699dbe3f8aff5e6fb4e69c0c05a",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T20:58:05.555835+00:00",
+    "reason": "FLOOR-ROLE uplift page (NH-E13, s5): BUC-detection / turn-undead / moderate aggression doctrine [requested title: 'Priest', redirected to 'Cleric']"
   }
 ]
