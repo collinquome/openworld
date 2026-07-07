@@ -83,6 +83,16 @@ metrics (3 estimators; wired into store), readiness backtrace +
 trajectory avoidability (NOT yet implemented in c2_avoid — open),
 capability map (0/34 cells resolved — fill via probes/lab).
 
+## Late-session addenda (post-draft)
+
+- **CAST-2 SHIPPED: +2.41 [+0.75, +4.41]** — first CI-low>0 lever ever;
+  shop deaths 0; NH_CAST joins the Phase-L config for casters.
+- **REPEAT-1 INERT: all 20 deltas exact 0.00** — hint fires but explore
+  layer discards the target; rework = first-class goal injection.
+- Healer heal Xp1-BLOCKED (pwmax 4 < 5 cost) — capability-map cell verdict.
+- FIRSTS ledger live in store (kill/verb/depth); PARETO directive +
+  option-frontier + tail-regime tagging registered; c22 GIFs rendered.
+
 ## Priority queue for session 2 (my read, честно)
 
 1. CAST-2 verdict → ledger + report (if green: FIRST SHIPPED Phase-L

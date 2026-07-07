@@ -187,3 +187,18 @@ FIGHT-AND-LOOT, SNEAK/WAIT.
    ranks itself per goal profile over time.
 Banner: "RECOGNIZED: ant pack [menu: fight .72 / sprint .85 / retreat .95]
 → goal weights favor sprint → booking it".
+
+## 10. FIRSTS LEDGER / NOVELTY AWARDS (operator directive 2026-07-07)
+
+First-time achievements (first kill per species, first verb use, first
+depth, first scenario-class solve, first relation type) = NOVELTY AWARD
+events: logged (store.first — SHIPPED: kill/verb/depth kinds live,
+serialized as store["firsts"]), GIF-celebrated, counted. Goal-pursuit
+wiring (registered): standing goal "BEAT NEW THINGS" — option-menu bonus
+for engagements scoring a first, as a BOUNDED premium inside the ε-ruin
+constraint + caution defaults (the award tempts, the veto governs).
+Not-just-fun: each first = evidence begun + coverage cell + boss-strat
+seed + sharpness gain — the coverage matrix gamified. Firsts-per-episode
+rate = exploration-health metric (declining firsts ⇒ world seen ⇒
+descend). Cumulative-firsts HUD + "new bosses beaten" milestone-email
+list = trophy case.

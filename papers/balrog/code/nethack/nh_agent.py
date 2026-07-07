@@ -362,6 +362,7 @@ class DiveAgent:
                 # exploration snapshot at every transition: consecutive
                 # snapshots give departure explored/frontier per level
                 nh_store.snapshot_exploration(self.store, self)
+                self.store.first(self.steps, A.time, "depth", str(A.depth))
             if self.steps % 200 == 0 or A.level_changed:
                 nh_store.scan_features(self.store, self)
         # Phase L NH_CAST: roles with no spells say so once; remember it
@@ -1596,6 +1597,8 @@ class DiveAgent:
                 d = self.cast_dir
                 self.cast_dir = None
                 self.cast_fires += 1
+                if self.store is not None:
+                    self.store.first(self.steps, A.time, "verb", "cast")
                 return d
             if "Really attack" in msg:
                 # peaceful: mark the intended cell and decline

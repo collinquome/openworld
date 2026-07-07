@@ -274,3 +274,29 @@ CAST-2 criteria met ⇒ NH_CAST ships into the Phase-L config for casting
 roles. Scope note: effect is role-conditional (Wizards ≈ 1.5/20 of random
 roles; naive block-level contribution ≈ +0.2 — role-coverage expansion
 (Priest/Monk attack spells, Healer at Xp2+) is the multiplier to chase).
+
+## REPEAT-1 VERDICT: INERT (honest negative)
+
+n=20 paired vs cast1ref: ALL deltas EXACT 0.00. Detections fire (5/5 early
+episodes logged REPEAT hits with correct stair predictions) but zero
+action divergence — the explore layer discards the injected explore_target
+(same fires≠effect signature as C2's ARMOR bug #5; the paired-exact-zero
+read is what caught it). NH_REPEAT stays default-off; rework (inject the
+predicted cell as a first-class goal-market goal, not a target hint) queued
+for session 2. The world-model discovery (layout repeats) stands
+regardless.
+
+## FIRSTS ledger (operator novelty-awards directive) — code partly SHIPPED
+
+store.first(): first kill per species / first verb use / first depth,
+logged as award events into story (GIF banner material) + serialized
+(store["firsts"]). Smoke (seed 940): ['depth:1','verb:cast','kill:grid
+bug',...]. Goal-pursuit bonus (bounded premium inside ε-ruin) registered
+for session 2.
+
+## c22 highlight GIFs rendered (coordinator email request)
+
+results/animations/: c22_cast2__seed918_wizard_dlvl10.gif (25 force-bolt
+kills, D3ref→D10, +10.14), c22_ref_contrast__seed918_meleeonly_dlvl3.gif,
+c22_first_forcebolt__seed839.gif (kill at range, step 6),
+c22_cast1block__seed822_barb_dlvl14.gif (29.25 block-best).

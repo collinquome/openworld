@@ -62,6 +62,7 @@ class Store:
         self.features = {}          # level key -> {kind: [cells]}
         self.story = []             # compact narrative lines
         self.n_events = 0
+        self._firsts = {}           # "kind:name" -> (step, t)
 
     # ---- recording -------------------------------------------------
     def event(self, step, t, kind, text, story=False):
@@ -86,8 +87,10 @@ class Store:
         if msg:
             m = RE_KILL.search(msg)
             if m:
-                self.mon(m.group(1).strip())["killed"] += 1
+                sp = m.group(1).strip()
+                self.mon(sp)["killed"] += 1
                 self.event(step, t, "kill", m.group(0), story=True)
+                self.first(step, t, "kill", sp)   # novelty award
             m = RE_HIT_US.search(msg)
             if m and "misses" not in m.group(0) and \
                     m.group(1).strip() not in NON_MONSTERS:
@@ -132,9 +135,27 @@ class Store:
         A = agent.atlas
         self.event(agent.steps, A.time, kind, text, story=True)
 
+    # ---- FIRSTS ledger (operator novelty-awards directive) ----------
+    # Layer: MEMORY. Every first-time achievement is an award event:
+    # first kill per species, first use per verb, first reach per depth.
+    # Logged to events (story=True → GIF banner material) + counted;
+    # firsts-per-episode rate = exploration-health metric (declining
+    # firsts = world seen; descend). Goal-pursuit bonus wiring (bounded
+    # premium inside the ε-ruin constraint) is registered, not yet coded.
+    def first(self, step, t, kind, name):
+        key = f"{kind}:{name}"
+        if key in self._firsts:
+            return False
+        self._firsts[key] = (step, t)
+        self.event(step, t, "FIRST",
+                   f"FIRST {kind}: {name} (#{len(self._firsts)})",
+                   story=True)
+        return True
+
     # ---- serialization ----------------------------------------------
     def to_dict(self):
-        return {"events": self.events[-4000:],
+        return {"firsts": {k: list(v) for k, v in self._firsts.items()},
+                "events": self.events[-4000:],
                 "items_seen": self.items_seen,
                 "prices": self.prices,
                 "monsters": self.monsters,
