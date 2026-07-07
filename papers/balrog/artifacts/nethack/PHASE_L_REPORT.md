@@ -164,3 +164,33 @@ fire-rate + no-regression evidence; the giant-bat fixture becomes a gym
 regression scenario when the E6 harvest lands. Full E15 state-machine
 formalization (explicit DIVE/EXPLORE/... states + carded transition table)
 remains open — v1 delivers the watchdog component.
+
+## NH-E13 wiki KB — BUILT (Mode A batch, 15 pages)
+
+wiki_kb.sqlite (FTS5, 944KB) + sha256 manifest, built via MediaWiki API by a
+Sonnet subagent (spec: Fable 5); 15 pages incl. Standard strategy, Spellbook
+of force bolt, Wizard/Healer, Wand/Potion/Scroll/Ring, Price identification,
+Shopkeeper. Add-only + idempotent (verified re-run: 0 fetches). Sanity
+queries rank correctly. Committed in NH-E13-wiki-strategy/.
+
+**kb_prices.json (MEMORY-layer reference, provenance: wiki rev-tagged):**
+base-cost tables parsed from KB wikitext — 28 potions / 18 scrolls / 25
+wands / 28 rings by price point, PLUS the wand ray/beam/non-directional type
+table (ray = {digging, magic missile, cold, fire, lightning, sleep, death})
+— the exact table the RAY_BOUNCE safety gate needs before NH_ZAP ships.
+This is the price-ID cross-reference the E18 dot-connector consumes.
+
+## NH-E12 backfill — DONE (163 combat deaths retro'd)
+
+Subagent backfill (spec + review: Fable 5) over the full cache corpus:
+**by class** MELEE_TRASH 88 / MELEE_OTHER 35 / SPIDER_ANT 21 / RANGED 10 /
+PRAY_DEATH 9; **by lesson type** ARRIVAL_CONSTRAINT 96 / NEEDS_REVIEW 52 /
+NO_LESSON_DICE 10 / TACTICAL_RULE 5 (avoidability verdicts only exist for
+the 63 v11block40 deaths — TACTICAL/DICE counts bounded by that subset).
+**59% of combat deaths carry an under-leveled-arrival deficit (xp < depth/2)
+— the strongest quantitative support yet for the operator's preparation
+thesis (P1/P4); per-role: Archeologist 100%, Priest 82%, Ranger 75%, Healer
+69% ... Priestess 29%.** 44.2% of deaths spent the final stretch below half
+HP. Artifacts: NH-E12-death-retro/results/{e12_retros,e12_summary}.json.
+Trajectory-avoidability counterfactual (operator's moment-vs-trajectory gap)
+remains open — the readiness numbers above are its motivation.

@@ -1,0 +1,44 @@
+{
+ "n_deaths": 163,
+ "by_class": {
+  "MELEE_OTHER": 35,
+  "RANGED": 10,
+  "MELEE_TRASH": 88,
+  "SPIDER_ANT": 21,
+  "PRAY_DEATH": 9
+ },
+ "by_lesson_type": {
+  "ARRIVAL_CONSTRAINT": 96,
+  "NEEDS_REVIEW": 52,
+  "TACTICAL_RULE": 5,
+  "NO_LESSON_DICE": 10
+ },
+ "pct_below_half_final_stretch": 44.171779141104295,
+ "arrival_constraint_rate_by_role": {
+  "Monk": 0.4,
+  "Samurai": 0.375,
+  "Priest": 0.8181818181818182,
+  "Healer": 0.6923076923076923,
+  "Knight": 0.38461538461538464,
+  "Wizard": 0.38461538461538464,
+  "UNKNOWN": 0.6666666666666666,
+  "Caveman": 0.5,
+  "Barbarian": 0.625,
+  "Tourist": 0.5,
+  "Priestess": 0.2857142857142857,
+  "Valkyrie": 0.5454545454545454,
+  "Ranger": 0.75,
+  "Cavewoman": 0.4,
+  "Archeologist": 1.0,
+  "Rogue": 0.625
+ },
+ "notes": [
+  "216 total cache episodes scanned; 139 classified via canonical results*.json end_reason (exact harness ground truth), 66 via raw untruncated final message from results/transitions/<label>/ (dev + exploration labels have no canonical results json in this workdir).",
+  "11 fallback-group episodes excluded as non-death endings (no death marker in final message -- likely step-limit truncation, not a death).",
+  "death-cause taxonomy over ALL 205 classified episodes (combat + non-combat): {'MELEE_TRASH': 88, 'STARVATION': 32, 'SPIDER_ANT': 21, 'MELEE_OTHER': 35, 'RANGED': 10, 'ABORT': 4, 'PRAY_DEATH': 9, 'TRAP': 2, 'EXPLODE': 3, 'SLEEP': 1}",
+  "6 of 163 combat-death records have role=null (fallback group where the 'Agent-<role3>-...' tag could not be parsed from the death screen message).",
+  "avoidability verdicts matched for 63/163 combat deaths, all from c2_avoid_v11block.json (the only avoid file whose (seed, steps) pairs actually match any cache episode -- c2_avoid_block80/devref/settled correspond to different, unlogged-in-this-cache playthroughs of reused dungeon seeds; matched strictly on (seed, steps) to avoid misattributing a verdict from the wrong trajectory).",
+  "final_stretch_below_half is computed from hp_trajectory_final (cache 'combat' log hp values + the terminal live frame): true if >=50% of the last ~10 trajectory points were below 50% of hpmax at that point.",
+  "readiness.ac is populated from the cache's final-frame AC (available for all episodes, contrary to the task's 'if available' hedge)."
+ ]
+}

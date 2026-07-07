@@ -1,0 +1,478 @@
+{
+ "potion": {
+  "0": [
+   {
+    "name": "water",
+    "prob": 6.0
+   }
+  ],
+  "20": [
+   {
+    "name": "healing",
+    "prob": 11.5
+   }
+  ],
+  "50": [
+   {
+    "name": "booze",
+    "prob": 4.0
+   },
+   {
+    "name": "fruit juice",
+    "prob": 4.0
+   },
+   {
+    "name": "see invisible",
+    "prob": 4.0
+   },
+   {
+    "name": "sickness",
+    "prob": 4.0
+   }
+  ],
+  "100": [
+   {
+    "name": "confusion",
+    "prob": 4.0
+   },
+   {
+    "name": "extra healing",
+    "prob": 4.5
+   },
+   {
+    "name": "hallucination",
+    "prob": 3.0
+   },
+   {
+    "name": "holy water",
+    "prob": 1.0
+   },
+   {
+    "name": "unholy water",
+    "prob": 1.0
+   },
+   {
+    "name": "restore ability",
+    "prob": 4.0
+   },
+   {
+    "name": "sleeping",
+    "prob": 4.0
+   }
+  ],
+  "150": [
+   {
+    "name": "blindness",
+    "prob": 3.0
+   },
+   {
+    "name": "gain energy",
+    "prob": 4.0
+   },
+   {
+    "name": "invisibility",
+    "prob": 4.0
+   },
+   {
+    "name": "monster detection",
+    "prob": 4.0
+   },
+   {
+    "name": "object detection",
+    "prob": 4.0
+   }
+  ],
+  "200": [
+   {
+    "name": "enlightenment",
+    "prob": 2.0
+   },
+   {
+    "name": "full healing",
+    "prob": 1.0
+   },
+   {
+    "name": "levitation",
+    "prob": 4.0
+   },
+   {
+    "name": "polymorph",
+    "prob": 1.0
+   },
+   {
+    "name": "speed",
+    "prob": 4.0
+   }
+  ],
+  "250": [
+   {
+    "name": "acid",
+    "prob": 1.0
+   },
+   {
+    "name": "oil",
+    "prob": 3.0
+   }
+  ],
+  "300": [
+   {
+    "name": "gain ability",
+    "prob": 4.0
+   },
+   {
+    "name": "gain level",
+    "prob": 2.0
+   },
+   {
+    "name": "paralysis",
+    "prob": 4.0
+   }
+  ]
+ },
+ "scroll": {
+  "20": [
+   {
+    "name": "identify",
+    "prob": 18.0
+   }
+  ],
+  "50": [
+   {
+    "name": "light",
+    "prob": 9.0
+   }
+  ],
+  "60": [
+   {
+    "name": "enchant weapon",
+    "prob": 8.0
+   }
+  ],
+  "80": [
+   {
+    "name": "enchant armor",
+    "prob": 6.3
+   },
+   {
+    "name": "remove curse",
+    "prob": 6.5
+   }
+  ],
+  "100": [
+   {
+    "name": "confuse monster",
+    "prob": 5.3
+   },
+   {
+    "name": "destroy armor",
+    "prob": 4.5
+   },
+   {
+    "name": "fire",
+    "prob": 3.0
+   },
+   {
+    "name": "food detection",
+    "prob": 2.5
+   },
+   {
+    "name": "gold detection",
+    "prob": 3.3
+   },
+   {
+    "name": "magic mapping",
+    "prob": 4.5
+   },
+   {
+    "name": "scare monster",
+    "prob": 3.5
+   }
+  ],
+  "200": [
+   {
+    "name": "amnesia",
+    "prob": 3.5
+   },
+   {
+    "name": "taming",
+    "prob": 1.5
+   }
+  ],
+  "300": [
+   {
+    "name": "charging",
+    "prob": 1.5
+   },
+   {
+    "name": "genocide",
+    "prob": 1.5
+   },
+   {
+    "name": "punishment",
+    "prob": 1.5
+   },
+   {
+    "name": "stinking cloud",
+    "prob": 1.5
+   }
+  ]
+ },
+ "wand": {
+  "100": [
+   {
+    "name": "light",
+    "prob": 9.5,
+    "type": "non-directional"
+   },
+   {
+    "name": "nothing",
+    "prob": 2.5,
+    "type": "varies"
+   }
+  ],
+  "150": [
+   {
+    "name": "digging",
+    "prob": 4.0,
+    "type": "ray"
+   },
+   {
+    "name": "enlightenment",
+    "prob": 1.5,
+    "type": "non-directional"
+   },
+   {
+    "name": "locking",
+    "prob": 3.0,
+    "type": "beam"
+   },
+   {
+    "name": "magic missile",
+    "prob": 5.0,
+    "type": "ray"
+   },
+   {
+    "name": "make invisible",
+    "prob": 4.5,
+    "type": "beam"
+   },
+   {
+    "name": "opening",
+    "prob": 3.0,
+    "type": "beam"
+   },
+   {
+    "name": "probing",
+    "prob": 3.0,
+    "type": "beam"
+   },
+   {
+    "name": "secret door detection",
+    "prob": 5.0,
+    "type": "non-directional"
+   },
+   {
+    "name": "slow monster",
+    "prob": 5.0,
+    "type": "beam"
+   },
+   {
+    "name": "speed monster",
+    "prob": 5.0,
+    "type": "beam"
+   },
+   {
+    "name": "stasis",
+    "prob": 4.5,
+    "type": "non-directional"
+   },
+   {
+    "name": "striking",
+    "prob": 3.0,
+    "type": "beam"
+   },
+   {
+    "name": "undead turning",
+    "prob": 5.0,
+    "type": "beam"
+   }
+  ],
+  "175": [
+   {
+    "name": "cold",
+    "prob": 4.0,
+    "type": "ray"
+   },
+   {
+    "name": "fire",
+    "prob": 4.0,
+    "type": "ray"
+   },
+   {
+    "name": "lightning",
+    "prob": 4.0,
+    "type": "ray"
+   },
+   {
+    "name": "sleep",
+    "prob": 5.0,
+    "type": "ray"
+   }
+  ],
+  "200": [
+   {
+    "name": "cancellation",
+    "prob": 4.5,
+    "type": "beam"
+   },
+   {
+    "name": "create monster",
+    "prob": 5.0,
+    "type": "non-directional"
+   },
+   {
+    "name": "polymorph",
+    "prob": 4.5,
+    "type": "beam"
+   },
+   {
+    "name": "teleportation",
+    "prob": 4.5,
+    "type": "beam"
+   }
+  ],
+  "500": [
+   {
+    "name": "death",
+    "prob": 0.5,
+    "type": "ray"
+   },
+   {
+    "name": "wishing",
+    "prob": 0.5,
+    "type": "non-directional"
+   }
+  ]
+ },
+ "wand_types": {
+  "light": "non-directional",
+  "nothing": "varies",
+  "digging": "ray",
+  "enlightenment": "non-directional",
+  "locking": "beam",
+  "magic missile": "ray",
+  "make invisible": "beam",
+  "opening": "beam",
+  "probing": "beam",
+  "secret door detection": "non-directional",
+  "slow monster": "beam",
+  "speed monster": "beam",
+  "stasis": "non-directional",
+  "striking": "beam",
+  "undead turning": "beam",
+  "cold": "ray",
+  "fire": "ray",
+  "lightning": "ray",
+  "sleep": "ray",
+  "cancellation": "beam",
+  "create monster": "non-directional",
+  "polymorph": "beam",
+  "teleportation": "beam",
+  "death": "ray",
+  "wishing": "non-directional"
+ },
+ "ring": {
+  "100": [
+   {
+    "name": "adornment"
+   },
+   {
+    "name": "hunger"
+   },
+   {
+    "name": "protection"
+   },
+   {
+    "name": "protection from shape changers"
+   },
+   {
+    "name": "stealth"
+   },
+   {
+    "name": "sustain ability"
+   },
+   {
+    "name": "warning"
+   }
+  ],
+  "150": [
+   {
+    "name": "aggravate monster"
+   },
+   {
+    "name": "cold resistance"
+   },
+   {
+    "name": "gain constitution"
+   },
+   {
+    "name": "gain strength"
+   },
+   {
+    "name": "increase accuracy"
+   },
+   {
+    "name": "increase damage"
+   },
+   {
+    "name": "invisibility"
+   },
+   {
+    "name": "poison resistance"
+   },
+   {
+    "name": "see invisible"
+   },
+   {
+    "name": "shock resistance"
+   }
+  ],
+  "200": [
+   {
+    "name": "fire resistance"
+   },
+   {
+    "name": "free action"
+   },
+   {
+    "name": "levitation"
+   },
+   {
+    "name": "regeneration"
+   },
+   {
+    "name": "searching"
+   },
+   {
+    "name": "slow digestion"
+   },
+   {
+    "name": "teleportation"
+   }
+  ],
+  "300": [
+   {
+    "name": "conflict"
+   },
+   {
+    "name": "polymorph"
+   },
+   {
+    "name": "polymorph control"
+   },
+   {
+    "name": "teleport control"
+   }
+  ]
+ }
+}
