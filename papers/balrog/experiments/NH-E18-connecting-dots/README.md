@@ -1,0 +1,83 @@
+# NH-E18 — Connecting-dots memory (REGISTERED, Phase L; operator directive 2026-07-07 — LEADS the Phase-L priority order together with the perceptor backlog)
+
+**Core insight (operator):** memory serves TWO functions. (1) Avoiding death —
+hazard ledgers, dossiers: we have this, it is code-shaped. (2) CONNECTING DOTS —
+relational inference over remembered observations, where facts jointly imply
+something neither implies alone: we DON'T have this, and it requires the LLM.
+
+## 1. Memory substrate (code; ships into both arms)
+
+Unify the episode's observations into ONE queryable store: level dossier +
+item sightings WITH unidentified appearances + prices seen (shop offer/asking
+events) + monster encounters with outcomes + events timeline. Code records
+everything; the structure is designed for retrieval (by item appearance, by
+species, by level, by event type). Within-episode only (BALROG protocol:
+nothing persists into a scored episode from outside it); serialized into
+trajectories for offline analysis and between-episode reflection.
+
+## 2. LLM dot-connector (dev/gym + Arm B consultation points + between-episode reflection)
+
+The LLM reads the memory store and proposes RELATIONAL HYPOTHESES. Canonical
+NetHack targets:
+- **PRICE-ID:** offered/asking price + item class → probable identity set
+  (wiki documents the price tables — NH-E13 KB cross-reference makes each
+  inference concrete and checkable).
+- **Altar drop → BUC identification** (message grammar on drop).
+- **"Monster X didn't attack while adjacent → peaceful/passive class"**.
+- **Level features → branch recognition** (Mines/Sokoban signatures).
+- **Key/lock-class bindings** where they exist.
+
+Each proposed relation = a rule card (provenance: **inferred**) validated via
+gym/branch-probe (NH-E16 component 2) before ANY policy trust. Validated
+relations compile to code for Arm A; Arm B may also run them live.
+
+## 3. The two-loop demonstration (write-up angle, operator's)
+
+Code CANNOT do step 2 — pattern-matching across heterogeneous remembered facts
+is the LLM's comparative advantage; executing a validated relation cheaply and
+reliably every step is code's. NH-E18 is the cleanest demonstration in the
+program that BOTH loops are necessary. The writeup treats this as its thesis.
+
+## 4. Metrics
+
+- relations proposed / validated / refuted per episode (and per reflection pass)
+- score + survival impact of validated relations (price-ID alone should
+  measurably improve item decisions — paired dev validation like any lever)
+- dots-connected count surfaced in GIF banners
+  (e.g. `INFERRED: 60gp potion ≈ healing [price-ID]`)
+
+## 5. Hypothesis-driven exploration objectives (operator refinement, closes the E18↔E11 loop)
+
+> **"The LLM decides WHERE to go; the procedures decide HOW to get there.
+> Strategist chooses destinations, navigator drives."** — operator, 2026-07-07
+
+- **REVALUATION TRIGGER:** whenever new capability or knowledge lands (item
+  acquired: key/pick-axe/wand identified; relation validated; skill unlocked),
+  the dot-connector RE-SCANS the level dossiers for revalued opportunities:
+  "locked door on D1 + key now held → that room is reachable", "unreachable
+  vault + pick-axe → diggable", "unidentified wand + now-known zap semantics →
+  test target".
+- **CURIOSITY OBJECTIVE contract:** {hypothesis ("I wonder if..."), target
+  location, expected value (what might be there × prior), cost (risk-costed
+  travel per the NH-E11 navigator), abort conditions} — priced in the goal
+  market against descent value (the explore/exploit call is the LLM's;
+  execution and per-step replanning over dossier hazards is the navigator's
+  risk-costed A*).
+- **LOGGING:** hypothesis→journey→outcome triples. Metric: **curiosity hit
+  rate** (journey found something valuable vs wasted trip + its cost) — the
+  empirical explore/exploit curve for backtracking; feeds the goal market's
+  future pricing of curiosity.
+- **RENDER:** curiosity journeys get their own GIF banner, e.g.
+  `CURIOSITY: returning to D1 locked room [key acquired]`.
+
+## Dependencies / siblings
+
+Perceptor backlog feeds the substrate (operator reweight, same directive):
+shop/altar/fountain/special-room detectors, monster-state perceptor
+(peaceful/hostile/fleeing/asleep), item-appearance tracker (unidentified
+appearance + observed prices + contexts), branch/level-feature recognition.
+NH-E13 KB supplies the reference tables; NH-E16 supplies the validation
+instrument; NH-E11 dossier is the substrate's spatial spine.
+
+## Status log
+- 2026-07-07: registered (operator directive), folder created.
