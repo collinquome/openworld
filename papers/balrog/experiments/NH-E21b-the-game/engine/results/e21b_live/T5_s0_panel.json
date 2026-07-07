@@ -1,0 +1,167 @@
+{
+ "model": "Fable 5 (max reasoning), s3",
+ "note": "structured distillation; verbatim in T5_s0.json",
+ "total_consults": 8,
+ "panels": [
+  {
+   "consult": 1,
+   "at_step": 0,
+   "bullets": [
+    [
+     "NOTE",
+     "new instance, partial context"
+    ],
+    [
+     "NOTE",
+     "T1/T6 lessons = hypotheses"
+    ],
+    [
+     "PLAN",
+     "read before touching"
+    ]
+   ]
+  },
+  {
+   "consult": 2,
+   "at_step": 0,
+   "bullets": [
+    [
+     "SAW",
+     "dark seed, warm charm"
+    ],
+    [
+     "THINK",
+     "charm: T6 trap rhyme?"
+    ],
+    [
+     "PLAN",
+     "probe gate empty-handed"
+    ]
+   ]
+  },
+  {
+   "consult": 3,
+   "at_step": 14,
+   "bullets": [
+    [
+     "SAW",
+     "way east SEALED"
+    ],
+    [
+     "THINK",
+     "items are the levers"
+    ],
+    [
+     "PLAN",
+     "try charm-as-key first"
+    ]
+   ]
+  },
+  {
+   "consult": 4,
+   "at_step": 29,
+   "bullets": [
+    [
+     "SAW",
+     "charm didn't open way"
+    ],
+    [
+     "THINK",
+     "seed wants: plant? eat?"
+    ],
+    [
+     "PLAN",
+     "plant seed at barrier"
+    ]
+   ]
+  },
+  {
+   "consult": 5,
+   "at_step": 50,
+   "bullets": [
+    [
+     "SAW",
+     "planting refused too"
+    ],
+    [
+     "OVERRIDE",
+     "eat dark seed, priced -HP"
+    ],
+    [
+     "PLAN",
+     "watch state, verb sweep"
+    ]
+   ]
+  },
+  {
+   "consult": 6,
+   "at_step": 54,
+   "bullets": [
+    [
+     "SAW",
+     "-15 HP: MAP REVEALED"
+    ],
+    [
+     "CONFIRMED",
+     "reveal-by-sacrifice mechanic"
+    ],
+    [
+     "THINK",
+     "info bought with blood"
+    ],
+    [
+     "PLAN",
+     "probe east gate, charm held"
+    ]
+   ]
+  },
+  {
+   "consult": 7,
+   "at_step": 63,
+   "bullets": [
+    [
+     "SAW",
+     "G1 yields (worn+charm)"
+    ],
+    [
+     "THINK",
+     "CONFOUNDED: wound or charm?"
+    ],
+    [
+     "NOTE",
+     "post-win probe owed"
+    ],
+    [
+     "PLAN",
+     "press east to goal"
+    ]
+   ]
+  },
+  {
+   "consult": 8,
+   "at_step": 64,
+   "bullets": [
+    [
+     "SAW",
+     "probe: no charm = refused"
+    ],
+    [
+     "CONFIRMED",
+     "gate is CHARM-KEYED"
+    ],
+    [
+     "THINK",
+     "T5 inverts T6's trap"
+    ],
+    [
+     "NOTE",
+     "rule-vs-hypothesis test passed"
+    ],
+    [
+     "PLAN",
+     "WIN logged, 3/3 mechanics"
+    ]
+   ]
+  }
+ ]
+}

@@ -69,14 +69,22 @@ M = {
     "MELEE+": (None, None), "STARV": (NA, None), "SPIDANT": (None, None),
     "RANGED": (NA, None), "PRAY": (NA, None)},
   "REST_GATES (A8)": {
-    "TRASH": (None, None), "MELEE+": (None, None), "STARV": (None, None),
+    "TRASH": (P, "e6_solve s3: REST survives 10/20 TRASH deaths on 10 "
+                 "distinct dev seeds (deterministic branch counterfactual,"
+                 " e6_solve_trash.json); lever not yet paired-dev"),
+    "MELEE+": (None, None), "STARV": (None, None),
     "SPIDANT": (None, None), "RANGED": (NA, None), "PRAY": (NA, None)},
   "FLEE_GATE (A6)": {
-    "TRASH": (None, None), "MELEE+": (None, None), "STARV": (NA, None),
+    "TRASH": (P, "e6_solve s3: RETREAT survives 6/20 TRASH deaths, "
+                 "distinct seeds (e6_solve_trash.json); subset of REST "
+                 "wins; lever not yet paired-dev"),
+    "MELEE+": (None, None), "STARV": (NA, None),
     "SPIDANT": (None, None), "RANGED": (None, None), "PRAY": (NA, None)},
   "STALL_WATCHDOG_V1": {
     "TRASH": (NA, None), "MELEE+": (NA, None),
-    "STARV": (None, None),  # standoffs burn the food clock
+    "STARV": (P, "E15-1 s3: hunger deaths 10->5 on the paired block "
+                 "(watchdog breaks stall-starve loops); shipped as "
+                 "robustness lever, progression-unclear"),
     "SPIDANT": (NA, None), "RANGED": (NA, None), "PRAY": (NA, None)},
   "REPEAT_LAYOUT_STAIRS_V2": {
     "TRASH": (NA, None), "MELEE+": (NA, None),

@@ -1,0 +1,17 @@
+{
+ "template": "T5",
+ "seed": 0,
+ "probe": "G1 disambiguation: wounded-no-charm at the true crossing",
+ "pre_cross_index": 61,
+ "result": {
+  "pos": [
+   18,
+   3
+  ],
+  "messages": [
+   "The gate (G1) holds firm; something about your situation doesn't satisfy it yet."
+  ]
+ },
+ "note": "full-HP arrival is impossible on this seed: the middle zone is sealed until the seed is eaten (-15). So damage-precondition cannot be separated from arrival; the separable question is charm-necessity.",
+ "model": "Fable 5 (max reasoning), s3"
+}

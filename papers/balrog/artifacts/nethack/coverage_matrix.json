@@ -252,8 +252,8 @@
   },
   "REST_GATES (A8)": {
    "TRASH": {
-    "status": "UNTESTED",
-    "evidence": null
+    "status": "PROVISIONAL",
+    "evidence": "e6_solve s3: REST survives 10/20 TRASH deaths on 10 distinct dev seeds (deterministic branch counterfactual, e6_solve_trash.json); lever not yet paired-dev"
    },
    "MELEE+": {
     "status": "UNTESTED",
@@ -278,8 +278,8 @@
   },
   "FLEE_GATE (A6)": {
    "TRASH": {
-    "status": "UNTESTED",
-    "evidence": null
+    "status": "PROVISIONAL",
+    "evidence": "e6_solve s3: RETREAT survives 6/20 TRASH deaths, distinct seeds (e6_solve_trash.json); subset of REST wins; lever not yet paired-dev"
    },
    "MELEE+": {
     "status": "UNTESTED",
@@ -312,8 +312,8 @@
     "evidence": null
    },
    "STARV": {
-    "status": "UNTESTED",
-    "evidence": null
+    "status": "PROVISIONAL",
+    "evidence": "E15-1 s3: hunger deaths 10->5 on the paired block (watchdog breaks stall-starve loops); shipped as robustness lever, progression-unclear"
    },
    "SPIDANT": {
     "status": "N/A",
@@ -440,16 +440,6 @@
    "weight": 0.394
   },
   {
-   "card": "REST_GATES (A8)",
-   "class": "TRASH",
-   "weight": 0.394
-  },
-  {
-   "card": "FLEE_GATE (A6)",
-   "class": "TRASH",
-   "weight": 0.394
-  },
-  {
    "card": "WIELD_DOCTRINE (P2, unbuilt)",
    "class": "TRASH",
    "weight": 0.394
@@ -506,11 +496,6 @@
   },
   {
    "card": "REST_GATES (A8)",
-   "class": "STARV",
-   "weight": 0.202
-  },
-  {
-   "card": "STALL_WATCHDOG_V1",
    "class": "STARV",
    "weight": 0.202
   },
@@ -575,6 +560,6 @@
    "weight": 0.054
   }
  ],
- "weighted_fill": 0.16422413793103455,
+ "weighted_fill": 0.23198275862068973,
  "criterion_i_pass": false
 }

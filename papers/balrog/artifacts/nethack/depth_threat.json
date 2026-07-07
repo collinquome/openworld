@@ -1,0 +1,87 @@
+{
+ "provenance": {
+  "corpus": "results/c2_cache combat rows",
+  "dpt": "nh_percept.species_dpt (empirical blend)",
+  "hp_prior": "4.5 x mlevel (source arithmetic)",
+  "model": "Fable 5 (max reasoning), s3"
+ },
+ "bands": {
+  "1": {
+   "n_turns": 15832,
+   "dpt_mean": 0.441,
+   "dpt_p75": 0.639,
+   "hp_mean": 5.77,
+   "species": 30
+  },
+  "2": {
+   "n_turns": 23286,
+   "dpt_mean": 1.732,
+   "dpt_p75": 1.805,
+   "hp_mean": 51.22,
+   "species": 26
+  },
+  "3": {
+   "n_turns": 51871,
+   "dpt_mean": 0.449,
+   "dpt_p75": 0.639,
+   "hp_mean": 7.15,
+   "species": 49
+  },
+  "4": {
+   "n_turns": 61221,
+   "dpt_mean": 0.643,
+   "dpt_p75": 0.954,
+   "hp_mean": 8.69,
+   "species": 48
+  },
+  "5": {
+   "n_turns": 41305,
+   "dpt_mean": 0.988,
+   "dpt_p75": 1.373,
+   "hp_mean": 10.63,
+   "species": 68
+  },
+  "6": {
+   "n_turns": 21703,
+   "dpt_mean": 0.88,
+   "dpt_p75": 1.119,
+   "hp_mean": 9.76,
+   "species": 58
+  },
+  "7": {
+   "n_turns": 12337,
+   "dpt_mean": 1.082,
+   "dpt_p75": 1.481,
+   "hp_mean": 11.24,
+   "species": 54
+  },
+  "8": {
+   "n_turns": 563,
+   "dpt_mean": 1.372,
+   "dpt_p75": 1.959,
+   "hp_mean": 11.42,
+   "species": 49
+  },
+  "9": {
+   "n_turns": 1357,
+   "dpt_mean": 1.342,
+   "dpt_p75": 2.215,
+   "hp_mean": 13.72,
+   "species": 31
+  },
+  "10": {
+   "n_turns": 648,
+   "dpt_mean": 1.139,
+   "dpt_p75": 2.074,
+   "hp_mean": 13.79,
+   "species": 31
+  },
+  "11": {
+   "n_turns": 71,
+   "dpt_mean": 1.384,
+   "dpt_p75": 2.074,
+   "hp_mean": 14.61,
+   "species": 15
+  }
+ }
+}

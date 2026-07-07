@@ -1,0 +1,1144 @@
+{
+ "model": "Fable 5 (max reasoning), s3",
+ "class": "TRASH",
+ "backoffs": "40,120,300",
+ "window": 600,
+ "verdicts": {
+  "MISPLAYED": 11,
+  "UNRESOLVED": 9
+ },
+ "wins_by_line": {
+  "REST": 10,
+  "RETREAT": 6
+ },
+ "results": [
+  {
+   "id": "c2dev_full_w0_706",
+   "seed": 706,
+   "role": "Priest",
+   "depth_at_death": 3,
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "n_steps": 248,
+   "death_time": 237,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 144
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 158
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": true,
+      "time": 523,
+      "hp": 13,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 53
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST"
+   ],
+   "winning_backoff": 120,
+   "wall_s": 3.6
+  },
+  {
+   "id": "c2dev_full_w0_709",
+   "seed": 709,
+   "role": "Healer",
+   "depth_at_death": 2,
+   "end_reason": "DEATH: died. Killed by a kobold.",
+   "n_steps": 428,
+   "death_time": 419,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 781,
+      "hp": 12,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 303
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 1.9
+  },
+  {
+   "id": "c2dev_full_w0_712",
+   "seed": 712,
+   "role": "Samurai",
+   "depth_at_death": 7,
+   "end_reason": "DEATH: died. Killed by a rothe.",
+   "n_steps": 823,
+   "death_time": 601,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 7
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 82
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 1
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 6
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 38
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 43
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 5.1
+  },
+  {
+   "id": "c2dev_full_w0_721",
+   "seed": 721,
+   "role": "Knight",
+   "depth_at_death": 4,
+   "end_reason": "DEATH: died. Killed by a fox.",
+   "n_steps": 1281,
+   "death_time": 1243,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 1849,
+      "hp": 31,
+      "steps": 285
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 131
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 4.3
+  },
+  {
+   "id": "c2dev_full_w0_724",
+   "seed": 724,
+   "role": "Barbarian",
+   "depth_at_death": 8,
+   "end_reason": "DEATH: died. Killed by a rock mole.",
+   "n_steps": 638,
+   "death_time": 612,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 148
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 148
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 182
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 166
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": true,
+      "time": 718,
+      "hp": 2,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 726,
+      "hp": 16,
+      "steps": 408
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST",
+    "RETREAT"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 5.7
+  },
+  {
+   "id": "c2dev_full_w0_727",
+   "seed": 727,
+   "role": "Valkyrie",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a wererat.",
+   "n_steps": 780,
+   "death_time": 755,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 251
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 245
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 311
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 262
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 44
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 52
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 6.0
+  },
+  {
+   "id": "c2dev_full_w0_733",
+   "seed": 733,
+   "role": "Ranger",
+   "depth_at_death": 9,
+   "end_reason": "DEATH: died. Killed by a black naga hatchling.",
+   "n_steps": 636,
+   "death_time": 601,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 12
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 12
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 218
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 907,
+      "hp": 14,
+      "steps": 408
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "RETREAT"
+   ],
+   "winning_backoff": 120,
+   "wall_s": 4.2
+  },
+  {
+   "id": "c2dev_full_w0_739",
+   "seed": 739,
+   "role": "Barbarian",
+   "depth_at_death": 3,
+   "end_reason": "DEATH: died. Killed by a goblin.",
+   "n_steps": 1337,
+   "death_time": 1345,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 55
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 31
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 50
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 315
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 17
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 15
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 9.4
+  },
+  {
+   "id": "c2dev_full_w1_701",
+   "seed": 701,
+   "role": "Knight",
+   "depth_at_death": 3,
+   "end_reason": "DEATH: died. Killed by a straw golem.",
+   "n_steps": 14384,
+   "death_time": 2640,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 3259,
+      "hp": 37,
+      "steps": 251
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 3259,
+      "hp": 37,
+      "steps": 259
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST",
+    "RETREAT"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 44.8
+  },
+  {
+   "id": "c2dev_full_w1_704",
+   "seed": 704,
+   "role": "Knight",
+   "depth_at_death": 1,
+   "end_reason": "DEATH: was poisoned. Poisoned by a rotted newt corpse.",
+   "n_steps": 916,
+   "death_time": 909,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 1528,
+      "hp": 16,
+      "steps": 270
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 1521,
+      "hp": 16,
+      "steps": 266
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST",
+    "RETREAT"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 4.3
+  },
+  {
+   "id": "c2dev_full_w1_707",
+   "seed": 707,
+   "role": "Rogue",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "n_steps": 654,
+   "death_time": 623,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 113
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 91
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 49
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 141
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 43
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 63
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 4.6
+  },
+  {
+   "id": "c2dev_full_w1_725",
+   "seed": 725,
+   "role": "Archeologist",
+   "depth_at_death": 7,
+   "end_reason": "DEATH: died. Killed by a kobold mummy.",
+   "n_steps": 78,
+   "death_time": 154,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 75
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 75
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": true,
+      "time": 305,
+      "hp": 13,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 305,
+      "hp": 13,
+      "steps": 400
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST",
+    "RETREAT"
+   ],
+   "winning_backoff": 120,
+   "wall_s": 1.3
+  },
+  {
+   "id": "c2dev_full_w1_737",
+   "seed": 737,
+   "role": "Rogue",
+   "depth_at_death": 4,
+   "end_reason": "DEATH: died. Killed by a fox.",
+   "n_steps": 435,
+   "death_time": 418,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 782,
+      "hp": 12,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": true,
+      "time": 790,
+      "hp": 12,
+      "steps": 408
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST",
+    "RETREAT"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 2.1
+  },
+  {
+   "id": "c2dev_full_w2_708",
+   "seed": 708,
+   "role": "Rogue",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "n_steps": 1242,
+   "death_time": 1226,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 23
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 23
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 101
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 300
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 291
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 302
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 8.8
+  },
+  {
+   "id": "c2dev_full_w2_714",
+   "seed": 714,
+   "role": "Tourist",
+   "depth_at_death": 4,
+   "end_reason": "DEATH: died. Killed by a hobbit.",
+   "n_steps": 688,
+   "death_time": 658,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 277
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 214
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 9
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 12
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 47
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 36
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 5.4
+  },
+  {
+   "id": "c2dev_full_w2_723",
+   "seed": 723,
+   "role": "Ranger",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a dwarf.",
+   "n_steps": 4145,
+   "death_time": 4143,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 3
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 32
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 87
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 93
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": true,
+      "time": 4253,
+      "hp": 26,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 188
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST"
+   ],
+   "winning_backoff": 300,
+   "wall_s": 32.4
+  },
+  {
+   "id": "c2dev_full_w2_732",
+   "seed": 732,
+   "role": "Ranger",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a kitten.",
+   "n_steps": 2157,
+   "death_time": 2061,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 40
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 11
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 19
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 90
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 90
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 16.5
+  },
+  {
+   "id": "c2dev_full_w2_735",
+   "seed": 735,
+   "role": "Caveman",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a kitten.",
+   "n_steps": 573,
+   "death_time": 553,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 63
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 165
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 133
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 121
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 111
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 4.1
+  },
+  {
+   "id": "c2dev_full_w2_738",
+   "seed": 738,
+   "role": "Caveman",
+   "depth_at_death": 5,
+   "end_reason": "DEATH: died. Killed by a gas spore's explosion.",
+   "n_steps": 406,
+   "death_time": 397,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": true,
+      "time": 760,
+      "hp": 15,
+      "steps": 400
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 278
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "MISPLAYED",
+   "winners": [
+    "REST"
+   ],
+   "winning_backoff": 40,
+   "wall_s": 1.9
+  },
+  {
+   "id": "c2g_armorR_wa_702",
+   "seed": 702,
+   "role": "Knight",
+   "depth_at_death": 7,
+   "end_reason": "DEATH: died. Killed by a rothe.",
+   "n_steps": 2757,
+   "death_time": 2669,
+   "window": 600,
+   "backoffs": {
+    "40": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 18
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 22
+     }
+    },
+    "120": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 38
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 126
+     }
+    },
+    "300": {
+     "REST": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 337
+     },
+     "RETREAT": {
+      "alive": false,
+      "time": 0,
+      "hp": 0,
+      "steps": 205
+     }
+    }
+   },
+   "lines": {
+    "ORIG": {
+     "alive": false,
+     "time": 0,
+     "hp": 0,
+     "steps": 40
+    }
+   },
+   "verdict": "UNRESOLVED",
+   "winners": [],
+   "wall_s": 21.2
+  }
+ ]
+}

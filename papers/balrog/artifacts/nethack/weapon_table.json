@@ -1,0 +1,385 @@
+{
+ "provenance": {
+  "extractor": "nh_sheet.build_weapon_table",
+  "model": "Fable 5 (max reasoning), s3",
+  "page": "Weapon",
+  "sha256": "53f32fdaf1b0ffb11f7a2c74aceeab500c60583829186d9c4125a224620e552a"
+ },
+ "weapons": {
+  "aklys": {
+   "dlarge": 2.0,
+   "dsmall": 3.5,
+   "skill": "club"
+  },
+  "arrow": {
+   "dlarge": 3.5,
+   "dsmall": 3.5,
+   "skill": "bow"
+  },
+  "athame": {
+   "dlarge": 2.0,
+   "dsmall": 2.5,
+   "skill": "dagger"
+  },
+  "axe": {
+   "dlarge": 2.5,
+   "dsmall": 3.5,
+   "skill": "axe"
+  },
+  "bardiche": {
+   "dlarge": 7.5,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "battle-axe": {
+   "dlarge": 8.5,
+   "dsmall": 7.0,
+   "skill": "axe"
+  },
+  "bec de corbin": {
+   "dlarge": 3.5,
+   "dsmall": 4.5,
+   "skill": "polearms"
+  },
+  "bill-guisarme": {
+   "dlarge": 5.5,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "boomerang": {
+   "dlarge": 5.0,
+   "dsmall": 5.0,
+   "skill": "boomerang"
+  },
+  "bow": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "bow"
+  },
+  "broadsword": {
+   "dlarge": 4.5,
+   "dsmall": 5.0,
+   "skill": "broadsword"
+  },
+  "bullwhip": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "whip"
+  },
+  "club": {
+   "dlarge": 2.0,
+   "dsmall": 3.5,
+   "skill": "club"
+  },
+  "crossbow": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "crossbow"
+  },
+  "crossbow bolt": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "crossbow"
+  },
+  "crysknife": {
+   "dlarge": 5.5,
+   "dsmall": 5.5,
+   "skill": "knife"
+  },
+  "dagger": {
+   "dlarge": 2.0,
+   "dsmall": 2.5,
+   "skill": "dagger"
+  },
+  "dart": {
+   "dlarge": 1.5,
+   "dsmall": 2.0,
+   "skill": "dart"
+  },
+  "dwarvish mattock": {
+   "dlarge": 11.5,
+   "dsmall": 6.5,
+   "skill": "pick-axe"
+  },
+  "dwarvish short sword": {
+   "dlarge": 4.5,
+   "dsmall": 4.0,
+   "skill": "short sword"
+  },
+  "dwarvish spear": {
+   "dlarge": 4.5,
+   "dsmall": 4.5,
+   "skill": "spear"
+  },
+  "elven arrow": {
+   "dlarge": 3.5,
+   "dsmall": 4.0,
+   "skill": "bow"
+  },
+  "elven bow": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "bow"
+  },
+  "elven broadsword": {
+   "dlarge": 4.5,
+   "dsmall": 6.0,
+   "skill": "broadsword"
+  },
+  "elven dagger": {
+   "dlarge": 2.0,
+   "dsmall": 3.0,
+   "skill": "dagger"
+  },
+  "elven short sword": {
+   "dlarge": 4.5,
+   "dsmall": 4.5,
+   "skill": "short sword"
+  },
+  "elven spear": {
+   "dlarge": 4.5,
+   "dsmall": 4.0,
+   "skill": "spear"
+  },
+  "fauchard": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "polearms"
+  },
+  "flail": {
+   "dlarge": 5.0,
+   "dsmall": 4.5,
+   "skill": "flail"
+  },
+  "flint stone": {
+   "dlarge": 3.5,
+   "dsmall": 3.5,
+   "skill": "sling"
+  },
+  "glaive": {
+   "dlarge": 5.5,
+   "dsmall": 3.5,
+   "skill": "polearms"
+  },
+  "grappling hook": {
+   "dlarge": 3.5,
+   "dsmall": 1.5,
+   "skill": "flail"
+  },
+  "guisarme": {
+   "dlarge": 4.5,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "halberd": {
+   "dlarge": 7.0,
+   "dsmall": 5.5,
+   "skill": "polearms"
+  },
+  "javelin": {
+   "dlarge": 3.5,
+   "dsmall": 3.5,
+   "skill": "spear"
+  },
+  "katana": {
+   "dlarge": 6.5,
+   "dsmall": 5.5,
+   "skill": "long sword"
+  },
+  "knife": {
+   "dlarge": 1.5,
+   "dsmall": 2.0,
+   "skill": "knife"
+  },
+  "lance": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "lance"
+  },
+  "long sword": {
+   "dlarge": 6.5,
+   "dsmall": 4.5,
+   "skill": "long sword"
+  },
+  "lucern hammer": {
+   "dlarge": 3.5,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "mace": {
+   "dlarge": 3.5,
+   "dsmall": 4.5,
+   "skill": "mace"
+  },
+  "morning star": {
+   "dlarge": 4.5,
+   "dsmall": 5.0,
+   "skill": "morning star"
+  },
+  "orcish arrow": {
+   "dlarge": 3.5,
+   "dsmall": 3.0,
+   "skill": "bow"
+  },
+  "orcish bow": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "bow"
+  },
+  "orcish dagger": {
+   "dlarge": 2.0,
+   "dsmall": 2.0,
+   "skill": "dagger"
+  },
+  "orcish short sword": {
+   "dlarge": 4.5,
+   "dsmall": 3.0,
+   "skill": "short sword"
+  },
+  "orcish spear": {
+   "dlarge": 4.5,
+   "dsmall": 3.0,
+   "skill": "spear"
+  },
+  "partisan": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "polearms"
+  },
+  "pick-axe": {
+   "dlarge": 2.0,
+   "dsmall": 3.5,
+   "skill": "pick-axe"
+  },
+  "quarterstaff": {
+   "dlarge": 3.5,
+   "dsmall": 3.5,
+   "skill": "quarterstaff"
+  },
+  "ranseur": {
+   "dlarge": 5.0,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "rubber hose": {
+   "dlarge": 2.0,
+   "dsmall": 2.5,
+   "skill": "whip"
+  },
+  "runesword": {
+   "dlarge": 4.5,
+   "dsmall": 5.0,
+   "skill": "broadsword"
+  },
+  "scalpel": {
+   "dlarge": 2.0,
+   "dsmall": 2.0,
+   "skill": "knife"
+  },
+  "scimitar": {
+   "dlarge": 4.5,
+   "dsmall": 4.5,
+   "skill": "saber"
+  },
+  "short sword": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "short sword"
+  },
+  "shuriken": {
+   "dlarge": 3.5,
+   "dsmall": 4.5,
+   "skill": "shuriken"
+  },
+  "silver arrow": {
+   "dlarge": 3.5,
+   "dsmall": 3.5,
+   "skill": "bow"
+  },
+  "silver dagger": {
+   "dlarge": 2.0,
+   "dsmall": 2.5,
+   "skill": "dagger"
+  },
+  "silver mace": {
+   "dlarge": 3.5,
+   "dsmall": 4.5,
+   "skill": "mace"
+  },
+  "silver saber": {
+   "dlarge": 4.5,
+   "dsmall": 4.5,
+   "skill": "saber"
+  },
+  "silver spear": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "spear"
+  },
+  "sling": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "sling"
+  },
+  "spear": {
+   "dlarge": 4.5,
+   "dsmall": 3.5,
+   "skill": "spear"
+  },
+  "spetum": {
+   "dlarge": 7.0,
+   "dsmall": 4.5,
+   "skill": "polearms"
+  },
+  "stiletto": {
+   "dlarge": 1.5,
+   "dsmall": 2.0,
+   "skill": "knife"
+  },
+  "trident": {
+   "dlarge": 7.5,
+   "dsmall": 4.5,
+   "skill": "trident"
+  },
+  "tsurugi": {
+   "dlarge": 11.5,
+   "dsmall": 8.5,
+   "skill": "two-handed sword"
+  },
+  "two-handed sword": {
+   "dlarge": 10.5,
+   "dsmall": 6.5,
+   "skill": "two-handed sword"
+  },
+  "unicorn horn": {
+   "dlarge": 6.5,
+   "dsmall": 6.5,
+   "skill": "unicorn horn"
+  },
+  "voulge": {
+   "dlarge": 5.0,
+   "dsmall": 5.0,
+   "skill": "polearms"
+  },
+  "war hammer": {
+   "dlarge": 2.5,
+   "dsmall": 3.5,
+   "skill": "hammer"
+  },
+  "worm tooth": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "knife"
+  },
+  "ya": {
+   "dlarge": 4.0,
+   "dsmall": 4.0,
+   "skill": "bow"
+  },
+  "yumi": {
+   "dlarge": 1.5,
+   "dsmall": 1.5,
+   "skill": "bow"
+  }
+ }
+}

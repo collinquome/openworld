@@ -1,0 +1,30 @@
+{
+  "kill_msg": {
+    "message": "You kill the grid bug!",
+    "source_trajectory": "results/trajectories/baseline25__ep10.json"
+  },
+  "see_here_food": {
+    "message": "You see here a food ration.",
+    "source_trajectory": "results/trajectories/baseline25__ep10.json"
+  },
+  "see_here_armor": {
+    "message": "You see here a crude chain mail.",
+    "source_trajectory": "results/trajectories/v11block40__ep67.json"
+  },
+  "see_here_armor_shop": {
+    "message": "You see here a studded leather armor (for sale, 20 zorkmids).",
+    "source_trajectory": "results/trajectories/c2dev_full__ep732.json"
+  },
+  "door_already_open": {
+    "message": "This door is already open.",
+    "source_trajectory": "results/trajectories/baseline25__ep17.json"
+  },
+  "door_broken": {
+    "message": "This door is broken.",
+    "source_trajectory": "results/trajectories/baseline25__ep17.json"
+  },
+  "phantom_eat_refusal": {
+    "message": "You don't have anything to eat.",
+    "source_trajectory": "results/trajectories/baseline25__ep11.json"
+  }
+}

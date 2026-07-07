@@ -587,3 +587,60 @@ survives death+600 turns; UNRESOLVED deliberately ≠ UNWINNABLE (that
 stamp waits for the v2 menu + in-model MC). First TRASH batch (≤20
 distinct dev seeds) running; smoke: jackal-death MISPLAYED via REST,
 poison-corpse death correctly unsolvable by repositioning.
+
+## Session 3 close (MODEL: Fable 5 max reasoning throughout — no handoff needed this session)
+
+### Dev-metric trend table addendum
+
+| block | config | n | mean prog | avoidable dmg % | violations | notes |
+|---|---|---|---|---|---|---|
+| DEV-B1 (700-739) | standing+CAST | 40 | 5.32 | 6% | 0/119,057 | criterion-iii clock v1 (restarted by ships) |
+| DEV-B2 (700-739) | +CASTHUNGER +E15 | 40 | 5.45 | 5% | 0/80,155 | block 1/2 new config; 39 eps adopted from e15b1 (registered construction) |
+| DEV-B3 (740-779) | same, FRESH seeds | 40 | 5.51 | 5% | 0/54,859 | block 2/2 — **CRITERION (iii) MET, |5-5|=0<1pt** |
+
+### The session in one paragraph
+
+Three in-flight verdicts collected and shipped/dropped per their
+pre-registrations (CASTHUNGER latch SHIPPED pure-guard, E15 watchdog
+SHIPPED on its robustness gate with the inertness caveat, REPEAT-2
+stays off); the criterion-iii clock restarted and CLOSED within the
+session (5%→5% across DEV-B2/B3); the snapshot suite was built and is
+GREEN (criterion iv); violations stayed at literal zero across 233k
+transitions (criterion v); the CHARACTER SHEET shipped as nh_sheet.py
+(PI/TI/RR with damage-mass-weighted corpus threat bands + frozen-KB
+weapon/armor tables); the E6 solve loop went live and its first TRASH
+batch fired the class-solve rule (REST wins 10/20 distinct seeds —
+disengage-and-recover graduates to a paired block); coverage moved
+16.4%→23.2%; E21b T5 was live-won with the reveal-by-sacrifice line and
+the post-win probe pinned the charm-key inversion of T6 (the T5/T6
+defeasibility pair is now a documented result: rules fail, hypotheses
+transfer); the e21b side-panel reel standard shipped (v2 GIFs for
+T1/T5/T6); NH-E28 (goal-inference bridge, opacity ladder O0-O6, P1-P6)
+and the PROPOSE→COMPILE→BACKTEST→DEPLOY core-loop architecture
+statement were registered per operator directives.
+
+### Exit-criteria scoreboard after session 3
+
+(i) coverage matrix: 23.2% weighted fill (needs ≥70%) — the long pole;
+    KITE/WIELD/ARMOR/ZAP × TRASH are the top cells; WIELD/ARMOR now
+    unblocked by the sheet's power deltas.
+(ii) gym syllabus: solve loop LIVE; TRASH 20/118 seeds adjudicated,
+    11 MISPLAYED (REST rule candidate fired), 9 UNRESOLVED honestly
+    held; MELEE+/STARV/SPIDANT/RANGED classes untouched by the loop.
+(iii) avoidable-damage plateau: **MET** (5%→5%, fresh-seed block 2/2).
+(iv) snapshot suite: **MET** (18/18 green, runs per-session).
+(v) violations: **MET and holding** (0 across all session-3 blocks).
+
+### Session-4 queue (my read)
+
+1. REST/disengage rule candidate → compile as lever (likely an NH_E15
+   L2-threshold tune) → paired dev block (the first solve-loop-sourced
+   lever — closes the loop the operator asked for).
+2. WIELD/ARMOR doctrine on nh_sheet power deltas + readiness logging
+   wire-in (flag-off regression first) + RR-threshold sweep.
+3. Solve loop v2 menu (kite/throw/stairs-escape + in-model MC) →
+   re-adjudicate the 9 UNRESOLVED; then MELEE+ and STARV batches.
+4. E21b multi-seed (T1/T5/T6 × s1,s2) + 4-arm ablation; fresh-context
+   blind intuition instance for clean statistics (subagent pattern).
+5. Zap doctrine probe-first (kb table + RAY_BOUNCE/CAST_NEVER guards).
+6. NH-E25(a) open-mode session + SAMPLE-10 at generative moments.
