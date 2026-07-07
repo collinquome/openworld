@@ -54,3 +54,33 @@ evidence:
 4. **LOG the resolution path per engagement**; resolution-depth
    distribution over time = maturity metric (early: mostly generic; late:
    mostly specific). GIF banner shows it.
+
+## THE STANDARD DECISION PATTERN (operator directive 2026-07-07; strategy AND action level)
+
+1. **SUGGEST, DON'T DICTATE:** procedures produce a SUGGESTED action/
+   strategy (resolution chain + option menus) — overridable by the
+   intuition layer (Arm B) or by playout evidence (both arms).
+   Bidirectional authority: intuition proposes objectives downward,
+   procedures propose actions upward; either overrides with logged
+   reasons.
+2. **PLAY IT OUT FIRST** (planning in imagination — world-model playouts,
+   zero env access, legitimate at test time): before committing to
+   strategy X in a recognized scenario, roll K sampled futures (~20–50
+   steps) through the symbolic+exchange model; summarize the POSSIBILITY-
+   SPACE REGION per goal dimension: P(death), HP distribution,
+   depth/loot/xp, time. Operator's question verbatim: "Do I like where we
+   could be in possibility space if I try strategy X?" — per menu option.
+   (Implementation shares E-NH4b's determinized K-future sampling
+   machinery.)
+3. **EVALUATE + CHOOSE:** Arm A = goal-weighted scoring over playout
+   summaries; Arm B = intuition READS the playout summaries and
+   picks/overrides ("sprint: 85% cross safely, worst case 40% HP — I like
+   that region better than fight's bimodal outcome").
+4. **THEN TRY IT** — per-step replanning + abort conditions; playouts
+   inform, reality governs.
+5. **CALIBRATION:** playout-predicted distribution vs realized outcome
+   logged per decision — playout calibration at strategy scale = a
+   world-model quality metric (extends the verification stack upward);
+   poorly-calibrated playout classes = model gaps = curiosity targets.
+Render: playout preview panel ("SIMULATED: fight → P(death) .18, sprint →
+.05") before the chosen action — the agent visibly thinking ahead.
