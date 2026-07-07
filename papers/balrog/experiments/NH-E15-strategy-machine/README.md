@@ -84,3 +84,32 @@ evidence:
    poorly-calibrated playout classes = model gaps = curiosity targets.
 Render: playout preview panel ("SIMULATED: fight → P(death) .18, sprint →
 .05") before the chosen action — the agent visibly thinking ahead.
+
+## PARETO, BOTH SENSES (operator directive 2026-07-07; extends option menus + decision pattern)
+
+1. **PARETO FRONTIER over option menus:** options carry goal-dimension
+   outcome vectors (survival/loot/xp/time/depth). PRUNE DOMINATED OPTIONS
+   first (worse on every dimension than some alternative = never choose);
+   the remaining choice is a point ON the frontier selected by current
+   goal weights, felt-sense picking along it. Playout previews render the
+   frontier (2D projections: P(death) vs E[progression], options plotted,
+   dominated greyed) — "which point on the frontier do I like" is the
+   possibility-space question made visual.
+2. **PARETO-DISTRIBUTED OUTCOMES (tail-awareness as explicit policy):**
+   episode scores are heavy-tailed (best 39.29 vs mean ~6; jackpot seeds
+   dominate blocks) and the max-rung metric is CONVEX. Policy
+   implications, stated not implied:
+   (a) means mislead — decisions + bandit rewards use medians/quantiles/
+       CIs (E23 already specifies robust estimators; THIS is why);
+   (b) the optimal portfolio BUYS CHEAP LOTTERY TICKETS: low-cost
+       attempts at tail outcomes (dive opportunities, dig chances,
+       repeat-layout skips) are worth more than their average suggests,
+       while ruin stays capped — formally: maximize expected TAIL capture
+       subject to P(death) bounds (the E-NH4b ε-constraint), not expected
+       value;
+   (c) per-scenario REGIME TAGGING: normal-ish outcome classes (food
+       economy) → optimize means; Pareto outcome classes (depth runs) →
+       optimize tail access + survival-to-keep-drawing. Scenario
+       fingerprints carry an outcome-distribution-shape tag; optimal
+       strategy differs BY DISTRIBUTION SHAPE, and knowing which world
+       you're in is perceptor-grade knowledge.
