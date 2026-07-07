@@ -31,6 +31,24 @@ os.makedirs(TRAJ, exist_ok=True)
 MAX_LOOP = 110_000     # safety bound above the env's own 100k cap
 
 
+def _subgoal_summary(agent, steps):
+    """Time share per subgoal label + the subgoal active at episode end
+    (E-NH1 attribution: which subgoal precedes deaths)."""
+    log = agent.subgoal_log
+    if not log:
+        return {}
+    share = {}
+    for i, (s, label, _r) in enumerate(log):
+        nxt = log[i + 1][0] if i + 1 < len(log) else steps
+        share[label] = share.get(label, 0) + max(0, nxt - s)
+    tot = max(1, sum(share.values()))
+    out = {k: round(v / tot, 4) for k, v in
+           sorted(share.items(), key=lambda kv: -kv[1])}
+    out["_final"] = log[-1][1]
+    out["_final_reason"] = log[-1][2]
+    return out
+
+
 def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
                 log=print, frame_cap=5000):
     env = H.make_env()
@@ -50,14 +68,35 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
 
     traj = {"task": tag, "episode": ep, "seed": seed, "condition": condition,
             "actions": [], "frames": [], "frame_steps": [], "positions": [],
-            "hp": [], "depth": [], "messages": [], "notes": [],
-            "mem_fired": []}
+            "hp": [], "depth": [], "hunger": [], "messages": [], "notes": [],
+            "mem_fired": [], "subgoals": [], "plans": [], "evs": [],
+            "beliefs": [], "monsters": []}
 
     def snap(o, step):
         tty = o["obs"]["tty_chars"]
         traj["frames"].append(["".join(chr(c) for c in row).rstrip()
                                for row in tty])
         traj["frame_steps"].append(step)
+        # belief snapshot (Campaign 2 renderer): terrain+explored grid,
+        # visible monsters — straight from the agent's own belief state
+        try:
+            A = agent.atlas
+            L = A.level
+            rows = []
+            for y in range(21):
+                chars = []
+                for x in range(79):
+                    if not L.explored[y][x]:
+                        chars.append(".")
+                    else:
+                        chars.append(chr(65 + int(L.terrain[y][x])))
+                rows.append("".join(chars))
+            sus = sorted(agent.suspect_walls.get(A.key, set()))
+            traj["beliefs"].append([step, rows, sus])
+            traj["monsters"].append(
+                [step, [[m.x, m.y, m.name, int(m.pet)] for m in L.monsters]])
+        except Exception:
+            pass
 
     def want_frame(step, agent, depth_changed, hp_frac):
         if len(traj["frames"]) >= frame_cap:
@@ -94,6 +133,7 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         traj["positions"].append(list(A.agent))
         traj["hp"].append([A.hp, A.hpmax])
         traj["depth"].append(A.depth)
+        traj["hunger"].append(A.hunger)
         traj["messages"].append(A.message[:150])
         if want_frame(steps, agent, dchg, A.hp / max(1, A.hpmax)):
             snap(obs, steps)
@@ -108,6 +148,10 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
     tfile = tlog.close()
     traj["notes"].extend([f"step {s}: {n}" for (s, n) in agent.notes])
     traj["mem_fired"] = [f"step {s}: {n}" for (s, n) in agent.mem_fired]
+    traj["subgoals"] = [list(x) for x in agent.subgoal_log]
+    traj["plans"] = [[s, cells] for (s, cells) in agent.plan_log]
+    traj["evs"] = [list(x) for x in agent.ev_log]
+    traj["pred_dmg"] = [list(x) for x in getattr(agent, "pred_log", [])]
 
     result = {
         "task": tag,
@@ -128,6 +172,9 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         "wallclock_s": round(time.time() - t0, 1),
         "transitions_file": os.path.relpath(tfile, RESULTS),
         "mem_fired": traj["mem_fired"],
+        "subgoal_summary": _subgoal_summary(agent, steps),
+        "ev_fired": len(agent.ev_log),
+        "emergency_fired": agent.emergency_fired,
     }
     if memory is not None:
         memory.end_episode(result, steps)

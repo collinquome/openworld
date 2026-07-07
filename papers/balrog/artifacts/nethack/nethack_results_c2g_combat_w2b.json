@@ -1,0 +1,227 @@
+{
+ "label": "c2g_combat_w2b",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 705,
+   "seed": 705,
+   "condition": "A",
+   "steps": 4376,
+   "illegal": 0,
+   "progression": 0.09770935198701912,
+   "highest_achievement": "Dlvl:9",
+   "depth_max": 9,
+   "xplvl_max": 6,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:8",
+    "Dlvl:9"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5",
+    "Xp:6"
+   ],
+   "end_reason": "DEATH: died. Killed by a human mummy.",
+   "role": "Barbarian",
+   "race": "orcish",
+   "wallclock_s": 202.6,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep705.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7004,
+    "loot": 0.1565,
+    "find-stairs": 0.0606,
+    "fight": 0.0551,
+    "descend": 0.0222,
+    "eat": 0.0034,
+    "ranged": 0.0014,
+    "survive": 0.0005,
+    "_final": "fight",
+    "_final_reason": "cornered vs human mummy"
+   },
+   "ev_fired": 12,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 708,
+   "seed": 708,
+   "condition": "A",
+   "steps": 2953,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 5,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5"
+   ],
+   "end_reason": "DEATH: died. Killed by a white unicorn.",
+   "role": "Rogue",
+   "race": "orcish",
+   "wallclock_s": 124.7,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep708.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.4461,
+    "explore": 0.2043,
+    "descend": 0.1596,
+    "kite-choke": 0.1375,
+    "ranged": 0.0193,
+    "fight": 0.0125,
+    "loot": 0.0108,
+    "rest": 0.0064,
+    "eat": 0.0034,
+    "_final": "kite-choke",
+    "_final_reason": "3 attackers"
+   },
+   "ev_fired": 434,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 711,
+   "seed": 711,
+   "condition": "A",
+   "steps": 6964,
+   "illegal": 0,
+   "progression": 0.035428686118173014,
+   "highest_achievement": "Dlvl:6",
+   "depth_max": 6,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a dwarf, while fainted from lack of food.",
+   "role": "Barbarian",
+   "race": "orcish",
+   "wallclock_s": 140.1,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep711.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "descend": 0.9003,
+    "explore": 0.0722,
+    "find-stairs": 0.0152,
+    "fight": 0.0085,
+    "eat": 0.0034,
+    "survive": 0.0003,
+    "_final": "eat",
+    "_final_reason": "hunger 4"
+   },
+   "ev_fired": 5,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 714,
+   "seed": 714,
+   "condition": "A",
+   "steps": 537,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a jackal.",
+   "role": "Tourist",
+   "race": "human",
+   "wallclock_s": 17.4,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep714.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7388,
+    "find-stairs": 0.1791,
+    "fight": 0.0597,
+    "descend": 0.0131,
+    "ranged": 0.0056,
+    "survive": 0.0037,
+    "_final": "fight",
+    "_final_reason": "cornered vs fox"
+   },
+   "ev_fired": 2,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 717,
+   "seed": 717,
+   "condition": "A",
+   "steps": 3377,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a purple worm.",
+   "role": "Caveman",
+   "race": "human",
+   "wallclock_s": 53.6,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep717.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5151,
+    "eat": 0.2616,
+    "fight": 0.1896,
+    "rest": 0.0187,
+    "descend": 0.0127,
+    "loot": 0.0024,
+    "_final": "fight",
+    "_final_reason": "cornered vs purple worm"
+   },
+   "ev_fired": 1,
+   "emergency_fired": 0
+  }
+ ]
+}

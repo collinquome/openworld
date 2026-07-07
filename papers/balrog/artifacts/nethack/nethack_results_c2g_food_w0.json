@@ -1,0 +1,295 @@
+{
+ "label": "c2g_food_w0",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 700,
+   "seed": 700,
+   "condition": "A",
+   "steps": 7077,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: starved to death.",
+   "role": "Valkyrie",
+   "race": "human",
+   "wallclock_s": 123.6,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep700.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "eat": 0.7809,
+    "explore": 0.1166,
+    "find-stairs": 0.0978,
+    "descend": 0.0044,
+    "loot": 0.0003,
+    "_final": "eat",
+    "_final_reason": "hunger 4"
+   },
+   "ev_fired": 50,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 703,
+   "seed": 703,
+   "condition": "A",
+   "steps": 1879,
+   "illegal": 0,
+   "progression": 0.12558597019922987,
+   "highest_achievement": "Dlvl:10",
+   "depth_max": 10,
+   "xplvl_max": 5,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant spider.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 92.0,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep703.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6502,
+    "find-stairs": 0.2939,
+    "descend": 0.0437,
+    "rest": 0.0085,
+    "eat": 0.0021,
+    "loot": 0.0016,
+    "_final": "explore",
+    "_final_reason": "5 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 706,
+   "seed": 706,
+   "condition": "A",
+   "steps": 450,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a hobgoblin.",
+   "role": "Priest",
+   "race": "elven",
+   "wallclock_s": 14.1,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep706.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7572,
+    "rest": 0.1359,
+    "descend": 0.078,
+    "loot": 0.02,
+    "survive": 0.0089,
+    "_final": "explore",
+    "_final_reason": "7 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 709,
+   "seed": 709,
+   "condition": "A",
+   "steps": 791,
+   "illegal": 0,
+   "progression": 0.017539535798967013,
+   "highest_achievement": "Dlvl:3",
+   "depth_max": 3,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a magic missile, while sleeping.",
+   "role": "Healer",
+   "race": "gnomish",
+   "wallclock_s": 32.4,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep709.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8291,
+    "find-stairs": 0.0709,
+    "rest": 0.062,
+    "descend": 0.0127,
+    "dig": 0.0114,
+    "loot": 0.0051,
+    "eat": 0.0051,
+    "survive": 0.0038,
+    "_final": "dig",
+    "_final_reason": "depth 3"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 712,
+   "seed": 712,
+   "condition": "A",
+   "steps": 1635,
+   "illegal": 0,
+   "progression": 0.2566039887664476,
+   "highest_achievement": "Dlvl:13",
+   "depth_max": 13,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10",
+    "Dlvl:11",
+    "Dlvl:13"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a guard.",
+   "role": "Samurai",
+   "race": "human",
+   "wallclock_s": 57.9,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep712.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6689,
+    "find-stairs": 0.2044,
+    "descend": 0.0563,
+    "rest": 0.0502,
+    "loot": 0.0171,
+    "eat": 0.0031,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 715,
+   "seed": 715,
+   "condition": "A",
+   "steps": 18,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox, while praying.",
+   "role": "Wizard",
+   "race": "human",
+   "wallclock_s": 0.5,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep715.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6471,
+    "descend": 0.2353,
+    "survive": 0.1176,
+    "_final": "survive",
+    "_final_reason": "pray hp 3/12"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 718,
+   "seed": 718,
+   "condition": "A",
+   "steps": 810,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 2,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a kobold.",
+   "role": "Tourist",
+   "race": "human",
+   "wallclock_s": 62.9,
+   "transitions_file": "transitions/c2g_food/NetHackChallenge-v0__ep718.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.7624,
+    "explore": 0.1399,
+    "rest": 0.078,
+    "descend": 0.0111,
+    "survive": 0.0062,
+    "eat": 0.0025,
+    "_final": "rest",
+    "_final_reason": "hp 1/18"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  }
+ ]
+}

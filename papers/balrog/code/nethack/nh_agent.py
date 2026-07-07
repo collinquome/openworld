@@ -57,6 +57,70 @@ OUR_SPEED = 12          # all starting roles move at speed 12
 import os as _os
 HUNT_SHALLOW = _os.environ.get("NH_HUNT", "0") == "1"
 
+# ---------------------------------------------------------------- Campaign 2
+# Feature flags (all default OFF -> byte-identical v1.1 behavior). Each
+# lever is dev-validated on >=20 paired seeds and dropped if it doesn't
+# clearly pay (program rule).
+def _flag(name):
+    return _os.environ.get(name, "0") == "1"
+
+C2_EXPMAX = _flag("NH_EXPMAX")    # expectimax combat + death-veto
+C2_RANGED = _flag("NH_RANGED")    # ranged-first vs fast/pack threats
+C2_ARMOR = _flag("NH_ARMOR")      # armor pickup + wear economy
+C2_FOOD2 = _flag("NH_FOOD2")      # food economy v2 (floor detours, corpse@hungry)
+C2_PRAYFIX = _flag("NH_PRAYFIX")  # no hunger-prayer with hostile adjacent
+C2_LOS = _flag("NH_LOS")          # line-of-fire avoidance in travel
+C2_THREAT = _flag("NH_THREAT")    # threat-halo avoidance in travel
+C2_TOPO = _flag("NH_TOPO")        # topology-driven hidden-passage search
+C2_PACE = _flag("NH_PACE")        # role-conditional descent pacing
+C2_ELBERETH = _flag("NH_ELBERETH")  # E-NH5: weapon-engraved Elbereth panic
+C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
+#   (guard-class only; lets the guards ride even on an otherwise-v1.1
+#    configuration)
+PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
+PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
+PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
+C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
+              C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD))
+
+# Elbereth is ignored by these (offline source facts, disclosed):
+ELBERETH_IGNORES = {"minotaur", "shopkeeper", "watchman", "watch captain",
+                    "guard", "vault guard"}
+
+# RULE CARD [TOUCH_KILL_WEAPON_MELEE]: petrification is a FLESH-touch
+# effect — attacking cockatrice-class species with a WIELDED WEAPON is
+# safe in the source (uhitm.c: touch checks apply to unarmed/martial
+# hits and grabs). v1's blanket never-melee is right for bare hands but
+# left a cornered Barbarian standing still while a chickatrice touched
+# it to death (settled dev seed 705, 100+ step-away attempts while boxed
+# in by a peaceful). Scope: fires only when (a) a C2 flag is on, (b) a
+# weapon is wielded, (c) role is not Monk (martial arts = flesh), and
+# (d) step-away has already failed (cornered). Status: source-derived
+# prior, guard-class; evidence: 1 observed death + source read.
+TOUCH_KILL = {"cockatrice", "chickatrice", "Medusa"}
+
+# RULE CARD [NOVELTY_DETECTOR]: species adjacent to us with < 12
+# exchange-model rows are flagged to the ledger (logging only in this
+# campaign; caution-default behavior is the queued E-NH4b/novelty
+# protocol work). Unexplained-novelty count is a report metric.
+NOVELTY_MIN_ROWS = 12
+
+if C2_ANY:
+    import nh_percept as P
+else:
+    P = None
+
+FRAGILE_ROLES = {"Tourist", "Healer", "Wizard", "Priest", "Priestess",
+                 "Rogue", "Archeologist"}
+# (Archeologist only counts as fragile when it has no digger; dig-dive
+# behavior is never pace-gated.)
+
+FAST_THREATS = {"giant spider", "soldier ant", "giant ant", "fire ant",
+                "killer bee", "pony", "horse", "little dog", "dog",
+                "large dog", "kitten", "housecat", "large cat", "jaguar",
+                "panther", "tiger", "wolf", "warg", "dingo", "coyote",
+                "jackal", "fox", "giant bat", "bat", "raven"}
+
 RE_KILLED = re.compile(r"You (?:kill|destroy) the ([a-zA-Z' -]+?)!")
 RE_SEE_HERE = re.compile(r"You see here (?:an? |the )?([^.]*)\.")
 
@@ -109,6 +173,33 @@ class DiveAgent:
         self.recent_max_hit = 0                 # worst single-step hp loss, decayed
         self.notes = []                         # sparse decision log
         self.mem_fired = []                     # memory-driven decisions
+        # ---- Campaign 2: subgoal ledger + planner visibility (log-only)
+        self.subgoal = None                     # (label, reason)
+        self.subgoal_log = []                   # (step, label, reason) on change
+        self.plan_cells = []                    # current planned path cells
+        self.plan_log = []                      # (step, [[x,y],...]) on change
+        self.ev_log = []                        # (step, text) expectimax fires
+        self.pred_log = []                      # (step, predicted dmg/turn)
+        self._novelty_seen = set()
+        self._wields_weapon = False
+        # ---- Campaign 2: lever state
+        self.topos = {}                         # level key -> P.Topology
+        self.ammo_letters = []
+        self.wear_pending = None                # letter being worn
+        self.worn_slots = set()                 # 'body','helmet','shield','boots','gloves'
+        self.burdened = False
+        self.item_target = None                 # (cell, kind, name)
+        self.pickup_kind = None                 # what P0 menu should select
+        self.wearable = []
+        self.wear_tried = {}                    # letter -> attempts
+        self.loot_tries = {}                    # (key, cell) -> attempts
+        self.grind_kills = 0
+        self.pace_grind_until = {}              # level key -> game time budget end
+        self.emergency_fired = 0
+        self.elbereth_cell = None               # (key, cell) of live engraving
+        self.elbereth_time = 0
+        self.elbereth_uses = 0
+        self.elbereth_hits = 0                  # dmg taken while standing on it
         self._mem_avoid = set()
         self._mem_danger_depth = None
         if memory is not None:
@@ -126,6 +217,40 @@ class DiveAgent:
     def note(self, s):
         self.notes.append((self.steps, s))
 
+    def _goal(self, label, reason=""):
+        """Subgoal ledger: record the active subgoal (logged on change)."""
+        if self.subgoal is None or self.subgoal[0] != label or \
+                self.subgoal[1] != reason:
+            self.subgoal = (label, reason)
+            self.subgoal_log.append((self.steps, label, reason))
+
+    def _ev(self, text):
+        self.ev_log.append((self.steps, text))
+
+    def _log_pred(self):
+        """Online twin (E-NH1b.4): the model's expected damage THIS turn
+        from currently-adjacent hostiles. Logged sparsely (adjacency
+        only); post-hoc calibration = predicted vs realized hp drop."""
+        if P is None:
+            return
+        adj = self._adjacent_hostiles()
+        if not adj:
+            return
+        pred = sum(P.species_dpt(m.name, m.difficulty) for m in adj
+                   if m.name not in C.IMMOBILE)
+        if pred > 0:
+            self.pred_log.append((self.steps, round(pred, 2)))
+        # novelty detector (RULE CARD [NOVELTY_DETECTOR]): logging only
+        for m in adj:
+            if m.name in self._novelty_seen:
+                continue
+            v = P.exchange()["species"].get(m.name)
+            if v is None or v.get("n_rows", 0) < NOVELTY_MIN_ROWS:
+                self._novelty_seen.add(m.name)
+                self._ev(f"NOVEL species adjacent: {m.name} "
+                         f"(rows {0 if v is None else v.get('n_rows', 0)}, "
+                         f"diff {m.difficulty})")
+
     def _fire(self, s):
         self.mem_fired.append((self.steps, s))
         if self.memory is not None:
@@ -136,6 +261,8 @@ class DiveAgent:
         A.update(obs)
         msg = A.message
         self._bookkeeping(obs, msg)
+        if C2_ANY:
+            self._log_pred()
         a = self._decide(obs, msg)
         self.last_action = a
         self.last_pos = A.agent
@@ -143,6 +270,19 @@ class DiveAgent:
         self.last_hp = A.hp
         self.steps += 1
         return a
+
+    # --------------------------------------------------- planner visibility
+    def _log_plan(self, path):
+        """Record the currently-planned route (cells) when it changes."""
+        cells = []
+        x, y = self.atlas.agent
+        for stp in path:
+            dx, dy = DIRS[stp]
+            x, y = x + dx, y + dy
+            cells.append([x, y])
+        if cells != self.plan_cells:
+            self.plan_cells = cells
+            self.plan_log.append((self.steps, cells))
 
     # ---------------------------------------------------------- bookkeeping
     def _bookkeeping(self, obs, msg):
@@ -196,6 +336,8 @@ class DiveAgent:
         # damage tracking (crisis detection + memory ledger)
         if self.last_hp is not None:
             dmg = self.last_hp - A.hp
+            if dmg > 0 and self.elbereth_cell == (A.key, A.agent):
+                self.elbereth_hits += 1     # engraving smudged/ignored
             if dmg > 0:
                 self.recent_max_hit = max(self.recent_max_hit, dmg)
                 if self.memory is not None:
@@ -390,10 +532,413 @@ class DiveAgent:
         d = (tgt[0] - ax, tgt[1] - ay)
         return DIR_OF.get(d)
 
+    # ------------------------------------------------- Campaign 2 helpers
+    def _topo(self):
+        t = self.topos.get(self.atlas.key)
+        if t is None:
+            t = self.topos[self.atlas.key] = P.Topology()
+        return t.refresh(self.atlas.level)
+
+    def _travel_avoid(self, goals=frozenset()):
+        """First-pass travel avoid set: suspects + hostiles + (flagged)
+        threat halos and line-of-fire cells. Callers keep their existing
+        relaxed fallbacks, so this only re-routes when a route exists.
+        Perceptor fields are cached per env step (pure wall-clock)."""
+        avoid = set(self._suspects()) | (self._mcells() - set(goals))
+        A = self.atlas
+        if C2_THREAT:
+            if getattr(self, "_tf_step", -1) != self.steps:
+                self._tf_step = self.steps
+                _, self._tf_halo = P.threat_field(A.level)
+            avoid |= (self._tf_halo - set(goals)) - {A.agent}
+        if C2_LOS:
+            if getattr(self, "_los_step", -1) != self.steps:
+                self._los_step = self.steps
+                if any((not m.pet) and m.cls in P.RANGED_CLASSES and
+                       max(abs(m.x - A.agent[0]),
+                           abs(m.y - A.agent[1])) > 1
+                       for m in A.level.monsters):
+                    self._los_cells = P.los_cells(A.level, A.agent)
+                else:
+                    self._los_cells = set()
+            if self._los_cells:
+                avoid |= (self._los_cells - set(goals)) - {A.agent}
+        return avoid
+
+    def _c2_scan_inv(self, obs):
+        """Track ammo letters and worn armor slots from inventory."""
+        ammo, worn = [], set()
+        self.wearable = []           # (letter, slot, name)
+        for letter, desc, oc in self._inv(obs):
+            d = desc.lower()
+            being_worn = "(being worn)" in d
+            slot = None
+            if any(n in d for n in P.BODY_ARMOR):
+                slot = "body"
+            elif any(n in d for n in P.HELMETS):
+                slot = "helmet"
+            elif any(n in d for n in P.SHIELDS):
+                slot = "shield"
+            elif "boots" in d or "iron shoes" in d:
+                slot = "boots"
+            elif "gloves" in d or "gauntlets" in d:
+                slot = "gloves"
+            if slot:
+                if being_worn:
+                    worn.add(slot)
+                else:
+                    self.wearable.append((letter, slot, d))
+                continue
+            if "weapon in hand" in d or "weapons in hands" in d:
+                continue
+            if any(k in d for k in P.AMMO_NAMES) and oc == 2:  # WEAPON_CLASS
+                ammo.append(letter)
+        self.ammo_letters = ammo
+        self.worn_slots = worn
+
+    def _melee_step(self, m):
+        """Legal melee move into m's cell, or None (door-diagonal rule)."""
+        A = self.atlas
+        L = A.level
+        ax, ay = A.agent
+        d = (m.x - ax, m.y - ay)
+        if d not in DIR_OF:
+            return None
+        t_here = L.terrain[ay][ax]
+        t_there = L.terrain[m.y][m.x]
+        if d[0] and d[1] and (
+                t_here in (C.DOORWAY, C.DOOR_OPEN, C.DOOR_CLOSED) or
+                t_there in (C.DOORWAY, C.DOOR_OPEN, C.DOOR_CLOSED)):
+            return None
+        return DIR_OF[d]
+
+    def _c2_engrave_tool(self, obs):
+        """Letter of a weapon to engrave with (prefer non-wielded)."""
+        wielded = None
+        for letter, desc, oc in self._inv(obs):
+            if oc != 2:
+                continue
+            if "weapon in hand" in desc.lower() or \
+                    "weapons in hands" in desc.lower():
+                wielded = letter
+                continue
+            return letter
+        return wielded
+
+    _ELBERETH_OK_TERRAIN = None   # set lazily from C
+
+    def _c2_elbereth(self, obs, adj, reason):
+        """E-NH5: engrave Elbereth with a weapon (fingers are unreachable
+        in BALROG's action space, but getobj accepts a weapon letter and
+        'more' (= CR) submits the getlin). One game turn; typing is
+        zero-time. Scares most melee attackers off the square."""
+        if not C2_ELBERETH or self.elbereth_uses >= 5:
+            return None
+        A = self.atlas
+        t = A.level.terrain[A.agent[1]][A.agent[0]]
+        if t not in (C.FLOOR, C.CORRIDOR, C.DOORWAY):
+            return None
+        # someone must actually be scareable
+        scareable = [m for m in adj
+                     if m.cls != "@" and m.name not in ELBERETH_IGNORES]
+        if not scareable:
+            return None
+        tool = self._c2_engrave_tool(obs)
+        if tool is None:
+            return None
+        self.elbereth_uses += 1
+        self.elbereth_cell = (A.key, A.agent)
+        self.elbereth_time = A.time
+        self.elbereth_hits = 0
+        self._goal("survive", f"Elbereth ({reason})")
+        self._ev(f"ELBERETH: {reason} (hp {A.hp}/{A.hpmax}, "
+                 f"{[m.name for m in adj]})")
+        self.note(f"engraving Elbereth: {reason}")
+        self.queue = [tool] + list("Elbereth") + ["more"]
+        self.queue_tag = "engrave"
+        return "engrave"
+
+    def _on_elbereth(self):
+        A = self.atlas
+        return (self.elbereth_cell == (A.key, A.agent) and
+                A.time - self.elbereth_time < 200 and
+                self.elbereth_hits < 3)
+
+    def _c2_emergency(self):
+        """Death-recognizer veto action: escape upstairs or gamble a
+        last-resort prayer. None if no emergency line exists."""
+        A = self.atlas
+        if A.agent in A.level.stairs_up and self.retreat_ups < 3:
+            self.retreat_ups += 1
+            self.emergency_fired += 1
+            self._ev(f"VETO: upstairs escape (hp {A.hp}/{A.hpmax})")
+            return "up"
+        if A.hp <= 6 and self._pray_ok(last_resort=True):
+            self.prayed_at = A.time
+            self.pray_count += 1
+            self.emergency_fired += 1
+            self._ev(f"VETO: last-resort prayer (hp {A.hp}/{A.hpmax})")
+            self.queue = ["y"]
+            self.queue_tag = "pray"
+            return "pray"
+        return None
+
+    def _c2_combat(self, obs, adj):
+        """E-NH4 expectimax fight/flee/hold/throw over exchange EVs.
+        Returns an action or None (nothing attackable adjacent)."""
+        A = self.atlas
+        L = A.level
+        mobile = [m for m in adj if m.name not in C.IMMOBILE and
+                  not self._never_melee(m) and m.pos not in L.no_attack]
+        if not mobile:
+            return None
+        stats = sorted(((m, P.species_dpt(m.name, m.difficulty),
+                         P.species_ttk(m.name, m.difficulty,
+                                       role=self.role, xplvl=A.xplvl))
+                        for m in mobile), key=lambda t: t[2])
+        total_dpt = sum(d for _, d, _ in stats)
+        # expected HP cost of fighting the pack out, weakest-ttk first
+        loss, alive = 0.0, total_dpt
+        for m, d, ttk in stats:
+            loss += alive * ttk
+            alive -= d
+        loss *= 1.35
+        floor = max(4.0, 0.12 * A.hpmax)
+        target = stats[0][0]
+        win = A.hp - loss >= floor
+        # ---- death veto: ~3 turns from death and the fight is losing
+        if not win and A.hp <= 3.0 * total_dpt:
+            act = self._c2_emergency()
+            if act:
+                return act
+        if win:
+            step = self._melee_step(target)
+            if step:
+                self._goal("fight", f"{target.name} EVloss {loss:.0f}")
+                if len(mobile) > 1 or loss > 0.3 * A.hp:
+                    self._ev(f"EV fight: loss {loss:.1f} hp {A.hp} "
+                             f"targets {[m.name for m, _, _ in stats]}")
+                return step
+            # diagonal-door block: try any legal melee on another target
+            for m, _, _ in stats[1:]:
+                step = self._melee_step(m)
+                if step:
+                    return step
+            # winnable but no legal attack THIS turn (door geometry):
+            # fall through to the other layers exactly like v1.1 — do NOT
+            # flee a fight we are winning (dev seed 739: a Barbarian spent
+            # 1300 steps fleeing a goblin it out-EV'd 10x)
+            return None
+        # ---- losing line: full disengage if speed allows
+        act = self._flee(adj)
+        if act:
+            self._goal("flee", f"loss {loss:.0f} > hp {A.hp}")
+            self._ev(f"EV flee: loss {loss:.1f} >= hp {A.hp}-floor")
+            return act
+        # (E-NH5 verdict: weapon-engraved Elbereth is CARVING — multi-turn,
+        # helpless — and got three dev characters beaten to death mid-
+        # engraving. Removed from the emergency chain; see report.)
+        # ---- hold a choke: on a choke cell, packs engage one at a time
+        topo = self._topo()
+        if len(mobile) >= 2 and A.agent in topo.chokes:
+            step = self._melee_step(target)
+            if step:
+                self._goal("hold-choke", f"{len(mobile)} attackers")
+                self._ev(f"EV hold-choke: {len(mobile)} attackers, "
+                         f"loss(pack) {loss:.1f}")
+                return step
+        # ---- retreat to a nearby choke when it clearly pays
+        if len(mobile) >= 2:
+            max_dpt = max(d for _, d, _ in stats)
+            sum_ttk = sum(t for _, _, t in stats)
+            loss_choke = 1.35 * max_dpt * sum_ttk
+            if loss_choke < 0.75 * loss:
+                best = None
+                for cell in topo.chokes:
+                    dist = max(abs(cell[0] - A.agent[0]),
+                               abs(cell[1] - A.agent[1]))
+                    if 0 < dist <= 3:
+                        p = L.bfs(A.agent, [cell],
+                                  avoid=self._suspects() | self._mcells())
+                        if p and (best is None or len(p) < best[1]):
+                            best = (p, len(p))
+                if best:
+                    self._goal("kite-choke", f"{len(mobile)} attackers")
+                    self._ev(f"EV kite: choke loss {loss_choke:.1f} < "
+                             f"open loss {loss:.1f}")
+                    return self._step_path(best[0])
+        # ---- nothing better than fighting
+        step = self._melee_step(target)
+        if step:
+            self._goal("fight", f"cornered vs {target.name}")
+            return step
+        return None
+
+    def _c2_prethrow(self, obs):
+        """Ranged-first: soften fast/pack threats before contact."""
+        if not self.ammo_letters:
+            return None
+        A = self.atlas
+        L = A.level
+        ax, ay = A.agent
+        hostiles = [m for m in L.monsters
+                    if not m.pet and m.name not in C.IMMOBILE and
+                    m.pos not in L.no_attack]
+        n_close = sum(1 for m in hostiles
+                      if max(abs(m.x - ax), abs(m.y - ay)) <= 5)
+        for m in hostiles:
+            dx, dy = m.x - ax, m.y - ay
+            dist = max(abs(dx), abs(dy))
+            if dist < 2 or dist > 5:
+                continue
+            if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+                continue
+            fast = m.speed > OUR_SPEED or m.name in FAST_THREATS
+            if not fast and n_close < 2:
+                continue
+            key = (A.key, m.pos)
+            if self.throws_at.get(key, 0) >= 6:
+                continue
+            sx = (dx > 0) - (dx < 0)
+            sy = (dy > 0) - (dy < 0)
+            cx, cy = ax + sx, ay + sy
+            clear = True
+            while (cx, cy) != m.pos:
+                if not L.passable(cx, cy, bad_traps_ok=True) or \
+                        any(mm.pos == (cx, cy) for mm in L.monsters):
+                    clear = False
+                    break
+                cx, cy = cx + sx, cy + sy
+            if not clear:
+                continue
+            letter = self.ammo_letters[0]
+            self.throws_at[key] = self.throws_at.get(key, 0) + 1
+            self._goal("ranged", f"{m.name} d{dist}")
+            self._ev(f"EV throw: {m.name} at d{dist} (speed {m.speed})")
+            self.queue = [letter, DIR_OF[(sx, sy)]]
+            self.queue_tag = "throw"
+            return "throw"
+        return None
+
+    def _c2_items(self, obs, pre_descent):
+        """Item goal market: wear owned armor when safe; detour to floor
+        food/ammo/armor. pre_descent=True limits to urgent/cheap grabs."""
+        A = self.atlas
+        L = A.level
+        # wear what we carry (multi-turn: only when safe)
+        if C2_ARMOR and self.wearable:
+            danger_near = any(
+                (not m.pet) and m.name not in C.IMMOBILE and
+                max(abs(m.x - A.agent[0]), abs(m.y - A.agent[1])) <= 4
+                for m in L.monsters)
+            if not danger_near and A.hp >= 0.5 * A.hpmax and \
+                    A.hunger < C.WEAK:
+                for letter, slot, dsc in self.wearable:
+                    if slot in self.worn_slots or \
+                            self.wear_tried.get(letter, 0) >= 2:
+                        continue
+                    self.wear_tried[letter] = \
+                        self.wear_tried.get(letter, 0) + 1
+                    self._goal("wear", f"{slot}: {dsc[:30]}")
+                    self.note(f"wearing {dsc[:40]} ({slot})")
+                    self.queue = [letter]
+                    self.queue_tag = "wear"
+                    return "wear"
+        # floor items
+        if self.burdened:
+            wanted_kinds = {"food"}
+        else:
+            wanted_kinds = {"food"}
+            if C2_RANGED and len(self.ammo_letters) < 10:
+                wanted_kinds.add("ammo")
+            if C2_ARMOR:
+                wanted_kinds.add("armor")
+                wanted_kinds.add("armor2")
+        if not (C2_FOOD2 or C2_ARMOR or C2_RANGED):
+            return None
+        # shop guard: picking up merchandise gets us killed by the
+        # shopkeeper (dev seed 716). Any peaceful '@' on the level ->
+        # no floor pickups except cells we've killed on (corpse drops).
+        if any(m.cls == "@" and not m.pet for m in L.monsters) or \
+                "unpaid" in A.message or "will cost you" in A.message:
+            return None
+        glyphs = obs["obs"]["glyphs"]
+        radius = 14 if not pre_descent else (
+            10 if A.hunger >= C.HUNGRY else 3)
+        targets = P.item_targets(glyphs, A.agent, radius=radius)
+        for val, cell, kind, name in targets:
+            if kind not in wanted_kinds:
+                continue
+            if kind == "food" and not C2_FOOD2:
+                continue
+            tk = (A.key, cell)
+            if self.loot_tries.get(tk, 0) >= 8:
+                continue          # unreachable/refused item: stop thrashing
+            if cell == A.agent:
+                self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self.pickup_kind = kind
+                self._goal("loot", f"{kind}: {name}")
+                self.queue_tag = "pickup"
+                return "pickup"
+            path = L.bfs(A.agent, [cell], avoid=self._travel_avoid({cell}))
+            if path and len(path) <= radius:
+                # only near-target attempts count toward give-up (a long
+                # legitimate walk must not exhaust the budget)
+                if len(path) <= 2:
+                    self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self._goal("loot", f"{kind}: {name} d{len(path)}")
+                return self._step_path(path)
+        return None
+
+    def _c2_pace(self, obs, digger):
+        """Role-conditional descent pacing: fragile roles defer descent
+        while beatable prey is visible and xp lags depth."""
+        A = self.atlas
+        if digger or self.role not in FRAGILE_ROLES:
+            return None
+        allowed = PACE_DEPTH + PACE_XP_STEP * (A.xplvl - 1)
+        if A.depth < allowed or A.hunger >= C.WEAK:
+            return None
+        until = self.pace_grind_until.setdefault(A.key,
+                                                 A.time + PACE_BUDGET)
+        if A.time >= until:
+            return None
+        prey = []
+        for m in self._mobile_hostiles():
+            if self._never_melee(m) or m.speed > OUR_SPEED:
+                continue
+            dpt = P.species_dpt(m.name, m.difficulty)
+            ttk = P.species_ttk(m.name, m.difficulty, role=self.role,
+                                xplvl=A.xplvl)
+            if 1.35 * dpt * ttk < 0.35 * A.hp and m.difficulty <= A.xplvl + 1:
+                d = max(abs(m.x - A.agent[0]), abs(m.y - A.agent[1]))
+                if d <= 10:
+                    prey.append((d, m))
+        if not prey:
+            return None
+        prey.sort(key=lambda t: t[0])
+        m = prey[0][1]
+        path = A.level.bfs(A.agent, [m.pos],
+                           avoid=self._suspects() |
+                           (self._mcells() - {m.pos}))
+        if path:
+            self._goal("grind", f"{m.name} (xp{A.xplvl} d{A.depth})")
+            return self._step_path(path)
+        return None
+
     # ------------------------------------------------------------- decision
     def _decide(self, obs, msg):
         A = self.atlas
         L = A.level
+        if C2_RANGED or C2_ARMOR:
+            self._c2_scan_inv(obs)
+            if "burdened" in msg.lower():
+                self.burdened = True
+        if C2_ANY:
+            self._wields_weapon = any(
+                oc == 2 and ("weapon in hand" in d.lower() or
+                             "weapons in hands" in d.lower())
+                for _l, d, oc in self._inv(obs))
 
         # ---- P0: prompts ------------------------------------------------
         in_yn, in_getlin, waitspace = C.misc_of(obs)
@@ -444,6 +989,16 @@ class DiveAgent:
             self.need_look = False
             return "look"
 
+        # ---- P2.7: protected rest on a live Elbereth engraving -----------
+        if C2_ELBERETH and self._on_elbereth() and A.hp < 0.85 * A.hpmax:
+            hostiles_near = any(
+                (not m.pet) and m.name not in C.IMMOBILE and
+                max(abs(m.x - A.agent[0]), abs(m.y - A.agent[1])) <= 3
+                for m in A.level.monsters)
+            if hostiles_near and A.hunger < C.WEAK:
+                self._goal("rest", "on Elbereth")
+                return "search"
+
         # ---- P3: emergency survival --------------------------------------
         adj = self._adjacent_hostiles()
         # prayer heals only in "major trouble" (hp < hpmax/7): fire it there
@@ -452,20 +1007,28 @@ class DiveAgent:
             self.prayed_at = A.time
             self.pray_count += 1
             self.note(f"pray (hp {A.hp}/{A.hpmax})")
+            self._goal("survive", f"pray hp {A.hp}/{A.hpmax}")
             self.queue = ["y"]
             self.queue_tag = "pray"
             return "pray"
-        # crisis zone: below ~28% max HP, or worst recent hit could kill us
-        # within two more exchanges -> disengage from slower monsters
-        crisis = A.hp <= max(A.hpmax * 0.28, 6) or \
-            (self.recent_max_hit * 2 >= A.hp and self.recent_max_hit > 0)
-        if crisis and adj:
-            act = self._flee(adj)
-            if act:
-                return act
+        if C2_EXPMAX:
+            if adj:
+                act = self._c2_combat(obs, adj)
+                if act:
+                    return act
+        else:
+            # crisis zone: below ~28% max HP, or worst recent hit could
+            # kill us within two more exchanges -> disengage from slower
+            crisis = A.hp <= max(A.hpmax * 0.28, 6) or \
+                (self.recent_max_hit * 2 >= A.hp and self.recent_max_hit > 0)
+            if crisis and adj:
+                act = self._flee(adj)
+                if act:
+                    return act
 
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:
+            self._goal("eat", f"hunger {A.hunger}")
             fl = self._food_letter(obs)
             if fl:
                 self.note(f"eat inventory food {fl} (hunger {A.hunger})")
@@ -490,7 +1053,15 @@ class DiveAgent:
             fainting_ok = (A.hunger >= C.FAINTING and self.pray_count < 5 and
                            (self.prayed_at is None or
                             A.time - self.prayed_at > 400))
-            if self._pray_ok() or fainting_ok:
+            # PRAY_DEATH lever: praying with a mobile hostile adjacent
+            # donates ~10+ free attacks; kill/escape first unless fainting
+            pray_now = self._pray_ok() or fainting_ok
+            if C2_PRAYFIX and pray_now and A.hunger < C.FAINTING and \
+                    any(m.name not in C.IMMOBILE for m in adj):
+                pray_now = False
+                self._ev(f"PRAYFIX: deferring hunger prayer, "
+                         f"{[m.name for m in adj]} adjacent")
+            if pray_now:
                 self.prayed_at = A.time
                 self.pray_count += 1
                 self.note(f"pray (hunger {A.hunger})")
@@ -500,9 +1071,20 @@ class DiveAgent:
         elif A.hunger == C.HUNGRY:
             fl = self._food_letter(obs)
             if fl:
+                self._goal("eat", "hungry: inventory")
                 self.queue = [fl]
                 self.queue_tag = "eat"
                 return "eat"
+            if C2_FOOD2:
+                # eat a fresh safe corpse underfoot already at Hungry:
+                # waiting for Weak wastes the freshness window
+                corpse = self._fresh_corpse_here()
+                if corpse:
+                    self._goal("eat", f"hungry: fresh {corpse}")
+                    self.note(f"eat fresh corpse at Hungry ({corpse})")
+                    self.queue = ["y"]
+                    self.queue_tag = "eat_corpse"
+                    return "eat"
 
         # held by a sticky monster: kill it, fleeing is impossible
         if "cannot escape from" in msg:
@@ -516,8 +1098,20 @@ class DiveAgent:
                             return DIR_OF[d]
 
         # ---- P5: combat ---------------------------------------------------
-        if adj:
+        if adj and not C2_EXPMAX:
             act = self._combat(adj)
+            if act:
+                return act
+        if adj and C2_EXPMAX:
+            # expectimax already ran at P3; handle remaining never-melee
+            # mobile threats with the legacy step-away logic
+            act = self._combat([m for m in adj if self._never_melee(m)])
+            if act:
+                return act
+
+        # ---- P5.2: ranged-first softening (Campaign 2) ---------------------
+        if C2_RANGED:
+            act = self._c2_prethrow(obs)
             if act:
                 return act
 
@@ -536,6 +1130,7 @@ class DiveAgent:
         if A.hp < 0.35 * A.hpmax and self._rest_here_ok() and \
                 self.rest_budget.get(A.key, 0) < 900:
             self.rest_budget[A.key] = self.rest_budget.get(A.key, 0) + 1
+            self._goal("rest", f"hp {A.hp}/{A.hpmax}")
             return "search"
 
         # ---- P5.7: shallow opportunistic hunting (V1.1 L2) -----------------
@@ -558,6 +1153,12 @@ class DiveAgent:
                     self.hunt_turns[A.key] = t0 + 1
                     return self._step_path(path)
 
+        # ---- P6.5: urgent/cheap item grabs before committing to descent ----
+        if C2_ANY:
+            act = self._c2_items(obs, pre_descent=True)
+            if act:
+                return act
+
         # ---- P6/P7: descent (dig > stairs), with rest gate -----------------
         act = self._descend(obs)
         if act:
@@ -568,8 +1169,18 @@ class DiveAgent:
         if act:
             return act
 
-        # opportunistic floor-food pickup (long games starve otherwise)
+        # ---- P8.5: item goal market (Campaign 2) ----------------------------
+        if C2_ANY:
+            act = self._c2_items(obs, pre_descent=False)
+            if act:
+                return act
+
+        # opportunistic floor pickup via the message channel (an item under
+        # the agent is INVISIBLE in glyphs — the @ covers it; "You see
+        # here" is the only on-cell item sensor)
         m3 = RE_SEE_HERE.search(msg)
+        if m3 and C2_ANY and ("for sale" in msg or "zorkmids" in msg):
+            m3 = None            # shop merchandise: taking it = death
         if m3 and self.queue_tag != "pickup":
             it = m3.group(1)
             if any(k in it for k in ("food ration", "cram ration", "lembas",
@@ -578,6 +1189,21 @@ class DiveAgent:
                                      "orange", "pear", "banana", "melon",
                                      "carrot", "meatball", "meat stick")):
                 self.note(f"picking up food: {it}")
+                self.queue_tag = "pickup"
+                return "pickup"
+            if C2_ARMOR and any(k in it for k in
+                                P.BODY_ARMOR + P.HELMETS + P.SHIELDS +
+                                P.BOOTS_GLOVES):
+                self.note(f"picking up armor: {it}")
+                self._goal("loot", f"armor here: {it[:30]}")
+                self.pickup_kind = "armor"
+                self.queue_tag = "pickup"
+                return "pickup"
+            if C2_RANGED and len(self.ammo_letters) < 10 and \
+                    any(k in it for k in P.AMMO_NAMES):
+                self.note(f"picking up ammo: {it}")
+                self._goal("loot", f"ammo here: {it[:30]}")
+                self.pickup_kind = "ammo"
                 self.queue_tag = "pickup"
                 return "pickup"
 
@@ -643,8 +1269,17 @@ class DiveAgent:
             return "esc"
         # xwaitingforspace: menus / overview screens
         if "Pick up what" in msg or self._tty_has(obs, "Pick up what"):
-            letter = self._menu_letter_for(obs, ("pick-axe", "mattock"))
+            kws = ("pick-axe", "mattock")
+            if self.pickup_kind == "food":
+                kws = kws + P.FOOD_NAMES if P else kws
+            elif self.pickup_kind == "ammo":
+                kws = kws + P.AMMO_NAMES if P else kws
+            elif self.pickup_kind in ("armor", "armor2"):
+                kws = kws + P.BODY_ARMOR + P.HELMETS + P.SHIELDS + \
+                    P.BOOTS_GLOVES if P else kws
+            letter = self._menu_letter_for(obs, kws)
             if letter and self.queue_tag == "pickup":
+                self.pickup_kind = None
                 self.queue = ["more"]
                 return letter
             return "esc"
@@ -722,6 +1357,18 @@ class DiveAgent:
                         not any(m.x == nx and m.y == ny for m in L.monsters):
                     self.note(f"stepping away from {nm_threats[0].name}")
                     return name
+            # cornered vs a touch-killer: weapon melee is source-safe
+            # (see RULE CARD [TOUCH_KILL_WEAPON_MELEE])
+            if C2_ANY and self.role != "Monk" and self._wields_weapon:
+                for m in nm_threats:
+                    if m.name in TOUCH_KILL:
+                        step = self._melee_step(m)
+                        if step:
+                            self.note(f"cornered: weapon melee vs "
+                                      f"{m.name} (touch-kill, wielded)")
+                            self._ev(f"TOUCHKILL guard: weapon melee "
+                                     f"{m.name}")
+                            return step
             return "search"     # nowhere better: pass time, don't touch it
         return None
 
@@ -865,14 +1512,20 @@ class DiveAgent:
         return None
 
     # ------------------------------------------------------------- descent
+    _REST_LO = float(_os.environ.get("NH_REST_LO", "0.6"))
+    _REST_HI = float(_os.environ.get("NH_REST_HI", "0.85"))
+    _REST_SLO = float(_os.environ.get("NH_REST_SLO", "0.75"))
+    _REST_SHI = float(_os.environ.get("NH_REST_SHI", "0.92"))
+    _REST_SDEPTH = int(_os.environ.get("NH_REST_SDEPTH", "3"))
+
     def _rest_threshold(self):
         A = self.atlas
-        lo, hi = 0.6, 0.85
+        lo, hi = self._REST_LO, self._REST_HI
         # V1.1 L4 — shallow rest discipline: the 2000-block's early deaths
         # (13/25 episodes at depth 2-6, xp 1-2) went in at part health;
         # shallow floors are the cheapest place to buy HP
-        if A.depth <= 3:
-            lo, hi = 0.75, 0.92
+        if A.depth <= self._REST_SDEPTH:
+            lo, hi = self._REST_SLO, self._REST_SHI
         if self._mem_danger_depth is not None and \
                 A.depth >= self._mem_danger_depth - 1:
             if (lo, hi) != (0.9, 0.95) and A.hp < 0.9 * A.hpmax:
@@ -971,6 +1624,7 @@ class DiveAgent:
                 self.digging = True
                 if att == 0:
                     self.note(f"digging down at {A.agent} depth {A.depth}")
+                self._goal("dig", f"depth {A.depth}")
                 return "apply"
         elif digger and threat_near and not L.undiggable:
             # close and kill the interloper so the dig can proceed
@@ -995,6 +1649,13 @@ class DiveAgent:
             else:
                 L.undiggable = True
                 self.note(f"level {A.key} marked undiggable")
+
+        # role-conditional pacing (Campaign 2): fragile roles clear the
+        # local prey before diving deeper than their xp supports
+        if C2_PACE:
+            act = self._c2_pace(obs, digger)
+            if act:
+                return act
 
         # Mines policy (condition A run 1: 3/5 episodes erased by early-
         # Mines dwarves at xplvl 1-2): while weak, back out of the Mines'
@@ -1031,8 +1692,7 @@ class DiveAgent:
                     self.note("Mines avoidance timed out: committing to Mines")
         if not goals:
             return None
-        mcells = self._mcells()
-        avoid = self._suspects() | (mcells - goals)
+        avoid = self._travel_avoid(goals)
         path = L.bfs(A.agent, goals, avoid=avoid)
         if path is None:
             path = L.bfs(A.agent, goals, avoid=self._suspects())
@@ -1043,10 +1703,13 @@ class DiveAgent:
             # standing on the goal
             if self._should_rest() and self._rest_here_ok():
                 self.rest_budget[A.key] = self.rest_budget.get(A.key, 0) + 1
+                self._goal("rest", f"hp {A.hp}/{A.hpmax} on stairs")
                 return "search"
             self.descended_from = (A.key, A.agent)
+            self._goal("descend", f"take > at depth {A.depth}")
             return "down"
         if path:
+            self._goal("descend", f"to > at depth {A.depth}")
             return self._step_path(path)
         return None
 
@@ -1065,12 +1728,14 @@ class DiveAgent:
         glyphs = obs["obs"]["glyphs"]
         best = None
         ax, ay = A.agent
-        for y in range(C.ROWS):
-            for x in range(C.COLS):
-                if int(glyphs[y][x]) in DIGGER_GLYPHS:
-                    d = max(abs(x - ax), abs(y - ay))
-                    if d <= 20 and (best is None or d < best[0]):
-                        best = (d, (x, y))
+        import numpy as _np
+        ga = _np.asarray(glyphs)
+        for g in DIGGER_GLYPHS:
+            ys, xs = _np.nonzero(ga == g)
+            for y, x in zip(ys.tolist(), xs.tolist()):
+                d = max(abs(x - ax), abs(y - ay))
+                if d <= 20 and (best is None or d < best[0]):
+                    best = (d, (x, y))
         if best:
             if best[1] == A.agent:
                 self.queue_tag = "pickup"
@@ -1090,9 +1755,10 @@ class DiveAgent:
         frontier = L.frontier_cells()
         if not frontier:
             return None
+        self._goal("explore", f"{len(frontier)} frontier cells")
         fset = set(frontier)
         mcells = self._mcells()
-        avoid = self._suspects() | mcells
+        avoid = self._travel_avoid()
         path = None
         if self.explore_target in fset:
             path = L.bfs(A.agent, [self.explore_target], avoid=avoid)
@@ -1200,7 +1866,9 @@ class DiveAgent:
     def _hidden_search(self, obs):
         A = self.atlas
         L = A.level
+        self._goal("find-stairs", "hidden-passage search")
         counts = L.search_counts
+        topo_hosts = self._topo().search_hosts(L) if C2_TOPO else None
         cands = []
         for y in range(C.ROWS):
             for x in range(C.COLS):
@@ -1225,10 +1893,17 @@ class DiveAgent:
                             L.terrain[ny2][nx2] == C.WALL and \
                             not L.inferred_wall[ny2][nx2]:
                         wall_adj += 1
-                if pot > 0 or deg <= 1 or wall_adj > 0:
+                host_bonus = 3 if (topo_hosts is not None and
+                                   ((x, y) in topo_hosts or any(
+                                       (x + dx, y + dy) in topo_hosts
+                                       for dx, dy in ((1, 0), (-1, 0),
+                                                      (0, 1), (0, -1))))) \
+                    else 0
+                if pot > 0 or deg <= 1 or wall_adj > 0 or host_bonus:
                     rounds = counts.get((x, y), 0) // 6
                     cands.append((rounds,
-                                  -(pot + (4 if deg <= 1 else 0) + wall_adj),
+                                  -(pot + (4 if deg <= 1 else 0) + wall_adj
+                                    + host_bonus),
                                   abs(x - A.agent[0]) + abs(y - A.agent[1]),
                                   (x, y)))
         if cands:
@@ -1249,6 +1924,7 @@ class DiveAgent:
     def _step_path(self, path):
         A = self.atlas
         L = A.level
+        self._log_plan(path)
         step = path[0]
         dx, dy = DIRS[step]
         nx, ny = A.agent[0] + dx, A.agent[1] + dy

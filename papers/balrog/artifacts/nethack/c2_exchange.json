@@ -1,0 +1,1780 @@
+{
+ "alpha": 0.01,
+ "bins": [
+  [
+   0,
+   0
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   5,
+   7
+  ],
+  [
+   8,
+   99
+  ]
+ ],
+ "fallback": {
+  "slope": 0.07952324749642348,
+  "intercept": 0.6122321173104436
+ },
+ "pack_rows": {
+  "1": 78288,
+  "2": 38400,
+  "3": 2669,
+  "4": 6125,
+  "5": 6
+ },
+ "role_mult": {
+  "strong": 0.675,
+  "weak": 1.305
+ },
+ "role_kt": {
+  "strong": [
+   672,
+   34560
+  ],
+  "weak": [
+   1388,
+   36905
+  ]
+ },
+ "species": {
+  "lichen": {
+   "n_turns": 942,
+   "n_rows": 942,
+   "p_hit": 0.0021,
+   "dpt": 0.019,
+   "dpt_split": [
+    0.019,
+    0.01
+   ],
+   "hist": [
+    940,
+    0,
+    1,
+    0,
+    1
+   ],
+   "kills": 159,
+   "kill_rate": 0.16879,
+   "ttk": 5.9,
+   "verified": false,
+   "p_chi": 0.525576507575793,
+   "p_binom": 1.4603121246377635e-05,
+   "difficulty": 1
+  },
+  "kobold zombie": {
+   "n_turns": 117,
+   "n_rows": 117,
+   "p_hit": 0.1111,
+   "dpt": 0.252,
+   "dpt_split": [
+    0.331,
+    0.13
+   ],
+   "hist": [
+    104,
+    8,
+    5,
+    0,
+    0
+   ],
+   "kills": 62,
+   "kill_rate": 0.52991,
+   "ttk": 1.9,
+   "verified": true,
+   "p_chi": 0.32277577475341324,
+   "p_binom": 0.46344280577846186,
+   "difficulty": 1
+  },
+  "jackal": {
+   "n_turns": 794,
+   "n_rows": 794,
+   "p_hit": 0.4194,
+   "dpt": 0.637,
+   "dpt_split": [
+    0.652,
+    0.621
+   ],
+   "hist": [
+    461,
+    330,
+    3,
+    0,
+    0
+   ],
+   "kills": 278,
+   "kill_rate": 0.35013,
+   "ttk": 2.9,
+   "verified": true,
+   "p_chi": 0.6879008005109714,
+   "p_binom": 0.12033557128546285,
+   "difficulty": 1
+  },
+  "yellow mold": {
+   "n_turns": 4173,
+   "n_rows": 4173,
+   "p_hit": 0.0,
+   "dpt": 0.0,
+   "dpt_split": [
+    0.0,
+    0.0
+   ],
+   "hist": [
+    4173,
+    0,
+    0,
+    0,
+    0
+   ],
+   "kills": 7,
+   "kill_rate": 0.00168,
+   "ttk": 596.1,
+   "verified": true,
+   "p_chi": 0.9731771481701058,
+   "p_binom": 0.08140869572571482,
+   "difficulty": 2
+  },
+  "newt": {
+   "n_turns": 818,
+   "n_rows": 818,
+   "p_hit": 0.2164,
+   "dpt": 0.355,
+   "dpt_split": [
+    0.307,
+    0.355
+   ],
+   "hist": [
+    641,
+    173,
+    4,
+    0,
+    0
+   ],
+   "kills": 282,
+   "kill_rate": 0.34474,
+   "ttk": 2.9,
+   "verified": false,
+   "p_chi": 0.0008967885642599101,
+   "p_binom": 3.642443918511848e-05,
+   "difficulty": 1
+  },
+  "acid blob": {
+   "n_turns": 18794,
+   "n_rows": 18794,
+   "p_hit": 0.0005,
+   "dpt": 0.01,
+   "dpt_split": [
+    0.002,
+    0.01
+   ],
+   "hist": [
+    18785,
+    2,
+    4,
+    0,
+    3
+   ],
+   "kills": 11,
+   "kill_rate": 0.00059,
+   "ttk": 1708.5,
+   "verified": false,
+   "p_chi": 0.3498476120527581,
+   "p_binom": 0.003958746366945165,
+   "difficulty": 2
+  },
+  "grid bug": {
+   "n_turns": 510,
+   "n_rows": 510,
+   "p_hit": 0.2431,
+   "dpt": 0.373,
+   "dpt_split": [
+    0.445,
+    0.309
+   ],
+   "hist": [
+    386,
+    122,
+    2,
+    0,
+    0
+   ],
+   "kills": 232,
+   "kill_rate": 0.4549,
+   "ttk": 2.2,
+   "verified": true,
+   "p_chi": 0.020966043965714613,
+   "p_binom": 0.6706705094593199,
+   "difficulty": 1
+  },
+  "floating eye": {
+   "n_turns": 18377,
+   "n_rows": 18377,
+   "p_hit": 0.0011,
+   "dpt": 0.004,
+   "dpt_split": [
+    0.006,
+    0.001
+   ],
+   "hist": [
+    18357,
+    13,
+    2,
+    3,
+    2
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": true,
+   "p_chi": 0.040093603875259315,
+   "p_binom": 1.0,
+   "difficulty": 3
+  },
+  "goblin": {
+   "n_turns": 345,
+   "n_rows": 345,
+   "p_hit": 0.142,
+   "dpt": 0.48,
+   "dpt_split": [
+    0.296,
+    0.667
+   ],
+   "hist": [
+    296,
+    16,
+    27,
+    4,
+    2
+   ],
+   "kills": 97,
+   "kill_rate": 0.28116,
+   "ttk": 3.6,
+   "verified": true,
+   "p_chi": 0.016371796328977634,
+   "p_binom": 0.0413287658865762,
+   "difficulty": 1
+  },
+  "gecko": {
+   "n_turns": 365,
+   "n_rows": 365,
+   "p_hit": 0.2082,
+   "dpt": 0.482,
+   "dpt_split": [
+    0.482,
+    0.452
+   ],
+   "hist": [
+    289,
+    52,
+    23,
+    0,
+    1
+   ],
+   "kills": 129,
+   "kill_rate": 0.35342,
+   "ttk": 2.8,
+   "verified": false,
+   "p_chi": 0.5095551330140331,
+   "p_binom": 0.009123804446307936,
+   "difficulty": 2
+  },
+  "green mold": {
+   "n_turns": 769,
+   "n_rows": 769,
+   "p_hit": 0.0091,
+   "dpt": 0.077,
+   "dpt_split": [
+    0.09,
+    0.033
+   ],
+   "hist": [
+    762,
+    0,
+    2,
+    1,
+    4
+   ],
+   "kills": 3,
+   "kill_rate": 0.0039,
+   "ttk": 256.3,
+   "verified": true,
+   "p_chi": 0.13943270024747584,
+   "p_binom": 1.0,
+   "difficulty": 2
+  },
+  "giant rat": {
+   "n_turns": 206,
+   "n_rows": 206,
+   "p_hit": 0.4175,
+   "dpt": 0.976,
+   "dpt_split": [
+    1.076,
+    0.742
+   ],
+   "hist": [
+    120,
+    50,
+    36,
+    0,
+    0
+   ],
+   "kills": 67,
+   "kill_rate": 0.32524,
+   "ttk": 3.1,
+   "verified": true,
+   "p_chi": 0.270240651456924,
+   "p_binom": 0.06809166348121774,
+   "difficulty": 2
+  },
+  "cave spider": {
+   "n_turns": 71,
+   "n_rows": 71,
+   "p_hit": 0.5634,
+   "dpt": 0.845,
+   "dpt_split": [
+    0.83,
+    0.9
+   ],
+   "hist": [
+    31,
+    40,
+    0,
+    0,
+    0
+   ],
+   "kills": 17,
+   "kill_rate": 0.23944,
+   "ttk": 4.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "fox": {
+   "n_turns": 163,
+   "n_rows": 163,
+   "p_hit": 0.4049,
+   "dpt": 0.985,
+   "dpt_split": [
+    1.049,
+    0.92
+   ],
+   "hist": [
+    97,
+    39,
+    24,
+    3,
+    0
+   ],
+   "kills": 76,
+   "kill_rate": 0.46626,
+   "ttk": 2.1,
+   "verified": true,
+   "p_chi": 0.3505562373184317,
+   "p_binom": 0.022927449493376228,
+   "difficulty": 1
+  },
+  "bat": {
+   "n_turns": 77,
+   "n_rows": 77,
+   "p_hit": 0.3117,
+   "dpt": 1.078,
+   "dpt_split": [
+    1.314,
+    0.779
+   ],
+   "hist": [
+    53,
+    8,
+    10,
+    6,
+    0
+   ],
+   "kills": 42,
+   "kill_rate": 0.54545,
+   "ttk": 1.8,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 2
+  },
+  "giant bat": {
+   "n_turns": 84,
+   "n_rows": 84,
+   "p_hit": 0.5,
+   "dpt": 2.708,
+   "dpt_split": [
+    2.69,
+    2.726
+   ],
+   "hist": [
+    42,
+    8,
+    13,
+    13,
+    8
+   ],
+   "kills": 12,
+   "kill_rate": 0.14286,
+   "ttk": 7.0,
+   "verified": true,
+   "p_chi": 0.15185639452573876,
+   "p_binom": 0.16588339888618536,
+   "difficulty": 3
+  },
+  "kobold": {
+   "n_turns": 120,
+   "n_rows": 120,
+   "p_hit": 0.1,
+   "dpt": 0.345,
+   "dpt_split": [
+    0.228,
+    0.345
+   ],
+   "hist": [
+    108,
+    3,
+    9,
+    0,
+    0
+   ],
+   "kills": 63,
+   "kill_rate": 0.525,
+   "ttk": 1.9,
+   "verified": false,
+   "p_chi": 0.09228981387255115,
+   "p_binom": 0.00033473088483613626,
+   "difficulty": 1
+  },
+  "sewer rat": {
+   "n_turns": 265,
+   "n_rows": 265,
+   "p_hit": 0.3736,
+   "dpt": 0.817,
+   "dpt_split": [
+    0.83,
+    0.799
+   ],
+   "hist": [
+    166,
+    65,
+    34,
+    0,
+    0
+   ],
+   "kills": 116,
+   "kill_rate": 0.43774,
+   "ttk": 2.3,
+   "verified": true,
+   "p_chi": 0.07864161226458534,
+   "p_binom": 0.02555316339241952,
+   "difficulty": 1
+  },
+  "shrieker": {
+   "n_turns": 207,
+   "n_rows": 207,
+   "p_hit": 0.0048,
+   "dpt": 0.029,
+   "dpt_split": [
+    0.0,
+    0.054
+   ],
+   "hist": [
+    206,
+    0,
+    0,
+    1,
+    0
+   ],
+   "kills": 16,
+   "kill_rate": 0.07729,
+   "ttk": 12.9,
+   "verified": true,
+   "p_chi": 0.721642594427508,
+   "p_binom": 0.7176067934195414,
+   "difficulty": 2
+  },
+  "giant ant": {
+   "n_turns": 67,
+   "n_rows": 67,
+   "p_hit": 0.7015,
+   "dpt": 2.694,
+   "dpt_split": [
+    2.732,
+    2.667
+   ],
+   "hist": [
+    20,
+    19,
+    13,
+    12,
+    3
+   ],
+   "kills": 5,
+   "kill_rate": 0.07463,
+   "ttk": 13.4,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "hill orc": {
+   "n_turns": 31,
+   "n_rows": 31,
+   "p_hit": 0.5484,
+   "dpt": 2.097,
+   "dpt_split": [
+    1.932,
+    2.5
+   ],
+   "hist": [
+    14,
+    5,
+    8,
+    3,
+    1
+   ],
+   "kills": 6,
+   "kill_rate": 0.19355,
+   "ttk": 5.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "kitten": {
+   "n_turns": 23,
+   "n_rows": 23,
+   "p_hit": 0.3043,
+   "dpt": 1.717,
+   "dpt_split": [
+    0.5,
+    6.1
+   ],
+   "hist": [
+    16,
+    3,
+    0,
+    2,
+    2
+   ],
+   "kills": 4,
+   "kill_rate": 0.17391,
+   "ttk": 5.8,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "guard": {
+   "n_turns": 16,
+   "n_rows": 16,
+   "p_hit": 0.0,
+   "dpt": 0.0,
+   "dpt_split": [
+    0.0,
+    0.0
+   ],
+   "hist": [
+    16,
+    0,
+    0,
+    0,
+    0
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 14
+  },
+  "gnome": {
+   "n_turns": 76,
+   "n_rows": 76,
+   "p_hit": 0.0921,
+   "dpt": 0.493,
+   "dpt_split": [
+    0.318,
+    0.628
+   ],
+   "hist": [
+    69,
+    0,
+    4,
+    2,
+    1
+   ],
+   "kills": 29,
+   "kill_rate": 0.38158,
+   "ttk": 2.6,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "coyote": {
+   "n_turns": 118,
+   "n_rows": 118,
+   "p_hit": 0.5,
+   "dpt": 1.14,
+   "dpt_split": [
+    1.088,
+    1.25
+   ],
+   "hist": [
+    59,
+    36,
+    23,
+    0,
+    0
+   ],
+   "kills": 37,
+   "kill_rate": 0.31356,
+   "ttk": 3.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 2
+  },
+  "shopkeeper": {
+   "n_turns": 8447,
+   "n_rows": 8447,
+   "p_hit": 0.0002,
+   "dpt": 0.002,
+   "dpt_split": [
+    0.0,
+    0.002
+   ],
+   "hist": [
+    8445,
+    0,
+    1,
+    0,
+    1
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": false,
+   "p_chi": 7.409471740743625e-25,
+   "p_binom": 1.0,
+   "difficulty": 15
+  },
+  "hobgoblin": {
+   "n_turns": 29,
+   "n_rows": 29,
+   "p_hit": 0.2759,
+   "dpt": 0.948,
+   "dpt_split": [
+    1.167,
+    0.591
+   ],
+   "hist": [
+    21,
+    4,
+    1,
+    3,
+    0
+   ],
+   "kills": 11,
+   "kill_rate": 0.37931,
+   "ttk": 2.6,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "kobold lord": {
+   "n_turns": 100,
+   "n_rows": 100,
+   "p_hit": 0.17,
+   "dpt": 1.055,
+   "dpt_split": [
+    1.026,
+    1.074
+   ],
+   "hist": [
+    83,
+    0,
+    3,
+    12,
+    2
+   ],
+   "kills": 7,
+   "kill_rate": 0.07,
+   "ttk": 14.3,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "dwarf zombie": {
+   "n_turns": 82,
+   "n_rows": 82,
+   "p_hit": 0.122,
+   "dpt": 0.518,
+   "dpt_split": [
+    0.5,
+    0.556
+   ],
+   "hist": [
+    72,
+    4,
+    2,
+    3,
+    1
+   ],
+   "kills": 8,
+   "kill_rate": 0.09756,
+   "ttk": 10.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "giant spider": {
+   "n_turns": 32,
+   "n_rows": 32,
+   "p_hit": 0.5625,
+   "dpt": 2.781,
+   "dpt_split": [
+    2.771,
+    2.812
+   ],
+   "hist": [
+    14,
+    1,
+    8,
+    8,
+    1
+   ],
+   "kills": 3,
+   "kill_rate": 0.09375,
+   "ttk": 10.7,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 7
+  },
+  "gnome zombie": {
+   "n_turns": 49,
+   "n_rows": 49,
+   "p_hit": 0.1429,
+   "dpt": 0.51,
+   "dpt_split": [
+    0.375,
+    0.69
+   ],
+   "hist": [
+    42,
+    1,
+    5,
+    1,
+    0
+   ],
+   "kills": 24,
+   "kill_rate": 0.4898,
+   "ttk": 2.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 2
+  },
+  "large kobold": {
+   "n_turns": 62,
+   "n_rows": 62,
+   "p_hit": 0.0968,
+   "dpt": 0.347,
+   "dpt_split": [
+    0.0,
+    0.566
+   ],
+   "hist": [
+    56,
+    1,
+    4,
+    1,
+    0
+   ],
+   "kills": 30,
+   "kill_rate": 0.48387,
+   "ttk": 2.1,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 2
+  },
+  "hobbit": {
+   "n_turns": 246,
+   "n_rows": 246,
+   "p_hit": 0.0894,
+   "dpt": 0.483,
+   "dpt_split": [
+    0.314,
+    0.483
+   ],
+   "hist": [
+    224,
+    5,
+    9,
+    7,
+    1
+   ],
+   "kills": 35,
+   "kill_rate": 0.14228,
+   "ttk": 7.0,
+   "verified": false,
+   "p_chi": 0.02700396742179692,
+   "p_binom": 1.0035510316920195e-08,
+   "difficulty": 2
+  },
+  "orc zombie": {
+   "n_turns": 44,
+   "n_rows": 44,
+   "p_hit": 0.1818,
+   "dpt": 0.818,
+   "dpt_split": [
+    0.765,
+    0.852
+   ],
+   "hist": [
+    36,
+    1,
+    3,
+    4,
+    0
+   ],
+   "kills": 13,
+   "kill_rate": 0.29545,
+   "ttk": 3.4,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "iguana": {
+   "n_turns": 216,
+   "n_rows": 216,
+   "p_hit": 0.2546,
+   "dpt": 0.69,
+   "dpt_split": [
+    0.682,
+    0.699
+   ],
+   "hist": [
+    161,
+    27,
+    26,
+    1,
+    1
+   ],
+   "kills": 36,
+   "kill_rate": 0.16667,
+   "ttk": 6.0,
+   "verified": true,
+   "p_chi": 0.45945602546954967,
+   "p_binom": 0.04492293646164591,
+   "difficulty": 3
+  },
+  "imp": {
+   "n_turns": 16,
+   "n_rows": 16,
+   "p_hit": 0.5,
+   "dpt": 1.25,
+   "dpt_split": [
+    1.25,
+    0.0
+   ],
+   "hist": [
+    8,
+    4,
+    4,
+    0,
+    0
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "rock piercer": {
+   "n_turns": 14,
+   "n_rows": 14,
+   "p_hit": 0.0714,
+   "dpt": 0.821,
+   "dpt_split": [
+    0.821,
+    0.0
+   ],
+   "hist": [
+    13,
+    0,
+    0,
+    0,
+    1
+   ],
+   "kills": 1,
+   "kill_rate": 0.07143,
+   "ttk": 14.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "human zombie": {
+   "n_turns": 21,
+   "n_rows": 21,
+   "p_hit": 0.1905,
+   "dpt": 1.071,
+   "dpt_split": [
+    1.071,
+    0.0
+   ],
+   "hist": [
+    17,
+    1,
+    1,
+    1,
+    1
+   ],
+   "kills": 3,
+   "kill_rate": 0.14286,
+   "ttk": 7.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "invisible monster": {
+   "n_turns": 62,
+   "n_rows": 62,
+   "p_hit": 0.1452,
+   "dpt": 0.782,
+   "dpt_split": [
+    1.121,
+    0.485
+   ],
+   "hist": [
+    53,
+    2,
+    3,
+    2,
+    2
+   ],
+   "kills": 2,
+   "kill_rate": 0.03226,
+   "ttk": 31.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": null
+  },
+  "red mold": {
+   "n_turns": 11150,
+   "n_rows": 11150,
+   "p_hit": 0.0004,
+   "dpt": 0.001,
+   "dpt_split": [
+    0.001,
+    0.001
+   ],
+   "hist": [
+    11145,
+    4,
+    1,
+    0,
+    0
+   ],
+   "kills": 6,
+   "kill_rate": 0.00054,
+   "ttk": 1858.3,
+   "verified": true,
+   "p_chi": 0.9572709851886286,
+   "p_binom": 0.019329973266958105,
+   "difficulty": 2
+  },
+  "kobold shaman": {
+   "n_turns": 18,
+   "n_rows": 18,
+   "p_hit": 0.0,
+   "dpt": 0.0,
+   "dpt_split": [
+    0.0,
+    0.0
+   ],
+   "hist": [
+    18,
+    0,
+    0,
+    0,
+    0
+   ],
+   "kills": 3,
+   "kill_rate": 0.16667,
+   "ttk": 6.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "rock mole": {
+   "n_turns": 56,
+   "n_rows": 56,
+   "p_hit": 0.1786,
+   "dpt": 0.562,
+   "dpt_split": [
+    0.385,
+    0.616
+   ],
+   "hist": [
+    46,
+    3,
+    6,
+    1,
+    0
+   ],
+   "kills": 2,
+   "kill_rate": 0.03571,
+   "ttk": 28.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "straw golem": {
+   "n_turns": 40,
+   "n_rows": 40,
+   "p_hit": 0.65,
+   "dpt": 1.825,
+   "dpt_split": [
+    1.7,
+    1.843
+   ],
+   "hist": [
+    14,
+    13,
+    12,
+    0,
+    1
+   ],
+   "kills": 3,
+   "kill_rate": 0.075,
+   "ttk": 13.3,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "brown mold": {
+   "n_turns": 111,
+   "n_rows": 111,
+   "p_hit": 0.009,
+   "dpt": 0.032,
+   "dpt_split": [
+    0.067,
+    0.0
+   ],
+   "hist": [
+    110,
+    0,
+    1,
+    0,
+    0
+   ],
+   "kills": 4,
+   "kill_rate": 0.03604,
+   "ttk": 27.8,
+   "verified": true,
+   "p_chi": 0.4917944167630429,
+   "p_binom": 0.26229800042007606,
+   "difficulty": 2
+  },
+  "dwarf": {
+   "n_turns": 51,
+   "n_rows": 51,
+   "p_hit": 0.0784,
+   "dpt": 0.529,
+   "dpt_split": [
+    0.365,
+    0.7
+   ],
+   "hist": [
+    47,
+    0,
+    1,
+    2,
+    1
+   ],
+   "kills": 8,
+   "kill_rate": 0.15686,
+   "ttk": 6.4,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "gnome lord": {
+   "n_turns": 49,
+   "n_rows": 49,
+   "p_hit": 0.2653,
+   "dpt": 1.173,
+   "dpt_split": [
+    0.615,
+    1.804
+   ],
+   "hist": [
+    36,
+    6,
+    4,
+    0,
+    3
+   ],
+   "kills": 7,
+   "kill_rate": 0.14286,
+   "ttk": 7.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "little dog": {
+   "n_turns": 39,
+   "n_rows": 39,
+   "p_hit": 0.641,
+   "dpt": 3.205,
+   "dpt_split": [
+    1.658,
+    4.675
+   ],
+   "hist": [
+    14,
+    3,
+    9,
+    11,
+    2
+   ],
+   "kills": 5,
+   "kill_rate": 0.12821,
+   "ttk": 7.8,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "gas spore": {
+   "n_turns": 18448,
+   "n_rows": 18448,
+   "p_hit": 0.001,
+   "dpt": 0.006,
+   "dpt_split": [
+    0.006,
+    0.007
+   ],
+   "hist": [
+    18430,
+    5,
+    3,
+    4,
+    6
+   ],
+   "kills": 7,
+   "kill_rate": 0.00038,
+   "ttk": 2635.4,
+   "verified": true,
+   "p_chi": 0.2290673596824618,
+   "p_binom": 0.05735158922868828,
+   "difficulty": 2
+  },
+  "fog cloud": {
+   "n_turns": 19,
+   "n_rows": 19,
+   "p_hit": 0.1053,
+   "dpt": 0.368,
+   "dpt_split": [
+    0.7,
+    0.25
+   ],
+   "hist": [
+    17,
+    0,
+    2,
+    0,
+    0
+   ],
+   "kills": 1,
+   "kill_rate": 0.05263,
+   "ttk": 19.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "monkey": {
+   "n_turns": 36,
+   "n_rows": 36,
+   "p_hit": 0.1944,
+   "dpt": 0.569,
+   "dpt_split": [
+    0.0,
+    0.603
+   ],
+   "hist": [
+    29,
+    2,
+    5,
+    0,
+    0
+   ],
+   "kills": 3,
+   "kill_rate": 0.08333,
+   "ttk": 12.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "cockatrice": {
+   "n_turns": 25,
+   "n_rows": 25,
+   "p_hit": 0.08,
+   "dpt": 0.2,
+   "dpt_split": [
+    0.2,
+    0.0
+   ],
+   "hist": [
+    23,
+    1,
+    1,
+    0,
+    0
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 8
+  },
+  "violet fungus": {
+   "n_turns": 19,
+   "n_rows": 19,
+   "p_hit": 0.1053,
+   "dpt": 0.263,
+   "dpt_split": [
+    0.5,
+    0.125
+   ],
+   "hist": [
+    17,
+    1,
+    1,
+    0,
+    0
+   ],
+   "kills": 2,
+   "kill_rate": 0.10526,
+   "ttk": 9.5,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "garter snake": {
+   "n_turns": 60,
+   "n_rows": 60,
+   "p_hit": 0.2833,
+   "dpt": 0.425,
+   "dpt_split": [
+    0.571,
+    0.346
+   ],
+   "hist": [
+    43,
+    17,
+    0,
+    0,
+    0
+   ],
+   "kills": 22,
+   "kill_rate": 0.36667,
+   "ttk": 2.7,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "wererat": {
+   "n_turns": 36,
+   "n_rows": 36,
+   "p_hit": 0.5556,
+   "dpt": 1.736,
+   "dpt_split": [
+    2.633,
+    1.095
+   ],
+   "hist": [
+    16,
+    10,
+    5,
+    5,
+    0
+   ],
+   "kills": 5,
+   "kill_rate": 0.13889,
+   "ttk": 7.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "werejackal": {
+   "n_turns": 37,
+   "n_rows": 37,
+   "p_hit": 0.3784,
+   "dpt": 1.0,
+   "dpt_split": [
+    1.312,
+    0.914
+   ],
+   "hist": [
+    23,
+    6,
+    8,
+    0,
+    0
+   ],
+   "kills": 5,
+   "kill_rate": 0.13514,
+   "ttk": 7.4,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "paper golem": {
+   "n_turns": 32,
+   "n_rows": 32,
+   "p_hit": 0.5938,
+   "dpt": 1.266,
+   "dpt_split": [
+    0.95,
+    1.409
+   ],
+   "hist": [
+    13,
+    13,
+    6,
+    0,
+    0
+   ],
+   "kills": 4,
+   "kill_rate": 0.125,
+   "ttk": 8.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "rothe": {
+   "n_turns": 17,
+   "n_rows": 17,
+   "p_hit": 0.5294,
+   "dpt": 2.559,
+   "dpt_split": [
+    1.688,
+    3.333
+   ],
+   "hist": [
+    8,
+    3,
+    1,
+    4,
+    1
+   ],
+   "kills": 5,
+   "kill_rate": 0.29412,
+   "ttk": 3.4,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "manes": {
+   "n_turns": 41,
+   "n_rows": 41,
+   "p_hit": 0.0732,
+   "dpt": 0.317,
+   "dpt_split": [
+    1.083,
+    0.0
+   ],
+   "hist": [
+    38,
+    0,
+    2,
+    1,
+    0
+   ],
+   "kills": 11,
+   "kill_rate": 0.26829,
+   "ttk": 3.7,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "housecat": {
+   "n_turns": 15,
+   "n_rows": 15,
+   "p_hit": 0.8,
+   "dpt": 4.0,
+   "dpt_split": [
+    2.833,
+    4.778
+   ],
+   "hist": [
+    3,
+    1,
+    3,
+    8,
+    0
+   ],
+   "kills": 2,
+   "kill_rate": 0.13333,
+   "ttk": 7.5,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "gray ooze": {
+   "n_turns": 20,
+   "n_rows": 20,
+   "p_hit": 0.1,
+   "dpt": 0.65,
+   "dpt_split": [
+    0.0,
+    0.867
+   ],
+   "hist": [
+    18,
+    1,
+    0,
+    0,
+    1
+   ],
+   "kills": 2,
+   "kill_rate": 0.1,
+   "ttk": 10.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "pony": {
+   "n_turns": 14,
+   "n_rows": 14,
+   "p_hit": 0.5,
+   "dpt": 5.036,
+   "dpt_split": [
+    3.286,
+    6.786
+   ],
+   "hist": [
+    7,
+    1,
+    0,
+    0,
+    6
+   ],
+   "kills": 3,
+   "kill_rate": 0.21429,
+   "ttk": 4.7,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "homunculus": {
+   "n_turns": 54,
+   "n_rows": 54,
+   "p_hit": 0.5185,
+   "dpt": 1.463,
+   "dpt_split": [
+    1.175,
+    1.632
+   ],
+   "hist": [
+    26,
+    12,
+    14,
+    2,
+    0
+   ],
+   "kills": 8,
+   "kill_rate": 0.14815,
+   "ttk": 6.8,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 3
+  },
+  "kobold mummy": {
+   "n_turns": 61,
+   "n_rows": 61,
+   "p_hit": 0.1967,
+   "dpt": 0.459,
+   "dpt_split": [
+    0.0,
+    0.538
+   ],
+   "hist": [
+    49,
+    7,
+    5,
+    0,
+    0
+   ],
+   "kills": 2,
+   "kill_rate": 0.03279,
+   "ttk": 30.5,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "Uruk-hai": {
+   "n_turns": 16,
+   "n_rows": 16,
+   "p_hit": 0.25,
+   "dpt": 1.281,
+   "dpt_split": [
+    0.0,
+    1.281
+   ],
+   "hist": [
+    12,
+    2,
+    0,
+    1,
+    1
+   ],
+   "kills": 3,
+   "kill_rate": 0.1875,
+   "ttk": 5.3,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "elf zombie": {
+   "n_turns": 31,
+   "n_rows": 31,
+   "p_hit": 0.3871,
+   "dpt": 1.323,
+   "dpt_split": [
+    1.632,
+    0.833
+   ],
+   "hist": [
+    19,
+    3,
+    7,
+    2,
+    0
+   ],
+   "kills": 5,
+   "kill_rate": 0.16129,
+   "ttk": 6.2,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "wolf": {
+   "n_turns": 18,
+   "n_rows": 18,
+   "p_hit": 0.7222,
+   "dpt": 3.167,
+   "dpt_split": [
+    0.0,
+    3.167
+   ],
+   "hist": [
+    5,
+    3,
+    3,
+    7,
+    0
+   ],
+   "kills": 2,
+   "kill_rate": 0.11111,
+   "ttk": 9.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 6
+  },
+  "dingo": {
+   "n_turns": 17,
+   "n_rows": 17,
+   "p_hit": 0.7059,
+   "dpt": 3.912,
+   "dpt_split": [
+    3.25,
+    5.5
+   ],
+   "hist": [
+    5,
+    2,
+    3,
+    5,
+    2
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "killer bee": {
+   "n_turns": 39,
+   "n_rows": 39,
+   "p_hit": 0.7179,
+   "dpt": 2.231,
+   "dpt_split": [
+    2.231,
+    0.0
+   ],
+   "hist": [
+    11,
+    16,
+    8,
+    2,
+    2
+   ],
+   "kills": 6,
+   "kill_rate": 0.15385,
+   "ttk": 6.5,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 5
+  },
+  "aligned priest": {
+   "n_turns": 14,
+   "n_rows": 14,
+   "p_hit": 0.0,
+   "dpt": 0.0,
+   "dpt_split": [
+    0.0,
+    0.0
+   ],
+   "hist": [
+    14,
+    0,
+    0,
+    0,
+    0
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 15
+  },
+  "small mimic": {
+   "n_turns": 16,
+   "n_rows": 16,
+   "p_hit": 0.125,
+   "dpt": 1.094,
+   "dpt_split": [
+    0.545,
+    2.3
+   ],
+   "hist": [
+    14,
+    0,
+    0,
+    1,
+    1
+   ],
+   "kills": 2,
+   "kill_rate": 0.125,
+   "ttk": 8.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 8
+  },
+  "centipede": {
+   "n_turns": 13,
+   "n_rows": 13,
+   "p_hit": 0.1538,
+   "dpt": 0.385,
+   "dpt_split": [
+    0.385,
+    0.0
+   ],
+   "hist": [
+    11,
+    1,
+    1,
+    0,
+    0
+   ],
+   "kills": 0,
+   "kill_rate": 0.0,
+   "ttk": null,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 4
+  },
+  "pyrolisk": {
+   "n_turns": 27,
+   "n_rows": 27,
+   "p_hit": 0.0741,
+   "dpt": 0.444,
+   "dpt_split": [
+    0.0,
+    0.444
+   ],
+   "hist": [
+    25,
+    0,
+    0,
+    2,
+    0
+   ],
+   "kills": 1,
+   "kill_rate": 0.03704,
+   "ttk": 27.0,
+   "verified": null,
+   "p_chi": null,
+   "p_binom": null,
+   "difficulty": 8
+  }
+ }
+}

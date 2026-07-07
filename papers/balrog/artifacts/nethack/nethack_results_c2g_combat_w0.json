@@ -1,0 +1,289 @@
+{
+ "label": "c2g_combat_w0",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 700,
+   "seed": 700,
+   "condition": "A",
+   "steps": 1659,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by an imp.",
+   "role": "Valkyrie",
+   "race": "human",
+   "wallclock_s": 46.0,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep700.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5645,
+    "find-stairs": 0.2497,
+    "rest": 0.0796,
+    "fight": 0.0446,
+    "descend": 0.0362,
+    "loot": 0.0205,
+    "eat": 0.0024,
+    "kite-choke": 0.0012,
+    "survive": 0.0012,
+    "_final": "fight",
+    "_final_reason": "cornered vs imp"
+   },
+   "ev_fired": 16,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 703,
+   "seed": 703,
+   "condition": "A",
+   "steps": 2199,
+   "illegal": 0,
+   "progression": 0.12558597019922987,
+   "highest_achievement": "Dlvl:10",
+   "depth_max": 10,
+   "xplvl_max": 6,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5",
+    "Xp:6"
+   ],
+   "end_reason": "DEATH: died. Killed by a wand.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 86.2,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep703.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6583,
+    "find-stairs": 0.2407,
+    "descend": 0.0346,
+    "fight": 0.0296,
+    "rest": 0.0291,
+    "eat": 0.0027,
+    "ranged": 0.0027,
+    "loot": 0.0023,
+    "_final": "rest",
+    "_final_reason": "hp 12/62"
+   },
+   "ev_fired": 13,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 706,
+   "seed": 706,
+   "condition": "A",
+   "steps": 19,
+   "illegal": 0,
+   "progression": 0.0,
+   "highest_achievement": null,
+   "depth_max": 1,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a falling rock.",
+   "role": "Priest",
+   "race": "elven",
+   "wallclock_s": 0.4,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep706.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5,
+    "loot": 0.5,
+    "_final": "loot",
+    "_final_reason": "ammo: rock d1"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 709,
+   "seed": 709,
+   "condition": "A",
+   "steps": 428,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a kobold.",
+   "role": "Healer",
+   "race": "gnomish",
+   "wallclock_s": 17.9,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep709.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8806,
+    "find-stairs": 0.0749,
+    "fight": 0.0351,
+    "descend": 0.0094,
+    "_final": "fight",
+    "_final_reason": "kobold EVloss 1"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 712,
+   "seed": 712,
+   "condition": "A",
+   "steps": 726,
+   "illegal": 0,
+   "progression": 0.035428686118173014,
+   "highest_achievement": "Dlvl:6",
+   "depth_max": 6,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a rothe.",
+   "role": "Samurai",
+   "race": "human",
+   "wallclock_s": 26.1,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep712.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8869,
+    "descend": 0.0634,
+    "fight": 0.0372,
+    "loot": 0.0124,
+    "_final": "fight",
+    "_final_reason": "cornered vs rothe"
+   },
+   "ev_fired": 5,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 715,
+   "seed": 715,
+   "condition": "A",
+   "steps": 18,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox, while praying.",
+   "role": "Wizard",
+   "race": "human",
+   "wallclock_s": 0.3,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep715.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.4706,
+    "descend": 0.2353,
+    "kite-choke": 0.1765,
+    "fight": 0.1176,
+    "_final": "kite-choke",
+    "_final_reason": "2 attackers"
+   },
+   "ev_fired": 3,
+   "emergency_fired": 1
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 718,
+   "seed": 718,
+   "condition": "A",
+   "steps": 811,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 2,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a sewer rat.",
+   "role": "Tourist",
+   "race": "human",
+   "wallclock_s": 43.2,
+   "transitions_file": "transitions/c2g_combat/NetHackChallenge-v0__ep718.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.746,
+    "explore": 0.1356,
+    "rest": 0.0727,
+    "fight": 0.0308,
+    "descend": 0.0062,
+    "flee": 0.0037,
+    "eat": 0.0025,
+    "survive": 0.0025,
+    "_final": "fight",
+    "_final_reason": "cornered vs sewer rat"
+   },
+   "ev_fired": 4,
+   "emergency_fired": 0
+  }
+ ]
+}

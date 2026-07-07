@@ -697,3 +697,1290 @@ fb677af4ba77a3e6615195ba7024c68f  nh_runner.py
 03:23:56 v11block40 chunk v5 complete (10 eps)
 03:24:40 V1.1 FINAL n=80: mean 6.09 CI95 [4.46,7.93]. Excludes 4.0 from above (clearly above field, tied with #1); straddles 6.8 (no decisive beat). Depth record Dlvl:21 (39.29, seed 3061 Archeologist). 0 churn-aborts / 80 eps (v1: 2/25).
 (v1.1 phase log appended; see FABLE_NETHACK_REPORT.md V1.1 section for the narrative.)
+12:31:25 === c2dev_full/w1 seed 701 ===
+12:31:25 === c2dev_full/w2 seed 702 ===
+12:31:25 === c2dev_full/w0 seed 700 ===
+12:32:07     step 2000 depth 3 (max 3) hp 14/27 xp 3 t=1648 wall=39s
+12:32:19     step 4000 depth 3 (max 3) hp 17/27 xp 3 t=1679 wall=52s
+12:32:22     step 2000 depth 4 (max 4) hp 27/27 xp 3 t=1981 wall=54s
+12:32:34     step 6000 depth 3 (max 3) hp 21/27 xp 3 t=1710 wall=67s
+12:32:46     step 8000 depth 3 (max 3) hp 28/31 xp 4 t=1742 wall=79s
+12:33:01     step 10000 depth 3 (max 3) hp 31/31 xp 4 t=1773 wall=94s
+12:33:18     step 12000 depth 3 (max 3) hp 31/31 xp 4 t=1813 wall=110s
+12:33:29     step 2000 depth 2 (max 2) hp 20/20 xp 2 t=1936 wall=121s
+12:33:39     step 4000 depth 4 (max 4) hp 27/27 xp 3 t=3992 wall=131s
+12:33:40     step 14000 depth 3 (max 3) hp 31/31 xp 4 t=2162 wall=133s
+12:33:50   [c2dev_full/w1] seed 701: prog 0.0291 depth 3 role Knight end DEATH: died. Killed by a straw golem.
+12:33:50 === c2dev_full/w1 seed 704 ===
+12:34:10   [c2dev_full/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: died. Killed by a giant bat, while fainted from lack of food.
+12:34:10 === c2dev_full/w0 seed 703 ===
+12:34:45   [c2dev_full/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+12:34:45 === c2dev_full/w1 seed 707 ===
+12:35:14   [c2dev_full/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+12:35:14 === c2dev_full/w1 seed 710 ===
+12:35:36     step 2000 depth 9 (max 9) hp 36/51 xp 5 t=1968 wall=86s
+12:35:38   [c2dev_full/w0] seed 703: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a winter wolf cub.
+12:35:38 === c2dev_full/w0 seed 706 ===
+12:35:43   [c2dev_full/w0] seed 706: prog 0.0175 depth 3 role Priest end DEATH: died. Killed by a jackal.
+12:35:43 === c2dev_full/w0 seed 709 ===
+12:35:56   [c2dev_full/w1] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a winter wolf.
+12:35:56 === c2dev_full/w1 seed 713 ===
+12:35:56   [c2dev_full/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a kobold.
+12:35:56 === c2dev_full/w0 seed 712 ===
+12:36:01   [c2dev_full/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+12:36:01 === c2dev_full/w1 seed 716 ===
+12:36:13   [c2dev_full/w0] seed 712: prog 0.0485 depth 7 role Samurai end DEATH: died. Killed by a rothe.
+12:36:13 === c2dev_full/w0 seed 715 ===
+12:36:13     step 4000 depth 2 (max 2) hp 28/28 xp 3 t=3915 wall=285s
+12:36:13   [c2dev_full/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+12:36:13 === c2dev_full/w0 seed 718 ===
+12:36:19   [c2dev_full/w0] seed 718: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a boulder.
+12:36:19 === c2dev_full/w0 seed 721 ===
+12:36:49   [c2dev_full/w0] seed 721: prog 0.0212 depth 4 role Knight end DEATH: died. Killed by a fox.
+12:36:49 === c2dev_full/w0 seed 724 ===
+12:36:59   [c2dev_full/w0] seed 724: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a rock mole.
+12:36:59 === c2dev_full/w0 seed 727 ===
+12:37:14   [c2dev_full/w0] seed 727: prog 0.0265 depth 5 role Valkyrie end DEATH: died. Killed by a wererat.
+12:37:14 === c2dev_full/w0 seed 730 ===
+12:37:15     step 6000 depth 2 (max 2) hp 35/35 xp 4 t=5935 wall=348s
+12:37:17     step 2000 depth 1 (max 1) hp 33/33 xp 2 t=1999 wall=76s
+12:37:36   [c2dev_full/w2] seed 702: prog 0.0242 depth 2 role Knight end DEATH: starved to death.
+12:37:36 === c2dev_full/w2 seed 705 ===
+12:37:58   [c2dev_full/w0] seed 730: prog 0.0185 depth 3 role Ranger end DEATH: died. Killed by a magic missile.
+12:37:58 === c2dev_full/w0 seed 733 ===
+12:38:11   [c2dev_full/w0] seed 733: prog 0.0977 depth 9 role Ranger end DEATH: died. Killed by a black naga hatchling.
+12:38:11 === c2dev_full/w0 seed 736 ===
+12:38:12   [c2dev_full/w0] seed 736: prog 0.0175 depth 3 role Priestess end DEATH: died. Killed by a guard.
+12:38:12 === c2dev_full/w0 seed 739 ===
+12:38:35     step 4000 depth 2 (max 2) hp 60/60 xp 4 t=3999 wall=154s
+12:38:39     step 2000 depth 2 (max 2) hp 26/26 xp 2 t=1978 wall=63s
+12:38:41   [c2dev_full/w1] seed 716: prog 0.0242 depth 3 role Valkyrie end DEATH: died. Killed by Mr. Sablja; the shopkeeper.
+12:38:41 === c2dev_full/w1 seed 719 ===
+12:38:45   [c2dev_full/w0] seed 739: prog 0.0185 depth 3 role Barbarian end DEATH: died. Killed by a goblin.
+12:38:45 c2dev_full chunk w0 complete (14 eps)
+12:38:53   [c2dev_full/w1] seed 719: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a giant mimic.
+12:38:53 === c2dev_full/w1 seed 722 ===
+12:39:20     step 4000 depth 2 (max 2) hp 26/26 xp 2 t=3986 wall=104s
+12:39:51     step 2000 depth 1 (max 1) hp 15/15 xp 1 t=1954 wall=58s
+12:39:52     step 6000 depth 2 (max 2) hp 26/26 xp 2 t=6007 wall=136s
+12:40:02   [c2dev_full/w1] seed 722: prog 0.0185 depth 1 role Barbarian end DEATH: died. Killed by a guard, while sleeping off a magical draught.
+12:40:02 === c2dev_full/w1 seed 725 ===
+12:40:02   [c2dev_full/w1] seed 725: prog 0.0485 depth 7 role Archeologist end DEATH: died. Killed by a kobold mummy.
+12:40:02 === c2dev_full/w1 seed 728 ===
+12:40:23     step 8000 depth 2 (max 2) hp 26/26 xp 2 t=8027 wall=166s
+12:40:36   [c2dev_full/w2] seed 705: prog 0.0185 depth 2 role Barbarian end DEATH: starved to death.
+12:40:36 === c2dev_full/w2 seed 708 ===
+12:41:01   [c2dev_full/w2] seed 708: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a jackal.
+12:41:01 === c2dev_full/w2 seed 711 ===
+12:41:16     step 2000 depth 6 (max 6) hp 39/39 xp 3 t=1971 wall=15s
+12:41:28     step 4000 depth 6 (max 6) hp 47/47 xp 4 t=3990 wall=27s
+12:41:30     step 2000 depth 1 (max 1) hp 14/14 xp 1 t=1998 wall=88s
+12:41:34   [c2dev_full/w2] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: starved to death.
+12:41:34 === c2dev_full/w2 seed 714 ===
+12:41:45   [c2dev_full/w2] seed 714: prog 0.0212 depth 4 role Tourist end DEATH: died. Killed by a hobbit.
+12:41:45 === c2dev_full/w2 seed 717 ===
+12:42:08     step 2000 depth 4 (max 5) hp 23/23 xp 3 t=1980 wall=23s
+12:42:19     step 4000 depth 4 (max 5) hp 23/23 xp 3 t=4000 wall=34s
+12:42:34     step 6000 depth 4 (max 5) hp 23/23 xp 3 t=6020 wall=49s
+12:42:37   [c2dev_full/w2] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: starved to death.
+12:42:37 === c2dev_full/w2 seed 720 ===
+12:42:40   [c2dev_full/w2] seed 720: prog 0.0175 depth 3 role Tourist end DEATH: died. Killed by a boulder.
+12:42:40 === c2dev_full/w2 seed 723 ===
+12:43:00     step 2000 depth 1 (max 1) hp 17/17 xp 1 t=1994 wall=20s
+12:43:02     step 4000 depth 1 (max 1) hp 23/23 xp 3 t=4023 wall=180s
+12:43:34     step 4000 depth 4 (max 4) hp 25/26 xp 4 t=4018 wall=54s
+12:43:35   [c2dev_full/w2] seed 723: prog 0.0291 depth 5 role Ranger end DEATH: died. Killed by a dwarf.
+12:43:35 === c2dev_full/w2 seed 726 ===
+12:43:44   [c2dev_full/w1] seed 728: prog 0.1613 depth 11 role Priest end DEATH: died. Killed by an owlbear.
+12:43:44 === c2dev_full/w1 seed 731 ===
+12:43:57   [c2dev_full/w2] seed 726: prog 0.0977 depth 9 role Samurai end DEATH: died. Killed by a ghoul, while paralyzed by a monster.
+12:43:57 === c2dev_full/w2 seed 729 ===
+12:44:34     step 2000 depth 6 (max 6) hp 36/36 xp 4 t=1935 wall=36s
+12:44:44     step 2000 depth 4 (max 4) hp 24/24 xp 3 t=1998 wall=60s
+12:45:14     step 4000 depth 10 (max 10) hp 32/44 xp 6 t=3861 wall=77s
+12:45:34   [c2dev_full/w2] seed 729: prog 0.1256 depth 10 role Ranger end DEATH: died. Killed by an owlbear.
+12:45:34 === c2dev_full/w2 seed 732 ===
+12:46:43     step 4000 depth 4 (max 4) hp 24/24 xp 3 t=4018 wall=178s
+12:46:45     step 2000 depth 4 (max 5) hp 24/26 xp 4 t=1904 wall=70s
+12:46:46   [c2dev_full/w2] seed 732: prog 0.0265 depth 5 role Ranger end DEATH: died. Killed by a kitten.
+12:46:46 === c2dev_full/w2 seed 735 ===
+12:46:59   [c2dev_full/w2] seed 735: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a kitten.
+12:46:59 === c2dev_full/w2 seed 738 ===
+12:47:06   [c2dev_full/w2] seed 738: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a gas spore's explosion.
+12:47:06 c2dev_full chunk w2 complete (13 eps)
+12:47:12   [c2dev_full/w1] seed 731: prog 0.0242 depth 4 role Priestess end DEATH: starved to death.
+12:47:12 === c2dev_full/w1 seed 734 ===
+12:47:49   [c2dev_full/w1] seed 734: prog 0.0185 depth 3 role Samurai end DEATH: died. Killed by a wand.
+12:47:49 === c2dev_full/w1 seed 737 ===
+12:47:54   [c2dev_full/w1] seed 737: prog 0.0212 depth 4 role Rogue end DEATH: died. Killed by a fox.
+12:47:54 c2dev_full chunk w1 complete (13 eps)
+12:55:55 === c2g_combat/w1 seed 701 ===
+12:55:55 === c2g_combat/w0 seed 700 ===
+12:55:55 === c2g_combat/w2 seed 702 ===
+12:56:45   [c2g_combat/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: died. Killed by a little dog, while helpless.
+12:56:45 === c2g_combat/w0 seed 703 ===
+12:57:00     step 2000 depth 3 (max 3) hp 18/18 xp 2 t=1963 wall=62s
+12:57:36   [c2g_combat/w0] seed 703: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a giant bat, while helpless.
+12:57:36 === c2g_combat/w0 seed 706 ===
+12:57:38   [c2g_combat/w0] seed 706: prog 0.0000 depth 1 role Priest end DEATH: died. Killed by a kobold zombie, while praying.
+12:57:38 === c2g_combat/w0 seed 709 ===
+12:57:50   [c2g_combat/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a kobold.
+12:57:50 === c2g_combat/w0 seed 712 ===
+12:57:51     step 2000 depth 2 (max 2) hp 28/28 xp 3 t=1951 wall=113s
+12:57:57   [c2g_combat/w1] seed 701: prog 0.0185 depth 3 role Knight end DEATH: starved to death.
+12:57:57 === c2g_combat/w1 seed 704 ===
+12:58:06   [c2g_combat/w0] seed 712: prog 0.0354 depth 6 role Samurai end DEATH: died. Killed by a rothe.
+12:58:06 === c2g_combat/w0 seed 715 ===
+12:58:06   [c2g_combat/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox.
+12:58:06 === c2g_combat/w0 seed 718 ===
+12:58:37   [c2g_combat/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+12:58:37 === c2g_combat/w1 seed 707 ===
+12:58:44   [c2g_combat/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a sewer rat.
+12:58:44 c2g_combat chunk w0 complete (7 eps)
+12:58:55   [c2g_combat/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+12:58:55 === c2g_combat/w1 seed 710 ===
+12:59:25   [c2g_combat/w1] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a wolf.
+12:59:25 === c2g_combat/w1 seed 713 ===
+12:59:30   [c2g_combat/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+12:59:30 === c2g_combat/w1 seed 716 ===
+12:59:36     step 4000 depth 2 (max 2) hp 30/30 xp 4 t=3951 wall=218s
+13:00:16     step 2000 depth 1 (max 1) hp 25/25 xp 2 t=1998 wall=47s
+13:00:53     step 6000 depth 2 (max 2) hp 30/30 xp 4 t=5969 wall=295s
+13:01:15     step 4000 depth 2 (max 2) hp 37/37 xp 3 t=4006 wall=105s
+13:01:18   [c2g_combat/w2] seed 702: prog 0.0242 depth 2 role Knight end DEATH: starved to death.
+13:01:18 === c2g_combat/w2 seed 705 ===
+13:01:58     step 2000 depth 2 (max 2) hp 26/26 xp 2 t=1970 wall=40s
+13:02:16     step 6000 depth 2 (max 2) hp 37/37 xp 3 t=6026 wall=166s
+13:02:26   [c2g_combat/w1] seed 716: prog 0.0208 depth 2 role Valkyrie end DEATH: died. Killed by a goblin, while fainted from lack of food.
+13:02:26 === c2g_combat/w1 seed 719 ===
+13:02:30     step 4000 depth 2 (max 2) hp 26/26 xp 2 t=3976 wall=72s
+13:02:32   [c2g_combat/w1] seed 719: prog 0.0485 depth 7 role Barbarian end DEATH: died. Killed by a giant spider, while helpless.
+13:02:32 c2g_combat chunk w1 complete (7 eps)
+13:02:53     step 6000 depth 2 (max 2) hp 26/26 xp 2 t=5996 wall=95s
+13:03:03   [c2g_combat/w2] seed 705: prog 0.0185 depth 2 role Barbarian end DEATH: died. Killed by a giant rat, while helpless.
+13:03:03 === c2g_combat/w2 seed 708 ===
+13:03:30     step 2000 depth 6 (max 6) hp 22/22 xp 3 t=1893 wall=27s
+13:03:37     step 4000 depth 6 (max 6) hp 22/22 xp 3 t=3923 wall=34s
+13:03:41   [c2g_combat/w2] seed 708: prog 0.0354 depth 6 role Rogue end DEATH: starved to death.
+13:03:41 === c2g_combat/w2 seed 711 ===
+13:03:48   [c2g_combat/w2] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a rothe, while helpless.
+13:03:48 === c2g_combat/w2 seed 714 ===
+13:03:55   [c2g_combat/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a fox.
+13:03:55 === c2g_combat/w2 seed 717 ===
+13:04:07   [c2g_combat/w2] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a wererat.
+13:04:07 c2g_combat chunk w2 complete (6 eps)
+13:04:09 === c2g_armor/w1 seed 701 ===
+13:04:09 === c2g_armor/w0 seed 700 ===
+13:04:09 === c2g_armor/w2 seed 702 ===
+13:04:50     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1978 wall=39s
+13:05:02     step 4000 depth 4 (max 4) hp 25/25 xp 2 t=3976 wall=51s
+13:05:05   [c2g_armor/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: starved to death.
+13:05:05 === c2g_armor/w0 seed 703 ===
+13:05:10     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1966 wall=59s
+13:05:34     step 2000 depth 5 (max 5) hp 23/23 xp 3 t=1919 wall=83s
+13:05:39   [c2g_armor/w2] seed 702: prog 0.0265 depth 5 role Knight end DEATH: died. Killed by a homunculus.
+13:05:39 === c2g_armor/w2 seed 705 ===
+13:06:07     step 2000 depth 9 (max 9) hp 60/60 xp 5 t=1956 wall=62s
+13:06:14     step 4000 depth 3 (max 3) hp 27/27 xp 3 t=3976 wall=123s
+13:06:49   [c2g_armor/w0] seed 703: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a captain.
+13:06:49 === c2g_armor/w0 seed 706 ===
+13:06:53   [c2g_armor/w0] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a kitten.
+13:06:53 === c2g_armor/w0 seed 709 ===
+13:07:02     step 2000 depth 3 (max 3) hp 35/35 xp 3 t=1970 wall=84s
+13:07:06   [c2g_armor/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a goblin.
+13:07:06 === c2g_armor/w0 seed 712 ===
+13:07:10   [c2g_armor/w2] seed 705: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by a dwarf.
+13:07:10 === c2g_armor/w2 seed 708 ===
+13:07:16     step 6000 depth 3 (max 3) hp 27/27 xp 3 t=5996 wall=185s
+13:07:30   [c2g_armor/w0] seed 712: prog 0.0485 depth 7 role Samurai end DEATH: died. Killed by a Mordor orc.
+13:07:30 === c2g_armor/w0 seed 715 ===
+13:07:31   [c2g_armor/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:07:31 === c2g_armor/w0 seed 718 ===
+13:07:34   [c2g_armor/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a werejackal, while fainted from lack of food.
+13:07:34 === c2g_armor/w1 seed 704 ===
+13:07:41   [c2g_armor/w2] seed 708: prog 0.0354 depth 6 role Rogue end DEATH: died. Killed by a gnome lord.
+13:07:41 === c2g_armor/w2 seed 711 ===
+13:08:05   [c2g_armor/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+13:08:05 c2g_armor chunk w0 complete (7 eps)
+13:08:10   [c2g_armor/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+13:08:10 === c2g_armor/w1 seed 707 ===
+13:08:11     step 2000 depth 7 (max 7) hp 32/32 xp 2 t=1975 wall=30s
+13:08:28   [c2g_armor/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:08:28 === c2g_armor/w1 seed 710 ===
+13:08:34     step 4000 depth 7 (max 7) hp 32/32 xp 2 t=3978 wall=53s
+13:08:46   [c2g_armor/w2] seed 711: prog 0.0485 depth 7 role Barbarian end DEATH: starved to death.
+13:08:46 === c2g_armor/w2 seed 714 ===
+13:08:47   [c2g_armor/w1] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a werewolf.
+13:08:47 === c2g_armor/w1 seed 713 ===
+13:08:50   [c2g_armor/w1] seed 713: prog 0.0977 depth 9 role Rogue end DEATH: died. Killed by a jackal.
+13:08:50 === c2g_armor/w1 seed 716 ===
+13:08:55   [c2g_armor/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+13:08:55 === c2g_armor/w2 seed 717 ===
+13:09:14   [c2g_armor/w2] seed 717: prog 0.0485 depth 7 role Caveman end DEATH: died. Killed by a giant spider.
+13:09:14 c2g_armor chunk w2 complete (6 eps)
+13:09:33     step 2000 depth 1 (max 1) hp 19/26 xp 2 t=2002 wall=43s
+13:10:20     step 4000 depth 1 (max 1) hp 35/35 xp 3 t=4008 wall=90s
+13:10:54     step 6000 depth 11 (max 11) hp 8/58 xp 5 t=5986 wall=124s
+13:10:54   [c2g_armor/w1] seed 716: prog 0.1613 depth 11 role Valkyrie end DEATH: died. Killed by a xorn, while fainted from lack of food.
+13:10:54 === c2g_armor/w1 seed 719 ===
+13:11:11     step 2000 depth 4 (max 4) hp 23/23 xp 2 t=1994 wall=16s
+13:11:31     step 4000 depth 4 (max 4) hp 42/42 xp 4 t=4004 wall=37s
+13:11:43     step 6000 depth 4 (max 4) hp 12/12 xp 5 t=6124 wall=48s
+13:11:43   [c2g_armor/w1] seed 719: prog 0.0291 depth 4 role Barbarian end DEATH: died. Killed by a manes, while fainted from lack of food.
+13:11:43 c2g_armor chunk w1 complete (7 eps)
+13:11:44 === c2g_food/w1 seed 701 ===
+13:11:44 === c2g_food/w2 seed 702 ===
+13:11:44 === c2g_food/w0 seed 700 ===
+13:12:07 === c2g_combat2/w0 seed 700 ===
+13:12:36     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1978 wall=49s
+13:12:57     step 4000 depth 4 (max 4) hp 25/25 xp 2 t=3985 wall=70s
+13:13:05     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1966 wall=78s
+13:13:15     step 6000 depth 4 (max 4) hp 25/25 xp 2 t=6005 wall=87s
+13:13:23     step 2000 depth 4 (max 4) hp 37/37 xp 4 t=1979 wall=73s
+13:13:28   [c2g_food/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: starved to death.
+13:13:28 === c2g_food/w0 seed 703 ===
+13:13:39     step 2000 depth 5 (max 5) hp 23/23 xp 3 t=1919 wall=112s
+13:13:45   [c2g_food/w2] seed 702: prog 0.0265 depth 5 role Knight end DEATH: died. Killed by a homunculus.
+13:13:45 === c2g_food/w2 seed 705 ===
+13:13:50     step 4000 depth 4 (max 4) hp 20/41 xp 5 t=3096 wall=100s
+13:14:10     step 6000 depth 4 (max 4) hp 38/41 xp 5 t=3134 wall=120s
+13:14:34 === c2g_combat/w2 seed 702 ===
+13:14:34 === c2g_combat/w1 seed 701 ===
+13:14:34 === c2g_combat/w0 seed 700 ===
+13:15:03   [c2g_combat/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: died. Killed by a gnome lord.
+13:15:03 === c2g_combat/w0 seed 703 ===
+13:15:05     step 2000 depth 2 (max 3) hp 19/19 xp 2 t=1975 wall=29s
+13:15:25     step 4000 depth 2 (max 3) hp 23/23 xp 3 t=3853 wall=49s
+13:15:49     step 6000 depth 2 (max 3) hp 23/23 xp 3 t=5517 wall=72s
+13:16:06     step 2000 depth 9 (max 9) hp 26/62 xp 6 t=1964 wall=63s
+13:16:09   [c2g_combat/w0] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a wand.
+13:16:09 === c2g_combat/w0 seed 706 ===
+13:16:09   [c2g_combat/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: was poisoned. Poisoned by a rotted jackal corpse.
+13:16:09 === c2g_combat/w1 seed 704 ===
+13:16:09   [c2g_combat/w0] seed 706: prog 0.0000 depth 1 role Priest end DEATH: died. Killed by a falling rock.
+13:16:09 === c2g_combat/w0 seed 709 ===
+13:16:23   [c2g_combat/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a kobold.
+13:16:23 === c2g_combat/w0 seed 712 ===
+13:16:28     step 2000 depth 2 (max 2) hp 28/28 xp 3 t=1951 wall=112s
+13:16:45   [c2g_combat/w0] seed 712: prog 0.0265 depth 5 role Samurai end DEATH: died. Killed by a hill orc, while fainted from lack of food.
+13:16:45 === c2g_combat/w0 seed 715 ===
+13:16:45   [c2g_combat/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:16:45 === c2g_combat/w0 seed 718 ===
+13:16:51   [c2g_combat/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+13:16:51 === c2g_combat/w1 seed 707 ===
+13:17:13   [c2g_combat/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:17:13 === c2g_combat/w1 seed 710 ===
+13:17:22   [c2g_combat/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a sewer rat.
+13:17:22 c2g_combat chunk w0 complete (7 eps)
+13:17:38     step 2000 depth 2 (max 2) hp 35/36 xp 3 t=2008 wall=25s
+13:17:39     step 4000 depth 2 (max 2) hp 37/37 xp 4 t=3973 wall=183s
+13:17:44   [c2g_combat/w1] seed 710: prog 0.0242 depth 2 role Caveman end DEATH: was poisoned. Poisoned by a rotted giant rat corpse.
+13:17:44 === c2g_combat/w1 seed 713 ===
+13:17:47   [c2g_combat/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+13:17:47 === c2g_combat/w1 seed 716 ===
+13:17:53   [c2g_combat/w1] seed 716: prog 0.0000 depth 1 role Valkyrie end DEATH: died. Killed by a falling rock.
+13:17:53 === c2g_combat/w1 seed 719 ===
+13:17:55   [c2g_combat/w2] seed 702: prog 0.0291 depth 2 role Knight end DEATH: died. Killed by a hobgoblin, while fainted from lack of food.
+13:17:55 === c2g_combat/w2 seed 705 ===
+13:18:17     step 2000 depth 4 (max 4) hp 15/15 xp 1 t=1990 wall=24s
+13:18:44     step 2000 depth 1 (max 1) hp 22/22 xp 2 t=1991 wall=49s
+13:18:58     step 4000 depth 4 (max 4) hp 36/36 xp 3 t=4000 wall=65s
+13:19:02     step 4000 depth 1 (max 1) hp 29/29 xp 3 t=3988 wall=67s
+13:19:15     step 6000 depth 1 (max 1) hp 37/37 xp 4 t=6000 wall=80s
+13:19:32     step 8000 depth 1 (max 1) hp 37/37 xp 4 t=8025 wall=96s
+13:19:34   [c2g_combat/w2] seed 705: prog 0.0242 depth 1 role Barbarian end DEATH: died. Killed by a giant rat, while fainted from lack of food.
+13:19:34 === c2g_combat/w2 seed 708 ===
+13:19:49     step 6000 depth 4 (max 4) hp 36/36 xp 3 t=6020 wall=116s
+13:20:00   [c2g_combat/w1] seed 719: prog 0.0212 depth 4 role Barbarian end DEATH: starved to death.
+13:20:00 c2g_combat chunk w1 complete (7 eps)
+13:20:09     step 2000 depth 8 (max 8) hp 26/26 xp 3 t=1966 wall=35s
+13:20:25     step 4000 depth 8 (max 8) hp 26/26 xp 3 t=3996 wall=52s
+13:20:39   [c2g_combat/w2] seed 708: prog 0.0696 depth 8 role Rogue end DEATH: starved to death.
+13:20:39 === c2g_combat/w2 seed 711 ===
+13:20:55     step 2000 depth 6 (max 6) hp 39/39 xp 3 t=1974 wall=16s
+13:21:09     step 4000 depth 6 (max 6) hp 39/39 xp 3 t=3975 wall=30s
+13:21:24     step 6000 depth 6 (max 6) hp 48/48 xp 4 t=6005 wall=45s
+13:21:31   [c2g_combat/w2] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a dwarf, while fainted from lack of food.
+13:21:31 === c2g_combat/w2 seed 714 ===
+13:21:38   [c2g_combat/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+13:21:38 === c2g_combat/w2 seed 717 ===
+13:21:55     step 2000 depth 4 (max 4) hp 24/24 xp 3 t=2158 wall=17s
+13:22:03   [c2g_combat/w2] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: starved to death.
+13:22:03 c2g_combat chunk w2 complete (6 eps)
+13:22:04 === c2g_food/w2 seed 702 ===
+13:22:04 === c2g_food/w1 seed 701 ===
+13:22:04 === c2g_food/w0 seed 700 ===
+13:22:46     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1978 wall=40s
+13:22:56     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1569 wall=49s
+13:22:59     step 4000 depth 4 (max 4) hp 25/25 xp 2 t=3985 wall=52s
+13:23:07     step 4000 depth 3 (max 3) hp 21/21 xp 2 t=1600 wall=61s
+13:23:10     step 6000 depth 4 (max 4) hp 25/25 xp 2 t=6005 wall=64s
+13:23:19   [c2g_food/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: starved to death.
+13:23:19 === c2g_food/w0 seed 703 ===
+13:23:20     step 6000 depth 3 (max 3) hp 21/21 xp 2 t=1630 wall=74s
+13:23:29     step 2000 depth 4 (max 5) hp 23/23 xp 3 t=1921 wall=83s
+13:23:35     step 8000 depth 3 (max 3) hp 21/21 xp 2 t=1661 wall=88s
+13:23:45   [c2g_food/w2] seed 702: prog 0.0265 depth 5 role Knight end DEATH: died. Killed by a giant ant.
+13:23:45 === c2g_food/w2 seed 705 ===
+13:23:47     step 10000 depth 3 (max 3) hp 21/21 xp 2 t=1692 wall=100s
+13:23:58     step 12000 depth 3 (max 3) hp 21/21 xp 2 t=1732 wall=111s
+13:24:10     step 14000 depth 3 (max 3) hp 21/21 xp 2 t=1811 wall=123s
+13:24:10   [c2g_food/w0] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a giant spider.
+13:24:10 === c2g_food/w0 seed 706 ===
+13:24:25     step 16000 depth 3 (max 3) hp 21/21 xp 2 t=1951 wall=138s
+13:24:29     step 2000 depth 4 (max 4) hp 16/16 xp 1 t=757 wall=19s
+13:24:37   [c2g_food/w1] seed 701: prog 0.0185 depth 3 role Knight end DEATH: died. Killed by a coyote, while fainted from lack of food.
+13:24:37 === c2g_food/w1 seed 704 ===
+13:24:43     step 4000 depth 4 (max 4) hp 16/16 xp 1 t=1759 wall=33s
+13:24:55     step 2000 depth 8 (max 8) hp 42/42 xp 3 t=1952 wall=70s
+13:24:58     step 6000 depth 4 (max 4) hp 27/27 xp 4 t=3782 wall=49s
+13:25:05   [c2g_food/w0] seed 706: prog 0.0242 depth 4 role Priest end DEATH: was poisoned. Poisoned by a rotted rothe corpse.
+13:25:05 === c2g_food/w0 seed 709 ===
+13:25:10     step 4000 depth 8 (max 8) hp 60/60 xp 5 t=3965 wall=85s
+13:25:16   [c2g_food/w2] seed 705: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a soldier ant.
+13:25:16 === c2g_food/w2 seed 708 ===
+13:25:26   [c2g_food/w0] seed 709: prog 0.0175 depth 3 role Healer end DEATH: died. Killed by a magic missile, while sleeping.
+13:25:26 === c2g_food/w0 seed 712 ===
+13:25:32     step 2000 depth 2 (max 2) hp 5/16 xp 1 t=1443 wall=55s
+13:25:37     step 2000 depth 4 (max 4) hp 11/11 xp 1 t=766 wall=21s
+13:25:45     step 4000 depth 2 (max 2) hp 7/16 xp 1 t=1474 wall=68s
+13:25:49     step 4000 depth 4 (max 4) hp 11/11 xp 1 t=796 wall=33s
+13:25:54     step 2000 depth 3 (max 3) hp 26/26 xp 2 t=1481 wall=28s
+13:25:58     step 6000 depth 2 (max 2) hp 9/16 xp 1 t=1504 wall=81s
+13:26:00     step 6000 depth 4 (max 4) hp 11/11 xp 1 t=827 wall=44s
+13:26:13     step 8000 depth 2 (max 2) hp 11/16 xp 1 t=1535 wall=96s
+13:26:14     step 8000 depth 4 (max 4) hp 11/11 xp 1 t=858 wall=58s
+13:26:18   [c2g_food/w0] seed 712: prog 0.0208 depth 3 role Samurai end DEATH: was poisoned. Poisoned by a rotted giant rat corpse.
+13:26:18 === c2g_food/w0 seed 715 ===
+13:26:19   [c2g_food/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:26:19 === c2g_food/w0 seed 718 ===
+13:26:36     step 10000 depth 4 (max 4) hp 11/11 xp 1 t=889 wall=79s
+13:26:39     step 10000 depth 2 (max 2) hp 13/16 xp 1 t=1566 wall=122s
+13:26:56     step 12000 depth 4 (max 4) hp 11/11 xp 1 t=952 wall=100s
+13:27:01     step 12000 depth 2 (max 2) hp 16/16 xp 1 t=1626 wall=144s
+13:27:14     step 14000 depth 4 (max 4) hp 11/11 xp 1 t=1118 wall=118s
+13:27:17   [c2g_food/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+13:27:17 c2g_food chunk w0 complete (7 eps)
+13:27:23     step 14000 depth 2 (max 2) hp 16/16 xp 1 t=1810 wall=166s
+13:27:34     step 16000 depth 4 (max 4) hp 11/11 xp 1 t=1341 wall=138s
+13:27:43     step 16000 depth 2 (max 2) hp 16/16 xp 1 t=1973 wall=186s
+13:27:49     step 18000 depth 4 (max 4) hp 11/11 xp 1 t=1607 wall=153s
+13:27:54   [c2g_food/w2] seed 708: prog 0.0212 depth 4 role Rogue end DEATH: starved to death.
+13:27:54 === c2g_food/w2 seed 711 ===
+13:28:00     step 18000 depth 2 (max 2) hp 16/16 xp 1 t=2375 wall=203s
+13:28:13     step 2000 depth 4 (max 4) hp 15/15 xp 1 t=759 wall=19s
+13:28:14   [c2g_food/w1] seed 704: prog 0.0154 depth 2 role Knight end DEATH: starved to death.
+13:28:14 === c2g_food/w1 seed 707 ===
+13:28:33     step 4000 depth 4 (max 4) hp 15/15 xp 1 t=790 wall=39s
+13:28:46   [c2g_food/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:28:46 === c2g_food/w1 seed 710 ===
+13:28:51     step 6000 depth 6 (max 6) hp 29/29 xp 2 t=1064 wall=57s
+13:29:23     step 2000 depth 2 (max 2) hp 30/30 xp 3 t=2000 wall=38s
+13:29:33     step 8000 depth 6 (max 6) hp 12/50 xp 4 t=3066 wall=99s
+13:29:48     step 4000 depth 2 (max 2) hp 37/37 xp 4 t=4018 wall=62s
+13:29:50     step 10000 depth 6 (max 6) hp 50/50 xp 4 t=5087 wall=116s
+13:30:01   [c2g_food/w2] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a killer bee, while fainted from lack of food.
+13:30:01 === c2g_food/w2 seed 714 ===
+13:30:03   [c2g_food/w1] seed 710: prog 0.0291 depth 2 role Caveman end DEATH: died. Killed by a newt, while fainted from lack of food.
+13:30:03 === c2g_food/w1 seed 713 ===
+13:30:14   [c2g_food/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+13:30:14 === c2g_food/w1 seed 716 ===
+13:30:33 === c2g_combat/w0 seed 700 ===
+13:30:33 === c2g_combat/w1 seed 701 ===
+13:30:33 === c2g_combat/w2 seed 702 ===
+13:31:07     step 2000 depth 4 (max 4) hp 24/24 xp 2 t=1969 wall=31s
+13:31:23   [c2g_combat/w0] seed 700: prog 0.0696 depth 8 role Valkyrie end DEATH: died. Killed by an imp.
+13:31:23 === c2g_combat/w0 seed 703 ===
+13:31:27     step 4000 depth 4 (max 4) hp 24/24 xp 2 t=3989 wall=51s
+13:31:46     step 6000 depth 4 (max 4) hp 24/24 xp 2 t=6009 wall=69s
+13:31:51   [c2g_combat/w1] seed 701: prog 0.0212 depth 4 role Knight end DEATH: starved to death.
+13:31:51 === c2g_combat/w1 seed 704 ===
+13:32:44   [c2g_combat/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+13:32:44 === c2g_combat/w1 seed 707 ===
+13:32:45     step 2000 depth 9 (max 9) hp 26/62 xp 6 t=1964 wall=82s
+13:32:49   [c2g_combat/w0] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a wand.
+13:32:49 === c2g_combat/w0 seed 706 ===
+13:32:50   [c2g_combat/w0] seed 706: prog 0.0000 depth 1 role Priest end DEATH: died. Killed by a falling rock.
+13:32:50 === c2g_combat/w0 seed 709 ===
+13:33:06     step 2000 depth 2 (max 2) hp 28/28 xp 3 t=1951 wall=150s
+13:33:08   [c2g_combat/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a kobold.
+13:33:08 === c2g_combat/w0 seed 712 ===
+13:33:13   [c2g_combat/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:33:13 === c2g_combat/w1 seed 710 ===
+13:33:34   [c2g_combat/w0] seed 712: prog 0.0354 depth 6 role Samurai end DEATH: died. Killed by a rothe.
+13:33:34 === c2g_combat/w0 seed 715 ===
+13:33:35   [c2g_combat/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:33:35 === c2g_combat/w0 seed 718 ===
+13:33:58   [c2g_combat/w1] seed 710: prog 0.0354 depth 6 role Caveman end DEATH: died. Killed by a gnome lord.
+13:33:58 === c2g_combat/w1 seed 713 ===
+13:34:05   [c2g_combat/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+13:34:05 === c2g_combat/w1 seed 716 ===
+13:34:17   [c2g_combat/w1] seed 716: prog 0.0000 depth 1 role Valkyrie end DEATH: died. Killed by a falling rock.
+13:34:17 === c2g_combat/w1 seed 719 ===
+13:34:18   [c2g_combat/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a sewer rat.
+13:34:18 c2g_combat chunk w0 complete (7 eps)
+13:34:57     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1992 wall=40s
+13:35:07   [c2g_combat/w1] seed 719: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a giant mimic.
+13:35:07 c2g_combat chunk w1 complete (7 eps)
+13:35:26     step 4000 depth 2 (max 2) hp 36/36 xp 4 t=3897 wall=290s
+13:35:40   [c2g_combat/w2] seed 702: prog 0.0242 depth 2 role Knight end DEATH: died. Killed by a hobgoblin.
+13:35:40 === c2g_combat/w2 seed 705 ===
+13:36:28     step 2000 depth 4 (max 5) hp 34/34 xp 3 t=1961 wall=48s
+13:36:49     step 4000 depth 9 (max 9) hp 49/54 xp 5 t=3911 wall=70s
+13:36:55   [c2g_combat/w2] seed 705: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a human mummy.
+13:36:55 === c2g_combat/w2 seed 708 ===
+13:37:00 === c2g_food/w2 seed 702 ===
+13:37:00 === c2g_food/w1 seed 701 ===
+13:37:00 === c2g_food/w0 seed 700 ===
+13:37:03 === c2g_combat/w2b seed 705 ===
+13:38:04     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1978 wall=60s
+13:38:28     step 4000 depth 4 (max 4) hp 25/25 xp 2 t=3985 wall=84s
+13:38:40     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1972 wall=97s
+13:38:52     step 6000 depth 4 (max 4) hp 25/25 xp 2 t=6005 wall=109s
+13:39:08   [c2g_food/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: starved to death.
+13:39:08 === c2g_food/w0 seed 703 ===
+13:39:08     step 2000 depth 4 (max 5) hp 34/34 xp 3 t=1961 wall=122s
+13:39:24     step 2000 depth 5 (max 5) hp 23/23 xp 3 t=1919 wall=140s
+13:39:38   [c2g_food/w2] seed 702: prog 0.0265 depth 5 role Knight end DEATH: died. Killed by a pony.
+13:39:38 === c2g_food/w2 seed 705 ===
+13:40:11     step 4000 depth 9 (max 9) hp 49/54 xp 5 t=3911 wall=184s
+13:40:30   [c2g_combat/w2b] seed 705: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a human mummy.
+13:40:30 === c2g_combat/w2b seed 708 ===
+13:40:41   [c2g_food/w0] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a giant spider.
+13:40:41 === c2g_food/w0 seed 706 ===
+13:40:41     step 4000 depth 3 (max 3) hp 21/21 xp 2 t=3992 wall=217s
+13:40:55   [c2g_food/w0] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a hobgoblin.
+13:40:55 === c2g_food/w0 seed 709 ===
+13:41:27   [c2g_food/w0] seed 709: prog 0.0175 depth 3 role Healer end DEATH: died. Killed by a magic missile, while sleeping.
+13:41:27 === c2g_food/w0 seed 712 ===
+13:41:39     step 2000 depth 9 (max 9) hp 22/42 xp 3 t=1951 wall=121s
+13:42:06     step 2000 depth 8 (max 8) hp 26/26 xp 3 t=1966 wall=95s
+13:42:26   [c2g_food/w0] seed 712: prog 0.2566 depth 13 role Samurai end DEATH: died. Killed by a guard.
+13:42:26 === c2g_food/w0 seed 715 ===
+13:42:27   [c2g_food/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:42:27 === c2g_food/w0 seed 718 ===
+13:42:36   [c2g_combat/w2b] seed 708: prog 0.0696 depth 8 role Rogue end DEATH: died. Killed by a white unicorn.
+13:42:36 === c2g_combat/w2b seed 711 ===
+13:42:40     step 6000 depth 3 (max 3) hp 21/21 xp 2 t=6010 wall=336s
+13:43:09   [c2g_food/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: starved to death.
+13:43:09 === c2g_food/w1 seed 704 ===
+13:43:30   [c2g_food/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+13:43:30 c2g_food chunk w0 complete (7 eps)
+13:43:32     step 2000 depth 6 (max 6) hp 39/39 xp 3 t=1974 wall=56s
+13:43:38   [c2g_food/w2] seed 705: prog 0.1613 depth 11 role Barbarian end DEATH: died. Killed by brainlessness.
+13:43:38 === c2g_food/w2 seed 708 ===
+13:43:45   [c2g_food/w2] seed 708: prog 0.0212 depth 4 role Rogue end DEATH: died. Killed by a gas spore's explosion.
+13:43:45 === c2g_food/w2 seed 711 ===
+13:43:53   [c2g_food/w2] seed 711: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a giant bat.
+13:43:53 === c2g_food/w2 seed 714 ===
+13:44:06     step 4000 depth 6 (max 6) hp 39/39 xp 3 t=3975 wall=89s
+13:44:23     step 2000 depth 2 (max 2) hp 5/16 xp 1 t=1443 wall=74s
+13:44:40     step 6000 depth 6 (max 6) hp 48/48 xp 4 t=6005 wall=124s
+13:44:43     step 4000 depth 2 (max 2) hp 7/16 xp 1 t=1474 wall=94s
+13:44:56   [c2g_food/w2] seed 714: prog 0.0000 depth 1 role Tourist end DEATH: died. Killed by a sewer rat.
+13:44:56 === c2g_food/w2 seed 717 ===
+13:44:57   [c2g_combat/w2b] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a dwarf, while fainted from lack of food.
+13:44:57 === c2g_combat/w2b seed 714 ===
+13:45:01     step 6000 depth 2 (max 2) hp 9/16 xp 1 t=1504 wall=112s
+13:45:15   [c2g_combat/w2b] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+13:45:15 === c2g_combat/w2b seed 717 ===
+13:45:18     step 8000 depth 2 (max 2) hp 11/16 xp 1 t=1535 wall=129s
+13:45:32   [c2g_food/w2] seed 717: prog 0.0485 depth 7 role Caveman end DEATH: died. Killed by a giant spider.
+13:45:32 c2g_food chunk w2 complete (6 eps)
+13:45:37     step 10000 depth 2 (max 2) hp 13/16 xp 1 t=1566 wall=148s
+13:45:49     step 12000 depth 2 (max 2) hp 16/16 xp 1 t=1626 wall=160s
+13:45:58     step 2000 depth 4 (max 5) hp 29/29 xp 3 t=1971 wall=43s
+13:46:03     step 14000 depth 2 (max 2) hp 16/16 xp 1 t=1810 wall=174s
+13:46:09   [c2g_combat/w2b] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a purple worm.
+13:46:09 c2g_combat chunk w2b complete (5 eps)
+13:46:15     step 16000 depth 2 (max 2) hp 16/16 xp 1 t=1973 wall=186s
+13:46:29     step 18000 depth 2 (max 2) hp 16/16 xp 1 t=2375 wall=200s
+13:46:37   [c2g_food/w1] seed 704: prog 0.0154 depth 2 role Knight end DEATH: starved to death.
+13:46:37 === c2g_food/w1 seed 707 ===
+13:46:52   [c2g_food/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:46:52 === c2g_food/w1 seed 710 ===
+13:47:06   [c2g_food/w1] seed 710: prog 0.0354 depth 6 role Caveman end DEATH: died. Killed by a gas spore's explosion.
+13:47:06 === c2g_food/w1 seed 713 ===
+13:47:11   [c2g_food/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+13:47:11 === c2g_food/w1 seed 716 ===
+13:47:29   [c2g_food/w1] seed 716: prog 0.0208 depth 3 role Valkyrie end DEATH: died. Killed by a small mimic.
+13:47:29 === c2g_food/w1 seed 719 ===
+13:47:33   [c2g_food/w1] seed 719: prog 0.0485 depth 7 role Barbarian end DEATH: died. Killed by a giant spider.
+13:47:33 c2g_food chunk w1 complete (7 eps)
+13:47:34 === c2g_armor/w0 seed 700 ===
+13:47:34 === c2g_armor/w2 seed 702 ===
+13:47:35 === c2g_armor/w1 seed 701 ===
+13:48:00     step 2000 depth 5 (max 5) hp 26/26 xp 2 t=1979 wall=23s
+13:48:12     step 4000 depth 5 (max 5) hp 26/26 xp 2 t=3989 wall=35s
+13:48:27     step 6000 depth 5 (max 5) hp 26/26 xp 2 t=6009 wall=50s
+13:48:30     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1966 wall=53s
+13:48:35   [c2g_armor/w0] seed 700: prog 0.0265 depth 5 role Valkyrie end DEATH: starved to death.
+13:48:35 === c2g_armor/w0 seed 703 ===
+13:49:05     step 2000 depth 3 (max 3) hp 23/23 xp 3 t=1941 wall=88s
+13:49:07   [c2g_armor/w0] seed 703: prog 0.1613 depth 11 role Barbarian end DEATH: died. Killed by an owlbear.
+13:49:07 === c2g_armor/w0 seed 706 ===
+13:49:10   [c2g_armor/w0] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a kitten.
+13:49:10 === c2g_armor/w0 seed 709 ===
+13:49:19     step 4000 depth 3 (max 3) hp 27/27 xp 3 t=3976 wall=103s
+13:49:30   [c2g_armor/w0] seed 709: prog 0.0185 depth 3 role Healer end DEATH: died. Killed by a magic missile, while sleeping.
+13:49:30 === c2g_armor/w0 seed 712 ===
+13:49:31     step 4000 depth 3 (max 3) hp 25/25 xp 4 t=3962 wall=114s
+13:49:37   [c2g_armor/w2] seed 702: prog 0.0242 depth 3 role Knight end DEATH: starved to death.
+13:49:37 === c2g_armor/w2 seed 705 ===
+13:49:48   [c2g_armor/w0] seed 712: prog 0.0485 depth 7 role Samurai end DEATH: died. Killed by a Mordor orc.
+13:49:48 === c2g_armor/w0 seed 715 ===
+13:49:48   [c2g_armor/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:49:48 === c2g_armor/w0 seed 718 ===
+13:50:10     step 6000 depth 3 (max 3) hp 27/27 xp 3 t=5996 wall=153s
+13:50:19   [c2g_armor/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+13:50:19 c2g_armor chunk w0 complete (7 eps)
+13:50:23   [c2g_armor/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a werejackal, while fainted from lack of food.
+13:50:23 === c2g_armor/w1 seed 704 ===
+13:50:41     step 2000 depth 3 (max 3) hp 35/35 xp 3 t=1970 wall=64s
+13:50:46   [c2g_armor/w2] seed 705: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by a dwarf.
+13:50:46 === c2g_armor/w2 seed 708 ===
+13:50:47   [c2g_armor/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+13:50:47 === c2g_armor/w1 seed 707 ===
+13:50:59   [c2g_armor/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:50:59 === c2g_armor/w1 seed 710 ===
+13:51:02   [c2g_armor/w2] seed 708: prog 0.0354 depth 6 role Rogue end DEATH: died. Killed by a gnome lord.
+13:51:02 === c2g_armor/w2 seed 711 ===
+13:51:14   [c2g_armor/w1] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a werewolf.
+13:51:14 === c2g_armor/w1 seed 713 ===
+13:51:15   [c2g_armor/w2] seed 711: prog 0.2925 depth 14 role Barbarian end DEATH: died. Killed by a chameleon imitating a white dragon.
+13:51:15 === c2g_armor/w2 seed 714 ===
+13:51:17   [c2g_armor/w1] seed 713: prog 0.0977 depth 9 role Rogue end DEATH: died. Killed by a jackal.
+13:51:17 === c2g_armor/w1 seed 716 ===
+13:51:27   [c2g_armor/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+13:51:27 === c2g_armor/w2 seed 717 ===
+13:51:43   [c2g_armor/w2] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: was poisoned. Poisoned by a rotted golden naga hatchling corpse.
+13:51:43 c2g_armor chunk w2 complete (6 eps)
+13:51:57     step 2000 depth 1 (max 1) hp 33/33 xp 3 t=2002 wall=40s
+13:52:23   [c2g_armor/w1] seed 716: prog 0.0208 depth 1 role Valkyrie end DEATH: died. Killed by a newt, while fainted from lack of food.
+13:52:23 === c2g_armor/w1 seed 719 ===
+13:52:28   [c2g_armor/w1] seed 719: prog 0.0485 depth 7 role Barbarian end DEATH: died. Killed by a giant spider.
+13:52:28 c2g_armor chunk w1 complete (7 eps)
+13:52:29 === c2g_nav/w2 seed 702 ===
+13:52:29 === c2g_nav/w1 seed 701 ===
+13:52:29 === c2g_nav/w0 seed 700 ===
+13:53:46     step 2000 depth 4 (max 4) hp 33/33 xp 3 t=1980 wall=74s
+13:53:56     step 2000 depth 3 (max 3) hp 27/27 xp 3 t=1981 wall=85s
+13:53:58   [c2g_nav/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a little dog.
+13:53:58 === c2g_nav/w1 seed 704 ===
+13:53:59     step 4000 depth 4 (max 4) hp 33/33 xp 3 t=3961 wall=87s
+13:54:12     step 6000 depth 4 (max 4) hp 33/33 xp 3 t=5991 wall=100s
+13:54:29   [c2g_nav/w0] seed 700: prog 0.0242 depth 4 role Valkyrie end DEATH: starved to death.
+13:54:29 === c2g_nav/w0 seed 703 ===
+13:54:35   [c2g_nav/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+13:54:35 === c2g_nav/w1 seed 707 ===
+13:54:38     step 2000 depth 2 (max 2) hp 24/24 xp 2 t=1972 wall=127s
+13:54:53   [c2g_nav/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+13:54:53 === c2g_nav/w1 seed 710 ===
+13:55:11     step 2000 depth 9 (max 9) hp 18/69 xp 6 t=1934 wall=42s
+13:55:15   [c2g_nav/w1] seed 710: prog 0.0354 depth 6 role Caveman end DEATH: died. Killed by a gnome lord.
+13:55:15 === c2g_nav/w1 seed 713 ===
+13:55:17   [c2g_nav/w0] seed 703: prog 0.2061 depth 12 role Barbarian end DEATH: died. Killed by a Woodland-elf.
+13:55:17 === c2g_nav/w0 seed 706 ===
+13:55:18     step 4000 depth 2 (max 2) hp 24/24 xp 2 t=3993 wall=167s
+13:55:19   [c2g_nav/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+13:55:19 === c2g_nav/w1 seed 716 ===
+13:55:23   [c2g_nav/w0] seed 706: prog 0.0175 depth 3 role Priest end DEATH: died. Killed by a jackal.
+13:55:23 === c2g_nav/w0 seed 709 ===
+13:55:45   [c2g_nav/w0] seed 709: prog 0.0185 depth 3 role Healer end DEATH: died. Killed by a magic missile, while sleeping.
+13:55:45 === c2g_nav/w0 seed 712 ===
+13:56:03     step 6000 depth 2 (max 2) hp 24/24 xp 2 t=6014 wall=211s
+13:56:06   [c2g_nav/w0] seed 712: prog 0.1256 depth 10 role Samurai end DEATH: died. Killed by a soldier ant.
+13:56:06 === c2g_nav/w0 seed 715 ===
+13:56:06   [c2g_nav/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+13:56:06 === c2g_nav/w0 seed 718 ===
+13:56:10   [c2g_nav/w0] seed 718: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a boulder.
+13:56:10 c2g_nav chunk w0 complete (7 eps)
+13:56:14     step 2000 depth 9 (max 9) hp 34/46 xp 4 t=1924 wall=54s
+13:56:14   [c2g_nav/w1] seed 716: prog 0.1613 depth 11 role Valkyrie end DEATH: died. Killed by a yeti.
+13:56:14 === c2g_nav/w1 seed 719 ===
+13:56:17   [c2g_nav/w2] seed 702: prog 0.0185 depth 2 role Knight end DEATH: starved to death.
+13:56:17 === c2g_nav/w2 seed 705 ===
+13:56:22   [c2g_nav/w1] seed 719: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a giant mimic.
+13:56:22 c2g_nav chunk w1 complete (7 eps)
+13:56:59     step 2000 depth 3 (max 3) hp 35/35 xp 3 t=1968 wall=42s
+13:57:04   [c2g_nav/w2] seed 705: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a dwarf.
+13:57:04 === c2g_nav/w2 seed 708 ===
+13:57:11   [c2g_nav/w2] seed 708: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a manes.
+13:57:11 === c2g_nav/w2 seed 711 ===
+13:57:25   [c2g_nav/w2] seed 711: prog 0.2925 depth 14 role Barbarian end DEATH: died. Killed by an ogre.
+13:57:25 === c2g_nav/w2 seed 714 ===
+13:57:32   [c2g_nav/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+13:57:32 === c2g_nav/w2 seed 717 ===
+13:57:44   [c2g_nav/w2] seed 717: prog 0.0485 depth 7 role Caveman end DEATH: died. Killed by a giant spider.
+13:57:44 c2g_nav chunk w2 complete (6 eps)
+13:57:45 === c2g_pace/w1 seed 701 ===
+13:57:45 === c2g_pace/w0 seed 700 ===
+13:57:45 === c2g_pace/w2 seed 702 ===
+13:58:17     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1978 wall=30s
+13:58:34     step 4000 depth 4 (max 4) hp 25/25 xp 2 t=3976 wall=46s
+13:58:36   [c2g_pace/w0] seed 700: prog 0.0212 depth 4 role Valkyrie end DEATH: starved to death.
+13:58:36 === c2g_pace/w0 seed 703 ===
+13:58:38     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1966 wall=50s
+13:59:00     step 2000 depth 5 (max 5) hp 23/23 xp 3 t=1919 wall=72s
+13:59:04   [c2g_pace/w2] seed 702: prog 0.0265 depth 5 role Knight end DEATH: died. Killed by a homunculus.
+13:59:04 === c2g_pace/w2 seed 705 ===
+13:59:23     step 2000 depth 9 (max 9) hp 60/60 xp 5 t=1956 wall=47s
+13:59:31     step 4000 depth 3 (max 3) hp 27/27 xp 3 t=3976 wall=103s
+13:59:59   [c2g_pace/w0] seed 703: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a captain.
+13:59:59 === c2g_pace/w0 seed 706 ===
+14:00:03   [c2g_pace/w0] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a bat.
+14:00:03 === c2g_pace/w0 seed 709 ===
+14:00:14   [c2g_pace/w0] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a goblin.
+14:00:14 === c2g_pace/w0 seed 712 ===
+14:00:20     step 2000 depth 3 (max 3) hp 35/35 xp 3 t=1970 wall=76s
+14:00:22     step 6000 depth 3 (max 3) hp 27/27 xp 3 t=5996 wall=154s
+14:00:30   [c2g_pace/w2] seed 705: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by a dwarf.
+14:00:30 === c2g_pace/w2 seed 708 ===
+14:00:36   [c2g_pace/w0] seed 712: prog 0.0485 depth 7 role Samurai end DEATH: died. Killed by a Mordor orc.
+14:00:36 === c2g_pace/w0 seed 715 ===
+14:00:36   [c2g_pace/w0] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+14:00:36 === c2g_pace/w0 seed 718 ===
+14:00:36   [c2g_pace/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a werejackal, while fainted from lack of food.
+14:00:36 === c2g_pace/w1 seed 704 ===
+14:00:55   [c2g_pace/w2] seed 708: prog 0.0354 depth 6 role Rogue end DEATH: died. Killed by a gnome lord.
+14:00:55 === c2g_pace/w2 seed 711 ===
+14:01:06   [c2g_pace/w0] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+14:01:06 c2g_pace chunk w0 complete (7 eps)
+14:01:08   [c2g_pace/w1] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+14:01:08 === c2g_pace/w1 seed 707 ===
+14:01:14     step 2000 depth 7 (max 7) hp 32/32 xp 2 t=1975 wall=19s
+14:01:21   [c2g_pace/w1] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+14:01:21 === c2g_pace/w1 seed 710 ===
+14:01:32     step 4000 depth 7 (max 7) hp 32/32 xp 2 t=3978 wall=37s
+14:01:39   [c2g_pace/w1] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a werewolf.
+14:01:39 === c2g_pace/w1 seed 713 ===
+14:01:40   [c2g_pace/w2] seed 711: prog 0.0485 depth 7 role Barbarian end DEATH: starved to death.
+14:01:40 === c2g_pace/w2 seed 714 ===
+14:01:42   [c2g_pace/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+14:01:42 === c2g_pace/w1 seed 716 ===
+14:01:48   [c2g_pace/w2] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+14:01:48 === c2g_pace/w2 seed 717 ===
+14:02:04   [c2g_pace/w2] seed 717: prog 0.0485 depth 7 role Caveman end DEATH: died. Killed by a giant spider.
+14:02:04 c2g_pace chunk w2 complete (6 eps)
+14:02:21     step 2000 depth 1 (max 1) hp 19/26 xp 2 t=2002 wall=39s
+14:03:02     step 4000 depth 1 (max 1) hp 35/35 xp 3 t=4008 wall=81s
+14:03:32     step 6000 depth 11 (max 11) hp 8/58 xp 5 t=5986 wall=111s
+14:03:33   [c2g_pace/w1] seed 716: prog 0.1613 depth 11 role Valkyrie end DEATH: died. Killed by a xorn, while fainted from lack of food.
+14:03:33 === c2g_pace/w1 seed 719 ===
+14:03:46     step 2000 depth 4 (max 4) hp 23/23 xp 2 t=1994 wall=13s
+14:04:02     step 4000 depth 4 (max 4) hp 42/42 xp 4 t=4004 wall=29s
+14:04:12     step 6000 depth 4 (max 4) hp 12/12 xp 5 t=6124 wall=39s
+14:04:12   [c2g_pace/w1] seed 719: prog 0.0291 depth 4 role Barbarian end DEATH: died. Killed by a manes, while fainted from lack of food.
+14:04:12 c2g_pace chunk w1 complete (7 eps)
+14:04:54 === c2g_armorR/wb seed 701 ===
+14:04:54 === c2g_combatR/wa seed 700 ===
+14:04:54 === c2g_armorR/wa seed 700 ===
+14:04:54 === c2g_combatR/wb seed 701 ===
+14:05:17   [c2g_combatR/wa] seed 700: prog 0.0265 depth 5 role Valkyrie end DEATH: died. Killed by a hill orc.
+14:05:17 === c2g_combatR/wa seed 702 ===
+14:05:27     step 2000 depth 4 (max 4) hp 22/22 xp 2 t=1969 wall=30s
+14:05:30     step 2000 depth 5 (max 5) hp 38/38 xp 4 t=1972 wall=33s
+14:05:47     step 4000 depth 4 (max 4) hp 22/22 xp 2 t=3989 wall=50s
+14:06:04     step 6000 depth 4 (max 4) hp 22/22 xp 2 t=6009 wall=67s
+14:06:05   [c2g_armorR/wa] seed 700: prog 0.3088 depth 15 role Valkyrie end DEATH: died. Killed by a dwarf king.
+14:06:05 === c2g_armorR/wa seed 702 ===
+14:06:08     step 2000 depth 3 (max 3) hp 21/21 xp 2 t=1966 wall=71s
+14:06:10   [c2g_combatR/wb] seed 701: prog 0.0212 depth 4 role Knight end DEATH: starved to death.
+14:06:10 === c2g_combatR/wb seed 703 ===
+14:07:22     step 4000 depth 3 (max 3) hp 27/27 xp 3 t=3976 wall=144s
+14:07:27     step 2000 depth 9 (max 9) hp 26/62 xp 6 t=1964 wall=77s
+14:07:32   [c2g_combatR/wb] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a wand.
+14:07:32 === c2g_combatR/wb seed 705 ===
+14:07:38     step 2000 depth 2 (max 2) hp 28/28 xp 3 t=1951 wall=141s
+14:07:52     step 2000 depth 4 (max 5) hp 23/23 xp 3 t=1926 wall=106s
+14:08:06   [c2g_armorR/wa] seed 702: prog 0.0485 depth 7 role Knight end DEATH: died. Killed by a rothe.
+14:08:06 === c2g_armorR/wa seed 704 ===
+14:08:32     step 6000 depth 3 (max 3) hp 27/27 xp 3 t=5996 wall=215s
+14:08:47   [c2g_armorR/wb] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a werejackal, while fainted from lack of food.
+14:08:47 === c2g_armorR/wb seed 703 ===
+14:08:54   [c2g_armorR/wa] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+14:08:54 === c2g_armorR/wa seed 706 ===
+14:08:58   [c2g_armorR/wa] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a bat.
+14:08:58 === c2g_armorR/wa seed 708 ===
+14:09:19     step 2000 depth 3 (max 3) hp 25/25 xp 2 t=1971 wall=107s
+14:09:35   [c2g_armorR/wa] seed 708: prog 0.0354 depth 6 role Rogue end DEATH: died. Killed by a gnome lord.
+14:09:35 === c2g_armorR/wa seed 710 ===
+14:09:40   [c2g_armorR/wb] seed 703: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a quasit.
+14:09:40 === c2g_armorR/wb seed 705 ===
+14:10:05   [c2g_armorR/wa] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a werewolf.
+14:10:05 === c2g_armorR/wa seed 712 ===
+14:10:18     step 4000 depth 2 (max 2) hp 36/36 xp 4 t=3897 wall=301s
+14:10:35   [c2g_armorR/wa] seed 712: prog 0.0485 depth 7 role Samurai end DEATH: died. Killed by a Mordor orc.
+14:10:35 === c2g_armorR/wa seed 714 ===
+14:10:52   [c2g_armorR/wa] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+14:10:52 === c2g_armorR/wa seed 716 ===
+14:11:20     step 2000 depth 3 (max 3) hp 35/35 xp 3 t=1970 wall=100s
+14:11:33   [c2g_armorR/wb] seed 705: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by a dwarf.
+14:11:33 === c2g_armorR/wb seed 707 ===
+14:11:34     step 4000 depth 3 (max 3) hp 25/25 xp 2 t=3973 wall=242s
+14:11:58   [c2g_armorR/wb] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+14:11:58 === c2g_armorR/wb seed 709 ===
+14:12:09     step 6000 depth 2 (max 2) hp 39/39 xp 5 t=5908 wall=413s
+14:12:16     step 2000 depth 1 (max 1) hp 33/33 xp 3 t=2001 wall=84s
+14:12:28   [c2g_armorR/wb] seed 709: prog 0.0175 depth 3 role Healer end DEATH: died. Killed by a small mimic.
+14:12:28 === c2g_armorR/wb seed 711 ===
+14:12:58     step 2000 depth 6 (max 6) hp 34/34 xp 3 t=1975 wall=29s
+14:12:58   [c2g_combatR/wa] seed 702: prog 0.0291 depth 2 role Knight end DEATH: starved to death.
+14:12:58 === c2g_combatR/wa seed 704 ===
+14:13:14     step 4000 depth 6 (max 6) hp 34/34 xp 3 t=3978 wall=45s
+14:13:34     step 6000 depth 6 (max 6) hp 34/34 xp 3 t=6008 wall=66s
+14:13:43   [c2g_armorR/wb] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: starved to death.
+14:13:43 === c2g_armorR/wb seed 713 ===
+14:13:47   [c2g_combatR/wa] seed 704: prog 0.0000 depth 1 role Knight end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+14:13:47 === c2g_combatR/wa seed 706 ===
+14:13:47   [c2g_combatR/wa] seed 706: prog 0.0000 depth 1 role Priest end DEATH: died. Killed by a falling rock.
+14:13:47 === c2g_combatR/wa seed 708 ===
+14:13:47     step 6000 depth 3 (max 3) hp 25/25 xp 2 t=5993 wall=375s
+14:13:49   [c2g_armorR/wb] seed 713: prog 0.0977 depth 9 role Rogue end DEATH: died. Killed by a jackal.
+14:13:49 === c2g_armorR/wb seed 715 ===
+14:13:50   [c2g_armorR/wb] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+14:13:50 === c2g_armorR/wb seed 717 ===
+14:13:59     step 4000 depth 1 (max 1) hp 46/46 xp 4 t=4009 wall=187s
+14:14:25   [c2g_armorR/wb] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: was poisoned. Poisoned by a rotted golden naga hatchling corpse.
+14:14:25 === c2g_armorR/wb seed 719 ===
+14:14:51     step 2000 depth 8 (max 8) hp 29/31 xp 4 t=1939 wall=64s
+14:15:04     step 2000 depth 4 (max 4) hp 37/37 xp 3 t=1991 wall=38s
+14:15:15   [c2g_combatR/wa] seed 708: prog 0.0696 depth 8 role Rogue end DEATH: died. Killed by a housecat.
+14:15:15 === c2g_combatR/wa seed 710 ===
+14:15:45     step 4000 depth 4 (max 4) hp 50/50 xp 4 t=4001 wall=80s
+14:15:52   [c2g_combatR/wa] seed 710: prog 0.0977 depth 9 role Caveman end DEATH: died. Killed by a mumak.
+14:15:52 === c2g_combatR/wa seed 712 ===
+14:15:56     step 8000 depth 3 (max 3) hp 25/25 xp 2 t=8064 wall=504s
+14:16:00     step 6000 depth 1 (max 1) hp 46/46 xp 4 t=6029 wall=308s
+14:16:05   [c2g_combatR/wb] seed 705: prog 0.0185 depth 3 role Barbarian end DEATH: starved to death.
+14:16:05 === c2g_combatR/wb seed 707 ===
+14:16:08   [c2g_armorR/wb] seed 719: prog 0.0242 depth 4 role Barbarian end DEATH: died. Killed by a gnome lord.
+14:16:08 c2g_armorR chunk wb complete (10 eps)
+14:16:09   [c2g_combatR/wa] seed 712: prog 0.0354 depth 6 role Samurai end DEATH: died. Killed by a rothe.
+14:16:09 === c2g_combatR/wa seed 714 ===
+14:16:21   [c2g_combatR/wa] seed 714: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+14:16:21 === c2g_combatR/wa seed 716 ===
+14:16:28   [c2g_combatR/wb] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+14:16:28 === c2g_combatR/wb seed 709 ===
+14:16:31   [c2g_combatR/wa] seed 716: prog 0.0000 depth 1 role Valkyrie end DEATH: died. Killed by a falling rock.
+14:16:31 === c2g_combatR/wa seed 718 ===
+14:16:38   [c2g_combatR/wb] seed 709: prog 0.0154 depth 2 role Healer end DEATH: died. Killed by a kobold.
+14:16:38 === c2g_combatR/wb seed 711 ===
+14:17:01   [c2g_combatR/wa] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a sewer rat.
+14:17:01 c2g_combatR chunk wa complete (10 eps)
+14:17:03     step 2000 depth 6 (max 6) hp 39/39 xp 3 t=1974 wall=25s
+14:17:06   [c2g_armorR/wa] seed 716: prog 0.0242 depth 1 role Valkyrie end DEATH: starved to death.
+14:17:06 === c2g_armorR/wa seed 718 ===
+14:17:18     step 4000 depth 6 (max 6) hp 39/39 xp 3 t=3975 wall=40s
+14:17:30   [c2g_armorR/wa] seed 718: prog 0.0185 depth 2 role Tourist end DEATH: died. Killed by a kobold.
+14:17:30 c2g_armorR chunk wa complete (10 eps)
+14:17:34     step 6000 depth 6 (max 6) hp 48/48 xp 4 t=6005 wall=56s
+14:17:40   [c2g_combatR/wb] seed 711: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by a dwarf, while fainted from lack of food.
+14:17:40 === c2g_combatR/wb seed 713 ===
+14:17:43   [c2g_combatR/wb] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+14:17:43 === c2g_combatR/wb seed 715 ===
+14:17:43   [c2g_combatR/wb] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+14:17:43 === c2g_combatR/wb seed 717 ===
+14:17:58     step 2000 depth 4 (max 5) hp 23/23 xp 3 t=1949 wall=15s
+14:18:06     step 4000 depth 4 (max 5) hp 32/32 xp 4 t=3969 wall=23s
+14:18:08   [c2g_combatR/wb] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a gnome.
+14:18:08 === c2g_combatR/wb seed 719 ===
+14:18:28     step 2000 depth 4 (max 4) hp 25/25 xp 2 t=1992 wall=20s
+14:18:33   [c2g_combatR/wb] seed 719: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a giant mimic.
+14:18:33 c2g_combatR chunk wb complete (10 eps)
+14:19:56 === c2settled/w0 seed 700 ===
+14:19:56 === c2settled/w2 seed 702 ===
+14:19:57 === c2settled/w1 seed 701 ===
+14:19:57 === c2settled/w3 seed 703 ===
+14:20:44     step 2000 depth 6 (max 6) hp 34/34 xp 4 t=1973 wall=44s
+14:20:58   [c2settled/w3] seed 703: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by an owlbear.
+14:20:58 === c2settled/w3 seed 707 ===
+14:20:59     step 2000 depth 3 (max 3) hp 27/27 xp 3 t=1980 wall=59s
+14:21:02   [c2settled/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a little dog.
+14:21:02 === c2settled/w1 seed 705 ===
+14:21:05     step 4000 depth 8 (max 8) hp 34/34 xp 4 t=4001 wall=65s
+14:21:16   [c2settled/w0] seed 700: prog 0.0977 depth 9 role Valkyrie end DEATH: died. Killed by an ogre.
+14:21:16 === c2settled/w0 seed 704 ===
+14:21:29   [c2settled/w3] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+14:21:29 === c2settled/w3 seed 711 ===
+14:21:41   [c2settled/w3] seed 711: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a plains centaur.
+14:21:41 === c2settled/w3 seed 715 ===
+14:21:42   [c2settled/w3] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+14:21:42 === c2settled/w3 seed 719 ===
+14:21:53   [c2settled/w3] seed 719: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a giant mimic.
+14:21:53 === c2settled/w3 seed 723 ===
+14:22:18     step 2000 depth 2 (max 2) hp 24/24 xp 2 t=1967 wall=138s
+14:22:28     step 2000 depth 2 (max 2) hp 5/16 xp 1 t=1443 wall=72s
+14:22:37     step 2000 depth 5 (max 5) hp 62/62 xp 5 t=1977 wall=95s
+14:22:42   [c2settled/w3] seed 723: prog 0.0208 depth 2 role Ranger end DEATH: died. Killed by a hobbit, while sleeping.
+14:22:42 === c2settled/w3 seed 727 ===
+14:22:47     step 4000 depth 2 (max 2) hp 7/16 xp 1 t=1474 wall=91s
+14:23:05     step 6000 depth 2 (max 2) hp 9/16 xp 1 t=1504 wall=109s
+14:23:23     step 4000 depth 8 (max 8) hp 79/79 xp 7 t=3656 wall=141s
+14:23:24     step 2000 depth 5 (max 5) hp 26/26 xp 2 t=1983 wall=42s
+14:23:25     step 8000 depth 2 (max 2) hp 11/16 xp 1 t=1535 wall=129s
+14:23:44     step 10000 depth 2 (max 2) hp 13/16 xp 1 t=1566 wall=148s
+14:24:02     step 12000 depth 2 (max 2) hp 16/16 xp 1 t=1626 wall=166s
+14:24:03     step 6000 depth 8 (max 8) hp 79/79 xp 7 t=5144 wall=181s
+14:24:06     step 4000 depth 5 (max 5) hp 26/26 xp 2 t=3988 wall=85s
+14:24:19     step 14000 depth 2 (max 2) hp 16/16 xp 1 t=1810 wall=184s
+14:24:22     step 4000 depth 2 (max 2) hp 37/37 xp 4 t=3986 wall=262s
+14:24:27   [c2settled/w1] seed 705: prog 0.0696 depth 8 role Barbarian end DEATH: turned to stone. Petrified by a chickatrice.
+14:24:27 === c2settled/w1 seed 709 ===
+14:24:39     step 16000 depth 2 (max 2) hp 16/16 xp 1 t=1973 wall=204s
+14:24:51     step 6000 depth 5 (max 5) hp 26/26 xp 2 t=5931 wall=129s
+14:24:58   [c2settled/w1] seed 709: prog 0.0185 depth 3 role Healer end DEATH: died. Killed by a gecko, while fainted from lack of food.
+14:24:58 === c2settled/w1 seed 713 ===
+14:24:59     step 18000 depth 2 (max 2) hp 16/16 xp 1 t=2375 wall=223s
+14:25:05   [c2settled/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+14:25:05 === c2settled/w1 seed 717 ===
+14:25:14   [c2settled/w0] seed 704: prog 0.0154 depth 2 role Knight end DEATH: starved to death.
+14:25:14 === c2settled/w0 seed 708 ===
+14:25:22   [c2settled/w0] seed 708: prog 0.0212 depth 4 role Rogue end DEATH: died. Killed by a gas spore's explosion.
+14:25:22 === c2settled/w0 seed 712 ===
+14:25:36     step 8000 depth 5 (max 5) hp 26/26 xp 2 t=7687 wall=174s
+14:25:43   [c2settled/w1] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a giant bat, while fainted from lack of food.
+14:25:43 === c2settled/w1 seed 721 ===
+14:25:46   [c2settled/w0] seed 712: prog 0.1256 depth 10 role Samurai end DEATH: died. Killed by a soldier ant.
+14:25:46 === c2settled/w0 seed 716 ===
+14:26:01   [c2settled/w3] seed 727: prog 0.0265 depth 5 role Valkyrie end DEATH: starved to death.
+14:26:01 === c2settled/w3 seed 731 ===
+14:26:10   [c2settled/w1] seed 721: prog 0.0696 depth 8 role Knight end DEATH: died. Killed by an imp.
+14:26:10 === c2settled/w1 seed 725 ===
+14:26:11   [c2settled/w1] seed 725: prog 0.0696 depth 8 role Archeologist end DEATH: died. Killed by a giant ant.
+14:26:11 === c2settled/w1 seed 729 ===
+14:26:31     step 6000 depth 2 (max 2) hp 41/41 xp 5 t=6004 wall=391s
+14:26:48   [c2settled/w1] seed 729: prog 0.0485 depth 7 role Ranger end DEATH: died. Killed by a human zombie.
+14:26:48 === c2settled/w1 seed 733 ===
+14:27:15     step 2000 depth 1 (max 1) hp 34/34 xp 3 t=2001 wall=89s
+14:27:17     step 2000 depth 4 (max 4) hp 31/33 xp 4 t=1988 wall=76s
+14:27:29   [c2settled/w3] seed 731: prog 0.0242 depth 4 role Priestess end DEATH: died. Killed by a newt, while fainted from lack of food.
+14:27:29 === c2settled/w3 seed 735 ===
+14:27:38   [c2settled/w3] seed 735: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a rabid rat.
+14:27:38 === c2settled/w3 seed 739 ===
+14:28:08   [c2settled/w2] seed 702: prog 0.0291 depth 2 role Knight end DEATH: starved to death.
+14:28:08 === c2settled/w2 seed 706 ===
+14:28:14   [c2settled/w2] seed 706: prog 0.0265 depth 5 role Priest end DEATH: died. Killed by a bugbear.
+14:28:14 === c2settled/w2 seed 710 ===
+14:28:19     step 2000 depth 4 (max 4) hp 14/14 xp 1 t=1991 wall=91s
+14:28:23   [c2settled/w3] seed 739: prog 0.0208 depth 3 role Barbarian end DEATH: died. Killed by a giant rat.
+14:28:23 c2settled chunk w3 complete (10 eps)
+14:28:48     step 4000 depth 1 (max 1) hp 34/34 xp 3 t=4001 wall=181s
+14:28:55     step 2000 depth 7 (max 7) hp 43/43 xp 4 t=2001 wall=41s
+14:28:57   [c2settled/w2] seed 710: prog 0.0485 depth 7 role Caveman end DEATH: died. Killed by a rock piercer.
+14:28:57 === c2settled/w2 seed 714 ===
+14:29:20   [c2settled/w2] seed 714: prog 0.0000 depth 1 role Tourist end DEATH: died. Killed by a fox.
+14:29:20 === c2settled/w2 seed 718 ===
+14:29:26   [c2settled/w2] seed 718: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a boulder.
+14:29:26 === c2settled/w2 seed 722 ===
+14:29:31   [c2settled/w0] seed 716: prog 0.0208 depth 1 role Valkyrie end DEATH: died. Killed by a gas spore's explosion, while fainted from lack of food.
+14:29:31 === c2settled/w0 seed 720 ===
+14:29:38   [c2settled/w0] seed 720: prog 0.0354 depth 6 role Tourist end DEATH: died. Killed by an imp.
+14:29:38 === c2settled/w0 seed 724 ===
+14:29:40     step 4000 depth 4 (max 4) hp 14/14 xp 1 t=3996 wall=172s
+14:29:49   [c2settled/w0] seed 724: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a rothe, while praying.
+14:29:49 === c2settled/w0 seed 728 ===
+14:30:15     step 2000 depth 2 (max 3) hp 43/43 xp 3 t=1968 wall=49s
+14:30:56     step 4000 depth 2 (max 3) hp 43/43 xp 3 t=3971 wall=90s
+14:30:59     step 6000 depth 4 (max 4) hp 14/14 xp 1 t=6016 wall=251s
+14:31:28     step 6000 depth 2 (max 3) hp 43/43 xp 3 t=5991 wall=122s
+14:31:39     step 2000 depth 1 (max 1) hp 24/24 xp 3 t=1988 wall=110s
+14:31:59     step 8000 depth 2 (max 3) hp 43/43 xp 3 t=8011 wall=152s
+14:32:04   [c2settled/w2] seed 722: prog 0.0208 depth 3 role Barbarian end DEATH: starved to death.
+14:32:04 === c2settled/w2 seed 726 ===
+14:32:16     step 8000 depth 4 (max 4) hp 14/14 xp 1 t=8036 wall=328s
+14:32:31   [c2settled/w2] seed 726: prog 0.1256 depth 10 role Samurai end DEATH: died. Killed by a horse.
+14:32:31 === c2settled/w2 seed 730 ===
+14:32:36   [c2settled/w0] seed 728: prog 0.0208 depth 1 role Priest end DEATH: died. Killed by a kobold, while fainted from lack of food.
+14:32:36 === c2settled/w0 seed 732 ===
+14:32:39   [c2settled/w1] seed 733: prog 0.0212 depth 4 role Ranger end DEATH: starved to death.
+14:32:39 === c2settled/w1 seed 737 ===
+14:32:56   [c2settled/w2] seed 730: prog 0.0242 depth 3 role Ranger end DEATH: died. Killed by a gnome lord.
+14:32:56 === c2settled/w2 seed 734 ===
+14:32:56   [c2settled/w0] seed 732: prog 0.0212 depth 4 role Ranger end DEATH: died. Killed by a wand.
+14:32:56 === c2settled/w0 seed 736 ===
+14:32:58   [c2settled/w0] seed 736: prog 0.0175 depth 3 role Priestess end DEATH: died. Killed by a guard.
+14:32:58 c2settled chunk w0 complete (10 eps)
+14:33:31     step 2000 depth 4 (max 5) hp 24/24 xp 3 t=1958 wall=52s
+14:33:41   [c2settled/w1] seed 737: prog 0.0354 depth 6 role Rogue end DEATH: died. Killed by a gnome lord.
+14:33:41 c2settled chunk w1 complete (10 eps)
+14:34:38     step 2000 depth 1 (max 1) hp 28/28 xp 3 t=1485 wall=102s
+14:35:27     step 4000 depth 1 (max 1) hp 28/28 xp 3 t=3011 wall=151s
+14:36:09     step 6000 depth 1 (max 1) hp 28/28 xp 3 t=4543 wall=193s
+14:36:37   [c2settled/w2] seed 734: prog 0.0208 depth 1 role Samurai end DEATH: died. Killed by a grid bug, while fainted from lack of food.
+14:36:37 === c2settled/w2 seed 738 ===
+14:37:00   [c2settled/w2] seed 738: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a giant bat.
+14:37:00 c2settled chunk w2 complete (10 eps)
+14:37:32 === c2navfood/w0 seed 700 ===
+14:37:32 === c2navfood/w1 seed 701 ===
+14:37:32 === c2navfood/w3 seed 703 ===
+14:37:32 === c2navfood/w2 seed 702 ===
+14:38:19     step 2000 depth 4 (max 4) hp 33/33 xp 3 t=1980 wall=44s
+14:38:42     step 2000 depth 3 (max 3) hp 27/27 xp 3 t=1980 wall=67s
+14:38:46   [c2navfood/w1] seed 701: prog 0.0208 depth 3 role Knight end DEATH: died. Killed by a little dog.
+14:38:46 === c2navfood/w1 seed 705 ===
+14:38:49     step 4000 depth 4 (max 4) hp 36/36 xp 4 t=3976 wall=74s
+14:38:54   [c2navfood/w3] seed 703: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a giant spider, while praying.
+14:38:54 === c2navfood/w3 seed 707 ===
+14:39:15     step 6000 depth 4 (max 4) hp 36/36 xp 4 t=6006 wall=100s
+14:39:37   [c2navfood/w3] seed 707: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a giant bat.
+14:39:37 === c2navfood/w3 seed 711 ===
+14:39:47   [c2navfood/w0] seed 700: prog 0.0242 depth 4 role Valkyrie end DEATH: died. Killed by a rock mole, while fainted from lack of food.
+14:39:47 === c2navfood/w0 seed 704 ===
+14:39:54   [c2navfood/w3] seed 711: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a plains centaur.
+14:39:54 === c2navfood/w3 seed 715 ===
+14:39:55   [c2navfood/w3] seed 715: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a fox, while praying.
+14:39:55 === c2navfood/w3 seed 719 ===
+14:40:12     step 2000 depth 2 (max 2) hp 24/24 xp 2 t=1972 wall=156s
+14:40:13   [c2navfood/w3] seed 719: prog 0.1613 depth 11 role Barbarian end DEATH: died. Killed by a soldier ant.
+14:40:13 === c2navfood/w3 seed 723 ===
+14:40:53     step 2000 depth 5 (max 5) hp 62/62 xp 5 t=1977 wall=127s
+14:41:18   [c2navfood/w3] seed 723: prog 0.0208 depth 2 role Ranger end DEATH: died. Killed by a hobbit, while sleeping.
+14:41:18 === c2navfood/w3 seed 727 ===
+14:41:24     step 2000 depth 2 (max 2) hp 5/16 xp 1 t=1443 wall=97s
+14:41:41     step 4000 depth 2 (max 2) hp 24/24 xp 2 t=3993 wall=245s
+14:41:52     step 4000 depth 2 (max 2) hp 7/16 xp 1 t=1474 wall=125s
+14:42:10     step 4000 depth 8 (max 8) hp 76/79 xp 7 t=3642 wall=204s
+14:42:22   [c2navfood/w1] seed 705: prog 0.0696 depth 8 role Barbarian end DEATH: died. Killed by a wand.
+14:42:22 === c2navfood/w1 seed 709 ===
+14:42:23     step 6000 depth 2 (max 2) hp 9/16 xp 1 t=1504 wall=155s
+14:42:27     step 2000 depth 5 (max 5) hp 26/26 xp 2 t=1983 wall=70s
+14:43:00     step 8000 depth 2 (max 2) hp 11/16 xp 1 t=1535 wall=192s
+14:43:16     step 6000 depth 2 (max 2) hp 24/24 xp 2 t=6014 wall=341s
+14:43:17   [c2navfood/w1] seed 709: prog 0.0175 depth 3 role Healer end DEATH: died. Killed by a magic missile, while sleeping.
+14:43:17 === c2navfood/w1 seed 713 ===
+14:43:30     step 10000 depth 2 (max 2) hp 13/16 xp 1 t=1566 wall=223s
+14:43:34   [c2navfood/w1] seed 713: prog 0.1256 depth 10 role Rogue end DEATH: died. Killed by a rope golem.
+14:43:34 === c2navfood/w1 seed 717 ===
+14:43:42     step 4000 depth 5 (max 5) hp 26/26 xp 2 t=3988 wall=144s
+14:43:58   [c2navfood/w2] seed 702: prog 0.0185 depth 2 role Knight end DEATH: starved to death.
+14:43:58 === c2navfood/w2 seed 706 ===
+14:44:02     step 12000 depth 2 (max 2) hp 16/16 xp 1 t=1626 wall=255s
+14:44:06   [c2navfood/w2] seed 706: prog 0.0175 depth 3 role Priest end DEATH: died. Killed by a jackal.
+14:44:06 === c2navfood/w2 seed 710 ===
+14:44:32   [c2navfood/w1] seed 717: prog 0.0265 depth 5 role Caveman end DEATH: died. Killed by a giant bat, while fainted from lack of food.
+14:44:32 === c2navfood/w1 seed 721 ===
+14:44:33     step 14000 depth 2 (max 2) hp 16/16 xp 1 t=1810 wall=285s
+14:44:51     step 6000 depth 5 (max 5) hp 26/26 xp 2 t=5931 wall=213s
+14:44:59     step 16000 depth 2 (max 2) hp 16/16 xp 1 t=1973 wall=312s
+14:45:10   [c2navfood/w1] seed 721: prog 0.0696 depth 8 role Knight end DEATH: died. Killed by an imp.
+14:45:10 === c2navfood/w1 seed 725 ===
+14:45:12   [c2navfood/w1] seed 725: prog 0.0696 depth 8 role Archeologist end DEATH: died. Killed by a giant ant.
+14:45:12 === c2navfood/w1 seed 729 ===
+14:45:18     step 2000 depth 7 (max 7) hp 37/37 xp 3 t=2001 wall=71s
+14:45:22     step 18000 depth 2 (max 2) hp 16/16 xp 1 t=2375 wall=335s
+14:45:43   [c2navfood/w0] seed 704: prog 0.0154 depth 2 role Knight end DEATH: starved to death.
+14:45:43 === c2navfood/w0 seed 708 ===
+14:45:44     step 8000 depth 5 (max 5) hp 26/26 xp 2 t=7687 wall=267s
+14:45:52   [c2navfood/w2] seed 710: prog 0.1256 depth 10 role Caveman end DEATH: died. Killed by a killer bee.
+14:45:52 === c2navfood/w2 seed 714 ===
+14:45:53   [c2navfood/w0] seed 708: prog 0.0212 depth 4 role Rogue end DEATH: died. Killed by a gas spore's explosion.
+14:45:53 === c2navfood/w0 seed 712 ===
+14:46:05     step 2000 depth 5 (max 7) hp 34/34 xp 4 t=1929 wall=53s
+14:46:14   [c2navfood/w3] seed 727: prog 0.0265 depth 5 role Valkyrie end DEATH: starved to death.
+14:46:14 === c2navfood/w3 seed 731 ===
+14:46:31   [c2navfood/w0] seed 712: prog 0.2061 depth 12 role Samurai end DEATH: died. Killed by a giant ant, while taking off clothes.
+14:46:31 === c2navfood/w0 seed 716 ===
+14:46:32   [c2navfood/w2] seed 714: prog 0.0000 depth 1 role Tourist end DEATH: died. Killed by a fox.
+14:46:32 === c2navfood/w2 seed 718 ===
+14:46:35   [c2navfood/w1] seed 729: prog 0.1613 depth 11 role Ranger end DEATH: died. Killed by a gray unicorn.
+14:46:35 === c2navfood/w1 seed 733 ===
+14:46:39   [c2navfood/w2] seed 718: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a boulder.
+14:46:39 === c2navfood/w2 seed 722 ===
+14:46:47   [c2navfood/w3] seed 731: prog 0.0265 depth 5 role Priestess end DEATH: died. Killed by a pony.
+14:46:47 === c2navfood/w3 seed 735 ===
+14:47:15   [c2navfood/w3] seed 735: prog 0.0696 depth 8 role Caveman end DEATH: died. Killed by a giant spider.
+14:47:15 === c2navfood/w3 seed 739 ===
+14:47:50     step 2000 depth 2 (max 2) hp 19/19 xp 1 t=1957 wall=71s
+14:48:13     step 2000 depth 1 (max 1) hp 34/34 xp 3 t=2001 wall=102s
+14:48:13   [c2navfood/w3] seed 739: prog 0.0208 depth 3 role Barbarian end DEATH: died. Killed by a giant rat.
+14:48:13 c2navfood chunk w3 complete (10 eps)
+14:48:14     step 2000 depth 4 (max 4) hp 14/14 xp 1 t=1991 wall=99s
+14:48:53     step 4000 depth 6 (max 6) hp 24/57 xp 5 t=3918 wall=134s
+14:48:57   [c2navfood/w2] seed 722: prog 0.0485 depth 7 role Barbarian end DEATH: died. Killed by a fire ant.
+14:48:57 === c2navfood/w2 seed 726 ===
+14:49:23   [c2navfood/w2] seed 726: prog 0.1256 depth 10 role Samurai end DEATH: died. Killed by a horse.
+14:49:23 === c2navfood/w2 seed 730 ===
+14:49:42     step 4000 depth 1 (max 1) hp 34/34 xp 3 t=4001 wall=191s
+14:49:44   [c2navfood/w2] seed 730: prog 0.0208 depth 3 role Ranger end DEATH: died. Killed by a gnome lord.
+14:49:44 === c2navfood/w2 seed 734 ===
+14:49:48     step 4000 depth 4 (max 4) hp 14/14 xp 1 t=3996 wall=193s
+14:50:33   [c2navfood/w0] seed 716: prog 0.0208 depth 1 role Valkyrie end DEATH: died. Killed by a gas spore's explosion, while fainted from lack of food.
+14:50:33 === c2navfood/w0 seed 720 ===
+14:50:35   [c2navfood/w0] seed 720: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a jackal.
+14:50:35 === c2navfood/w0 seed 724 ===
+14:50:53   [c2navfood/w0] seed 724: prog 0.1256 depth 10 role Barbarian end DEATH: died. Killed by a fire ant.
+14:50:53 === c2navfood/w0 seed 728 ===
+14:51:17     step 6000 depth 4 (max 4) hp 14/14 xp 1 t=6016 wall=283s
+14:52:08     step 2000 depth 1 (max 1) hp 28/28 xp 3 t=1485 wall=144s
+14:52:54     step 8000 depth 4 (max 4) hp 14/14 xp 1 t=8036 wall=379s
+14:53:10     step 2000 depth 1 (max 1) hp 22/22 xp 2 t=1994 wall=137s
+14:53:15   [c2navfood/w1] seed 733: prog 0.0212 depth 4 role Ranger end DEATH: starved to death.
+14:53:15 === c2navfood/w1 seed 737 ===
+14:53:19     step 4000 depth 1 (max 1) hp 28/28 xp 3 t=3011 wall=215s
+14:53:38     step 4000 depth 4 (max 4) hp 27/27 xp 3 t=4001 wall=165s
+14:53:53   [c2navfood/w1] seed 737: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a little dog.
+14:53:53 c2navfood chunk w1 complete (10 eps)
+14:53:53   [c2navfood/w0] seed 728: prog 0.0212 depth 4 role Priest end DEATH: died. Killed by a gecko, while fainted from lack of food.
+14:53:53 === c2navfood/w0 seed 732 ===
+14:54:02   [c2navfood/w0] seed 732: prog 0.0212 depth 4 role Ranger end DEATH: died. Killed by a gas spore's explosion.
+14:54:02 === c2navfood/w0 seed 736 ===
+14:54:04   [c2navfood/w0] seed 736: prog 0.0175 depth 3 role Priestess end DEATH: died. Killed by a guard.
+14:54:04 c2navfood chunk w0 complete (10 eps)
+14:54:12     step 6000 depth 1 (max 1) hp 28/28 xp 3 t=4543 wall=268s
+14:54:35   [c2navfood/w2] seed 734: prog 0.0208 depth 1 role Samurai end DEATH: died. Killed by a grid bug, while fainted from lack of food.
+14:54:35 === c2navfood/w2 seed 738 ===
+14:55:05     step 2000 depth 6 (max 6) hp 41/43 xp 5 t=1905 wall=30s
+14:55:09   [c2navfood/w2] seed 738: prog 0.0696 depth 8 role Caveman end DEATH: died. Killed by a giant spider.
+14:55:09 c2navfood chunk w2 complete (10 eps)
+14:56:19 NH-C2.1 CODE FREEZE (midpoint checkpoint). Config: NH_FOOD2 NH_PRAYFIX NH_LOS NH_TOPO NH_GUARD (NAVFOOD n=40 paired +1.03 [-0.58,+2.68] vs v1.1; settled 6-lever stack +0.01 -> reduced config chosen; EXPMAX/RANGED/THREAT/ELBERETH/ARMOR/PACE dropped per drop-rule). Guards: TOUCH_KILL weapon-melee + novelty ledger (operator-authorized guard-class). Scored block: n=80 seeds 4000-4079 (4000-4004 memory-pass-1 overlap disclosed). md5s:
+7840ccbe5d975b6cb631b9d344510654  nh_agent.py
+1f8d021bbb9c0a46db70530e73f2f07c  nh_common.py
+a251d3d8d4d64122c95bcf32c30df940  nh_runner.py
+71ddda9c8cb376a106fea94808bae32c  nh_harness.py
+1bb6fd219b23855e0ee3f0cbe143d580  nh_percept.py
+ddd6b6aa8483c57625326ef67e26ebe5  nh_transitions.py
+a09fb571d431e5e719ab564d1f4c04a8  run_c2.py
+791390f90d2063bc0e45ad068c615fe1  results/c2_exchange.json
+d36c8d289d1d5b1745e4db7db019fef9  c2_env.sh
+14:56:31 === c2block80/w0 seed 4000 ===
+14:56:31 === c2block80/w2 seed 4002 ===
+14:56:31 === c2block80/w1 seed 4001 ===
+14:56:31 === c2block80/w3 seed 4003 ===
+14:57:01   [c2block80/w0] seed 4000: prog 0.1256 depth 10 role Monk end DEATH: died. Killed by a soldier ant.
+14:57:01 === c2block80/w0 seed 4004 ===
+14:57:03   [c2block80/w2] seed 4002: prog 0.1613 depth 11 role Valkyrie end DEATH: died. Killed by a soldier ant.
+14:57:03 === c2block80/w2 seed 4006 ===
+14:57:05     step 2000 depth 2 (max 2) hp 13/13 xp 2 t=2014 wall=30s
+14:57:16   [c2block80/w2] seed 4006: prog 0.0154 depth 2 role Rogue end DEATH: died. Killed by an elven dagger.
+14:57:16 === c2block80/w2 seed 4010 ===
+14:57:41     step 4000 depth 2 (max 2) hp 17/17 xp 3 t=4034 wall=66s
+14:57:48   [c2block80/w2] seed 4010: prog 0.0485 depth 7 role Knight end DEATH: died. Killed by a Mordor orc.
+14:57:48 === c2block80/w2 seed 4014 ===
+14:58:04   [c2block80/w2] seed 4014: prog 0.1613 depth 11 role Ranger end DEATH: died. Killed by a wolf.
+14:58:04 === c2block80/w2 seed 4018 ===
+14:58:06   [c2block80/w2] seed 4018: prog 0.1613 depth 11 role Archeologist end DEATH: died. Killed by a wolf.
+14:58:06 === c2block80/w2 seed 4022 ===
+14:58:08   [c2block80/w3] seed 4003: prog 0.0208 depth 2 role Wizard end DEATH: starved to death.
+14:58:08 === c2block80/w3 seed 4007 ===
+14:58:13     step 2000 depth 5 (max 5) hp 27/27 xp 3 t=1963 wall=72s
+14:58:19   [c2block80/w2] seed 4022: prog 0.0696 depth 8 role Cavewoman end DEATH: died. Killed by a gas spore's explosion.
+14:58:19 === c2block80/w2 seed 4026 ===
+14:58:24   [c2block80/w3] seed 4007: prog 0.0000 depth 1 role Healer end DEATH: died. Killed by a jackal, while praying.
+14:58:24 === c2block80/w3 seed 4011 ===
+14:58:44     step 2000 depth 1 (max 1) hp 17/17 xp 2 t=1989 wall=130s
+14:58:49   [c2block80/w3] seed 4011: prog 0.0354 depth 6 role Caveman end DEATH: died. Killed by a homunculus.
+14:58:49 === c2block80/w3 seed 4015 ===
+14:58:54   [c2block80/w0] seed 4004: prog 0.0265 depth 5 role Wizard end DEATH: died. Killed by a rabid rat.
+14:58:54 === c2block80/w0 seed 4008 ===
+14:59:00   [c2block80/w0] seed 4008: prog 0.0265 depth 5 role Rogue end DEATH: died. Killed by a coyote.
+14:59:00 === c2block80/w0 seed 4012 ===
+14:59:56     step 2000 depth 6 (max 6) hp 32/32 xp 3 t=1936 wall=66s
+14:59:57   [c2block80/w2] seed 4026: prog 0.0185 depth 3 role Barbarian end DEATH: was poisoned. Poisoned by a rotted giant rat corpse.
+14:59:57 === c2block80/w2 seed 4030 ===
+15:00:01     step 2000 depth 6 (max 6) hp 51/56 xp 5 t=1939 wall=61s
+15:00:04   [c2block80/w3] seed 4015: prog 0.0485 depth 7 role Knight end DEATH: died. Killed by an imp.
+15:00:04 === c2block80/w3 seed 4019 ===
+15:00:05   [c2block80/w3] seed 4019: prog 0.0977 depth 9 role Archeologist end DEATH: died. Killed by a large kobold, while praying.
+15:00:05 === c2block80/w3 seed 4023 ===
+15:00:13   [c2block80/w3] seed 4023: prog 0.0485 depth 7 role Rogue end DEATH: died. Killed by a giant spider.
+15:00:13 === c2block80/w3 seed 4027 ===
+15:00:37   [c2block80/w0] seed 4012: prog 0.0354 depth 6 role Caveman end DEATH: was poisoned. Poisoned by a rotted orc shaman corpse.
+15:00:37 === c2block80/w0 seed 4016 ===
+15:00:46     step 2000 depth 6 (max 6) hp 58/58 xp 5 t=1987 wall=33s
+15:01:00   [c2block80/w0] seed 4016: prog 0.1256 depth 10 role Monk end DEATH: died. Killed by a jaguar.
+15:01:00 === c2block80/w0 seed 4020 ===
+15:01:14     step 4000 depth 6 (max 6) hp 58/58 xp 5 t=3982 wall=61s
+15:01:16   [c2block80/w3] seed 4027: prog 0.0354 depth 6 role Caveman end DEATH: died. Killed by Ms. Wonotobo; the shopkeeper.
+15:01:16 === c2block80/w3 seed 4031 ===
+15:01:23   [c2block80/w3] seed 4031: prog 0.0175 depth 3 role Tourist end DEATH: died. Killed by a coyote.
+15:01:23 === c2block80/w3 seed 4035 ===
+15:01:31     step 4000 depth 1 (max 1) hp 24/24 xp 3 t=4007 wall=296s
+15:01:37   [c2block80/w3] seed 4035: prog 0.0977 depth 9 role Rogue end DEATH: died. Killed by a little dog.
+15:01:37 === c2block80/w3 seed 4039 ===
+15:02:01     step 2000 depth 7 (max 7) hp 33/33 xp 3 t=1990 wall=24s
+15:02:07     step 2000 depth 7 (max 7) hp 44/44 xp 4 t=1957 wall=66s
+15:02:11   [c2block80/w0] seed 4020: prog 0.0696 depth 8 role Tourist end DEATH: died. Killed by an invisible imp.
+15:02:11 === c2block80/w0 seed 4024 ===
+15:02:20     step 4000 depth 7 (max 7) hp 33/33 xp 3 t=4010 wall=43s
+15:02:24   [c2block80/w0] seed 4024: prog 0.0485 depth 7 role Monk end DEATH: died. Killed by a housecat.
+15:02:24 === c2block80/w0 seed 4028 ===
+15:02:48     step 6000 depth 7 (max 7) hp 56/56 xp 5 t=6030 wall=71s
+15:03:00   [c2block80/w3] seed 4039: prog 0.0485 depth 7 role Barbarian end DEATH: died. Killed by a rothe, while fainted from lack of food.
+15:03:00 === c2block80/w3 seed 4043 ===
+15:03:48   [c2block80/w3] seed 4043: prog 0.0977 depth 9 role Knight end DEATH: died. Killed by a hill orc.
+15:03:48 === c2block80/w3 seed 4047 ===
+15:04:09     step 2000 depth 4 (max 4) hp 54/54 xp 4 t=1985 wall=105s
+15:04:12   [c2block80/w0] seed 4028: prog 0.0242 depth 4 role Valkyrie end DEATH: died. Killed by a hobgoblin.
+15:04:12 === c2block80/w0 seed 4032 ===
+15:04:21     step 2000 depth 2 (max 2) hp 22/22 xp 2 t=1998 wall=33s
+15:04:29   [c2block80/w1] seed 4001: prog 0.0242 depth 1 role Priest end DEATH: starved to death.
+15:04:29 === c2block80/w1 seed 4005 ===
+15:04:29   [c2block80/w1] seed 4005: prog 0.0212 depth 4 role None end DEATH: died. Killed by a magic missile.
+15:04:29 === c2block80/w1 seed 4009 ===
+15:04:33     step 2000 depth 1 (max 1) hp 15/15 xp 1 t=1464 wall=276s
+15:04:47   [c2block80/w3] seed 4047: prog 0.0242 depth 4 role Valkyrie end DEATH: died. Killed by an imp.
+15:04:47 === c2block80/w3 seed 4051 ===
+15:04:53   [c2block80/w1] seed 4009: prog 0.0212 depth 4 role Rogue end DEATH: died. Killed by a kobold, while fainted from lack of food.
+15:04:53 === c2block80/w1 seed 4013 ===
+15:04:54   [c2block80/w3] seed 4051: prog 0.0212 depth 4 role Samurai end DEATH: died. Killed by a boulder.
+15:04:54 === c2block80/w3 seed 4055 ===
+15:05:10   [c2block80/w2] seed 4030: prog 0.0185 depth 1 role Samurai end DEATH: was poisoned. Poisoned by a rotted newt corpse.
+15:05:10 === c2block80/w2 seed 4034 ===
+15:05:25   [c2block80/w2] seed 4034: prog 0.0185 depth 3 role Valkyrie end DEATH: died. Killed by a gecko.
+15:05:25 === c2block80/w2 seed 4038 ===
+15:05:36   [c2block80/w2] seed 4038: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by Mr. Yad; the shopkeeper.
+15:05:36 === c2block80/w2 seed 4042 ===
+15:05:37   [c2block80/w0] seed 4032: prog 0.0354 depth 6 role Knight end DEATH: died. Killed by a wand.
+15:05:37 === c2block80/w0 seed 4036 ===
+15:05:57   [c2block80/w2] seed 4042: prog 0.0977 depth 9 role None end DEATH: died. Killed by a golden naga hatchling.
+15:05:57 === c2block80/w2 seed 4046 ===
+15:05:58     step 2000 depth 2 (max 2) hp 20/20 xp 2 t=1520 wall=63s
+15:06:00   [c2block80/w3] seed 4055: prog 0.0485 depth 7 role Monk end DEATH: died. Killed by a giant spider.
+15:06:00 === c2block80/w3 seed 4059 ===
+15:06:05   [c2block80/w3] seed 4059: prog 0.0265 depth 5 role Valkyrie end DEATH: died. Killed by an orc zombie.
+15:06:05 === c2block80/w3 seed 4063 ===
+15:06:10     step 2000 depth 6 (max 6) hp 33/33 xp 3 t=1961 wall=33s
+15:06:16   [c2block80/w2] seed 4046: prog 0.0212 depth 4 role Priestess end DEATH: died. Killed by a gnome.
+15:06:16 === c2block80/w2 seed 4050 ===
+15:06:27   [c2block80/w2] seed 4050: prog 0.0212 depth 4 role Valkyrie end DEATH: died. Killed by a wand.
+15:06:27 === c2block80/w2 seed 4054 ===
+15:06:29     step 2000 depth 2 (max 2) hp 27/27 xp 3 t=1971 wall=96s
+15:06:32   [c2block80/w0] seed 4036: prog 0.0354 depth 6 role Barbarian end DEATH: died. Killed by an imp.
+15:06:32 === c2block80/w0 seed 4040 ===
+15:06:33   [c2block80/w0] seed 4040: prog 0.2061 depth 12 role Archeologist end DEATH: died. Killed by a pony, while praying.
+15:06:33 === c2block80/w0 seed 4044 ===
+15:06:58   [c2block80/w0] seed 4044: prog 0.0212 depth 4 role Healer end DEATH: died. Killed by a homunculus.
+15:06:58 === c2block80/w0 seed 4048 ===
+15:07:07     step 2000 depth 2 (max 2) hp 34/34 xp 4 t=1987 wall=40s
+15:07:28     step 2000 depth 4 (max 4) hp 26/26 xp 3 t=1924 wall=83s
+15:07:39     step 4000 depth 2 (max 2) hp 43/43 xp 5 t=3977 wall=72s
+15:07:56   [c2block80/w2] seed 4054: prog 0.0291 depth 2 role Ranger end DEATH: died. Killed by a giant bat.
+15:07:56 === c2block80/w2 seed 4058 ===
+15:08:03   [c2block80/w3] seed 4063: prog 0.0977 depth 9 role Knight end DEATH: died. Killed by a dingo.
+15:08:03 === c2block80/w3 seed 4067 ===
+15:08:13   [c2block80/w3] seed 4067: prog 0.0977 depth 9 role Knight end DEATH: died. Killed by a plains centaur.
+15:08:13 === c2block80/w3 seed 4071 ===
+15:08:20   [c2block80/w2] seed 4058: prog 0.0977 depth 9 role Barbarian end DEATH: died. Killed by a magic missile.
+15:08:20 === c2block80/w2 seed 4062 ===
+15:08:25   [c2block80/w2] seed 4062: prog 0.2566 depth 13 role Archeologist end DEATH: died. Killed by a wolf.
+15:08:25 === c2block80/w2 seed 4066 ===
+15:08:32   [c2block80/w2] seed 4066: prog 0.0265 depth 5 role Valkyrie end DEATH: died. Killed by a bat.
+15:08:32 === c2block80/w2 seed 4070 ===
+15:08:37     step 4000 depth 2 (max 2) hp 27/27 xp 3 t=3968 wall=224s
+15:09:08     step 2000 depth 5 (max 5) hp 27/27 xp 3 t=1470 wall=55s
+15:09:31     step 4000 depth 5 (max 5) hp 36/36 xp 4 t=3003 wall=78s
+15:10:10     step 6000 depth 8 (max 8) hp 24/46 xp 6 t=4488 wall=117s
+15:10:40     step 2000 depth 1 (max 1) hp 21/21 xp 2 t=1987 wall=222s
+15:10:48     step 6000 depth 2 (max 2) hp 27/27 xp 3 t=5988 wall=355s
+15:10:52     step 8000 depth 11 (max 11) hp 48/48 xp 7 t=5954 wall=159s
+15:10:58     step 2000 depth 3 (max 3) hp 26/26 xp 2 t=1947 wall=147s
+15:11:04   [c2block80/w3] seed 4071: prog 0.1613 depth 11 role Monk end DEATH: died. Killed by a mumak.
+15:11:04 === c2block80/w3 seed 4075 ===
+15:11:05   [c2block80/w3] seed 4075: prog 0.0354 depth 6 role Archeologist end DEATH: died. Killed by a werejackal, while praying.
+15:11:05 === c2block80/w3 seed 4079 ===
+15:11:12   [c2block80/w3] seed 4079: prog 0.0265 depth 5 role Tourist end DEATH: died. Killed by a gnome zombie.
+15:11:12 c2block80 chunk w3 complete (20 eps)
+15:12:08   [c2block80/w1] seed 4013: prog 0.0208 depth 2 role Knight end DEATH: starved to death.
+15:12:08 === c2block80/w1 seed 4017 ===
+15:12:09   [c2block80/w2] seed 4070: prog 0.0696 depth 8 role Caveman end DEATH: was poisoned. Poisoned by an orcish arrow.
+15:12:09 === c2block80/w2 seed 4074 ===
+15:12:24   [c2block80/w2] seed 4074: prog 0.0696 depth 8 role Knight end DEATH: died. Killed by a jackal.
+15:12:24 === c2block80/w2 seed 4078 ===
+15:13:01     step 2000 depth 4 (max 4) hp 22/22 xp 3 t=1969 wall=52s
+15:13:12   [c2block80/w2] seed 4078: prog 0.0212 depth 4 role Tourist end DEATH: died. Killed by a kitten.
+15:13:12 c2block80 chunk w2 complete (20 eps)
+15:13:14     step 4000 depth 4 (max 4) hp 22/22 xp 3 t=3989 wall=65s
+15:13:27     step 6000 depth 4 (max 4) hp 22/22 xp 3 t=6009 wall=79s
+15:13:32   [c2block80/w1] seed 4017: prog 0.0212 depth 4 role Knight end DEATH: starved to death.
+15:13:32 === c2block80/w1 seed 4021 ===
+15:13:41     step 4000 depth 1 (max 1) hp 37/41 xp 4 t=4007 wall=403s
+15:13:47     step 2000 depth 2 (max 2) hp 28/28 xp 3 t=1979 wall=15s
+15:13:59     step 4000 depth 2 (max 2) hp 31/31 xp 4 t=3998 wall=28s
+15:14:02   [c2block80/w1] seed 4021: prog 0.0242 depth 2 role Knight end DEATH: died. Killed by a gecko, while fainted from lack of food.
+15:14:02 === c2block80/w1 seed 4025 ===
+15:14:37   [c2block80/w1] seed 4025: prog 0.0242 depth 4 role Samurai end DEATH: died. Killed by a gnome lord.
+15:14:37 === c2block80/w1 seed 4029 ===
+15:14:41   [c2block80/w1] seed 4029: prog 0.0265 depth 5 role Barbarian end DEATH: died. Killed by a giant bat.
+15:14:41 === c2block80/w1 seed 4033 ===
+15:14:43   [c2block80/w0] seed 4048: prog 0.0242 depth 1 role Healer end DEATH: died. Killed by a coyote, while fainted from lack of food.
+15:14:43 === c2block80/w0 seed 4052 ===
+15:14:58     step 2000 depth 6 (max 6) hp 11/11 xp 4 t=1017 wall=16s
+15:15:01     step 2000 depth 3 (max 3) hp 23/23 xp 2 t=1471 wall=18s
+15:15:09     step 4000 depth 6 (max 6) hp 11/11 xp 4 t=1049 wall=28s
+15:15:14     step 4000 depth 3 (max 3) hp 39/39 xp 4 t=2983 wall=30s
+15:15:21     step 6000 depth 6 (max 6) hp 11/11 xp 4 t=1088 wall=40s
+15:15:25     step 6000 depth 3 (max 3) hp 47/47 xp 5 t=4507 wall=42s
+15:15:31   [c2block80/w0] seed 4052: prog 0.0291 depth 3 role Samurai end DEATH: died. Killed by an iguana, while fainted from lack of food.
+15:15:31 === c2block80/w0 seed 4056 ===
+15:15:33   [c2block80/w0] seed 4056: prog 0.0154 depth 2 role Tourist end DEATH: died. Killed by a sewer rat.
+15:15:33 === c2block80/w0 seed 4060 ===
+15:15:34     step 8000 depth 6 (max 6) hp 11/11 xp 4 t=1120 wall=53s
+15:15:45     step 10000 depth 6 (max 6) hp 11/11 xp 4 t=1152 wall=64s
+15:15:57     step 12000 depth 6 (max 6) hp 11/11 xp 4 t=1184 wall=76s
+15:16:06     step 14000 depth 6 (max 6) hp 11/11 xp 4 t=2266 wall=85s
+15:16:17     step 16000 depth 6 (max 6) hp 11/11 xp 4 t=2298 wall=96s
+15:16:19     step 2000 depth 2 (max 2) hp 38/38 xp 3 t=1981 wall=46s
+15:16:33     step 18000 depth 6 (max 6) hp 11/11 xp 4 t=2330 wall=112s
+15:16:44     step 20000 depth 6 (max 6) hp 11/11 xp 4 t=2362 wall=123s
+15:16:56     step 22000 depth 6 (max 6) hp 11/11 xp 4 t=2395 wall=135s
+15:17:08     step 24000 depth 6 (max 6) hp 11/11 xp 4 t=2427 wall=147s
+15:17:13     step 4000 depth 2 (max 2) hp 44/44 xp 4 t=3936 wall=100s
+15:17:21     step 26000 depth 6 (max 6) hp 11/11 xp 4 t=2459 wall=160s
+15:17:28   [c2block80/w0] seed 4060: prog 0.0242 depth 2 role Barbarian end DEATH: died. Killed by a newt, while fainted from lack of food.
+15:17:28 === c2block80/w0 seed 4064 ===
+15:17:32   [c2block80/w0] seed 4064: prog 0.0175 depth 3 role Valkyrie end DEATH: was poisoned. Poisoned by a little dart.
+15:17:32 === c2block80/w0 seed 4068 ===
+15:17:33   [c2block80/w0] seed 4068: prog 0.0212 depth 4 role Ranger end DEATH: died. Killed by a gas spore's explosion.
+15:17:33 === c2block80/w0 seed 4072 ===
+15:17:34   [c2block80/w0] seed 4072: prog 0.0485 depth 7 role Archeologist end DEATH: died. Killed by an elf zombie.
+15:17:34 === c2block80/w0 seed 4076 ===
+15:17:35     step 28000 depth 6 (max 6) hp 11/11 xp 4 t=2491 wall=174s
+15:17:46     step 30000 depth 6 (max 6) hp 11/11 xp 4 t=2524 wall=185s
+15:17:58     step 32000 depth 6 (max 6) hp 11/11 xp 4 t=2556 wall=197s
+15:18:09     step 34000 depth 6 (max 6) hp 12/12 xp 5 t=2598 wall=208s
+15:18:23   [c2block80/w1] seed 4033: prog 0.0354 depth 6 role Valkyrie end DEATH: died. Killed by a killer bee.
+15:18:23 === c2block80/w1 seed 4037 ===
+15:18:31   [c2block80/w1] seed 4037: prog 0.0485 depth 7 role Priest end DEATH: died. Killed by a giant ant.
+15:18:31 === c2block80/w1 seed 4041 ===
+15:19:43     step 2000 depth 3 (max 3) hp 48/48 xp 4 t=1991 wall=72s
+15:20:11     step 2000 depth 1 (max 1) hp 23/23 xp 3 t=1981 wall=157s
+15:21:45     step 4000 depth 3 (max 3) hp 48/48 xp 4 t=4011 wall=194s
+15:22:37   [c2block80/w1] seed 4041: prog 0.0242 depth 3 role None end DEATH: died. Killed by a giant bat, while fainted from lack of food.
+15:22:37 === c2block80/w1 seed 4045 ===
+15:22:55   [c2block80/w1] seed 4045: prog 0.0185 depth 2 role Caveman end DEATH: was poisoned. Poisoned by a rotted giant rat corpse.
+15:22:55 === c2block80/w1 seed 4049 ===
+15:23:37     step 2000 depth 3 (max 3) hp 34/34 xp 3 t=1502 wall=42s
+15:23:58     step 4000 depth 3 (max 3) hp 46/46 xp 4 t=2985 wall=63s
+15:23:58     step 4000 depth 1 (max 1) hp 29/29 xp 4 t=3968 wall=384s
+15:24:13   [c2block80/w1] seed 4049: prog 0.0242 depth 3 role Samurai end DEATH: died. Killed by a bolt of lightning.
+15:24:13 === c2block80/w1 seed 4053 ===
+15:24:41     step 2000 depth 4 (max 4) hp 21/21 xp 2 t=1468 wall=28s
+15:24:51     step 4000 depth 4 (max 4) hp 21/21 xp 2 t=2970 wall=38s
+15:25:00     step 6000 depth 4 (max 4) hp 21/21 xp 2 t=4494 wall=47s
+15:25:01   [c2block80/w1] seed 4053: prog 0.0212 depth 4 role Samurai end DEATH: died. Killed by an iguana, while fainted from lack of food.
+15:25:01 === c2block80/w1 seed 4057 ===
+15:25:38     step 2000 depth 5 (max 5) hp 24/24 xp 2 t=1473 wall=37s
+15:25:56     step 4000 depth 5 (max 5) hp 30/30 xp 3 t=2981 wall=56s
+15:26:14     step 6000 depth 5 (max 5) hp 30/30 xp 3 t=4471 wall=74s
+15:26:34     step 8000 depth 5 (max 5) hp 46/46 xp 5 t=5999 wall=94s
+15:26:43     step 10000 depth 5 (max 5) hp 46/46 xp 5 t=7507 wall=102s
+15:26:50   [c2block80/w1] seed 4057: prog 0.0369 depth 5 role Monk end DEATH: died. Killed by a giant rat, while fainted from lack of food.
+15:26:50 === c2block80/w1 seed 4061 ===
+15:27:13     step 6000 depth 1 (max 1) hp 23/36 xp 5 t=5945 wall=580s
+15:27:17     step 2000 depth 2 (max 2) hp 21/21 xp 2 t=1488 wall=27s
+15:27:20   [c2block80/w1] seed 4061: prog 0.0185 depth 2 role Samurai end DEATH: died. Killed by a purple worm.
+15:27:20 === c2block80/w1 seed 4065 ===
+15:27:21   [c2block80/w1] seed 4065: prog 0.2061 depth 12 role Archeologist end DEATH: died. Killed by a giant ant.
+15:27:21 === c2block80/w1 seed 4069 ===
+15:27:27   [c2block80/w1] seed 4069: prog 0.0265 depth 5 role Valkyrie end DEATH: died. Killed by a fox.
+15:27:27 === c2block80/w1 seed 4073 ===
+15:27:52     step 2000 depth 6 (max 6) hp 19/19 xp 2 t=1477 wall=24s
+15:27:53   [c2block80/w1] seed 4073: prog 0.0696 depth 8 role Monk end DEATH: died. Killed by a killer bee.
+15:27:53 === c2block80/w1 seed 4077 ===
+15:27:53   [c2block80/w1] seed 4077: prog 0.0154 depth 2 role Wizard end DEATH: died. Killed by a sewer rat, while praying.
+15:27:53 c2block80 chunk w1 complete (20 eps)
+15:30:06     step 8000 depth 1 (max 1) hp 36/36 xp 5 t=7997 wall=752s
+15:33:09     step 10000 depth 1 (max 1) hp 36/36 xp 5 t=10216 wall=936s
+15:33:15   [c2block80/w0] seed 4076: prog 0.0291 depth 1 role Tourist end DEATH: starved to death.
+15:33:15 c2block80 chunk w0 complete (20 eps)

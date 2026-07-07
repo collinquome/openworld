@@ -1,0 +1,414 @@
+{
+ "label": "c2settled_w0",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 700,
+   "seed": 700,
+   "condition": "A",
+   "steps": 4545,
+   "illegal": 0,
+   "progression": 0.09770935198701912,
+   "highest_achievement": "Dlvl:9",
+   "depth_max": 9,
+   "xplvl_max": 5,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:8",
+    "Dlvl:9"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5"
+   ],
+   "end_reason": "DEATH: died. Killed by an ogre.",
+   "role": "Valkyrie",
+   "race": "human",
+   "wallclock_s": 75.5,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep700.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6629,
+    "eat": 0.2049,
+    "loot": 0.0458,
+    "find-stairs": 0.0453,
+    "rest": 0.0242,
+    "descend": 0.0112,
+    "survive": 0.0048,
+    "wear": 0.0009,
+    "_final": "explore",
+    "_final_reason": "22 frontier cells"
+   },
+   "ev_fired": 50,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 704,
+   "seed": 704,
+   "condition": "A",
+   "steps": 19461,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: starved to death.",
+   "role": "Knight",
+   "race": "human",
+   "wallclock_s": 237.0,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep704.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "eat": 0.9267,
+    "find-stairs": 0.042,
+    "explore": 0.0279,
+    "loot": 0.0026,
+    "rest": 0.0005,
+    "descend": 0.0003,
+    "survive": 0.0001,
+    "_final": "eat",
+    "_final_reason": "hunger 4"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 708,
+   "seed": 708,
+   "condition": "A",
+   "steps": 322,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a gas spore's explosion.",
+   "role": "Rogue",
+   "race": "orcish",
+   "wallclock_s": 7.7,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep708.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7227,
+    "find-stairs": 0.1184,
+    "descend": 0.0966,
+    "loot": 0.0623,
+    "_final": "explore",
+    "_final_reason": "2 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 712,
+   "seed": 712,
+   "condition": "A",
+   "steps": 1164,
+   "illegal": 0,
+   "progression": 0.12558597019922987,
+   "highest_achievement": "Dlvl:10",
+   "depth_max": 10,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a soldier ant.",
+   "role": "Samurai",
+   "race": "human",
+   "wallclock_s": 24.2,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep712.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.853,
+    "descend": 0.0696,
+    "rest": 0.0447,
+    "loot": 0.0301,
+    "eat": 0.0026,
+    "_final": "rest",
+    "_final_reason": "hp 9/37"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 716,
+   "seed": 716,
+   "condition": "A",
+   "steps": 5187,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 1,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a gas spore's explosion, while fainted from lack of food.",
+   "role": "Valkyrie",
+   "race": "dwarven",
+   "wallclock_s": 224.0,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep716.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.9423,
+    "explore": 0.0509,
+    "eat": 0.0048,
+    "loot": 0.0019,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 720,
+   "seed": 720,
+   "condition": "A",
+   "steps": 539,
+   "illegal": 0,
+   "progression": 0.035428686118173014,
+   "highest_achievement": "Dlvl:6",
+   "depth_max": 6,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by an imp.",
+   "role": "Tourist",
+   "race": "human",
+   "wallclock_s": 6.5,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep720.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8532,
+    "descend": 0.0762,
+    "loot": 0.0539,
+    "survive": 0.0074,
+    "grind": 0.0056,
+    "wear": 0.0037,
+    "_final": "explore",
+    "_final_reason": "12 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 724,
+   "seed": 724,
+   "condition": "A",
+   "steps": 916,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a rothe, while praying.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 11.1,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep724.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6393,
+    "rest": 0.1967,
+    "descend": 0.0754,
+    "loot": 0.0372,
+    "find-stairs": 0.0273,
+    "eat": 0.0131,
+    "survive": 0.0109,
+    "_final": "survive",
+    "_final_reason": "pray hp 2/39"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 728,
+   "seed": 728,
+   "condition": "A",
+   "steps": 3130,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 1,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a kobold, while fainted from lack of food.",
+   "role": "Priest",
+   "race": "human",
+   "wallclock_s": 166.8,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep728.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.8837,
+    "explore": 0.0802,
+    "loot": 0.0256,
+    "eat": 0.0105,
+    "_final": "eat",
+    "_final_reason": "hunger 4"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 732,
+   "seed": 732,
+   "condition": "A",
+   "steps": 1475,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a wand.",
+   "role": "Ranger",
+   "race": "orcish",
+   "wallclock_s": 20.2,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep732.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7056,
+    "loot": 0.2612,
+    "descend": 0.0204,
+    "eat": 0.0075,
+    "survive": 0.0054,
+    "_final": "explore",
+    "_final_reason": "24 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 736,
+   "seed": 736,
+   "condition": "A",
+   "steps": 131,
+   "illegal": 0,
+   "progression": 0.017539535798967013,
+   "highest_achievement": "Dlvl:3",
+   "depth_max": 3,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a guard.",
+   "role": "Priestess",
+   "race": "human",
+   "wallclock_s": 1.4,
+   "transitions_file": "transitions/c2settled/NetHackChallenge-v0__ep736.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.3692,
+    "find-stairs": 0.3077,
+    "loot": 0.1923,
+    "descend": 0.1308,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  }
+ ]
+}

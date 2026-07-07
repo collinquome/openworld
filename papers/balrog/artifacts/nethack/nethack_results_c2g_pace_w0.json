@@ -1,0 +1,282 @@
+{
+ "label": "c2g_pace_w0",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 700,
+   "seed": 700,
+   "condition": "A",
+   "steps": 4304,
+   "illegal": 0,
+   "progression": 0.021221378364235505,
+   "highest_achievement": "Dlvl:4",
+   "depth_max": 4,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: starved to death.",
+   "role": "Valkyrie",
+   "race": "human",
+   "wallclock_s": 48.3,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep700.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "eat": 0.6398,
+    "explore": 0.1922,
+    "find-stairs": 0.1608,
+    "descend": 0.0072,
+    "_final": "eat",
+    "_final_reason": "hunger 4"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 703,
+   "seed": 703,
+   "condition": "A",
+   "steps": 2996,
+   "illegal": 0,
+   "progression": 0.09770935198701912,
+   "highest_achievement": "Dlvl:9",
+   "depth_max": 9,
+   "xplvl_max": 6,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5",
+    "Xp:6"
+   ],
+   "end_reason": "DEATH: died. Killed by a captain.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 82.1,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep703.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7152,
+    "find-stairs": 0.2574,
+    "descend": 0.024,
+    "eat": 0.002,
+    "survive": 0.0013,
+    "_final": "explore",
+    "_final_reason": "11 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 706,
+   "seed": 706,
+   "condition": "A",
+   "steps": 370,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a bat.",
+   "role": "Priest",
+   "race": "elven",
+   "wallclock_s": 4.0,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep706.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.5393,
+    "rest": 0.3415,
+    "descend": 0.0786,
+    "grind": 0.0244,
+    "survive": 0.0163,
+    "_final": "explore",
+    "_final_reason": "6 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 709,
+   "seed": 709,
+   "condition": "A",
+   "steps": 548,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a goblin.",
+   "role": "Healer",
+   "race": "gnomish",
+   "wallclock_s": 11.3,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep709.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9324,
+    "find-stairs": 0.0548,
+    "descend": 0.0073,
+    "survive": 0.0055,
+    "_final": "explore",
+    "_final_reason": "5 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 712,
+   "seed": 712,
+   "condition": "A",
+   "steps": 1093,
+   "illegal": 0,
+   "progression": 0.04846098359243788,
+   "highest_achievement": "Dlvl:7",
+   "depth_max": 7,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a Mordor orc.",
+   "role": "Samurai",
+   "race": "human",
+   "wallclock_s": 21.7,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep712.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7674,
+    "rest": 0.0888,
+    "descend": 0.0522,
+    "eat": 0.0467,
+    "find-stairs": 0.0339,
+    "survive": 0.011,
+    "_final": "explore",
+    "_final_reason": "23 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 715,
+   "seed": 715,
+   "condition": "A",
+   "steps": 18,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox, while praying.",
+   "role": "Wizard",
+   "race": "human",
+   "wallclock_s": 0.2,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep715.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6471,
+    "descend": 0.2353,
+    "survive": 0.1176,
+    "_final": "survive",
+    "_final_reason": "pray hp 3/12"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 718,
+   "seed": 718,
+   "condition": "A",
+   "steps": 810,
+   "illegal": 0,
+   "progression": 0.01847840456172601,
+   "highest_achievement": "Xp:2",
+   "depth_max": 2,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a kobold.",
+   "role": "Tourist",
+   "race": "human",
+   "wallclock_s": 29.8,
+   "transitions_file": "transitions/c2g_pace/NetHackChallenge-v0__ep718.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.7624,
+    "explore": 0.1399,
+    "rest": 0.078,
+    "descend": 0.0111,
+    "survive": 0.0062,
+    "eat": 0.0025,
+    "_final": "rest",
+    "_final_reason": "hp 1/18"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  }
+ ]
+}

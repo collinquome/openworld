@@ -1,0 +1,421 @@
+{
+ "label": "c2navfood_w3",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 703,
+   "seed": 703,
+   "condition": "A",
+   "steps": 1909,
+   "illegal": 0,
+   "progression": 0.12558597019922987,
+   "highest_achievement": "Dlvl:10",
+   "depth_max": 10,
+   "xplvl_max": 6,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5",
+    "Xp:6"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant spider, while praying.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 77.3,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep703.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6819,
+    "find-stairs": 0.229,
+    "descend": 0.0409,
+    "eat": 0.0377,
+    "loot": 0.0058,
+    "survive": 0.0047,
+    "_final": "survive",
+    "_final_reason": "pray hp 3/71"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 707,
+   "seed": 707,
+   "condition": "A",
+   "steps": 628,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "role": "Rogue",
+   "race": "human",
+   "wallclock_s": 43.4,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep707.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7145,
+    "find-stairs": 0.2488,
+    "descend": 0.0367,
+    "_final": "explore",
+    "_final_reason": "13 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 711,
+   "seed": 711,
+   "condition": "A",
+   "steps": 559,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a plains centaur.",
+   "role": "Barbarian",
+   "race": "orcish",
+   "wallclock_s": 16.5,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep711.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8799,
+    "descend": 0.0932,
+    "loot": 0.0215,
+    "survive": 0.0054,
+    "_final": "explore",
+    "_final_reason": "53 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 715,
+   "seed": 715,
+   "condition": "A",
+   "steps": 18,
+   "illegal": 0,
+   "progression": 0.015392269075361172,
+   "highest_achievement": "Dlvl:2",
+   "depth_max": 2,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a fox, while praying.",
+   "role": "Wizard",
+   "race": "human",
+   "wallclock_s": 0.4,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep715.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6471,
+    "descend": 0.2353,
+    "survive": 0.1176,
+    "_final": "survive",
+    "_final_reason": "pray hp 3/12"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 719,
+   "seed": 719,
+   "condition": "A",
+   "steps": 738,
+   "illegal": 0,
+   "progression": 0.1612677822768481,
+   "highest_achievement": "Dlvl:11",
+   "depth_max": 11,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10",
+    "Dlvl:11"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a soldier ant.",
+   "role": "Barbarian",
+   "race": "orcish",
+   "wallclock_s": 17.9,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep719.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8168,
+    "descend": 0.1398,
+    "loot": 0.0312,
+    "survive": 0.0068,
+    "find-stairs": 0.0054,
+    "_final": "explore",
+    "_final_reason": "46 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 723,
+   "seed": 723,
+   "condition": "A",
+   "steps": 1939,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 2,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a hobbit, while sleeping.",
+   "role": "Ranger",
+   "race": "orcish",
+   "wallclock_s": 63.9,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep723.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9272,
+    "find-stairs": 0.0537,
+    "eat": 0.0098,
+    "loot": 0.0046,
+    "descend": 0.0036,
+    "survive": 0.001,
+    "_final": "explore",
+    "_final_reason": "15 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 727,
+   "seed": 727,
+   "condition": "A",
+   "steps": 9289,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: starved to death.",
+   "role": "Valkyrie",
+   "race": "human",
+   "wallclock_s": 295.9,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep727.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.9925,
+    "eat": 0.0054,
+    "descend": 0.0018,
+    "loot": 0.0003,
+    "_final": "explore",
+    "_final_reason": "10 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 731,
+   "seed": 731,
+   "condition": "A",
+   "steps": 1086,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a pony.",
+   "role": "Priestess",
+   "race": "elven",
+   "wallclock_s": 32.5,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep731.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6442,
+    "find-stairs": 0.2765,
+    "descend": 0.0286,
+    "loot": 0.0203,
+    "rest": 0.012,
+    "survive": 0.0111,
+    "eat": 0.0074,
+    "_final": "survive",
+    "_final_reason": "pray hp 2/25"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 735,
+   "seed": 735,
+   "condition": "A",
+   "steps": 899,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant spider.",
+   "role": "Caveman",
+   "race": "human",
+   "wallclock_s": 27.3,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep735.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8964,
+    "descend": 0.0479,
+    "find-stairs": 0.0468,
+    "eat": 0.0089,
+    "_final": "explore",
+    "_final_reason": "29 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 739,
+   "seed": 739,
+   "condition": "A",
+   "steps": 1966,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 3,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant rat.",
+   "role": "Barbarian",
+   "race": "human",
+   "wallclock_s": 58.3,
+   "transitions_file": "transitions/c2navfood/NetHackChallenge-v0__ep739.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.7288,
+    "explore": 0.2076,
+    "rest": 0.0468,
+    "descend": 0.0122,
+    "survive": 0.0025,
+    "eat": 0.002,
+    "_final": "explore",
+    "_final_reason": "6 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  }
+ ]
+}

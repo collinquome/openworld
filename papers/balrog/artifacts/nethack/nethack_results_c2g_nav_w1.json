@@ -1,0 +1,290 @@
+{
+ "label": "c2g_nav_w1",
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 701,
+   "seed": 701,
+   "condition": "A",
+   "steps": 2115,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 3,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a little dog.",
+   "role": "Knight",
+   "race": "human",
+   "wallclock_s": 86.0,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep701.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.8841,
+    "explore": 0.0672,
+    "eat": 0.035,
+    "descend": 0.0137,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 704,
+   "seed": 704,
+   "condition": "A",
+   "steps": 916,
+   "illegal": 0,
+   "progression": 0.0,
+   "highest_achievement": null,
+   "depth_max": 1,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: was poisoned. Poisoned by a rotted newt corpse.",
+   "role": "Knight",
+   "race": "human",
+   "wallclock_s": 36.4,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep704.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.835,
+    "explore": 0.153,
+    "eat": 0.012,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 707,
+   "seed": 707,
+   "condition": "A",
+   "steps": 628,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant bat.",
+   "role": "Rogue",
+   "race": "human",
+   "wallclock_s": 18.3,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep707.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7145,
+    "find-stairs": 0.2488,
+    "descend": 0.0367,
+    "_final": "explore",
+    "_final_reason": "13 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 710,
+   "seed": 710,
+   "condition": "A",
+   "steps": 1203,
+   "illegal": 0,
+   "progression": 0.035428686118173014,
+   "highest_achievement": "Dlvl:6",
+   "depth_max": 6,
+   "xplvl_max": 2,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2"
+   ],
+   "end_reason": "DEATH: died. Killed by a gnome lord.",
+   "role": "Caveman",
+   "race": "human",
+   "wallclock_s": 21.5,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep710.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.4759,
+    "find-stairs": 0.4559,
+    "rest": 0.0433,
+    "descend": 0.0233,
+    "eat": 0.0017,
+    "_final": "explore",
+    "_final_reason": "15 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 713,
+   "seed": 713,
+   "condition": "A",
+   "steps": 341,
+   "illegal": 0,
+   "progression": 0.12558597019922987,
+   "highest_achievement": "Dlvl:10",
+   "depth_max": 10,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a rope golem.",
+   "role": "Rogue",
+   "race": "human",
+   "wallclock_s": 4.4,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep713.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7824,
+    "descend": 0.2176,
+    "_final": "explore",
+    "_final_reason": "1 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 716,
+   "seed": 716,
+   "condition": "A",
+   "steps": 2066,
+   "illegal": 0,
+   "progression": 0.1612677822768481,
+   "highest_achievement": "Dlvl:11",
+   "depth_max": 11,
+   "xplvl_max": 5,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9",
+    "Dlvl:10",
+    "Dlvl:11"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4",
+    "Xp:5"
+   ],
+   "end_reason": "DEATH: died. Killed by a yeti.",
+   "role": "Valkyrie",
+   "race": "dwarven",
+   "wallclock_s": 54.8,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep716.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.476,
+    "find-stairs": 0.447,
+    "eat": 0.0455,
+    "descend": 0.0315,
+    "_final": "explore",
+    "_final_reason": "11 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  },
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 719,
+   "seed": 719,
+   "condition": "A",
+   "steps": 651,
+   "illegal": 0,
+   "progression": 0.09770935198701912,
+   "highest_achievement": "Dlvl:9",
+   "depth_max": 9,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8",
+    "Dlvl:9"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant mimic.",
+   "role": "Barbarian",
+   "race": "orcish",
+   "wallclock_s": 7.1,
+   "transitions_file": "transitions/c2g_nav/NetHackChallenge-v0__ep719.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.8369,
+    "descend": 0.1538,
+    "survive": 0.0062,
+    "find-stairs": 0.0031,
+    "_final": "explore",
+    "_final_reason": "1 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0
+  }
+ ]
+}
