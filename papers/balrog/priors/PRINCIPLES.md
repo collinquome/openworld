@@ -67,6 +67,18 @@ Status: hypothesized. Provenance: Fable 5 from novelty-protocol design +
 NH-E6. Validation: E20 novel-monster scenarios; metric = novel-species death
 rate + info gained per probe.
 
+**P7 — EVERY NEW CAPABILITY IMPORTS NEW COSTS.** When a verb ships, its full
+resource ledger ships with it: Pw, NUTRITION, time, item consumption,
+noise/aggro. The lab battery for any new verb must include a
+resource-exhaustion scenario ("win the fight, then check what it cost").
+Evidence: NH_CAST shipped on score alone; the operator spotted "too hungry to
+cast" in the c22 GIFs within a day — casting Wizards run the hunger clock
+faster than any historical agent while starvation was killer #1.
+Status: validated-by-incident (the cost side; the doctrine fix is open work).
+Provenance: operator (2026-07-07, GIF-reel observation), Fable 5 transcription.
+Validation: CAST-HUNGER retro + paired dev of the eat-early doctrine; E20
+resource-exhaustion scenarios for zap/quaff/read before those levers ship.
+
 ---
 
 Change log:
@@ -74,3 +86,5 @@ Change log:
   P5–P6. No validations yet; nothing in the strategist prompt is marked
   validated — the intuition layer must treat all as priors with cited
   evidence, not laws.
+- v0.2 2026-07-07 (session 2): P7 added (capability-imports-costs; operator
+  GIF observation of "too hungry to cast" in the c22 reel).

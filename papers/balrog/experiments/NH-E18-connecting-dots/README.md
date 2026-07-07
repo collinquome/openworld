@@ -229,3 +229,54 @@ verdict. Give-ups logged WITH PRIDE: "SHELVED: soldier pack at xp2 —
 returning at xp5" is a smart agent talking. Metrics: shelve→return→win
 conversion rate (the whole point), death-rate on shelved-class targets
 before vs after.
+
+## 13. RENEWABLE-SOURCE LEDGER (operator directive 2026-07-07, session 2 — "the infinite-rupee-loop tracker")
+
+MODEL: Fable 5 (max reasoning) — registration.
+
+1. **Sources are first-class dossier entries:** any location/mechanism that
+   restores a resource. Schema:
+   `{resource, location, mechanism, yield_rate, cooldown, RISK, verified?,
+   remaining_uses_est, breakage_conditions}`.
+   Resource classes: HP (safe rest spots w/ low spawn pressure; fountains?),
+   FOOD (prayer-at-Weak cycle w/ cooldown economics; sinks; food shops =
+   gold→food conversion), Pw (rest), GOLD/XP (spawn areas as farms — FARM
+   playbook targets), and in The Game whatever the grammar generates
+   (regenerating berries etc.).
+2. **LOOPS are the special prize:** a repeatable sequence with net-positive
+   yield ("pray at Weak every 1000+ turns = infinite food while god relations
+   hold"; "camp the spawn corridor at 0.3 dmg/kill"). Every suspected loop is
+   VERIFIED before the planner trusts it (branch-probe/lab: does it replenish,
+   at what rate, what's the failure tail; wiki documents fountain/prayer odds —
+   three-way validate per NH-E13). A verified loop = a rule card WITH yield
+   economics; the planner may then treat that resource as SOLVED-within-
+   conditions — a Wizard with a verified food loop can cast freely (this is
+   the structural answer to the cast-hunger problem).
+3. **Integration:** renewable-source discovery = a FIRST (trophy + curiosity
+   payoff); dossier revaluation fires when a new resource need meets a known
+   source ("hungry + food shop remembered on D2 + gold ⇒ journey"); playbooks
+   gain FARM-mode targets; CONTEXT package lists known sources per resource
+   ("food: shop D2 [12 gold ea], prayer [available, last T2100]").
+4. **False-loop guard:** sources have depletion/cooldown/risk dynamics
+   (prayer anger, fountain luck, shop gold limits) — the ledger tracks
+   remaining-uses estimates and every loop card carries its breakage
+   conditions. NetHack loops bite back; the card says when.
+
+### 13b. NetHack-specific mapping (operator addendum, same directive)
+
+1. **HP/Pw regen is passive-anywhere ⇒ "recharge location" = emergent
+   REST-SPOT QUALITY.** Rate candidate rest spots in the dossier
+   {entrances count, observed spawn pressure, escape route}; the RECOVER
+   playbook routes to the best-rated KNOWN spot instead of resting in place.
+   **Cheapest immediate win** — directly serves the 57/66 attrition-death
+   class (rest BEFORE the kill zone, at a rated spot).
+2. **Dungeon features are GAMBLE TABLES, not chargers:** fountains (quaff
+   luck table; dip-for-Excalibur at xp≥5 lawful — huge if verified), altars
+   (BUC-ID + sacrifice gifts), thrones (sit outcomes incl. wish), sinks.
+   Add Fountain/Altar/Throne/Sink wiki pages to the KB, extract odds tables,
+   three-way validate the SAFE SUBSET before any feature use ships (fountain
+   tail: water moccasins, water demons).
+3. **Item-based recharge:** scroll of charging for wands — ledger treats wand
+   charges as a depletable with a known refill item.
+4. **Nurse-heal interaction** (nurse hits heal when unarmored) — candidate
+   verified-loop for later depths; lab-verify before trust.

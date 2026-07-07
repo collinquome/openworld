@@ -300,3 +300,32 @@ results/animations/: c22_cast2__seed918_wizard_dlvl10.gif (25 force-bolt
 kills, D3ref→D10, +10.14), c22_ref_contrast__seed918_meleeonly_dlvl3.gif,
 c22_first_forcebolt__seed839.gif (kill at range, step 6),
 c22_cast1block__seed822_barb_dlvl14.gif (29.25 block-best).
+
+## Session 2 open (2026-07-07, MODEL: Fable 5 max reasoning — same roster, no handoff)
+
+- DEV-B1 pre-registered + LAUNCHED at open: first 40-ep measurement-cadence
+  block, STANDING CONFIG = frozen(FOOD2,PRAYFIX,LOS,TOPO,GUARD)+NH_CAST,
+  seeds 700–739 (trend-table comparable). Primary read: c2_avoid
+  avoidable-damage rate (exit criterion iii, block 1/2). NH_E15 deliberately
+  OFF — the cadence block is the clean shipping config; it doubles as the
+  paired REF for both the E15 watchdog validation and the CAST-HUNGER fix.
+- Directive burst registered (ledger rows + folders/specs): **NH-E25**
+  open-mode play (Cleese: unstructured-play discovery yield vs structured
+  control, both directions pre-registered; second-solution rule in gym;
+  pondering passes), **NH-E26** policy-function evolution (FunSearch: LLM
+  mutations over single hot functions, E20 lab fitness, islands, drop-rule
+  still gates shipping), **AUX-CONSTRUCT** strategist move-class
+  (AlphaGeometry: at impasse, ADD an element — change the problem, don't
+  search harder; + synthetic-curriculum lesson onto E21b), **RENEWABLE**
+  renewable-source ledger (sources as dossier entries; VERIFIED loops as the
+  prize — a verified food loop = cast freely; NH mapping: rest-spot quality
+  rating = cheap immediate win vs the 57/66 attrition class; features are
+  gamble tables — KB pages + safe-subset validation first), **CAST-HUNGER**
+  cast-nutrition economics (operator saw "too hungry to cast" in the c22
+  GIFs — the reel's human-observer→hypothesis loop paying out; P7 added:
+  EVERY NEW CAPABILITY IMPORTS NEW COSTS).
+- WATCH ITEM (coordinator relay): claim that the ARC-3 sibling program hit
+  25/25 public games source-blind — UNVERIFIED against the public repo
+  (whose log still shows the goal-inference wall). No action unless
+  artifacts surface; if they do, cross-study their method vs our blind arm
+  immediately.
