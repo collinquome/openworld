@@ -93,3 +93,30 @@ store (FTS5 over observations + dossiers + relations) → retrieved memory
 answers the question → plan completes. Full chain logged (constraint →
 question → hits → answer → plan) + rendered in GIF banners. Both modes
 measured; chain rate is a core NH-E21 metric.
+
+## 7. CURIOSITY REWARD, operationalized (operator spec 2026-07-07)
+
+`curiosity_value(target) = α·NOVELTY + β·DOT_COMPLETION`, both from
+existing ledgers:
+
+- **NOVELTY** (what the model doesn't know): unpinned mechanics nearby,
+  unseen entity/tile/verb-context classes, reachable coverage-matrix
+  untested cells, high possibility-set-entropy regions (widest predictions
+  = most to learn). Queryable from rule cards + matrix + the model itself.
+- **DOT-COMPLETION** (connecting new dots): the memory store's OPEN
+  SOCKETS — unanswered questions, half-completed relations (door-condition
+  known but no matching capability; item seen but unpriced; monster
+  encountered but untyped). Each open socket projects a VALUE FIELD over
+  the world: any target that might complete it scores. Open questions
+  literally price exploration targets — question-driven retrieval,
+  inverted.
+- **CALIBRATION LOOP:** after each curiosity journey, log REALIZED info
+  gain (mechanics pinned, relations completed, sharpness delta, questions
+  answered) vs predicted curiosity value; the predicted-vs-realized curve
+  calibrates α/β over time, and NH-E23 bandits allocate among curiosity
+  targets using these as rewards. A curiosity estimator that stays
+  calibrated is the answer to "explore rewards are hard to model": model
+  them, then check the model.
+- **Report artifact:** curiosity calibration curve + top realized-gain
+  journeys ("CURIOSITY: unexplored NE room [2 open sockets] → FOUND: wand
+  → SOCKET CLOSED: ranged option acquired").
