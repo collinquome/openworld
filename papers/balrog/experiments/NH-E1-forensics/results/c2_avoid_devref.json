@@ -1,0 +1,838 @@
+[
+ {
+  "file": "NetHackChallenge-v0__ep700.jsonl.gz",
+  "seed": 700,
+  "steps": 4305,
+  "total_dmg": 37,
+  "avoidable": 0,
+  "unavoidable": 34,
+  "uncertain": 3,
+  "mech_mass": {},
+  "final_event": {
+   "step": 4304,
+   "dmg": 1,
+   "depth": 4,
+   "hp0": 1,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        309  Agent-Val-Hum-Fem-N"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep701.jsonl.gz",
+  "seed": 701,
+  "steps": 6478,
+  "total_dmg": 48,
+  "avoidable": 0,
+  "unavoidable": 42,
+  "uncertain": 6,
+  "mech_mass": {},
+  "final_event": {
+   "step": 6477,
+   "dmg": 27,
+   "depth": 3,
+   "hp0": 27,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You faint from lack of food.  The dart hits the acid blob.\nThe acid blob is killed!  The werejackal hits!\nThe werejackal"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep702.jsonl.gz",
+  "seed": 702,
+  "steps": 2386,
+  "total_dmg": 56,
+  "avoidable": 0,
+  "unavoidable": 42,
+  "uncertain": 14,
+  "mech_mass": {},
+  "final_event": {
+   "step": 2385,
+   "dmg": 1,
+   "depth": 5,
+   "hp0": 1,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the homunculus!  The homunculus bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        471  A"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep703.jsonl.gz",
+  "seed": 703,
+  "steps": 2997,
+  "total_dmg": 237,
+  "avoidable": 0,
+  "unavoidable": 181,
+  "uncertain": 56,
+  "mech_mass": {},
+  "final_event": {
+   "step": 2996,
+   "dmg": 22,
+   "depth": 9,
+   "hp0": 22,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You smite the captain!  The captain swings his long sword.\nThe captain hits!  The captain swings his long sword.\nThe cap"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep704.jsonl.gz",
+  "seed": 704,
+  "steps": 917,
+  "total_dmg": 16,
+  "avoidable": 0,
+  "unavoidable": 0,
+  "uncertain": 16,
+  "mech_mass": {},
+  "final_event": {
+   "step": 916,
+   "dmg": 16,
+   "depth": 1,
+   "hp0": 16,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1          2  Agent-Kni-Hum-Mal-Law was poisoned in T\nThe Dung"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep705.jsonl.gz",
+  "seed": 705,
+  "steps": 2278,
+  "total_dmg": 66,
+  "avoidable": 0,
+  "unavoidable": 46,
+  "uncertain": 20,
+  "mech_mass": {},
+  "final_event": {
+   "step": 2277,
+   "dmg": 9,
+   "depth": 5,
+   "hp0": 9,
+   "verdict": "UNAVOIDABLE",
+   "mech": "dice-won-fight"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the dwarf.  The dwarf swings his dwarvish mattock.\nThe dwarf hits!\n\u0000\nYou made the top ten list!\nNo  Points     "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep706.jsonl.gz",
+  "seed": 706,
+  "steps": 268,
+  "total_dmg": 36,
+  "avoidable": 2,
+  "unavoidable": 27,
+  "uncertain": 7,
+  "mech_mass": {
+   "LOS": 2
+  },
+  "final_event": {
+   "step": 267,
+   "dmg": 1,
+   "depth": 5,
+   "hp0": 1,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the kitten.  The kitten bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        217  Agent-Pr"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep707.jsonl.gz",
+  "seed": 707,
+  "steps": 629,
+  "total_dmg": 17,
+  "avoidable": 0,
+  "unavoidable": 5,
+  "uncertain": 12,
+  "mech_mass": {},
+  "final_event": {
+   "step": 628,
+   "dmg": 9,
+   "depth": 5,
+   "hp0": 9,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the giant bat.  The giant bat bites!  The giant bat bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp ["
+ },
+ {
+  "file": "NetHackChallenge-v0__ep708.jsonl.gz",
+  "seed": 708,
+  "steps": 1134,
+  "total_dmg": 44,
+  "avoidable": 0,
+  "unavoidable": 30,
+  "uncertain": 14,
+  "mech_mass": {},
+  "final_event": {
+   "step": 1133,
+   "dmg": 6,
+   "depth": 6,
+   "hp0": 6,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the gnome lord!  The gnome lord hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        488  Ag"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep709.jsonl.gz",
+  "seed": 709,
+  "steps": 549,
+  "total_dmg": 40,
+  "avoidable": 3,
+  "unavoidable": 30,
+  "uncertain": 7,
+  "mech_mass": {
+   "KITE": 3
+  },
+  "final_event": {
+   "step": 548,
+   "dmg": 5,
+   "depth": 2,
+   "hp0": 5,
+   "verdict": "UNAVOIDABLE",
+   "mech": "dice-won-fight"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the goblin.  The goblin thrusts his crude dagger.\nThe goblin hits!\n\u0000\nYou made the top ten list!\nNo  Points     N"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep710.jsonl.gz",
+  "seed": 710,
+  "steps": 1330,
+  "total_dmg": 79,
+  "avoidable": 3,
+  "unavoidable": 65,
+  "uncertain": 11,
+  "mech_mass": {
+   "THROW": 3
+  },
+  "final_event": {
+   "step": 1329,
+   "dmg": 6,
+   "depth": 9,
+   "hp0": 6,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 2,
+  "end": "The werewolf changes into a wolf.  The werewolf bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1      "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep711.jsonl.gz",
+  "seed": 711,
+  "steps": 5281,
+  "total_dmg": 107,
+  "avoidable": 5,
+  "unavoidable": 93,
+  "uncertain": 9,
+  "mech_mass": {
+   "EAT": 5
+  },
+  "final_event": {
+   "step": 5280,
+   "dmg": 55,
+   "depth": 7,
+   "hp0": 55,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 48,
+  "end": "You can hear again.  You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1       1110"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep712.jsonl.gz",
+  "seed": 712,
+  "steps": 1094,
+  "total_dmg": 129,
+  "avoidable": 10,
+  "unavoidable": 59,
+  "uncertain": 60,
+  "mech_mass": {
+   "KITE": 10
+  },
+  "final_event": {
+   "step": 1093,
+   "dmg": 2,
+   "depth": 7,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You see here a shito.  The Mordor orc hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        767  Agen"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep713.jsonl.gz",
+  "seed": 713,
+  "steps": 327,
+  "total_dmg": 42,
+  "avoidable": 14,
+  "unavoidable": 20,
+  "uncertain": 8,
+  "mech_mass": {
+   "KITE": 14
+  },
+  "final_event": {
+   "step": 326,
+   "dmg": 2,
+   "depth": 9,
+   "hp0": 2,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "The jackal bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        516  Agent-Rog-Hum-Fem-Cha died in "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep714.jsonl.gz",
+  "seed": 714,
+  "steps": 608,
+  "total_dmg": 32,
+  "avoidable": 0,
+  "unavoidable": 27,
+  "uncertain": 5,
+  "mech_mass": {},
+  "final_event": {
+   "step": 607,
+   "dmg": 2,
+   "depth": 2,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the jackal.  The jackal bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        101  Agent-To"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep715.jsonl.gz",
+  "seed": 715,
+  "steps": 19,
+  "total_dmg": 12,
+  "avoidable": 6,
+  "unavoidable": 6,
+  "uncertain": 0,
+  "mech_mass": {
+   "KITE": 6
+  },
+  "final_event": {
+   "step": 18,
+   "dmg": 3,
+   "depth": 2,
+   "hp0": 3,
+   "verdict": "AVOIDABLE",
+   "mech": "KITE"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You begin praying to Thoth.  You hear some noises.  The fox bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp ["
+ },
+ {
+  "file": "NetHackChallenge-v0__ep716.jsonl.gz",
+  "seed": 716,
+  "steps": 6009,
+  "total_dmg": 199,
+  "avoidable": 6,
+  "unavoidable": 95,
+  "uncertain": 98,
+  "mech_mass": {
+   "KITE": 6
+  },
+  "final_event": {
+   "step": 6008,
+   "dmg": 10,
+   "depth": 11,
+   "hp0": 10,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 31,
+  "end": "You faint from lack of food.  The lizard bites!  The lizard bites!\nThe xorn hits!  The xorn hits!  The xorn hits!\n\u0000\nYou "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep717.jsonl.gz",
+  "seed": 717,
+  "steps": 1542,
+  "total_dmg": 57,
+  "avoidable": 0,
+  "unavoidable": 25,
+  "uncertain": 32,
+  "mech_mass": {},
+  "final_event": {
+   "step": 1541,
+   "dmg": 18,
+   "depth": 7,
+   "hp0": 18,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "The giant spider bites!  The giant spider bites!\nThe giant spider's bite was poisoned!\n\u0000\nYou made the top ten list!\nNo  "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep718.jsonl.gz",
+  "seed": 718,
+  "steps": 811,
+  "total_dmg": 31,
+  "avoidable": 0,
+  "unavoidable": 17,
+  "uncertain": 14,
+  "mech_mass": {},
+  "final_event": {
+   "step": 810,
+   "dmg": 1,
+   "depth": 2,
+   "hp0": 1,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the kobold.  The kobold hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        158  Agent-Tou"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep719.jsonl.gz",
+  "seed": 719,
+  "steps": 6070,
+  "total_dmg": 181,
+  "avoidable": 48,
+  "unavoidable": 124,
+  "uncertain": 9,
+  "mech_mass": {
+   "KITE": 48
+  },
+  "final_event": {
+   "step": 6069,
+   "dmg": 27,
+   "depth": 4,
+   "hp0": 27,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You smite the manes.  The manes hits!  The manes hits!\nThe manes bites!  You can hear again.  You turn into a wererat!\nU"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep720.jsonl.gz",
+  "seed": 720,
+  "steps": 196,
+  "total_dmg": 16,
+  "avoidable": 0,
+  "unavoidable": 8,
+  "uncertain": 8,
+  "mech_mass": {},
+  "final_event": {
+   "step": 195,
+   "dmg": 8,
+   "depth": 3,
+   "hp0": 8,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "Things that are here:\nan orc corpse\na food ration\n\nClick!  You trigger a rolling boulder trap!  You are hit by a boulder"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep721.jsonl.gz",
+  "seed": 721,
+  "steps": 1837,
+  "total_dmg": 105,
+  "avoidable": 13,
+  "unavoidable": 37,
+  "uncertain": 55,
+  "mech_mass": {
+   "KITE": 13
+  },
+  "final_event": {
+   "step": 1836,
+   "dmg": 5,
+   "depth": 5,
+   "hp0": 5,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the gnome lord!  The gnome lord hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        510  Ag"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep722.jsonl.gz",
+  "seed": 722,
+  "steps": 7122,
+  "total_dmg": 88,
+  "avoidable": 0,
+  "unavoidable": 66,
+  "uncertain": 22,
+  "mech_mass": {},
+  "final_event": {
+   "step": 7121,
+   "dmg": 32,
+   "depth": 3,
+   "hp0": 32,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        382  Agent-Bar-Orc-Mal-C"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep723.jsonl.gz",
+  "seed": 723,
+  "steps": 6900,
+  "total_dmg": 109,
+  "avoidable": 1,
+  "unavoidable": 86,
+  "uncertain": 22,
+  "mech_mass": {
+   "KITE": 1
+  },
+  "final_event": {
+   "step": 6899,
+   "dmg": 34,
+   "depth": 3,
+   "hp0": 34,
+   "verdict": "UNAVOIDABLE",
+   "mech": "pack-no-choke"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You faint from lack of food.  The werejackal changes into a human.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp ["
+ },
+ {
+  "file": "NetHackChallenge-v0__ep724.jsonl.gz",
+  "seed": 724,
+  "steps": 568,
+  "total_dmg": 19,
+  "avoidable": 0,
+  "unavoidable": 17,
+  "uncertain": 2,
+  "mech_mass": {},
+  "final_event": {
+   "step": 567,
+   "dmg": 9,
+   "depth": 7,
+   "hp0": 9,
+   "verdict": "UNAVOIDABLE",
+   "mech": "dice-won-fight"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the dwarf.  The dwarf swings his pick-axe.  The dwarf hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep725.jsonl.gz",
+  "seed": 725,
+  "steps": 86,
+  "total_dmg": 30,
+  "avoidable": 0,
+  "unavoidable": 12,
+  "uncertain": 18,
+  "mech_mass": {},
+  "final_event": {
+   "step": 85,
+   "dmg": 3,
+   "depth": 8,
+   "hp0": 3,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the giant ant.  The giant ant bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        402  Age"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep726.jsonl.gz",
+  "seed": 726,
+  "steps": 1314,
+  "total_dmg": 85,
+  "avoidable": 0,
+  "unavoidable": 39,
+  "uncertain": 46,
+  "mech_mass": {},
+  "final_event": {
+   "step": 1313,
+   "dmg": 12,
+   "depth": 13,
+   "hp0": 12,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 3,
+  "end": "You miss the lynx.  The lynx hits!  The lynx hits!  The lynx bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep727.jsonl.gz",
+  "seed": 727,
+  "steps": 6772,
+  "total_dmg": 115,
+  "avoidable": 38,
+  "unavoidable": 67,
+  "uncertain": 10,
+  "mech_mass": {
+   "EAT": 38
+  },
+  "final_event": {
+   "step": 6771,
+   "dmg": 38,
+   "depth": 5,
+   "hp0": 38,
+   "verdict": "AVOIDABLE",
+   "mech": "EAT"
+  },
+  "weak_with_corpse_steps": 4,
+  "end": "You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        524  Agent-Val-Hum-Fem-N"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep728.jsonl.gz",
+  "seed": 728,
+  "steps": 1930,
+  "total_dmg": 44,
+  "avoidable": 0,
+  "unavoidable": 16,
+  "uncertain": 28,
+  "mech_mass": {},
+  "final_event": {
+   "step": 1929,
+   "dmg": 14,
+   "depth": 1,
+   "hp0": 14,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 21,
+  "end": "You faint from lack of food.  The jackal bites!  The jackal bites!\nThe jackal bites!  The jackal bites!  The jackal bite"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep729.jsonl.gz",
+  "seed": 729,
+  "steps": 1329,
+  "total_dmg": 86,
+  "avoidable": 39,
+  "unavoidable": 9,
+  "uncertain": 38,
+  "mech_mass": {
+   "THROW": 39
+  },
+  "final_event": {
+   "step": 1328,
+   "dmg": 2,
+   "depth": 5,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the pony.  The pony kicks!  The pony bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep730.jsonl.gz",
+  "seed": 730,
+  "steps": 1194,
+  "total_dmg": 82,
+  "avoidable": 14,
+  "unavoidable": 48,
+  "uncertain": 20,
+  "mech_mass": {
+   "KITE": 14
+  },
+  "final_event": {
+   "step": 1193,
+   "dmg": 2,
+   "depth": 7,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the black naga hatchling.  The black naga hatchling bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp ["
+ },
+ {
+  "file": "NetHackChallenge-v0__ep731.jsonl.gz",
+  "seed": 731,
+  "steps": 603,
+  "total_dmg": 42,
+  "avoidable": 0,
+  "unavoidable": 25,
+  "uncertain": 17,
+  "mech_mass": {},
+  "final_event": {
+   "step": 602,
+   "dmg": 6,
+   "depth": 4,
+   "hp0": 6,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "The hobbit thrusts his elven dagger.  The hobbit hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1      "
+ },
+ {
+  "file": "NetHackChallenge-v0__ep732.jsonl.gz",
+  "seed": 732,
+  "steps": 1252,
+  "total_dmg": 86,
+  "avoidable": 10,
+  "unavoidable": 39,
+  "uncertain": 37,
+  "mech_mass": {
+   "THROW": 6,
+   "KITE": 4
+  },
+  "final_event": {
+   "step": 1251,
+   "dmg": 2,
+   "depth": 5,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "offscreen-ranged"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "Things that are here:\na thonged club\nan arrow\n\nThe gnome thrusts his dagger.  The gnome hits!\n\u0000\nYou made the top ten lis"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep733.jsonl.gz",
+  "seed": 733,
+  "steps": 8493,
+  "total_dmg": 28,
+  "avoidable": 14,
+  "unavoidable": 14,
+  "uncertain": 0,
+  "mech_mass": {
+   "EAT": 14
+  },
+  "final_event": {
+   "step": 8492,
+   "dmg": 14,
+   "depth": 4,
+   "hp0": 14,
+   "verdict": "AVOIDABLE",
+   "mech": "EAT"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        234  Agent-Ran-Gno-Mal-N"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep734.jsonl.gz",
+  "seed": 734,
+  "steps": 8329,
+  "total_dmg": 111,
+  "avoidable": 49,
+  "unavoidable": 48,
+  "uncertain": 14,
+  "mech_mass": {
+   "THROW": 10,
+   "KITE": 39
+  },
+  "final_event": {
+   "step": 8328,
+   "dmg": 39,
+   "depth": 1,
+   "hp0": 39,
+   "verdict": "AVOIDABLE",
+   "mech": "KITE"
+  },
+  "weak_with_corpse_steps": 48,
+  "end": "You faint from lack of food.\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        555  Agent-Sam-Hum-Mal-L"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep735.jsonl.gz",
+  "seed": 735,
+  "steps": 661,
+  "total_dmg": 40,
+  "avoidable": 0,
+  "unavoidable": 8,
+  "uncertain": 32,
+  "mech_mass": {},
+  "final_event": {
+   "step": 660,
+   "dmg": 5,
+   "depth": 6,
+   "hp0": 5,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the pony!  The pony kicks!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        441  Agent-Cav-Hum"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep736.jsonl.gz",
+  "seed": 736,
+  "steps": 91,
+  "total_dmg": 14,
+  "avoidable": 0,
+  "unavoidable": 0,
+  "uncertain": 14,
+  "mech_mass": {},
+  "final_event": {
+   "step": 90,
+   "dmg": 14,
+   "depth": 3,
+   "hp0": 14,
+   "verdict": "UNCERTAIN",
+   "mech": "no-adjacency"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "\"You've been warned, knave!\"  The guard hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        104  Ag"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep737.jsonl.gz",
+  "seed": 737,
+  "steps": 871,
+  "total_dmg": 44,
+  "avoidable": 0,
+  "unavoidable": 7,
+  "uncertain": 37,
+  "mech_mass": {},
+  "final_event": {
+   "step": 870,
+   "dmg": 7,
+   "depth": 5,
+   "hp0": 7,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You hit the giant bat!  The giant bat bites!  The giant bat bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp ["
+ },
+ {
+  "file": "NetHackChallenge-v0__ep738.jsonl.gz",
+  "seed": 738,
+  "steps": 1106,
+  "total_dmg": 30,
+  "avoidable": 0,
+  "unavoidable": 5,
+  "uncertain": 25,
+  "mech_mass": {},
+  "final_event": {
+   "step": 1105,
+   "dmg": 2,
+   "depth": 5,
+   "hp0": 2,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the werejackal.  The werejackal hits!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1        327  A"
+ },
+ {
+  "file": "NetHackChallenge-v0__ep739.jsonl.gz",
+  "seed": 739,
+  "steps": 3131,
+  "total_dmg": 239,
+  "avoidable": 0,
+  "unavoidable": 192,
+  "uncertain": 47,
+  "mech_mass": {},
+  "final_event": {
+   "step": 3130,
+   "dmg": 6,
+   "depth": 7,
+   "hp0": 6,
+   "verdict": "UNCERTAIN",
+   "mech": "losing-1v1"
+  },
+  "weak_with_corpse_steps": 0,
+  "end": "You miss the soldier ant.  The soldier ant bites!\n\u0000\nYou made the top ten list!\nNo  Points     Name\nHp [max]\n1       2789"
+ }
+]

@@ -1,0 +1,3 @@
+# NH-E5 — Elbereth substitutes (CLOSED: two-sided verdict)
+
+Weapon-letter engrave + typed letters + `more`(=CR) completes the flow v1 thought unreachable — deterministic probe reads back "Elbereth". BUT weapon engraving is ground-carving: multi-turn helpless occupation; three dev deaths mid-engraving ("while helpless", death screen frozen at the getlin prompt). **Panic use dropped.** Without `-` (1-turn dust write), Elbereth-as-panic remains effectively blocked in BALROG's action space; scare-monster scrolls unusable (shuffled appearances). Residual niche (pre-emptive carving before rest) documented, unexploited.

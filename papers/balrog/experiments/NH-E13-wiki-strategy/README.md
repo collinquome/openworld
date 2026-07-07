@@ -1,0 +1,3 @@
+# NH-E13 — Wiki-strategy arm (REGISTERED, Phase L)
+
+Third knowledge provenance: community wisdom (nethackwiki), vs source-code mechanics and own-play evidence. Mode A (batch: Standard_strategy + linked pages -> carded levers) vs Mode B (reactive: death -> targeted wiki query -> rule card -> gym validation) vs no-wiki, three-way on dev blocks. No trust exemption — the wiki optimizes winning, we optimize max-rung; rejections are findings. Plus mechanics-claims 3-way cross-validation (wiki vs source model vs experiment; CONFIRMED / WIKI-WRONG / OUR-MODEL-WRONG / UNTESTABLE-IN-BALROG, version-tagged). Quarantine: this arm only; blind arm untouched.
