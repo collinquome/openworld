@@ -7,6 +7,9 @@ logged here at its phase boundary. Workers/subagents where used: Sonnet 5
 (tagged per artifact). PHASE BOUNDARY (logged per the provenance rule):
 sessions 1-2 = Fable 5 (max reasoning); session 3+ = claude-opus-4-8
 (max thinking) — forced handoff at Fable usage cap, 2026-07-07 evening.
+CORRECTION at session-3 open: the cap reset before session 3 launched —
+session 3 = Fable 5 (max reasoning). The opus fallback was NOT used;
+the roster remains single-model (Fable 5) through session 3.
 
 Predecessor state: NH-C2.1 checkpoint 5.27 [4.22, 6.43] vs SOTA 6.8 — no beat;
 avoidability audit says deaths are CAPABILITY-bound (5–8% of damage
@@ -494,3 +497,48 @@ verdict lands in nethack_results_casthunger2_wa.json) and E15-1 paired
 overnight rider (40 eps vs DEV-B1 ref). Ledger harness on DEV-B1: one D1
 fire (loot-approach x50, seed 704 Knight) — known bounded class.
 HANDOFF_3.md carries the full state. Model handoff logged above.
+
+
+## Session 3 open (2026-07-07 evening, MODEL: Fable 5 max reasoning — cap reset, no model handoff; roster correction logged in the header)
+
+### In-flight verdicts collected (all three finished writing after session-2 wrap)
+
+**CASTHUNGER-2 SHIPPED (pure guard).** All 4 affected Wizard seeds
+ref-EXACT (+0.00 CI [+0.00,+0.00]: 839 2.91 / 912 5.08 / 940 1.85 /
+980 3.54). Retry loops GONE: 'too hungry to cast' events test-vs-ref
+1/3169 (s839 — the 24%-of-episode loop), 1/115, 2/268, 1/465; the
+residual 1-2 events are the latch triggers themselves. Hunger-death
+class unchanged (the latch stops the loop, it does not mint food —
+RENEWABLE stays the structural fix). Violations 0/17,319. NH_CASTHUNGER
+(V1a latch-only) joins the standing config for casters; V1b eat-early
+stays dropped (lab sub-flag NH_CASTHUNGER_EAT).
+
+**E15-1 SHIPPED (robustness lever, on its own pre-registered gate).**
+40 seeds 700-739 vs DEV-B1: +0.13 [-0.44,+0.70]; watchdog fired in
+22/40 episodes (L1 perturb / L2 disengage, all noted in trajectories);
+15/40 action-divergent, 6/40 score-divergent (best +7.35 s700 D4→D9;
+worst -7.71 s710). Death classes: HUNGER DEATHS HALVED 10→5 — s700/702/
+704/727/728 all escaped stall-starve loops (s704 starved → rotted-corpse
+poisoning: lateral move within the food-crisis class, no novel class).
+All 3 pre-registered criteria pass (fire-rate>0, delta not clearly
+negative, no death-class worsening). Violations 0/81,125. HONEST CAVEAT:
+as a progression lever the effect is UNCLEAR by drop-rule standards (CI
+spans 0), and the mechanism is partially inert — 7/22 fired-episodes are
+byte-identical to ref (s715: 37 fires, s733: 61 fires, zero divergence;
+L2 disengage is a no-op without adjacent standoff combat and the L1
+perturb goal can resolve back to the incumbent explore target — the
+REPEAT-1 inertness class again; rework = goal-market integration).
+Shipped because its pre-registered criteria define the gate; DEV-B2
+validates it inside the standing config and a regression there reverts it.
+
+**REPEAT-2 (verdict landed 18:22 session 2, collected unchanged):**
++0.39 [-0.23,+1.28], 12/20 divergent (V1: 0/20), routing fired 19/20,
+best +7.71 s818 — mechanism FIXED, effect UNCLEAR ⇒ NH_REPEAT stays
+default-off per the drop rule; goal-market integration is the revisit
+path (same rework as the E15 inertness caveat — one integration serves
+both).
+
+**STANDING CONFIG after session-3 open:** NH_FOOD2, NH_PRAYFIX, NH_LOS,
+NH_TOPO, NH_GUARD, NH_CAST + NH_CASTHUNGER + NH_E15. Two levers shipped
+⇒ the criterion-iii 2-block clock RESTARTS: DEV-B2 = block 1/2 of the
+new config.

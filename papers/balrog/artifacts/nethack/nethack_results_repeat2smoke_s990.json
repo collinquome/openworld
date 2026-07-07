@@ -1,0 +1,58 @@
+{
+ "label": "repeat2smoke",
+ "flags": {
+  "NH_LOS": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1",
+  "NH_REPEAT": "1",
+  "NH_CAST": "1",
+  "NH_PRAYFIX": "1"
+ },
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 990,
+   "seed": 990,
+   "condition": "dev",
+   "steps": 1718,
+   "illegal": 0,
+   "progression": 0.02081163581974355,
+   "highest_achievement": "Xp:3",
+   "depth_max": 3,
+   "xplvl_max": 3,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3"
+   ],
+   "end_reason": "DEATH: died. Killed by a small mimic.",
+   "depth_max_blstats": 3,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Wizard",
+   "race": "elven",
+   "role_source": "welcome",
+   "wallclock_s": 14.9,
+   "transitions_file": "transitions/repeat2smoke/NetHackChallenge-v0__ep990.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.4415,
+    "find-stairs": 0.3058,
+    "loot": 0.2021,
+    "fight": 0.0414,
+    "descend": 0.0082,
+    "eat": 0.0012,
+    "_final": "fight",
+    "_final_reason": "cast at small mimic"
+   },
+   "ev_fired": 4,
+   "emergency_fired": 0
+  }
+ ]
+}
