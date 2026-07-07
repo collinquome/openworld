@@ -247,31 +247,31 @@ def render(traj_file, out_gif, title=""):
                         if (xx, yy) in sus:
                             col = (200, 60, 60)
                         d.rectangle(
-                            [x0 + xx * MCW, my0 + 12 + yy * MCH,
+                            [x0 + xx * MCW, my0 + 28 + yy * MCH,
                              x0 + xx * MCW + MCW - 1,
-                             my0 + 12 + yy * MCH + MCH - 1], fill=col)
+                             my0 + 28 + yy * MCH + MCH - 1], fill=col)
                 if pl and pl[1]:
                     for (px, py) in pl[1]:
                         d.rectangle(
-                            [x0 + px * MCW + 1, my0 + 12 + py * MCH + 1,
+                            [x0 + px * MCW + 1, my0 + 28 + py * MCH + 1,
                              x0 + px * MCW + MCW - 2,
-                             my0 + 12 + py * MCH + MCH - 2],
+                             my0 + 28 + py * MCH + MCH - 2],
                             fill=(241, 250, 140))
                 if mon:
                     for (mx, my_, name, pet) in mon[1]:
                         d.rectangle(
-                            [x0 + mx * MCW, my0 + 12 + my_ * MCH,
+                            [x0 + mx * MCW, my0 + 28 + my_ * MCH,
                              x0 + mx * MCW + MCW - 1,
-                             my0 + 12 + my_ * MCH + MCH - 1],
+                             my0 + 28 + my_ * MCH + MCH - 1],
                             fill=(80, 250, 123) if pet else (255, 60, 60))
                 # agent
                 d.rectangle([x0 + pos[0] * MCW - 1,
-                             my0 + 12 + pos[1] * MCH - 1,
+                             my0 + 28 + pos[1] * MCH - 1,
                              x0 + pos[0] * MCW + MCW,
-                             my0 + 12 + pos[1] * MCH + MCH],
+                             my0 + 28 + pos[1] * MCH + MCH],
                             outline=(255, 221, 51), width=1)
             # knowledge/decision ticker: recent provenance-coded events
-            ey = my0 + 12 + MAPR * MCH + 8
+            ey = my0 + 28 + MAPR * MCH + 8
             d.text((x0, ey), "KNOWLEDGE / DECISIONS", font=FONT_XS,
                    fill=(120, 120, 140))
             recent = [e for e in kevents

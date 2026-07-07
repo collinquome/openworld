@@ -167,7 +167,7 @@ def frame(grid, header, topline, status, subgoal, panel, H, gw, trail):
         d.rectangle([(10, text_y + 6), (10 + 300, text_y + 28)],
                     fill=(255, 140, 60) if has_ov else (90, 80, 160))
         d.text((18, text_y + 9), badge, font=F_TAG, fill=(10, 10, 18))
-        py = text_y + 34
+        py = text_y + 42            # label-clearance rule: gap below the badge
         for tag, txt in panel["bullets"]:
             col = TAG_COLOR.get(tag, (220, 220, 220))
             d.text((14, py), "■", font=F_TAG, fill=col)
