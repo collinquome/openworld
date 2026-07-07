@@ -239,3 +239,25 @@ agents). Lever: NH_REPEAT — ≥85% terrain match over ≥60 comparable cells
 there (hint-only; normal give-up applies). Smoke on seed 990: 3 detections,
 all correctly predicting (63,4). Rule card REPEAT_LAYOUT_STAIRS. Paired
 dev block queued behind CAST-2.
+
+## Phase-L status vs exit criteria (end of session 1, 2026-07-07)
+
+(i) coverage matrix ≥70% death-mass-weighted: **NOT STARTED as a formal
+grid** — capability map built (0/34 cells resolved; verb grammars pinned
+count toward the cast column's evidence base); matrix scheduler (E23 UCB)
+registered. (ii) top-5 gym classes solved/UNWINNABLE: **gym harvest not
+yet run**; instrument (nh_branch) + retro corpus (163 deaths typed) ready;
+bat-standoff fixture pending harvest. (iii) avoidable-damage plateau over
+2 consecutive 40-ep dev blocks: **cadence not started** (session ran
+targeted 20-seed lever blocks; first full 40-ep block with c2_avoid due
+session 2). (iv) snapshot suite green: **suite not yet assembled** (probe
+records + E21b tests exist; NetHack-side fixtures pending). (v) violation
+rate <1e-4: **play-time possibility-set checker not yet ported** from the
+blind arm.
+
+Honest summary: session 1 built the INSTRUMENTS (branch executor, store,
+KB, engine, watchdog, catalogs) and landed the first capability lever
+(CAST) + a world-model discovery (layout repeats); the exit-criteria
+MEASUREMENT loops (matrix fill, gym syllabus, avoidability cadence, suite,
+violation tracking) are session 2+'s backbone. No criterion is met yet;
+none is blocked.
