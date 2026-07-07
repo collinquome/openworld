@@ -1,0 +1,149 @@
+{
+ "model": "Fable 5 (max reasoning), s3",
+ "note": "structured distillation of the verbatim consultations in T6_s0.json (operator display directive s3); verbatim remains ground truth",
+ "total_consults": 8,
+ "panels": [
+  {
+   "consult": 1,
+   "at_step": 0,
+   "bullets": [
+    [
+     "NOTE",
+     "I have read the designs"
+    ],
+    [
+     "NOTE",
+     "treat facts as hypotheses"
+    ],
+    [
+     "SAW",
+     "2 fruits, charm, 2 gates"
+    ],
+    [
+     "PLAN",
+     "probe G1 at full HP"
+    ]
+   ]
+  },
+  {
+   "consult": 3,
+   "at_step": 16,
+   "bullets": [
+    [
+     "SAW",
+     "G1 refuses at hp 100"
+    ],
+    [
+     "SAW",
+     "charm was under start cell"
+    ],
+    [
+     "THINK",
+     "charm may be the trap"
+    ],
+    [
+     "PLAN",
+     "leave charm, eat mottled"
+    ],
+    [
+     "RECALL",
+     "T1 binding won't transfer"
+    ]
+   ]
+  },
+  {
+   "consult": 4,
+   "at_step": 17,
+   "bullets": [
+    [
+     "SAW",
+     "-65 HP, now 35"
+    ],
+    [
+     "OVERRIDE",
+     "step into G1 wounded"
+    ],
+    [
+     "PLAN",
+     "keep spiny fruit reserved"
+    ]
+   ]
+  },
+  {
+   "consult": 5,
+   "at_step": 18,
+   "bullets": [
+    [
+     "SAW",
+     "G1 yields - override confirmed"
+    ],
+    [
+     "THINK",
+     "G2 may punish possession"
+    ],
+    [
+     "OVERRIDE",
+     "charm stays on floor"
+    ],
+    [
+     "COST",
+     "mechanics 3-4 unexplored"
+    ],
+    [
+     "PLAN",
+     "walk corridor to G2"
+    ]
+   ]
+  },
+  {
+   "consult": 6,
+   "at_step": 19,
+   "bullets": [
+    [
+     "PLAN",
+     "walk east, cell by cell"
+    ]
+   ]
+  },
+  {
+   "consult": 7,
+   "at_step": 27,
+   "bullets": [
+    [
+     "SAW",
+     "at G2, empty-handed, hp35"
+    ],
+    [
+     "PLAN",
+     "step in: test hypothesis"
+    ],
+    [
+     "PLAN",
+     "if refused, drop fruit"
+    ]
+   ]
+  },
+  {
+   "consult": 8,
+   "at_step": 29,
+   "bullets": [
+    [
+     "SAW",
+     "G2 yields, empty-handed"
+    ],
+    [
+     "CONFIRMED",
+     "possession trap pinned"
+    ],
+    [
+     "NOTE",
+     "heal aura: probe owed"
+    ],
+    [
+     "PLAN",
+     "walk out - WIN"
+    ]
+   ]
+  }
+ ]
+}

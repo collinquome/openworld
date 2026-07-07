@@ -1,0 +1,131 @@
+{
+ "model": "Fable 5 (max reasoning), s3",
+ "note": "structured distillation of the verbatim consultations in T1_s0.json (operator display directive s3); verbatim remains ground truth",
+ "total_consults": 6,
+ "panels": [
+  {
+   "consult": 1,
+   "at_step": 0,
+   "bullets": [
+    [
+     "GOAL",
+     "learn the gate's rule"
+    ],
+    [
+     "SAW",
+     "two fruits, one gate east"
+    ],
+    [
+     "READ",
+     "'mottled' smells spoiled"
+    ],
+    [
+     "PLAN",
+     "probe gate BEFORE eating"
+    ],
+    [
+     "PLAN",
+     "pick up both fruits"
+    ]
+   ]
+  },
+  {
+   "consult": 2,
+   "at_step": 5,
+   "bullets": [
+    [
+     "SAW",
+     "interact hits standing cell"
+    ],
+    [
+     "PLAN",
+     "step onto the gate"
+    ]
+   ]
+  },
+  {
+   "consult": 3,
+   "at_step": 7,
+   "bullets": [
+    [
+     "SAW",
+     "gate wants a 'situation'"
+    ],
+    [
+     "THINK",
+     "state condition, not key"
+    ],
+    [
+     "THINK",
+     "only lever = the fruits"
+    ],
+    [
+     "PLAN",
+     "eat mottled, watch HP"
+    ],
+    [
+     "REJECTED",
+     "search walls / wait / drop"
+    ]
+   ]
+  },
+  {
+   "consult": 4,
+   "at_step": 17,
+   "bullets": [
+    [
+     "NOTE",
+     "inventory leaks true labels"
+    ],
+    [
+     "NOTE",
+     "engine bug filed live"
+    ],
+    [
+     "PLAN",
+     "eat mottled fruit 'a'"
+    ]
+   ]
+  },
+  {
+   "consult": 5,
+   "at_step": 18,
+   "bullets": [
+    [
+     "SAW",
+     "-68 HP: both mechanics known"
+    ],
+    [
+     "THINK",
+     "the damage IS the key"
+    ],
+    [
+     "OVERRIDE",
+     "self-harm rule, bounded hp32"
+    ],
+    [
+     "PLAN",
+     "re-test gate wounded"
+    ]
+   ]
+  },
+  {
+   "consult": 6,
+   "at_step": 25,
+   "bullets": [
+    [
+     "SAW",
+     "gate yields at hp 32"
+    ],
+    [
+     "CONFIRMED",
+     "damage-as-key, by play"
+    ],
+    [
+     "PLAN",
+     "walk out east - WIN"
+    ]
+   ]
+  }
+ ]
+}

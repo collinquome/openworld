@@ -542,3 +542,48 @@ both).
 NH_TOPO, NH_GUARD, NH_CAST + NH_CASTHUNGER + NH_E15. Two levers shipped
 ⇒ the criterion-iii 2-block clock RESTARTS: DEV-B2 = block 1/2 of the
 new config.
+
+### Session 3 mid: two exit criteria closed + the self-model shipped
+
+**CRITERION (iii) MET.** DEV-B2 (700-739; 39 eps adopted bit-identical
+from e15b1 by the registered structural-identity argument + s715 fresh
+under the full config — the latch removed s715's hunger death: died
+fighting a goblin at the same progression instead of fainting behind
+579 cast refusals) → avoidable damage **5%**, mean 5.45. DEV-B3
+(740-779, FRESH seeds, same config) → avoidable damage **5%**, mean
+5.51, hunger deaths 3/40. Plateau |5−5| = 0 < 1 point over two
+consecutive 40-episode blocks. Trend across configs: 10→8→6→5→5.
+
+**CRITERION (iv) MET.** snapshot_suite.py green 18/18 (Sonnet 5 worker,
+Fable 5 spec): the six fixed bugs each pinned by a fixture exercising
+the REAL code path (armor-under-@ driven through a live agent with
+recorded messages injected; shopkeeper-dpt floor proven load-bearing by
+a simulated-regression flip; corpse-on-victim-cell + phantom purge;
+dwarven≠dwarf; pet-not-a-wall BFS swap; stale-door correction) + E16
+probe records as integrity + replay fixtures behind the
+verify_determinism gate.
+
+**CRITERION (v) holding:** 0 violations across all four session-3
+blocks (233,458 transitions cumulative).
+
+**CHARACTER SHEET BUILT (nh_sheet.py, operator top-of-queue).**
+PI = best_dpt × hp; TI(d) = band_dpt × band_hp from damage-mass-weighted
+per-depth threat bands (the v0 exposure weighting was rejected when it
+diluted D5's p75 to 0.007 dpt — coexistence turns are not threat);
+RR = PI/TI = exact exchange semantics (their turns-to-kill-us over our
+turns-to-kill-them). Weapon (75) + armor (66) tables parsed from the
+frozen KB with sha256 provenance; force bolt 2d12 / d20<AC+10 from the
+KB page. counterfactual_power() renders wield decisions as power-delta
+arithmetic (Valkyrie D3 example: two-handed sword = +6.98 RR). Live
+probe on dev 805 (served-obs path): Ranger sheet correctly ranks
+crossbow+bolt over wielded dagger. Next: readiness logging wire-in
+(flag-off regression first), WIELD/ARMOR doctrine on the deltas,
+RR-threshold sweep.
+
+**E6 SOLVE LOOP LIVE (e6_solve.py).** Exact logged-action replay to
+branch points (death−40/−120/−300), ORIG control must reproduce the
+death, v1 alternatives REST/RETREAT, MISPLAYED iff an alternative
+survives death+600 turns; UNRESOLVED deliberately ≠ UNWINNABLE (that
+stamp waits for the v2 menu + in-model MC). First TRASH batch (≤20
+distinct dev seeds) running; smoke: jackal-death MISPLAYED via REST,
+poison-corpse death correctly unsolvable by repositioning.

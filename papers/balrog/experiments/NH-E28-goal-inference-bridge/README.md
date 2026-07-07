@@ -120,3 +120,29 @@ localizes the residual gap.
 - Execution sequencing: post-Phase-E (or as capacity allows), and the
   operator/coordinator flag gate above is a hard precondition for any
   compute-heavy arm.
+
+## The core loop this experiment instantiates (operator, s3)
+
+NH-E28 is the sharpest instance of the program's architecture statement
+(docs/NETHACK_PROGRAM.md §"The core loop"): **PROPOSE → COMPILE →
+BACKTEST → DEPLOY.**
+
+- PROPOSE: intuition emits goal hypotheses as procedure sketches (§instrument 1).
+- COMPILE: every sketch gets a code twin immediately — an executable
+  reward-checker over event streams (the hypothesis IS a candidate
+  verifier; E97 goal-as-code, ARC-3 lesson 5).
+- BACKTEST: the channel his attacks lacked — checkers run against
+  CROSS-RUN history first (which procedure fragments correlate with
+  already-logged score/reward/near-win events; nearly free), then model
+  playouts, then ladder worlds. A hypothesis that cannot postdict the
+  logged reward events never spends live compute.
+- DEPLOY: survivors drive goal-directed MPC; a single live win converts
+  the checker from hypothesis to verified objective (E97), after which
+  it is replay-validated against the full trajectory corpus.
+
+Pre-registered prediction P6 (added with this section): on the opacity
+ladder, backtest-filtered sketch sets reach the same solved grade as
+unfiltered sets at a fraction of the live-run budget (the filter's value
+is efficiency and safety, not reachability); if filtered sets solve
+LOWER grades, the backtest channel is over-pruning true hypotheses —
+report either way.
