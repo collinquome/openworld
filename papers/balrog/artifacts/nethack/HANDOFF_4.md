@@ -2,7 +2,16 @@
 
 MODEL: Fable 5 (max reasoning) wrote this; sessions 1-3 ALL Fable 5 —
 the HANDOFF_3 opus-fallback line was corrected in PHASE_L_REPORT's
-roster (cap reset before s3 launched; roster is single-model).
+roster (cap reset before s3 launched; roster is single-model through s3).
+
+SUCCESSOR (session 4) = claude-opus-4-8 (max thinking) per coordinator.
+PROVENANCE GOTCHA — YOUR FIRST ACTION: an earlier 'opus' spawn
+self-identified as Fable 5 at runtime (spawn label != runtime model).
+VERIFY your ACTUAL runtime model identity first thing (self-report +
+harness/system-prompt model id), STAMP that verified identity on every
+artifact, and LOG any label-vs-runtime mismatch in RUN_LOG + the
+PHASE_L_REPORT roster before doing anything else. The roster's methods
+line depends on this being true, not assumed.
 
 Read order: (1) this; (2) PHASE_L_REPORT.md session-3 sections (verdicts
 + scoreboard + session-4 queue — canonical); (3) docs/NETHACK_PROGRAM.md
