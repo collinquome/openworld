@@ -261,3 +261,16 @@ KB, engine, watchdog, catalogs) and landed the first capability lever
 MEASUREMENT loops (matrix fill, gym syllabus, avoidability cadence, suite,
 violation tracking) are session 2+'s backbone. No criterion is met yet;
 none is blocked.
+
+## ★★ CAST-2 VERDICT: SHIPPED (milestone — email-worthy)
+
+CAST_ATTACK_V1.1 revalidation, 12 Wizard seeds paired vs frozen ref:
+**ref 3.11 → test 5.53, paired delta +2.41, CI95 [+0.75, +4.41], 9+/2−/1=0.
+CI-low > 0 — the first lever in this program's history to clear zero on a
+paired CI.** Shopkeeper deaths 3 → 0 (the CAST_NEVER guard didn't just
+stop the bleeding: seed 957 flipped −3.09 → +4.92 (D9), seed 918 +10.14
+(D3 → D10)). Death mix moved deeper across the block. All pre-registered
+CAST-2 criteria met ⇒ NH_CAST ships into the Phase-L config for casting
+roles. Scope note: effect is role-conditional (Wizards ≈ 1.5/20 of random
+roles; naive block-level contribution ≈ +0.2 — role-coverage expansion
+(Priest/Monk attack spells, Healer at Xp2+) is the multiplier to chase).
