@@ -202,3 +202,30 @@ seed + sharpness gain — the coverage matrix gamified. Firsts-per-episode
 rate = exploration-health metric (declining firsts ⇒ world seen ⇒
 descend). Cumulative-firsts HUD + "new bosses beaten" milestone-email
 list = trophy case.
+
+## 11. SELF-SET GOLD STARS (operator directive 2026-07-07; exploratory — implement light, measure, keep what pays)
+
+At play-period start (reflection pass) the intuition layer DECLARES its
+own session goals — self-chosen, ability-calibrated ("pin the wolf strat",
+"D8 with a fragile role", "close 3 price-ID sockets", "first
+sprint-through"). Logged BEFORE play; pursued via the goal list;
+celebrated on earn (HUD + reel); period-end review (earned / missed /
+abandoned + why). MEASUREMENT: does self-set goal pursuit change learning
+rate vs fixed goals (zone-of-proximal-development hypothesis)?
+Self-calibration check: earned-rate should sit ~60–80% — persistently
+higher = sandbagging, lower = frustration loop; the earned-rate curve is
+itself the calibration read on the intuition layer's self-model.
+
+## 12. GIVE UP — TOO HARD, as a first-class move (same directive)
+
+Attempts beyond current capability end in a clean SHELVE, not a death
+spiral: disengage → dossier note "too hard now — return when [condition:
+xp≥X / ranged option / heal potions≥2]" → becomes a DEFERRED CURIOSITY
+OBJECTIVE that re-fires on the existing revaluation trigger (§5).
+ANTI-STUBBORNNESS GUARD: N failed attempts on the same target within a
+period → mandatory shelve (the inverse of the stall watchdog — don't
+grind what's beating you). Live-play twin of the gym's UNWINNABLE
+verdict. Give-ups logged WITH PRIDE: "SHELVED: soldier pack at xp2 —
+returning at xp5" is a smart agent talking. Metrics: shelve→return→win
+conversion rate (the whole point), death-rate on shelved-class targets
+before vs after.
