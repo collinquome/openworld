@@ -149,3 +149,18 @@ green mold passive_adj=2/hit_us=0 vs jackal hit_us=2 — the peaceful/passive
 separation is already visible in data.
 Niggle logged: possible stair-coord coincidences across level dossiers —
 verify before the dossier feeds routing.
+
+## NH-E15 stall watchdog v1 (layer: PROCEDURE) — BUILT (flag NH_E15)
+
+Windowed progress metrics (new tiles + depth + xp over WD_WINDOW=150 game
+turns); healing-rest exempted (deliberate rest is progress). Escalation:
+L1 perturb (drop explore target → different frontier), L2 disengage
+(WD_DISENGAGE=80 env steps: standoff combat skipped, descent/exploration
+take over; P3 emergencies unaffected). All fires ledgered (wd_fires +
+notes + subgoal). Unit-verified fire→escalate→disengage; flag-off
+regression byte-exact (seed 801 progression identical). Rule card
+STALL_WATCHDOG_V1 in nh_agent.py. Rides the next 40-ep dev block for
+fire-rate + no-regression evidence; the giant-bat fixture becomes a gym
+regression scenario when the E6 harvest lands. Full E15 state-machine
+formalization (explicit DIVE/EXPLORE/... states + carded transition table)
+remains open — v1 delivers the watchdog component.

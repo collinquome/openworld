@@ -76,13 +76,17 @@ C2_PACE = _flag("NH_PACE")        # role-conditional descent pacing
 C2_ELBERETH = _flag("NH_ELBERETH")  # E-NH5: weapon-engraved Elbereth panic
 C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
 C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
+C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
 PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
-              C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST))
+              C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
+              C2_E15))
+WD_WINDOW = int(_os.environ.get("NH_WD_WINDOW", "150"))   # game turns
+WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
 CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
 
@@ -166,6 +170,12 @@ class DiveAgent:
         if _os.environ.get("NH_STORE", "1") == "1":
             import nh_store
             self.store = nh_store.Store()
+        # ---- Phase L NH-E15 stall watchdog (inert unless C2_E15) ----
+        self.wd_hist = []           # (game_time, explored, depth, xp)
+        self.wd_level = 0           # escalation level
+        self.wd_last_fire_t = -999
+        self.wd_disengage_until = -1   # env-step deadline for disengage
+        self.wd_fires = []          # (step, t, level, action_taken)
         # ---- Phase L NH_CAST state (all inert unless C2_CAST) ----
         self.cast_spells = None     # letter -> (name, lvl, cat, fail%) per ep
         self.cast_choice = None     # (letter, name, pw_cost) selected spell
@@ -1033,6 +1043,10 @@ class DiveAgent:
             else:
                 return self._pop_queue()
 
+        # ---- P1.5: Phase L stall watchdog (NH-E15) ------------------------
+        if C2_E15:
+            self._watchdog()
+
         # ---- P2: swallowed ------------------------------------------------
         if A.swallowed:
             self.note("swallowed: attacking engulfer")
@@ -1161,7 +1175,11 @@ class DiveAgent:
                 return act
 
         # ---- P5: combat ---------------------------------------------------
-        if adj and not C2_EXPMAX:
+        # NH-E15 disengage: during a watchdog L2 window, standoff combat is
+        # skipped (descent/exploration layers take over); crisis handling
+        # at P3 still runs first, so this never suppresses emergencies.
+        wd_disengaged = C2_E15 and self.steps < self.wd_disengage_until
+        if adj and not C2_EXPMAX and not wd_disengaged:
             act = self._combat(adj)
             if act:
                 return act
@@ -1296,6 +1314,60 @@ class DiveAgent:
         return a
 
     # ------------------------------------------------------------- prompts
+    # ---------------------------------------------- Phase L: stall watchdog
+    # RULE CARD [STALL_WATCHDOG_V1] (layer: PROCEDURE; NH-E15; model:
+    # Fable 5 max): statement: if over the last WD_WINDOW(150) game turns
+    # NO new tiles were explored AND depth AND xp are unchanged, the
+    # episode is stalled; escalate: L1 perturbation (drop the current
+    # explore target so a different frontier is chosen), L2 disengage
+    # (for WD_DISENGAGE env steps, prefer movement/descent over repeated
+    # standoff combat; if a digger is held, force the dig-down line).
+    # mechanism evidence: the v1 ~400-turn giant-bat dig standoff
+    # (clean_A ep4 archeologist digdeath) — three strategy transitions
+    # overdue; stall classes cost score at zero risk compensation.
+    # status: provisional (rides the next dev block; fires + no-regression
+    # = keep). scope: dev/all arms once validated; all fires logged to
+    # wd_fires + notes.
+    def _watchdog(self):
+        A = self.atlas
+        explored = sum(row.count(True) if isinstance(row, list) else
+                       int(row.sum()) for row in A.level.explored)
+        self.wd_hist.append((A.time, explored, A.depth, A.xplvl))
+        if len(self.wd_hist) > 4000:
+            del self.wd_hist[:2000]
+        # find the newest record at least WD_WINDOW game turns old
+        cutoff = A.time - WD_WINDOW
+        old = None
+        for rec in reversed(self.wd_hist):
+            if rec[0] <= cutoff:
+                old = rec
+                break
+        if old is None:
+            return
+        if A.time - self.wd_last_fire_t < WD_WINDOW:
+            return                     # cooldown: one fire per window
+        _, oexp, odep, oxp = old
+        if explored > oexp or A.depth != odep or A.xplvl > oxp:
+            self.wd_level = 0          # progress: relax
+            return
+        # healing during a deliberate rest/eat IS progress, not a stall
+        if self.subgoal and self.subgoal[0] in ("rest", "eat") and \
+                A.hp < A.hpmax:
+            return
+        # stalled
+        self.wd_level = min(self.wd_level + 1, 2)
+        self.wd_last_fire_t = A.time
+        if self.wd_level == 1:
+            self.explore_target = None
+            act = "perturb-explore"
+        else:
+            self.wd_disengage_until = self.steps + WD_DISENGAGE
+            act = "disengage"
+        self.wd_fires.append((self.steps, A.time, self.wd_level, act))
+        self.note(f"WATCHDOG L{self.wd_level}: stalled {WD_WINDOW}t "
+                  f"(tiles {oexp}=={explored}, depth {A.depth}) -> {act}")
+        self._goal("survive", f"watchdog {act}")
+
     # ------------------------------------------------- Phase L: spellcasting
     # RULE CARD [CAST_ATTACK_V1] (layer: PROCEDURE; model: Fable 5 max):
     # statement: with a known attack spell at fail% <= CAST_FAIL_MAX and
