@@ -46,10 +46,18 @@ run here — budget for it or run it on the VM.
 
 ## Open / session-5 queue
 
-1. **REST lever** — if the s4 paired block was inconclusive/partial (slow
-   env), rerun on the VM at full cap + more fresh controls; apply drop rule
-   on the proximal KPI (TRASH-death rate) primarily. If it shipped, add
-   NH_CRISIS_HP/EXCH to the standing config + DEV-B4/B5 clock.
+1. **REST lever** — VERDICT IN (s4): UNCLEAR → DROPPED. Paired Δ +0.004
+   CI95 [-0.004,+0.014], 2/16 divergent, deaths 7/16 BOTH arms (proximal
+   KPI flat), 14/16 bit-identical. ROOT CAUSE: fatal TRASH deaths have a
+   SAME-SPEED hostile adjacent, where `_rest_here_ok` blocks rest and
+   `_flee` can't disengage — the crisis-flee threshold tune never reaches
+   the failure mode (e6_solve's REST wins were stand-and-heal, no hostile
+   visible = a different situation). CRISIS_HP/EXCH knobs kept (default-inert).
+   → DON'T re-tune thresholds; build the e6_solve **v2 menu** (corridor-kite
+   / stairs-escape / throw vs same-speed hostiles) — that's the real lever.
+   General lesson (recurring): threshold tunes rarely move adjacent-combat
+   deaths; the fix is a new ACTION, not a new number (same class as NH_E15
+   L2 / REPEAT-1 inertness).
 2. **ARMOR_DOCTRINE (P3)** — prerequisite (AC table) now correct. BUILD:
    fold AC into RR via monster-hit prob (effective_incoming_dpt = band_dpt ×
    P(hit|AC); source to-hit from KB d20-vs-10+AC). Then counterfactual_power
