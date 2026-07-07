@@ -154,6 +154,7 @@ class DiveAgent:
         self.fresh_kills = []                   # (cell, species, time)
         self.role = None
         self.race = None
+        self.role_source = None                 # "welcome" | "ttyrank"
         self.rest_budget = {}                   # level key -> turns rested
         self.dig_attempts = {}                  # level key -> attempts
         self.no_dig_cells = set()               # (key, cell)
@@ -292,7 +293,27 @@ class DiveAgent:
             if m:
                 self.role = m.group(3)
                 self.race = m.group(2)
+                self.role_source = "welcome"
                 self.note(f"role={self.role} race={self.race}")
+        # harness-audit item 4: welcome-message parse can miss (message
+        # scrolled past under skip_more). Fallback: the status line always
+        # carries "<Name> the <RankTitle>" — map via C.RANK_TO_ROLE
+        # (source role.c table, offline+disclosed). Two v1 "(unparsed)"
+        # episodes (seeds 2015/2016) were recovered exactly this way.
+        if self.role is None and self.steps > 10 and self.steps % 25 == 0:
+            try:
+                tty = obs["obs"]["tty_chars"]
+                for row in (tty[22], tty[23], tty[21]):
+                    line = "".join(chr(c) for c in row)
+                    m = re.search(r"the ([A-Z][a-zA-Z -]+?)(?:  |\s*$)", line)
+                    if m and m.group(1).strip() in C.RANK_TO_ROLE:
+                        self.role = C.RANK_TO_ROLE[m.group(1).strip()]
+                        self.role_source = "ttyrank"
+                        self.note(f"role={self.role} (ttyrank fallback: "
+                                  f"'{m.group(1).strip()}')")
+                        break
+            except Exception:
+                pass
 
         if A.level_changed:
             # mines-entrance learning: if taking that '>' put us in the

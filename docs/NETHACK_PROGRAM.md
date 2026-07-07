@@ -89,6 +89,14 @@ signatures).
   explain variance is how models rot. Metrics: % deaths with lessons,
   lesson→rule conversion, class decay after lesson ships, repeat-death
   alarms. Backfill over the historical 66+ combat deaths.
+  EXTENSION (operator 2026-07-07): READINESS BACKTRACE per capability-bound
+  death (readiness deficit at death vs floor threat band + dossier-enumerated
+  skipped prep opportunities → quantitative lesson) + TRAJECTORY AVOIDABILITY
+  metric (was there a prep path through the same dungeon that survives?) —
+  the moment-vs-trajectory gap = the quantified value of preparation
+  ("capability-bound at the moment, preparation-bound at the trajectory");
+  exploration weights raised by default for walker/fragile roles (digger
+  exemption = live hypothesis; E14b + backtraces tune per-role).
 - **NH-E11 strategist/navigator architecture:** level dossier (structured
   per-level record: rooms/exits/stairs, located hazards w/ evidence, item
   sightings, monster encounters w/ outcomes, frontiers, notes; persists

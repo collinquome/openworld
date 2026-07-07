@@ -489,3 +489,53 @@ class Atlas:
     @property
     def blind(self):
         return bool(self.condition & getattr(nh, "BL_MASK_BLIND", 0))
+
+
+# ---------------------------------------------------------------- roles
+# harness-audit item 4: tty-rank-title -> role fallback table.
+# Source-derived (NetHack 3.6 src/role.c rank strings; offline, disclosed —
+# same provenance class as the object tables). Both gender variants where
+# they differ. Used ONLY when the welcome-message parse missed (message
+# window scrolled past); parse source is recorded per episode as
+# role_source in the result JSON ("welcome" | "ttyrank" | None).
+RANK_TO_ROLE = {}
+for _role, _ranks in {
+    "Archeologist": ["Digger", "Field Worker", "Investigator", "Exhumer",
+                     "Excavator", "Spelunker", "Speleologist", "Archeologist",
+                     "Curator"],
+    "Barbarian": ["Plunderer", "Plunderess", "Pillager", "Bandit", "Brigand",
+                  "Despoiler", "Ravager", "Conqueror", "Conqueress",
+                  "Subjugator", "Chieftain", "Chieftainess"],
+    "Caveman": ["Troglodyte", "Aborigine", "Wanderer", "Vagrant", "Wayfarer",
+                "Roamer", "Nomad", "Rover", "Pioneer"],
+    "Healer": ["Rhizotomist", "Aesculapian", "Leech", "Empiric", "Embalmer",
+               "Apothecary", "Magister", "Magistra", "Physician",
+               "Chirurgeon"],
+    "Knight": ["Gallant", "Esquire", "Bayard", "Sergeant", "Knight",
+               "Banneret", "Chevalier", "Chevaliere", "Seignieur", "Dame",
+               "Paladin"],
+    "Monk": ["Candidate", "Novice", "Initiate", "Student of Stones",
+             "Student of Waters", "Student of Metals", "Student of Winds",
+             "Student of Fire", "Master"],
+    "Priest": ["Aspirant", "Acolyte", "Adept", "Priest", "Priestess",
+               "Curate", "Canon", "Canoness", "Lama", "Patriarch",
+               "Matriarch", "High Priest", "High Priestess"],
+    "Rogue": ["Footpad", "Cutpurse", "Rogue", "Pilferer", "Robber",
+              "Burglar", "Filcher", "Magsman", "Magswoman", "Thief"],
+    "Ranger": ["Tenderfoot", "Lookout", "Trailblazer", "Reconnoiterer",
+               "Reconnoiteress", "Scout", "Arbalester", "Archer",
+               "Sharpshooter", "Marksman", "Markswoman"],
+    "Samurai": ["Hatamoto", "Ronin", "Ninja", "Kunoichi", "Genin", "Chunin",
+                "Jonin", "Samurai", "Taro", "Daimyo"],
+    "Tourist": ["Rambler", "Sightseer", "Excursionist", "Peregrinator",
+                "Peregrinatrix", "Traveler", "Journeyer", "Voyager",
+                "Explorer", "Adventurer"],
+    "Valkyrie": ["Stripling", "Skirmisher", "Fighter", "Man-at-arms",
+                 "Woman-at-arms", "Warrior", "Swashbuckler", "Hero",
+                 "Heroine", "Champion", "Lord", "Lady"],
+    "Wizard": ["Evoker", "Conjurer", "Thaumaturge", "Magician", "Enchanter",
+               "Enchantress", "Sorcerer", "Sorceress", "Necromancer",
+               "Wizard", "Mage"],
+}.items():
+    for _r in _ranks:
+        RANK_TO_ROLE[_r] = _role

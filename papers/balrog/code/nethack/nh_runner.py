@@ -95,8 +95,19 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
             traj["beliefs"].append([step, rows, sus])
             traj["monsters"].append(
                 [step, [[m.x, m.y, m.name, int(m.pet)] for m in L.monsters]])
-        except Exception:
-            pass
+        except Exception as e:
+            # harness-audit item 1: never swallow silently — count + note
+            # (first occurrence carries the exception text for triage).
+            # step 0 is excluded by design: Atlas has no belief before the
+            # agent's first act(), so the reset-frame snapshot is expected
+            # to have no belief layer (verified: the only step-0 error is
+            # KeyError None on the empty atlas).
+            if step > 0:
+                snap_errors[0] += 1
+                if snap_errors[0] == 1:
+                    traj["notes"].append(
+                        f"step {step}: belief-snapshot error: "
+                        f"{type(e).__name__}: {e}")
 
     def want_frame(step, agent, depth_changed, hp_frac):
         if len(traj["frames"]) >= frame_cap:
@@ -107,15 +118,23 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
             return step % 3 == 0
         return step % max(3, (step // 2000) + 3) == 0
 
+    snap_errors = [0]                 # harness-audit item 1 (list: closure)
     snap(obs, 0)
     steps = 0
     done = False
     illegal = 0
     depth_max, xp_max = 1, 1
+    bl_depth_max = 1                  # harness-audit item 6: ground truth,
+    belief_depth_mismatch = 0         # read straight off served blstats
     last_depth = 1
     t0 = time.time()
     while not done and steps < MAX_LOOP:
         a = agent.act(obs)
+        # harness-audit item 6 (assert half): belief depth must equal the
+        # blstats depth of the SAME obs the agent just consumed — compared
+        # post-act so Atlas has processed exactly this observation.
+        if agent.atlas.depth != int(obs["obs"]["blstats"][C.nh.NLE_BL_DEPTH]):
+            belief_depth_mismatch += 1
         if a not in space:
             illegal += 1
             traj["notes"].append(f"step {steps}: illegal '{a}' -> search")
@@ -125,6 +144,10 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         done = term or trunc
         tlog.log_step(a, obs, r, done, info)
         A = agent.atlas
+        # harness-audit item 6 (ground-truth half): depth_max straight from
+        # served blstats, independent of the belief layer.
+        bl_depth_max = max(bl_depth_max,
+                           int(obs["obs"]["blstats"][C.nh.NLE_BL_DEPTH]))
         depth_max = max(depth_max, A.depth)
         xp_max = max(xp_max, A.xplvl)
         dchg = A.depth != last_depth
@@ -146,6 +169,11 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
     stats = env.get_stats()
     env.close()
     tfile = tlog.close()
+    # harness-audit item 3: a loop exit without env termination is OUR
+    # truncation, not the env's — say so explicitly in the end reason.
+    end_reason = str(stats.get("end_reason"))
+    if not done:
+        end_reason = f"RUNNER_TRUNCATED@{steps} ({end_reason})"
     traj["notes"].extend([f"step {s}: {n}" for (s, n) in agent.notes])
     traj["mem_fired"] = [f"step {s}: {n}" for (s, n) in agent.mem_fired]
     traj["subgoals"] = [list(x) for x in agent.subgoal_log]
@@ -166,9 +194,13 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         "xplvl_max": xp_max,
         "dlvl_list": stats.get("dlvl_list"),
         "xplvl_list": stats.get("xplvl_list"),
-        "end_reason": str(stats.get("end_reason")),
+        "end_reason": end_reason,
+        "depth_max_blstats": bl_depth_max,          # item 6 ground truth
+        "belief_depth_mismatch": belief_depth_mismatch,
+        "belief_snap_errors": snap_errors[0],       # item 1
         "role": agent.role,
         "race": agent.race,
+        "role_source": getattr(agent, "role_source", None),  # item 4
         "wallclock_s": round(time.time() - t0, 1),
         "transitions_file": os.path.relpath(tfile, RESULTS),
         "mem_fired": traj["mem_fired"],

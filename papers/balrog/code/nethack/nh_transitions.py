@@ -95,20 +95,48 @@ class TransitionLogger:
             "info": {k: str(v) for k, v in (info or {}).items()},
             "obs": self._encode_obs(obs)}) + "\n")
         self.n += 1
+        # harness-audit item 2: periodic flush so a killed worker loses at
+        # most FULL_EVERY steps instead of the gzip tail (the one truncated
+        # C2 log motivated this).
+        if self.n % self.FULL_EVERY == 0:
+            self.f.flush()
 
     def close(self):
         self.f.close()
+        # harness-audit item 2: completion marker — readers can distinguish
+        # "episode ended" from "worker killed mid-write".
+        with open(self.fn + ".complete", "w") as m:
+            m.write(str(self.n))
         return self.fn
 
 
-def read_episode(fn):
-    """Decoder: yields (header) then fully-restored step dicts."""
+def read_episode(fn, tolerant=True):
+    """Decoder: yields (header) then fully-restored step dicts.
+
+    harness-audit item 2: tolerant=True stops cleanly at a truncated tail
+    (gzip EOFError / partial JSON line) instead of raising — mining a
+    killed-worker log yields every complete step it contains. Callers can
+    check <fn>.complete to know whether the episode closed properly.
+    """
     prev_g = prev_t = prev_c = None
     with gzip.open(fn, "rt") as f:
         header = json.loads(f.readline())
         yield header
-        for line in f:
-            rec = json.loads(line)
+        while True:
+            try:
+                line = f.readline()
+            except (EOFError, OSError):
+                if tolerant:
+                    return
+                raise
+            if not line:
+                return
+            try:
+                rec = json.loads(line)
+            except ValueError:
+                if tolerant:
+                    return          # truncated final line
+                raise
             o = rec["obs"]
             if "glyphs" not in o:
                 g = list(prev_g)

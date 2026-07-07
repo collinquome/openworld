@@ -72,3 +72,19 @@ NH-E17 (clean-room rebuild) runs at exit — every card written to pass it.
   experiment); NH-E20 MiniHack scenario lab (des-file micro-scenarios,
   transfer gate, priority: spellcast doctrine + D5-6 melee); model-provenance
   standing rule (MODEL field stamped on all new artifacts).
+
+## Harness-audit fixes (items 1–4, 6) — SHIPPED (gate for all Phase-L dev blocks)
+
+All five queued defects fixed + smoke-verified on dev seed 801 (determinism
+preserved: identical progression across pre/post runs of the same seed):
+(1) belief-snapshot exceptions counted + first-occurrence noted
+(`belief_snap_errors`; step-0 empty-atlas case excluded by design — the
+counter's first outing caught exactly that and nothing else);
+(2) transition logs flush every 100 steps + `.complete` sidecar marker +
+tolerant reader (truncated tails yield every complete step);
+(3) `RUNNER_TRUNCATED@steps` end-reason whenever OUR loop, not the env,
+ends the episode;
+(4) role-parse fallback via status-line rank titles (`RANK_TO_ROLE`, 137
+titles, source role.c, offline+disclosed) with `role_source` recorded;
+(6) `depth_max_blstats` ground truth + same-obs belief-vs-blstats assert
+(`belief_depth_mismatch`; 0 on smoke).
