@@ -37,3 +37,20 @@ Current state + last transition go in the subgoal ledger and the GIF strategy ba
    artifact; **coverage of the top-10 death-mass adversaries is a Phase-L
    exit-relevant metric.** GIF banner: "BOSS STRAT: soldier ants →
    choke+throw [pinned in 14 reps]".
+
+## STRATEGY RESOLUTION ORDER (operator directive 2026-07-07)
+
+Case-based dispatch with honest confidence — most-specific-wins, gated by
+evidence:
+1. **LOOKUP CHAIN:** (a) adversary+context ("soldier-ant pack in corridor")
+   → (b) adversary ("soldier ants, any terrain") → (c) situation-class
+   ("melee pack") → (d) activity playbook (BOSS-FIGHT generic) → (e)
+   generic principles (throw-first, choke, EV). First PINNED entry wins.
+2. **EVIDENCE GATE:** specific-but-hypothesized LOSES to
+   generic-but-proven — and gets flagged as a practice-priority signal.
+3. **EVERY FALLBACK GROWS THE LIBRARY:** generic resolution for a
+   meaningful-death-mass adversary AUTO-ENQUEUES it for E20 practice reps.
+   The library fills itself where the dungeon shows gaps.
+4. **LOG the resolution path per engagement**; resolution-depth
+   distribution over time = maturity metric (early: mostly generic; late:
+   mostly specific). GIF banner shows it.
