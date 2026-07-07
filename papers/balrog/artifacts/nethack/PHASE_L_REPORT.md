@@ -194,3 +194,23 @@ thesis (P1/P4); per-role: Archeologist 100%, Priest 82%, Ranger 75%, Healer
 HP. Artifacts: NH-E12-death-retro/results/{e12_retros,e12_summary}.json.
 Trajectory-avoidability counterfactual (operator's moment-vs-trajectory gap)
 remains open — the readiness numbers above are its motivation.
+
+## ★ CAST-1 PAIRED VERDICT (milestone — flag for coordinator)
+
+n=20 paired (12 Wizard + 8 non-caster guards), ref = frozen NH-C2.1 config:
+- **Guard block: all 8 non-casters EXACT 0.00** — the lever is perfectly
+  role-scoped (first divergent decision only ever happens for casters).
+- **Wizard block: ref 3.12 → test 4.39 (paired +1.27/seed, 8+/3−/1=0;
+  best +7.65 seed 982 D4→D9, +4.54 seed 918 D3→D8).** Overall n=20 delta
+  +0.76 [−0.07, +1.80].
+- **Ledger caught an adverse class shift: shopkeeper deaths 0(ref) → 3
+  (test)** — directional casts SKIP the "Really attack?" confirm that
+  protects melee, so the line-cast's fast-mover gate (shopkeeper speed 18)
+  angered shopkeepers. Blocks shipping per the no-worse-death-class rule.
+- Fix: CAST_NEVER_PEACEFUL_CLASS static guard (rule card, verified-by-death
+  evidence, both target branches). **CAST-2 revalidation running** (12
+  Wizard seeds paired vs same ref; criteria pre-registered: shop deaths
+  → 0, Wizard delta not clearly negative).
+Wizard headroom context: Wizard block mean was 2.09–2.77 in every prior
+scored block; a +1.27 role-targeted lift on the worst role is exactly the
+capability-frontier thesis paying out — pending CAST-2 confirmation.

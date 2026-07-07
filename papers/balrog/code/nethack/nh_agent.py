@@ -94,6 +94,18 @@ CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
 ELBERETH_IGNORES = {"minotaur", "shopkeeper", "watchman", "watch captain",
                     "guard", "vault guard"}
 
+# RULE CARD [CAST_NEVER_PEACEFUL_CLASS] (layer: PROCEDURE; model: Fable 5
+# max): statement: never cast attack spells at civil @-classes that
+# generate peaceful (shopkeeper/watch/guards/temple priests/Oracle).
+# mechanism: a directional cast SKIPS the "Really attack?" confirm that
+# protects melee — CAST-1 dev block angered 3 shopkeepers (0 shop deaths
+# in ref -> 3 in test: seeds 940/957/990), each fatal. The peaceful-decline
+# machinery (no_attack cells) only learns from melee prompts, so spells
+# need a static class guard. evidence: CAST-1 paired block ledger.
+# status: verified-by-death, shipped with CAST_ATTACK_V1.1.
+CAST_NEVER = {"shopkeeper", "watchman", "watch captain", "guard",
+              "vault guard", "aligned priest", "high priest", "Oracle"}
+
 # RULE CARD [TOUCH_KILL_WEAPON_MELEE]: petrification is a FLESH-touch
 # effect — attacking cockatrice-class species with a WIELDED WEAPON is
 # safe in the source (uhitm.c: touch checks apply to unarmed/martial
@@ -332,6 +344,9 @@ class DiveAgent:
                     self, "level",
                     f"entered {A.key} depth {A.depth} "
                     f"(hp {A.hp}/{A.hpmax} xp {A.xplvl})")
+                # exploration snapshot at every transition: consecutive
+                # snapshots give departure explored/frontier per level
+                nh_store.snapshot_exploration(self.store, self)
             if self.steps % 200 == 0 or A.level_changed:
                 nh_store.scan_features(self.store, self)
         # Phase L NH_CAST: roles with no spells say so once; remember it
@@ -1437,13 +1452,17 @@ class DiveAgent:
         ax, ay = A.agent
         target = None
         # (a) adjacent hostiles: never-melee species first, else weakest
+        # (CAST_NEVER_PEACEFUL_CLASS guard on both branches)
         if adj:
-            nm = [m for m in adj if self._never_melee(m)]
-            pool = nm or adj
-            target = min(pool, key=lambda m: m.difficulty)
+            pool = [m for m in adj if m.name not in CAST_NEVER]
+            nm = [m for m in pool if self._never_melee(m)]
+            pool = nm or pool
+            target = min(pool, key=lambda m: m.difficulty) if pool else None
         else:
             # (b) straight-line fast/never-melee threats within range
             for m in self._mobile_hostiles():
+                if m.name in CAST_NEVER:
+                    continue
                 dx, dy = m.x - ax, m.y - ay
                 dist = max(abs(dx), abs(dy))
                 if not (2 <= dist <= CAST_LINE_RANGE):
