@@ -83,3 +83,13 @@ instrument; NH-E11 dossier is the substrate's spatial spine.
 
 ## Status log
 - 2026-07-07: registered (operator directive), folder created.
+
+## 6. Question-driven retrieval (operator addition, shared with NH-E21)
+
+Goal-directed mode alongside passive dot-connecting: planning hits a
+constraint → the intuition layer formulates an explicit QUESTION ("How can I
+get below 20 health?") → runs it as a retrieval query against the memory
+store (FTS5 over observations + dossiers + relations) → retrieved memory
+answers the question → plan completes. Full chain logged (constraint →
+question → hits → answer → plan) + rendered in GIF banners. Both modes
+measured; chain rate is a core NH-E21 metric.

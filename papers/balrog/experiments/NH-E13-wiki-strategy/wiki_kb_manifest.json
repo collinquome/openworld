@@ -1,0 +1,167 @@
+[
+  {
+    "page": "Standard strategy",
+    "requested_title": "Standard strategy",
+    "url": "https://nethackwiki.com/wiki/Standard_strategy",
+    "revision_id": 197126,
+    "revision_date": "2026-01-07T13:14:29Z",
+    "sha256": "4d8de8f9351f90e7e51b52cda7bf5b477336736bb2e22735e6b24861b32d4639",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:30.988747+00:00",
+    "reason": "core strategy arm (NH-E13)"
+  },
+  {
+    "page": "Spellbook of force bolt",
+    "requested_title": "Force bolt",
+    "url": "https://nethackwiki.com/wiki/Spellbook_of_force_bolt",
+    "revision_id": 191074,
+    "revision_date": "2025-07-10T13:55:13Z",
+    "sha256": "7df5c2fd81915853f1749e5218ef51013f3f9ee6a411295f37a07422c0769899",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:32.205992+00:00",
+    "reason": "Wizard combat doctrine (NH-E14) [requested title: 'Force bolt', redirected to 'Spellbook of force bolt']"
+  },
+  {
+    "page": "Wizard",
+    "requested_title": "Wizard",
+    "url": "https://nethackwiki.com/wiki/Wizard",
+    "revision_id": 202279,
+    "revision_date": "2026-04-25T10:39:02Z",
+    "sha256": "27232467ef87ac3b9d22e91998db84df6600a21be830420748cbbc663419036f",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:33.486334+00:00",
+    "reason": "role strategy page (NH-E14)"
+  },
+  {
+    "page": "Healer",
+    "requested_title": "Healer",
+    "url": "https://nethackwiki.com/wiki/Healer",
+    "revision_id": 201933,
+    "revision_date": "2026-04-19T21:56:02Z",
+    "sha256": "4be7b401fb4b8b6692099574f0c35972eba12507239d1af01924f636d57af214",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:34.803693+00:00",
+    "reason": "role strategy page (NH-E14)"
+  },
+  {
+    "page": "Wand",
+    "requested_title": "Wand",
+    "url": "https://nethackwiki.com/wiki/Wand",
+    "revision_id": 204554,
+    "revision_date": "2026-05-23T19:51:31Z",
+    "sha256": "72a32ecc5e474ba795e37b9fe800e118d0001fe4190bc8f0b5d005216880069b",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:36.029266+00:00",
+    "reason": "zap doctrine + wand identification (NH-E14/E18)"
+  },
+  {
+    "page": "Potion",
+    "requested_title": "Potion",
+    "url": "https://nethackwiki.com/wiki/Potion",
+    "revision_id": 204548,
+    "revision_date": "2026-05-23T17:09:06Z",
+    "sha256": "7965823e4e41b3c214f8890b4b742f6f31ffd164311d8736945ba1c629093150",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:37.296519+00:00",
+    "reason": "quaff doctrine + potion prices (NH-E14/E18)"
+  },
+  {
+    "page": "Scroll",
+    "requested_title": "Scroll",
+    "url": "https://nethackwiki.com/wiki/Scroll",
+    "revision_id": 204515,
+    "revision_date": "2026-05-23T01:37:29Z",
+    "sha256": "bc4607399c22f66cc5bf4a6d4270005c607538a97a326bba5550e507a63b2221",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:38.528047+00:00",
+    "reason": "read doctrine + scroll prices (NH-E14/E18)"
+  },
+  {
+    "page": "Price identification",
+    "requested_title": "Price identification",
+    "url": "https://nethackwiki.com/wiki/Price_identification",
+    "revision_id": 197466,
+    "revision_date": "2026-01-10T13:42:02Z",
+    "sha256": "ddebc2fc74e426f7f51066939831aee851a7ccf7a6401acfc4e2b280901cb59d",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:39.795882+00:00",
+    "reason": "THE price-ID reference (NH-E18 dot-connector)"
+  },
+  {
+    "page": "Weapon",
+    "requested_title": "Weapon",
+    "url": "https://nethackwiki.com/wiki/Weapon",
+    "revision_id": 204476,
+    "revision_date": "2026-05-23T00:09:21Z",
+    "sha256": "53f32fdaf1b0ffb11f7a2c74aceeab500c60583829186d9c4125a224620e552a",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:41.058252+00:00",
+    "reason": "wield doctrine (P2)"
+  },
+  {
+    "page": "Armor",
+    "requested_title": "Armor",
+    "url": "https://nethackwiki.com/wiki/Armor",
+    "revision_id": 205258,
+    "revision_date": "2026-06-06T18:06:05Z",
+    "sha256": "25e1513da0676ce92df8a92e444328c5697bbfea7ce83427dbf570ceb627d215",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:42.277601+00:00",
+    "reason": "armor doctrine (P3)"
+  },
+  {
+    "page": "Spellbook",
+    "requested_title": "Spellbook",
+    "url": "https://nethackwiki.com/wiki/Spellbook",
+    "revision_id": 206186,
+    "revision_date": "2026-07-07T06:53:34Z",
+    "sha256": "0ad77e59c15ee3ba91c74369d678fd6489430703152a231764fcb4311f7a21fe",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:43.569494+00:00",
+    "reason": "spell mechanics incl. failure rates (NH-E14)"
+  },
+  {
+    "page": "Elbereth",
+    "requested_title": "Elbereth",
+    "url": "https://nethackwiki.com/wiki/Elbereth",
+    "revision_id": 203238,
+    "revision_date": "2026-05-07T08:14:09Z",
+    "sha256": "950ff6d861e0abe06b84ea89bf0f210530d79dfbfb90c856b96ea68a08191ab3",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:44.800081+00:00",
+    "reason": "carded already, keep the reference (E-NH5)"
+  },
+  {
+    "page": "Ring",
+    "requested_title": "Ring",
+    "url": "https://nethackwiki.com/wiki/Ring",
+    "revision_id": 205954,
+    "revision_date": "2026-07-04T01:18:42Z",
+    "sha256": "5d7b95a2cbdcfaadcb11a4bdf98c704b069e21e650804bd18a479b29893501f2",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:46.049823+00:00",
+    "reason": "ring prices/effects (NH-E18)"
+  },
+  {
+    "page": "Comestible",
+    "requested_title": "Comestible",
+    "url": "https://nethackwiki.com/wiki/Comestible",
+    "revision_id": 204514,
+    "revision_date": "2026-05-23T01:30:13Z",
+    "sha256": "4205076dfcf8fd665725b28a6c94be2e6de3353ab9ea1ff0e244fdf0d6cd1ee6",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:47.279350+00:00",
+    "reason": "food economy reference"
+  },
+  {
+    "page": "Shopkeeper",
+    "requested_title": "Shopkeeper",
+    "url": "https://nethackwiki.com/wiki/Shopkeeper",
+    "revision_id": 203686,
+    "revision_date": "2026-05-14T04:32:12Z",
+    "sha256": "9b99cfa268f1c0f7c647d548bd73f973f5811ddb267475f44e99986a2f7aac4a",
+    "added_by": "A001-phaseL-session1 (Fable 5)",
+    "added_when": "2026-07-07T16:15:48.520936+00:00",
+    "reason": "shop mechanics/price mechanics (NH-E18)"
+  }
+]
