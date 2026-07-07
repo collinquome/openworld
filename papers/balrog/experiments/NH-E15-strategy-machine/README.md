@@ -12,3 +12,28 @@ Current state + last transition go in the subgoal ledger and the GIF strategy ba
 **Motivating fixture:** the ~400-turn giant-bat standoff in the dig-death episode (v1 condition-A Archeologist, `animations/clean_A__ep4_archeologist_digdeath.gif`) — that episode should have transitioned three times (FIGHT->FLEE->DIVE-elsewhere). Harvest as gym scenario + permanent regression fixture.
 
 **LLM roles:** Phase L — the LLM authors and revises the transition table (each rule carded + validated). Arm B additionally runs PROACTIVE REVIEW TICKS: every ~N game-turns (N~500, tuned) or on transition-oscillation, the strategist reviews a state summary and may proactively override strategy/objective; all consultations logged verbatim. Arm A scored runs stay pure code — the compiled transition table IS the strategist.
+
+## Operator consolidation (2026-07-07): pursuit schedules, playbooks, boss strats
+
+1. **PURSUIT SHIFTS OVER TIME:** goal-list weights are DYNAMIC — re-set at
+   consultations and by state-machine transitions; minute 5 (stronger/loot)
+   ≠ minute 40 (descend/survive). Weight trajectories logged per episode;
+   the weight-over-time curve per role is a learnable artifact (the
+   "pursuit schedule").
+2. **ACTIVITY-MODE PLAYBOOKS:** named strategies per activity — XP-FARMING
+   (safe-species grinding at chokes), LOOT-SWEEP, DESCENT (risk-minimal
+   stairs-seeking), BOSS-FIGHT, ESCAPE. Each playbook = parameter set +
+   tactics + termination conditions; the state machine selects playbooks;
+   felt-sense re-weights the goal list that drives selection.
+3. **PER-ADVERSARY BOSS STRATS, OBTAINED WITH PRACTICE:** dangerous
+   adversary classes ARE our bosses (soldier-ant packs, chickatrice,
+   floating eye, shopkeepers; deeper: mind flayers, soldiers). Bosses have
+   learnable patterns. For each high-death-mass adversary: dedicated
+   PRACTICE REPS in the E20 lab (same boss, varied conditions) until a
+   SPECIFIC counter is pinned — "vs soldier-ant pack: corridor choke +
+   throw-first + never open-room" — speedrunner boss-drilling, except our
+   muscle memory is a rule card + playbook entry. The BOSS-STRAT LIBRARY
+   (adversary → practiced counter, evidence, reps-to-pin) is a first-class
+   artifact; **coverage of the top-10 death-mass adversaries is a Phase-L
+   exit-relevant metric.** GIF banner: "BOSS STRAT: soldier ants →
+   choke+throw [pinned in 14 reps]".
