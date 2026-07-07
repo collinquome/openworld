@@ -88,3 +88,64 @@ ends the episode;
 titles, source role.c, offline+disclosed) with `role_source` recorded;
 (6) `depth_max_blstats` ground truth + same-obs belief-vs-blstats assert
 (`belief_depth_mismatch`; 0 on smoke).
+
+## NH-E16 instrument + first probe battery (SHIPPED)
+
+`nh_branch.py`: (seed, action-prefix) snapshot/replay/branch executor on the
+verified-deterministic env stack (session gate: verify_determinism() —
+green, sig-identical replay at step 300). Probe records in
+results/e16_probes/. Forbidden-seed guard hard-blocks all scored ranges.
+
+**Verb-grammar battery (Wizard dev seed 940, 7 probes, all saved):**
+cast → menu(with Fail% column) → letter(Pw deducted here) → direction;
+zap/quaff/read/wield/puton grammar mapped (getobj bracket lists candidate
+letters — a served percept); `more` dismisses the cast menu at ZERO cost;
+`esc` EXISTS in the action space (v1's engraving note said '-' missing —
+correct — but esc is available for menu bails). fire without quiver
+degrades to a throw prompt.
+
+**DANGER CARD from probe (RAY_BOUNCE):** zapping the starting wand of
+lightning at an adjacent wall BOUNCED the ray back and killed the caster
+on turn 1 (hp 11→0, tombstone; probe record
+zap_lightning_bounce_DEATH.json). Rule: never zap a ray wand without a
+clear line ≥2 cells; wall-adjacent ray zaps are suicide. This is the
+branch-probe instrument doing exactly its job — that lesson cost zero
+mainline deaths.
+
+**Paired-branch cast-vs-melee (same snapshot, seed 940 step 6, grid bug
+adjacent):** cast = 1-turn kill, 0 damage, 5 Pw; melee = 3 consecutive
+misses, −3 HP, target alive. First search-as-teacher paired verdict.
+
+## NH-E14 CAST_ATTACK_V1 (layer: PROCEDURE) — BUILT, dev block RUNNING
+
+NH_CAST flag (default off, v1.1-preserving; flag-off regression: seed-801
+progression byte-identical). Mechanism: per-episode menu discovery (parse
+letter/level/category/fail%), attack-spell selection gated on fail% ≤ 20 and
+Pw ≥ 5·level; targets = adjacent hostiles (never-melee species PREFERRED —
+spells bypass touch/passive effects) else straight-line fast/never-melee
+threats ≤6 cells with clear ray path. Live smoke (seed 940): 5 casts, 5
+one-shot kills incl. a two-rat line pierce. Rule card CAST_ATTACK_V1 in
+nh_agent.py with probe+KB provenance.
+
+**CAST-1 paired dev block pre-registered + launched** (RUN_LOG 
+md5s): ref=frozen NH-C2.1 config vs test=+NH_CAST; seeds = 12 Wizards
+(839 845 847 850 860 912 918 940 957 980 982 990, from the 800–999 role
+census — new artifact results/role_census.json) + 8 non-caster guards
+(801–822 subset, expected exact-0 delta). Wizard block is primary
+(role-targeted lever); drop-if-unclear applies.
+
+## NH-E18 memory substrate (layer: MEMORY) — SHIPPED (v0.1)
+
+`nh_store.py`: per-episode observation store — events timeline, item
+sightings w/ appearances + prices (RE-parsed from served messages), monster
+encounter ledger (seen/killed/hit_us/passive_adj — the didn't-attack ⇒
+peaceful-class evidence), per-level feature dossier (altar/fountain/throne/
+sink/grave/stairs from belief terrain), STORY-SO-FAR narrative, and
+`ctx_package()` — the CONTEXT_SPEC/v0.1 renderer (full multi-level ASCII
+world map + memories + story + current state; 9.5KB on a depth-10 dev
+episode). Wired into the agent as a pure logger (NH_STORE default-on, no
+decision reads); serialized into trajectories as traj["store"]. Smoke:
+green mold passive_adj=2/hit_us=0 vs jackal hit_us=2 — the peaceful/passive
+separation is already visible in data.
+Niggle logged: possible stair-coord coincidences across level dossiers —
+verify before the dossier feeds routing.

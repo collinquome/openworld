@@ -1,0 +1,17 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "read",
+  "j"
+ ],
+ "observed": "'What do you want to read? [ijklm or ?*]' -> letter -> 'As you read the scroll, it disappears.' (teleport fired, t+1; spellbooks also listed as readable)",
+ "knowledge": [
+  "read grammar: read -> letter",
+  "scroll of teleportation reads in 1 action from the served interface"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

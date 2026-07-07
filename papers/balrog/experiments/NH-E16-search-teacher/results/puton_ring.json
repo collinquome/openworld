@@ -1,0 +1,16 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "puton",
+  "d"
+ ],
+ "observed": "'What do you want to put on? [de or ?*]' -> letter -> 'Which ring-finger, Right or Left? [rl]' \u2014 needs r/l answer (letters are actions, so answerable).",
+ "knowledge": [
+  "puton grammar: puton -> letter -> r|l for rings"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

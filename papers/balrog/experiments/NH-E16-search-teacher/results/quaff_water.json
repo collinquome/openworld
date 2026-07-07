@@ -1,0 +1,17 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "quaff",
+  "f"
+ ],
+ "observed": "'What do you want to drink? [fgh or ?*]' -> letter -> 'This tastes like water.' t+1.",
+ "knowledge": [
+  "quaff grammar: quaff -> letter",
+  "bracket letters = quaffable candidates"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

@@ -1,0 +1,802 @@
+{
+"800": {
+"role": "Ranger",
+"race": "orcish"
+},
+"801": {
+"role": "Samurai",
+"race": "human"
+},
+"802": {
+"role": "Archeologist",
+"race": "human"
+},
+"803": {
+"role": "Barbarian",
+"race": "orcish"
+},
+"804": {
+"role": "Ranger",
+"race": "human"
+},
+"805": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"806": {
+"role": "Ranger",
+"race": "orcish"
+},
+"807": {
+"role": "Rogue",
+"race": "human"
+},
+"808": {
+"role": "Knight",
+"race": "human"
+},
+"809": {
+"role": "Barbarian",
+"race": "human"
+},
+"810": {
+"role": "Knight",
+"race": "human"
+},
+"811": {
+"role": "Rogue",
+"race": "human"
+},
+"812": {
+"role": "Tourist",
+"race": "human"
+},
+"813": {
+"role": "Knight",
+"race": null
+},
+"814": {
+"role": "Samurai",
+"race": "human"
+},
+"815": {
+"role": "Samurai",
+"race": "human"
+},
+"816": {
+"role": "Knight",
+"race": "human"
+},
+"817": {
+"role": "Rogue",
+"race": "orcish"
+},
+"818": {
+"role": "Valkyrie",
+"race": "human"
+},
+"819": {
+"role": "Caveman",
+"race": "dwarven"
+},
+"820": {
+"role": "Rogue",
+"race": null
+},
+"821": {
+"role": "Barbarian",
+"race": "human"
+},
+"822": {
+"role": "Barbarian",
+"race": "orcish"
+},
+"823": {
+"role": "Monk",
+"race": "human"
+},
+"824": {
+"role": "Caveman",
+"race": "dwarven"
+},
+"825": {
+"role": "Healer",
+"race": "human"
+},
+"826": {
+"role": "Ranger",
+"race": "elven"
+},
+"827": {
+"role": "Knight",
+"race": "human"
+},
+"828": {
+"role": "Healer",
+"race": "human"
+},
+"829": {
+"role": "Archeologist",
+"race": "human"
+},
+"830": {
+"role": "Ranger",
+"race": "elven"
+},
+"831": {
+"role": "Healer",
+"race": "gnomish"
+},
+"832": {
+"role": "Knight",
+"race": "human"
+},
+"833": {
+"role": "Healer",
+"race": "gnomish"
+},
+"834": {
+"role": "Tourist",
+"race": "human"
+},
+"835": {
+"role": "Priestess",
+"race": "human"
+},
+"836": {
+"role": "Archeologist",
+"race": null
+},
+"837": {
+"role": "Samurai",
+"race": "human"
+},
+"838": {
+"role": "Caveman",
+"race": "human"
+},
+"839": {
+"role": "Wizard",
+"race": "elven"
+},
+"840": {
+"role": "Samurai",
+"race": "human"
+},
+"841": {
+"role": "Priestess",
+"race": "human"
+},
+"842": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"843": {
+"role": "Monk",
+"race": "human"
+},
+"844": {
+"role": "Healer",
+"race": "gnomish"
+},
+"845": {
+"role": "Wizard",
+"race": "human"
+},
+"846": {
+"role": "Ranger",
+"race": "elven"
+},
+"847": {
+"role": "Wizard",
+"race": "gnomish"
+},
+"848": {
+"role": "Monk",
+"race": "human"
+},
+"849": {
+"role": "Priestess",
+"race": "human"
+},
+"850": {
+"role": "Wizard",
+"race": null
+},
+"851": {
+"role": "Knight",
+"race": "human"
+},
+"852": {
+"role": "Monk",
+"race": "human"
+},
+"853": {
+"role": "Ranger",
+"race": "elven"
+},
+"854": {
+"role": "Healer",
+"race": "gnomish"
+},
+"855": {
+"role": "Rogue",
+"race": "orcish"
+},
+"856": {
+"role": "Rogue",
+"race": "human"
+},
+"857": {
+"role": "Rogue",
+"race": "orcish"
+},
+"858": {
+"role": "Cavewoman",
+"race": "human"
+},
+"859": {
+"role": "Rogue",
+"race": "human"
+},
+"860": {
+"role": "Wizard",
+"race": "orcish"
+},
+"861": {
+"role": "Rogue",
+"race": "human"
+},
+"862": {
+"role": "Ranger",
+"race": "elven"
+},
+"863": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"864": {
+"role": "Valkyrie",
+"race": "dwarven"
+},
+"865": {
+"role": "Ranger",
+"race": "orcish"
+},
+"866": {
+"role": "Monk",
+"race": "human"
+},
+"867": {
+"role": "Healer",
+"race": "gnomish"
+},
+"868": {
+"role": "Samurai",
+"race": "human"
+},
+"869": {
+"role": "Ranger",
+"race": "orcish"
+},
+"870": {
+"role": "Monk",
+"race": "human"
+},
+"871": {
+"role": "Samurai",
+"race": "human"
+},
+"872": {
+"role": "Rogue",
+"race": "orcish"
+},
+"873": {
+"role": "Tourist",
+"race": null
+},
+"874": {
+"role": "Healer",
+"race": null
+},
+"875": {
+"role": "Valkyrie",
+"race": "human"
+},
+"876": {
+"role": "Cavewoman",
+"race": "gnomish"
+},
+"877": {
+"role": "Samurai",
+"race": "human"
+},
+"878": {
+"role": "Knight",
+"race": "human"
+},
+"879": {
+"role": "Healer",
+"race": "gnomish"
+},
+"880": {
+"role": "Tourist",
+"race": null
+},
+"881": {
+"role": "Monk",
+"race": "human"
+},
+"882": {
+"role": "Rogue",
+"race": "orcish"
+},
+"883": {
+"role": "Samurai",
+"race": "human"
+},
+"884": {
+"role": "Ranger",
+"race": "orcish"
+},
+"885": {
+"role": "Archeologist",
+"race": null
+},
+"886": {
+"role": "Healer",
+"race": "human"
+},
+"887": {
+"role": "Archeologist",
+"race": "human"
+},
+"888": {
+"role": "Healer",
+"race": "human"
+},
+"889": {
+"role": "Valkyrie",
+"race": "human"
+},
+"890": {
+"role": "Monk",
+"race": "human"
+},
+"891": {
+"role": "Healer",
+"race": "human"
+},
+"892": {
+"role": "Priestess",
+"race": "elven"
+},
+"893": {
+"role": "Archeologist",
+"race": "human"
+},
+"894": {
+"role": "Healer",
+"race": "gnomish"
+},
+"895": {
+"role": "Healer",
+"race": "gnomish"
+},
+"896": {
+"role": "Valkyrie",
+"race": "dwarven"
+},
+"897": {
+"role": "Knight",
+"race": "human"
+},
+"898": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"899": {
+"role": "Rogue",
+"race": "orcish"
+},
+"900": {
+"role": "Healer",
+"race": "human"
+},
+"901": {
+"role": "Cavewoman",
+"race": "human"
+},
+"902": {
+"role": "Monk",
+"race": null
+},
+"903": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"904": {
+"role": "Knight",
+"race": "human"
+},
+"905": {
+"role": "Ranger",
+"race": "orcish"
+},
+"906": {
+"role": "Monk",
+"race": "human"
+},
+"907": {
+"role": "Healer",
+"race": "gnomish"
+},
+"908": {
+"role": "Monk",
+"race": "human"
+},
+"909": {
+"role": "Samurai",
+"race": "human"
+},
+"910": {
+"role": "Valkyrie",
+"race": null
+},
+"911": {
+"role": "Healer",
+"race": "gnomish"
+},
+"912": {
+"role": "Wizard",
+"race": "orcish"
+},
+"913": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"914": {
+"role": "Barbarian",
+"race": null
+},
+"915": {
+"role": "Priestess",
+"race": "elven"
+},
+"916": {
+"role": "Knight",
+"race": "human"
+},
+"917": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"918": {
+"role": "Wizard",
+"race": "elven"
+},
+"919": {
+"role": "Priest",
+"race": "human"
+},
+"920": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"921": {
+"role": "Monk",
+"race": "human"
+},
+"922": {
+"role": "Tourist",
+"race": "human"
+},
+"923": {
+"role": "Rogue",
+"race": "orcish"
+},
+"924": {
+"role": "Knight",
+"race": "human"
+},
+"925": {
+"role": "Archeologist",
+"race": "human"
+},
+"926": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"927": {
+"role": "Healer",
+"race": "human"
+},
+"928": {
+"role": "Knight",
+"race": "human"
+},
+"929": {
+"role": "Priestess",
+"race": "human"
+},
+"930": {
+"role": "Barbarian",
+"race": "human"
+},
+"931": {
+"role": "Samurai",
+"race": "human"
+},
+"932": {
+"role": "Healer",
+"race": "human"
+},
+"933": {
+"role": "Knight",
+"race": "human"
+},
+"934": {
+"role": "Priestess",
+"race": "elven"
+},
+"935": {
+"role": "Healer",
+"race": null
+},
+"936": {
+"role": "Cavewoman",
+"race": "dwarven"
+},
+"937": {
+"role": "Valkyrie",
+"race": "human"
+},
+"938": {
+"role": "Rogue",
+"race": "human"
+},
+"939": {
+"role": "Rogue",
+"race": "human"
+},
+"940": {
+"role": "Wizard",
+"race": "orcish"
+},
+"941": {
+"role": "Valkyrie",
+"race": "human"
+},
+"942": {
+"role": "Archeologist",
+"race": "gnomish"
+},
+"943": {
+"role": "Archeologist",
+"race": "gnomish"
+},
+"944": {
+"role": "Samurai",
+"race": "human"
+},
+"945": {
+"role": "Barbarian",
+"race": "orcish"
+},
+"946": {
+"role": "Tourist",
+"race": "human"
+},
+"947": {
+"role": "Ranger",
+"race": "human"
+},
+"948": {
+"role": "Tourist",
+"race": "human"
+},
+"949": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"950": {
+"role": "Samurai",
+"race": null
+},
+"951": {
+"role": "Samurai",
+"race": "human"
+},
+"952": {
+"role": "Valkyrie",
+"race": "dwarven"
+},
+"953": {
+"role": "Samurai",
+"race": "human"
+},
+"954": {
+"role": "Caveman",
+"race": "dwarven"
+},
+"955": {
+"role": "Tourist",
+"race": "human"
+},
+"956": {
+"role": "Barbarian",
+"race": "human"
+},
+"957": {
+"role": "Wizard",
+"race": "elven"
+},
+"958": {
+"role": "Knight",
+"race": "human"
+},
+"959": {
+"role": "Priestess",
+"race": "human"
+},
+"960": {
+"role": "Healer",
+"race": "gnomish"
+},
+"961": {
+"role": "Samurai",
+"race": "human"
+},
+"962": {
+"role": "Archeologist",
+"race": null
+},
+"963": {
+"role": "Samurai",
+"race": "human"
+},
+"964": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"965": {
+"role": "Monk",
+"race": "human"
+},
+"966": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"967": {
+"role": "Healer",
+"race": "human"
+},
+"968": {
+"role": "Samurai",
+"race": "human"
+},
+"969": {
+"role": "Priestess",
+"race": "human"
+},
+"970": {
+"role": "Barbarian",
+"race": "human"
+},
+"971": {
+"role": "Cavewoman",
+"race": "dwarven"
+},
+"972": {
+"role": "Knight",
+"race": "human"
+},
+"973": {
+"role": "Samurai",
+"race": null
+},
+"974": {
+"role": "Barbarian",
+"race": "human"
+},
+"975": {
+"role": "Rogue",
+"race": "human"
+},
+"976": {
+"role": "Priest",
+"race": "elven"
+},
+"977": {
+"role": "Caveman",
+"race": null
+},
+"978": {
+"role": "Rogue",
+"race": "orcish"
+},
+"979": {
+"role": "Samurai",
+"race": "human"
+},
+"980": {
+"role": "Wizard",
+"race": null
+},
+"981": {
+"role": "Rogue",
+"race": "orcish"
+},
+"982": {
+"role": "Wizard",
+"race": "gnomish"
+},
+"983": {
+"role": "Archeologist",
+"race": "dwarven"
+},
+"984": {
+"role": "Knight",
+"race": "human"
+},
+"985": {
+"role": "Rogue",
+"race": "human"
+},
+"986": {
+"role": "Archeologist",
+"race": null
+},
+"987": {
+"role": "Ranger",
+"race": "gnomish"
+},
+"988": {
+"role": "Priestess",
+"race": "human"
+},
+"989": {
+"role": "Samurai",
+"race": "human"
+},
+"990": {
+"role": "Wizard",
+"race": "elven"
+},
+"991": {
+"role": "Rogue",
+"race": "orcish"
+},
+"992": {
+"role": "Rogue",
+"race": "human"
+},
+"993": {
+"role": "Barbarian",
+"race": "human"
+},
+"994": {
+"role": "Priestess",
+"race": "human"
+},
+"995": {
+"role": "Valkyrie",
+"race": "dwarven"
+},
+"996": {
+"role": "Archeologist",
+"race": "human"
+},
+"997": {
+"role": "Valkyrie",
+"race": "dwarven"
+},
+"998": {
+"role": "Tourist",
+"race": "human"
+},
+"999": {
+"role": "Priest",
+"race": null
+}
+}

@@ -1,0 +1,15 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "fire"
+ ],
+ "observed": "'You have no ammunition readied.' then falls through to throw getobj.",
+ "knowledge": [
+  "fire without quiver degrades to throw prompt"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

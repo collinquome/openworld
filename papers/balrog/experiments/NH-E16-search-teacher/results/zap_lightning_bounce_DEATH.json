@@ -1,0 +1,20 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "zap",
+  "c",
+  "west"
+ ],
+ "observed": "zap -> getobj 'What do you want to zap? [c or ?*]'. letter -> 'In what direction?'. west (adjacent wall) -> 'The bolt of lightning bounces! The bolt of lightning hits you!' hp 11->0 DEATH on turn 1.",
+ "knowledge": [
+  "zap grammar: zap -> letter -> direction",
+  "RAY WANDS BOUNCE off walls and can kill the caster",
+  "never zap a ray wand without clear line >= 2 cells or at a wall",
+  "getobj bracket lists candidate letters: '[c or ?*]' is a served percept of zappable items"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

@@ -454,6 +454,8 @@ class Atlas:
         self.dnum = int(bl[nh.NLE_BL_DNUM])
         self.dlevel = int(bl[nh.NLE_BL_DLEVEL])
         self.xplvl = int(bl[nh.NLE_BL_XP])
+        self.pw = int(bl[nh.NLE_BL_ENE])        # spell energy (Phase L cast)
+        self.pwmax = int(bl[nh.NLE_BL_ENEMAX])
         self.hunger = int(bl[nh.NLE_BL_HUNGER])
         self.condition = int(bl[nh.NLE_BL_CONDITION])
         self.ac = int(bl[nh.NLE_BL_AC])

@@ -1,0 +1,20 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "cast",
+  "a",
+  "west"
+ ],
+ "observed": "cast -> spell menu in text_message + misc[2]=1 (xwaitingforspace); includes 'Fail' column. letter -> Pw 7->2 (force bolt = 5 Pw) BEFORE direction prompt; 'In what direction?' misc[0]=1. direction -> time advances. Empty-target cast consumes Pw + turn.",
+ "knowledge": [
+  "cast grammar: cast -> letter -> direction",
+  "force bolt costs 5 Pw at Xp1 Wizard",
+  "Pw deducted at letter selection (before direction)",
+  "menu carries Fail% column (parseable gate)"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

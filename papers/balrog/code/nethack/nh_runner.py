@@ -180,6 +180,8 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
     traj["plans"] = [[s, cells] for (s, cells) in agent.plan_log]
     traj["evs"] = [list(x) for x in agent.ev_log]
     traj["pred_dmg"] = [list(x) for x in getattr(agent, "pred_log", [])]
+    if getattr(agent, "store", None) is not None:
+        traj["store"] = agent.store.to_dict()   # NH-E18 substrate
 
     result = {
         "task": tag,

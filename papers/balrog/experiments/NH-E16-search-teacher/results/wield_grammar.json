@@ -1,0 +1,15 @@
+{
+ "seed": 940,
+ "role": "Wizard",
+ "prefix_len": 0,
+ "script": [
+  "wield"
+ ],
+ "observed": "'What do you want to wield? [- a or ?*]' \u2014 note '-' (bare hands) is in the getobj set here even though BALROG has no '-' key; letter wield works.",
+ "knowledge": [
+  "wield grammar: wield -> letter"
+ ],
+ "kind": "verb-grammar-probe",
+ "model": "Fable 5 (max reasoning)",
+ "when": "2026-07-07T16:17:14Z"
+}

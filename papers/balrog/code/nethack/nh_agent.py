@@ -75,13 +75,16 @@ C2_TOPO = _flag("NH_TOPO")        # topology-driven hidden-passage search
 C2_PACE = _flag("NH_PACE")        # role-conditional descent pacing
 C2_ELBERETH = _flag("NH_ELBERETH")  # E-NH5: weapon-engraved Elbereth panic
 C2_GUARD = _flag("NH_GUARD")      # touch-kill weapon-melee + novelty ledger
+C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
 #    configuration)
 PACE_DEPTH = int(_os.environ.get("NH_PACE_DEPTH", "3"))
 PACE_XP_STEP = float(_os.environ.get("NH_PACE_XPSTEP", "2"))
 PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
-              C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD))
+              C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST))
+CAST_FAIL_MAX = int(_os.environ.get("NH_CAST_FAILMAX", "20"))  # % gate
+CAST_LINE_RANGE = int(_os.environ.get("NH_CAST_RANGE", "6"))
 
 # Elbereth is ignored by these (offline source facts, disclosed):
 ELBERETH_IGNORES = {"minotaur", "shopkeeper", "watchman", "watch captain",
@@ -155,6 +158,21 @@ class DiveAgent:
         self.role = None
         self.race = None
         self.role_source = None                 # "welcome" | "ttyrank"
+        # ---- Phase L NH-E18 memory substrate (pure logger, like the
+        # subgoal ledger: no decision code reads it in Arm A; the intuition
+        # layer reads it at consultation/reflection points). NH_STORE=0
+        # disables.
+        self.store = None
+        if _os.environ.get("NH_STORE", "1") == "1":
+            import nh_store
+            self.store = nh_store.Store()
+        # ---- Phase L NH_CAST state (all inert unless C2_CAST) ----
+        self.cast_spells = None     # letter -> (name, lvl, cat, fail%) per ep
+        self.cast_choice = None     # (letter, name, pw_cost) selected spell
+        self.cast_dir = None        # pending direction for in-flight cast
+        self.cast_step = -99        # step the cast was issued (staleness)
+        self.cast_unavailable = False
+        self.cast_fires = 0
         self.rest_budget = {}                   # level key -> turns rested
         self.dig_attempts = {}                  # level key -> attempts
         self.no_dig_cells = set()               # (key, cell)
@@ -295,6 +313,21 @@ class DiveAgent:
                 self.race = m.group(2)
                 self.role_source = "welcome"
                 self.note(f"role={self.role} race={self.race}")
+        # Phase L NH-E18: feed the observation store (MEMORY layer)
+        if self.store is not None:
+            import nh_store
+            self.store.observe(self, msg)
+            if A.level_changed:
+                self.store.level_event(
+                    self, "level",
+                    f"entered {A.key} depth {A.depth} "
+                    f"(hp {A.hp}/{A.hpmax} xp {A.xplvl})")
+            if self.steps % 200 == 0 or A.level_changed:
+                nh_store.scan_features(self.store, self)
+        # Phase L NH_CAST: roles with no spells say so once; remember it
+        if C2_CAST and "You don't know any spells" in msg:
+            self.cast_unavailable = True
+            self.cast_dir = None
         # harness-audit item 4: welcome-message parse can miss (message
         # scrolled past under skip_more). Fallback: the status line always
         # carries "<Name> the <RankTitle>" — map via C.RANK_TO_ROLE
@@ -1118,6 +1151,15 @@ class DiveAgent:
                         if d in DIR_OF:
                             return DIR_OF[d]
 
+        # ---- P4.9: Phase L attack-spell casting (CAST_ATTACK_V1) ----------
+        if C2_CAST:
+            # stale in-flight cast (prompt never arrived): clear + learn
+            if self.cast_dir and self.steps - self.cast_step > 3:
+                self.cast_dir = None
+            act = self._cast_attack(adj)
+            if act:
+                return act
+
         # ---- P5: combat ---------------------------------------------------
         if adj and not C2_EXPMAX:
             act = self._combat(adj)
@@ -1254,11 +1296,130 @@ class DiveAgent:
         return a
 
     # ------------------------------------------------------------- prompts
+    # ------------------------------------------------- Phase L: spellcasting
+    # RULE CARD [CAST_ATTACK_V1] (layer: PROCEDURE; model: Fable 5 max):
+    # statement: with a known attack spell at fail% <= CAST_FAIL_MAX and
+    #   Pw >= 5*level, cast at (a) any adjacent hostile, preferring
+    #   never-melee species (spells bypass touch/passive effects: floating
+    #   eye, cockatrice class), else (b) a straight-line hostile within
+    #   CAST_LINE_RANGE if it is fast/never-melee (kill-before-contact) and
+    #   the ray path is clear of walls/other monsters/pets.
+    # mechanism: force bolt never misses (probe: 3/3 quarterstaff misses vs
+    #   1-cast kill on the same branch); menu grammar cast->letter->direction
+    #   (probe records e16_probes/cast_forcebolt*.json, dev seeds 715/940);
+    #   Pw deducted at letter selection; menu carries Fail% column; 'more'
+    #   dismisses the menu at zero cost (probe); Xp1 Wizard force bolt =
+    #   5 Pw, 0% fail.
+    # evidence: NH-E16 branch probes (deterministic replay) + KB
+    #   provenance:wiki (Spellbook of force bolt; Wizard) + paired-branch
+    #   cast-vs-melee comparison. status: provisional until the paired dev
+    #   block lands. scope: any role whose cast menu yields an attack spell
+    #   passing the gates; discovery cast only attempted for Wizard until
+    #   other roles are probed.
+    def _parse_cast_menu(self, obs, msg):
+        """Parse 'Choose which spell to cast' menu into cast_spells and
+        select the best usable attack spell (min fail, then min level)."""
+        text = msg if "force bolt" in msg or " - " in msg else ""
+        rows = re.findall(
+            r"([a-zA-Z]) - ([a-z' -]+?)\s{2,}(\d+)\s+([a-z]+)\s+(\d+)%",
+            text)
+        if not rows:        # fall back to tty lines (menu may overflow msg)
+            tty = obs["obs"]["tty_chars"]
+            text = "\n".join("".join(chr(int(c)) for c in row)
+                             for row in tty)
+            rows = re.findall(
+                r"([a-zA-Z]) - ([a-z' -]+?)\s{2,}(\d+)\s+([a-z]+)\s+(\d+)%",
+                text)
+        self.cast_spells = {l: (n.strip(), int(lv), cat, int(f))
+                            for l, n, lv, cat, f in rows}
+        best = None
+        for l, (n, lv, cat, f) in self.cast_spells.items():
+            if cat == "attack" and f <= CAST_FAIL_MAX:
+                k = (f, lv)
+                if best is None or k < best[0]:
+                    best = (k, l, n, 5 * lv)
+        if best:
+            self.cast_choice = (best[1], best[2], best[3])
+            self.note(f"cast menu: {self.cast_spells} -> choice "
+                      f"{self.cast_choice}")
+        else:
+            self.cast_choice = None
+            self.cast_unavailable = True
+            self.note(f"cast menu: no usable attack spell "
+                      f"{self.cast_spells}")
+
+    def _cast_ready(self):
+        if not C2_CAST or self.cast_unavailable:
+            return False
+        if self.cast_spells is None and self.role != "Wizard":
+            return False        # discovery restricted to Wizard (carded)
+        cost = self.cast_choice[2] if self.cast_choice else 5
+        return self.atlas.pw >= cost
+
+    def _cast_attack(self, adj):
+        """Attack-spell layer: adjacent first (never-melee preferred),
+        then kill-before-contact line targets. Returns 'cast' or None."""
+        if not self._cast_ready():
+            return None
+        A = self.atlas
+        ax, ay = A.agent
+        target = None
+        # (a) adjacent hostiles: never-melee species first, else weakest
+        if adj:
+            nm = [m for m in adj if self._never_melee(m)]
+            pool = nm or adj
+            target = min(pool, key=lambda m: m.difficulty)
+        else:
+            # (b) straight-line fast/never-melee threats within range
+            for m in self._mobile_hostiles():
+                dx, dy = m.x - ax, m.y - ay
+                dist = max(abs(dx), abs(dy))
+                if not (2 <= dist <= CAST_LINE_RANGE):
+                    continue
+                if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+                    continue
+                if not (m.name in FAST_THREATS or self._never_melee(m)
+                        or m.speed > OUR_SPEED):
+                    continue
+                sx = (dx > 0) - (dx < 0)
+                sy = (dy > 0) - (dy < 0)
+                clear = True
+                cx, cy = ax + sx, ay + sy
+                occupied = {(mm.x, mm.y) for mm in A.level.monsters}
+                while (cx, cy) != (m.x, m.y):
+                    if not A.level.passable(cx, cy, doors_ok=False) or \
+                            (cx, cy) in occupied:
+                        clear = False
+                        break
+                    cx, cy = cx + sx, cy + sy
+                if clear:
+                    target = m
+                    break
+        if target is None:
+            return None
+        d = (((target.x > ax) - (target.x < ax)),
+             ((target.y > ay) - (target.y < ay)))
+        if d not in DIR_OF:
+            return None
+        self.cast_dir = DIR_OF[d]
+        self.cast_step = self.steps
+        self._goal("fight", f"cast at {target.name}")
+        self.note(f"cast at {target.name} dir {self.cast_dir} "
+                  f"(pw {A.pw})")
+        return "cast"
+
     def _answer_prompt(self, obs, msg, in_yn, in_getlin, waitspace):
         A = self.atlas
         if in_getlin:
             return "esc"
         if in_yn:
+            # Phase L NH_CAST: the cast flow's direction prompt. Must come
+            # before the generic "In what direction" -> esc fallback.
+            if C2_CAST and self.cast_dir and "In what direction" in msg:
+                d = self.cast_dir
+                self.cast_dir = None
+                self.cast_fires += 1
+                return d
             if "Really attack" in msg:
                 # peaceful: mark the intended cell and decline
                 if self.last_action in DIRS:
@@ -1289,6 +1450,16 @@ class DiveAgent:
                 return "esc"
             return "esc"
         # xwaitingforspace: menus / overview screens
+        # Phase L NH_CAST: spell-selection menu. Parse once per episode,
+        # pick the best attack spell (fail% gate), answer with its letter
+        # if a cast is in flight, else dismiss.
+        if C2_CAST and ("Choose which spell to cast" in msg or
+                        self._tty_has(obs, "Choose which spell")):
+            self._parse_cast_menu(obs, msg)
+            if self.cast_choice and self.cast_dir:
+                return self.cast_choice[0]
+            self.cast_dir = None
+            return "more"           # verified zero-cost dismissal (probe)
         if "Pick up what" in msg or self._tty_has(obs, "Pick up what"):
             kws = ("pick-axe", "mattock")
             if self.pickup_kind == "food":
