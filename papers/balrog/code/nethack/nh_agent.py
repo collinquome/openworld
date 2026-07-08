@@ -81,6 +81,7 @@ C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
 C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
 C2_ANTIFAINT = _flag("NH_ANTIFAINT")  # Phase L s9: eat-at-HUNGRY anti-faint guard
 C2_FOODACQ = _flag("NH_FOODACQ")  # Phase L s11: proactive safe-corpse banking
+C2_PET = _flag("NH_PET")          # Phase L s12: pet utilization (preserve-on-descent)
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -157,7 +158,7 @@ C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
               C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT,
-              C2_FOODACQ))
+              C2_FOODACQ, C2_PET))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -181,6 +182,16 @@ FOODACQ_COOLDOWN = int(_os.environ.get("NH_FOODACQ_COOLDOWN", "8"))  # s11 bank 
 # death-class (death-while-fainting 5/15->0/15, progression-neutral) without the
 # descent-stall that cd=0/routing caused (dev depth 15->1). cd=25 fired too little
 # (hunger effect null). See DOCTRINE_CARDS_s11.md CARD S11-1.
+# PET UTILIZATION (NH_PET, Phase L s12): before taking the down-stairs, wait a
+# BOUNDED number of turns for the starting pet to reach an adjacent cell so it
+# FOLLOWS us down (a pet descends only if adjacent when '>' is taken). Preserves
+# the pet across the descent so it keeps tanking/killing the D2-6 trash that is
+# the newly-unmasked combat death-class (s11: FOODACQ converted hunger-deaths
+# into combat-deaths at the same depth). PET_WAIT_MAX caps per-stair dawdling so
+# a far/stuck pet can't stall descent (the FOODACQ-stall lesson, CARD S11-2);
+# PET_WAIT_RADIUS = only wait if the pet is close enough to plausibly catch up.
+PET_WAIT_MAX = int(_os.environ.get("NH_PET_WAIT_MAX", "8"))     # turns per stair
+PET_WAIT_RADIUS = int(_os.environ.get("NH_PET_WAIT_RADIUS", "5"))  # only wait if <=
 # NH-E6 THROW-DISENGAGE lever (session 5, claude-opus-4-8[1m] max thinking):
 # the s4 REST-lever paired block DROPPED because the crisis-flee threshold
 # tune never reaches the failure mode — fatal TRASH deaths carry a SAME-SPEED
@@ -343,6 +354,8 @@ class DiveAgent:
         self.grind_start = {}                   # level key -> game time
         self.grind_note = set()
         self.descended_from = None              # (key, cell) of last '>' taken
+        self._pet_waits = {}                    # (key, stair cell) -> wait count
+        self.pet_wait_fires = 0                 # NH_PET: total pet-follow waits
         self.mines_entrances = {}               # level key -> {cells}
         self.mines_avoid_since = {}             # level key -> game time
         self.commit_mines = False               # ban expired: stop retreating
@@ -2120,6 +2133,59 @@ class DiveAgent:
                 return species
         return None
 
+    # ------------------------------------------------------- pet utilization
+    # RULE CARD [PET_FOLLOW] (layer: LOGISTICS/COMBAT; NH_PET; Phase L s12;
+    # model: claude-opus-4-8[max]). The starting pet fights trash for free and
+    # is the untried, zero-resource answer to the TRASH-MELEE death class that
+    # s11 unmasked (FOODACQ removed hunger-death but converted it to combat-death
+    # at the same depth). But the agent descends the instant it reaches the '>',
+    # abandoning the pet on the level above -> the pet is lost after D1 and never
+    # helps on the D2-6 kill-zone. A pet follows down the stairs ONLY if it is
+    # ADJACENT when '>' is taken. So: preserve it -> before descending, wait a
+    # BOUNDED number of turns for the pet to reach an adjacent cell, then go.
+    # Bounded per stair cell (PET_WAIT_MAX) + radius-gated (PET_WAIT_RADIUS) so a
+    # far/stuck pet cannot stall descent (the FOODACQ stall lesson, CARD S11-2).
+    # Never dawdle beside a hostile. provenance: insight-origin=OP
+    # (DEATH_TO_CAPABILITY Tier-2 PET UTILIZATION, zero prior use) + knowledge=
+    # our own s11 STACKED-DEATH-CLASSES finding (combat is the binding layer once
+    # hunger is fixed). replication: REF=C2.1+NH_FOODACQ vs TEST=REF+NH_PET on the
+    # trash-melee death corpus; KPI = combat-death rate + progression mean.
+    def _live_pet(self):
+        """Nearest live pet on the current level, or None."""
+        A = self.atlas
+        ax, ay = A.agent
+        pets = [m for m in A.level.monsters if m.pet]
+        if not pets:
+            return None
+        return min(pets, key=lambda m: max(abs(m.x - ax), abs(m.y - ay)))
+
+    def _pet_follow_wait(self):
+        """Return a wait action if we should hold on the down-stairs for the pet
+        to become adjacent (so it follows us down); else None. Flag-off (NH_PET
+        unset) => immediate None => descent bit-identical."""
+        if not C2_PET:
+            return None
+        A = self.atlas
+        if self._adjacent_hostiles():        # never dawdle beside a threat
+            return None
+        pet = self._live_pet()
+        if pet is None:
+            return None
+        dist = max(abs(pet.x - A.agent[0]), abs(pet.y - A.agent[1]))
+        if dist <= 1:                        # already adjacent: it'll follow
+            return None
+        if dist > PET_WAIT_RADIUS:           # too far to catch up: don't stall
+            return None
+        key = (A.key, A.agent)
+        n = self._pet_waits.get(key, 0)
+        if n >= PET_WAIT_MAX:                # budget spent: descend without it
+            return None
+        self._pet_waits[key] = n + 1
+        self.pet_wait_fires += 1
+        self._goal("pet", f"wait for pet dist {dist}")
+        self.note(f"PET wait for pet (dist {dist}, wait {n + 1}/{PET_WAIT_MAX})")
+        return "search"
+
     # -------------------------------------------------------------- combat
     def _combat(self, adj):
         A = self.atlas
@@ -2745,6 +2811,11 @@ class DiveAgent:
                 self.rest_budget[A.key] = self.rest_budget.get(A.key, 0) + 1
                 self._goal("rest", f"hp {A.hp}/{A.hpmax} on stairs")
                 return "search"
+            # PET UTILIZATION (NH_PET, s12): hold for the pet to reach an adjacent
+            # cell so it follows us down; bounded so it can't stall (no-op if off).
+            pa = self._pet_follow_wait()
+            if pa:
+                return pa
             self.descended_from = (A.key, A.agent)
             self._goal("descend", f"take > at depth {A.depth}")
             return "down"

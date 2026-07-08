@@ -31,6 +31,21 @@ def run(arm, seed):
     maxh = max(hung)
     fires = sum(1 for n in notes if "ANTIFAINT" in str(n))
     facq = sum(1 for n in notes if "FOODACQ" in str(n))
+    petw = sum(1 for n in notes if "PET wait" in str(n))
+    # pet survival: monsters snapshots = [[step, [[x,y,name,pet],...]], ...].
+    # pet_start = a pet present in an early (<=step 50) snapshot; pet_end = a pet
+    # present in the LAST snapshot (still with the agent at episode end/death).
+    mon = traj.get("monsters", []) or []
+    def _has_pet(frame):
+        return any(len(m) > 3 and m[3] for m in frame[1])
+    pet_start = any(_has_pet(f) for f in mon if f[0] <= 50)
+    pet_end = _has_pet(mon[-1]) if mon else False
+    # deepest snapshot that still shows a live pet (did it descend with us?)
+    pet_maxdepth_present = 0
+    depths = traj.get("depth", []) or []
+    for f in mon:
+        if _has_pet(f) and f[0] > 0 and f[0] <= len(depths):
+            pet_maxdepth_present = max(pet_maxdepth_present, depths[f[0] - 1])
     # nutrition-secured proxy: did the agent ever reach Hungry (tier 2) while
     # having banked food (>=1 FOODACQ eat) BEFORE it? Cheap proxy = any FOODACQ
     # fire at all (the s10 gap was arriving at Hungry with an EMPTY larder).
@@ -38,6 +53,8 @@ def run(arm, seed):
     return {"seed": seed, "arm": arm, "end_reason": er, "maxhunger": maxh,
             "maxhunger_name": HUNGER_NAME.get(maxh, maxh),
             "antifaint_fires": fires, "foodacq_fires": facq,
+            "pet_waits": petw, "pet_start": pet_start, "pet_end": pet_end,
+            "pet_maxdepth_present": pet_maxdepth_present,
             "steps": res.get("steps"),
             "depth_max": res.get("depth_max"), "prog": res.get("progression"),
             "role": res.get("role"), "race": res.get("race")}
@@ -52,8 +69,9 @@ def main():
     for s in seeds:
         r = run(arm, s)
         print(f"  seed {r['seed']:4d} end={r['end_reason'][:34]:34s} "
-              f"maxHunger={r['maxhunger_name']:8s} antifaint_fires={r['antifaint_fires']:3d} "
-              f"foodacq_fires={r['foodacq_fires']:3d} "
+              f"maxHunger={r['maxhunger_name']:8s} facq={r['foodacq_fires']:3d} "
+              f"petw={r['pet_waits']:3d} pet_end={int(r['pet_end'])} "
+              f"pet_dmax={r['pet_maxdepth_present']} "
               f"steps={r['steps']} depth={r['depth_max']} prog={r['prog']}")
         print("JSONL " + json.dumps(r))
 
