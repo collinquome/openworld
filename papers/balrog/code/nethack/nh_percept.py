@@ -312,6 +312,43 @@ for _g, (_nm, _ocls) in _OBJ_NAME.items():
         _GVAL[_g], _GKIND[_g], _GNAME[_g] = 1.2, 3, _nm
 
 
+# NH-E38: floor consumable spotter. Wand/potion/scroll appearances are
+# shuffled but every appearance glyph still resolves to its true CLASS via
+# objclass, so we can locate "a wand/potion/scroll is on the floor here" (not
+# which one — that needs the ID game). Separate from item_targets so no other
+# lever's valuation changes. Kind priority: wand(3) > scroll(2) > potion(1).
+WAND_CLASS = nh.WAND_CLASS
+POTION_CLASS = nh.POTION_CLASS
+SCROLL_CLASS = nh.SCROLL_CLASS
+_CONS_KIND = np.zeros(C.MAX_GLYPH + 2, dtype=np.int8)   # 3 wand,2 scroll,1 potion
+for _g, (_nm, _ocls) in _OBJ_NAME.items():
+    if _ocls == WAND_CLASS:
+        _CONS_KIND[_g] = 3
+    elif _ocls == SCROLL_CLASS:
+        _CONS_KIND[_g] = 2
+    elif _ocls == POTION_CLASS:
+        _CONS_KIND[_g] = 1
+
+
+def consumable_targets(glyphs, agent, radius=14):
+    """[(prio, (x,y), kind)] floor wands/scrolls/potions within radius, ranked
+    wand>scroll>potion then nearest. kind in {'wand','scroll','potion'}."""
+    ax, ay = agent
+    ga = np.asarray(glyphs)
+    k = _CONS_KIND[ga]
+    ys, xs = np.nonzero(k)
+    names = {3: "wand", 2: "scroll", 1: "potion"}
+    out = []
+    for y, x in zip(ys.tolist(), xs.tolist()):
+        d = max(abs(x - ax), abs(y - ay))
+        if d > radius:
+            continue
+        pr = int(k[y][x])
+        out.append((pr, (x, y), names[pr]))
+    out.sort(key=lambda t: (-t[0], max(abs(t[1][0] - ax), abs(t[1][1] - ay))))
+    return out
+
+
 def item_targets(glyphs, agent, radius=14):
     """[(value, (x,y), kind, name)] floor items worth a detour, ranked.
     value: food 3.0, ammo 2.0, body armor 1.8, other armor 1.2."""

@@ -84,6 +84,17 @@ C2_FOODACQ = _flag("NH_FOODACQ")  # Phase L s11: proactive safe-corpse banking
 C2_PET = _flag("NH_PET")          # Phase L s12: pet utilization (preserve-on-descent)
 C2_WIELD = _flag("NH_WIELD")      # Phase L s13: wield best-in-inventory weapon (direct combat-capability injection)
 C2_WIELDACQ = _flag("NH_WIELDACQ")  # Phase L s13: ACQUIRE a floor weapon that upgrades melee, then wield it
+C2_LOOT = _flag("NH_LOOT")          # Phase L s15: EFFICIENT looting — value floor weapons(dpt)+armor(AC), grab IFF value/detour clears threshold under a per-LEVEL detour budget, then wield/wear
+C2_CONSUME = _flag("NH_CONSUME")  # NH-E38: CONSUMABLE ECONOMY — engrave-ID wands
+#   (low-risk, deterministic) + zap KNOWN offensive/control wand at a tough/
+#   same-speed/fast threat (the spike-death counter: ends the unfleeable 1-shot
+#   fight AND yields zero-exchange safe XP via sleep/striking), + quaff KNOWN
+#   healing at HP-crisis, + quaff/read KNOWN gain-level (direct safe XP) +
+#   enchant/identify when safe. Default OFF => bit-identical. See docs/
+#   NH_ID_GAME_SCOPE.md. Aliased NH_IDGAME.
+if not C2_CONSUME:
+    C2_CONSUME = _flag("NH_IDGAME")
+C2_SAFELEVEL = _flag("NH_SAFELEVEL")  # Phase L s16: SAFE EARLY LEVELING — on D1-3, before diving, route to an ISOLATED SAFE weak monster to farm XP so we arrive at the D5-6 kill-zone stronger (the bootstrap-breaker: XP = the other unused capability)
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -160,7 +171,8 @@ C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
               C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT,
-              C2_FOODACQ, C2_PET, C2_WIELD, C2_WIELDACQ))
+              C2_FOODACQ, C2_PET, C2_WIELD, C2_WIELDACQ, C2_LOOT,
+              C2_SAFELEVEL, C2_CONSUME))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -223,6 +235,35 @@ WIELD_DIAG = _os.environ.get("NH_WIELD_DIAG") == "1"
 # NH_WIELD lever wields it). Bounded detour + loot_tries cap = the FOODACQ
 # no-stall discipline (CARD S11-2). Ammo/thrown-primary excluded (melee only).
 WIELDACQ_RADIUS = int(_os.environ.get("NH_WIELDACQ_RADIUS", "8"))  # max detour steps
+# EFFICIENT LOOTING (NH_LOOT, Phase L s15) — the ACQUISITION-BOUND meta-finding
+# (s13, PROGRAM_FINDINGS 11th angle) turned into a lever. The agent has USE
+# mechanisms (wield/wear/eat) but no ACQUIRE behaviour, so real combat capability
+# sits UNLOOTED on the floor (seed 746 Healer walked past a +1.44-dpt mace for 25
+# steps; 4054 Ranger past a flail 100 steps; 721 Knight past a two-handed sword).
+# NH_LOOT values every floor WEAPON (melee dpt gain vs current wield) and ARMOR
+# (AC bonus for an unfilled slot) and grabs the best one IFF value/detour_cost
+# clears LOOT_EFF_THRESH — so high-value gear (a two-handed sword) justifies a
+# longer detour and junk never does — all under a per-LEVEL total detour budget
+# (LOOT_LEVEL_BUDGET) so descent NEVER stalls (the confound that nulled the s13
+# WIELDACQ pivot: DEATH@D5 -> TRUNCATED@2000). Underfoot/adjacent grabs are free
+# (always taken). The NH_WIELD (wield) + NH_ARMOR (wear) USE levers then fire on
+# what was looted — the whole point. SCOPE: weapons+armor only. Floor potions/
+# scrolls are UNIDENTIFIED (can't value healing/enchant pre-ID) and hoarding them
+# risks burden -> descent-stall, so they are deliberately out of scope; gold
+# auto-collects on step (no detour needed). Default OFF => bit-identical.
+LOOT_EFF_THRESH = float(_os.environ.get("NH_LOOT_EFF", "0.12"))    # min value per detour-step for a FAR grab
+LOOT_MAX_DETOUR = int(_os.environ.get("NH_LOOT_DETOUR", "12"))     # per-item detour cap (steps)
+LOOT_LEVEL_BUDGET = int(_os.environ.get("NH_LOOT_BUDGET", "30"))   # max total loot-detour steps per dungeon level
+LOOT_AC_WEIGHT = float(_os.environ.get("NH_LOOT_AC_W", "0.4"))     # armor value = ac_bonus * this (dpt-comparable units)
+# SAFE EARLY LEVELING (NH_SAFELEVEL, Phase L s16) — the bootstrap-breaker.
+SAFELEVEL_MAXDEPTH = int(_os.environ.get("NH_SAFELEVEL_MAXDEPTH", "3"))   # only farm XP on D1..this
+SAFELEVEL_TARGET_XP = int(_os.environ.get("NH_SAFELEVEL_XP", "5"))        # hunt until xplvl>=this, then dive
+SAFELEVEL_BUDGET = int(_os.environ.get("NH_SAFELEVEL_BUDGET", "200"))     # max safe-level hunt STEPS per dungeon level (turn cap)
+SAFELEVEL_HP_FRAC = float(_os.environ.get("NH_SAFELEVEL_HP", "0.8"))      # only pick a fight when HP >= this*hpmax
+SAFELEVEL_MARGIN = float(_os.environ.get("NH_SAFELEVEL_MARGIN", "0.25"))  # engage IFF expected HP-loss (dpt*ttk) <= this*hp
+SAFELEVEL_MAX_DPT = float(_os.environ.get("NH_SAFELEVEL_MAXDPT", "2.0"))  # never engage a monster whose per-turn dpt exceeds this
+SAFELEVEL_RADIUS = int(_os.environ.get("NH_SAFELEVEL_RADIUS", "8"))       # max path length to route to prey
+SAFELEVEL_ISO_R = int(_os.environ.get("NH_SAFELEVEL_ISO", "3"))           # prey must have no OTHER hostile within this radius
 # NH-E6 THROW-DISENGAGE lever (session 5, claude-opus-4-8[1m] max thinking):
 # the s4 REST-lever paired block DROPPED because the crisis-flee threshold
 # tune never reaches the failure mode — fatal TRASH deaths carry a SAME-SPEED
@@ -290,6 +331,48 @@ FAST_THREATS = {"giant spider", "soldier ant", "giant ant", "fire ant",
                 "panther", "tiger", "wolf", "warg", "dingo", "coyote",
                 "jackal", "fox", "giant bat", "bat", "raven"}
 
+# NH-E38 CONSUMABLE ECONOMY tables (provenance: knowledge=wiki + NetHack 3.6.7
+# src/engrave.c WAND_CLASS switch, OFFLINE+disclosed; verified against local
+# wiki_kb.sqlite). Object-class ints: WAND=11, POTION=8, SCROLL=9 (nle.nethack).
+WAND_CLASS_INT, POTION_CLASS_INT, SCROLL_CLASS_INT = 11, 8, 9
+# ENGRAVE-TEST -> wand identity. Engraving in dust with the wand as the writing
+# tool ('E' -> wand-letter) discharges it; the message reveals the class with NO
+# zap-effect risk (digging/teleport are SAFE via engraving; only lightning
+# self-blinds, fire burns floor-items, create-monster spawns adjacent). We
+# pattern-match the distinctive substring (verbatim from source). Value =
+# whether the wand is a directional OFFENSIVE/CONTROL wand worth zapping at a
+# threat (ends the unfleeable spike fight / free XP).
+ENGRAVE_ID_SIGS = [
+    ("unsuccessfully fights your attempt to write", "striking"),
+    ("bugs on the",           "sleep_or_death"),   # "...stop moving!" (sleep OR death)
+    ("ice cubes drop from the wand", "cold"),
+    ("Flames fly from the wand",     "fire"),
+    ("wand of fire",                 "fire"),
+    ("Lightning arcs from the wand", "lightning"),
+    ("wand of lightning",            "lightning"),
+    ("riddled by bullet holes",      "magic missile"),
+    ("wand of digging",              "digging"),
+    ("Gravel flies up from the",     "digging"),
+    ("slow down",             "slow monster"),
+    ("speed up",              "speed monster"),
+    ("engraving now reads",   "polymorph"),
+    ("vanishes",              "ambiguous"),          # cancel/invis/teleport
+]
+# directional wands we will ZAP at a hostile (all end/neutralize the fight):
+OFFENSIVE_WANDS = {"striking", "sleep_or_death", "sleep", "death", "cold",
+                   "fire", "lightning", "magic missile", "cancellation",
+                   "slow monster", "polymorph"}
+# identity substrings appearing in an ALREADY-IDENTIFIED inventory desc:
+HEAL_POTIONS = ("healing", "extra healing", "full healing")
+GAINLEVEL_ITEMS = ("gain level",)
+ENCHANT_SCROLLS = ("enchant armor", "enchant weapon")
+# wands whose ENGRAVE-test carries a real (recoverable) cost -> engrave-test
+# these last / only when nothing better (fire burns floor items; lightning
+# blinds). Still worth IDing; we just note the cost.
+ENGRAVE_RISKY = {"fire", "lightning"}
+CONSUME_RADIUS = int(_os.environ.get("NH_CONSUME_RADIUS", "10"))     # max detour to a floor consumable
+CONSUME_LEVEL_BUDGET = int(_os.environ.get("NH_CONSUME_BUDGET", "25"))  # max detour steps/level (no-stall)
+
 RE_KILLED = re.compile(r"You (?:kill|destroy) the ([a-zA-Z' -]+?)!")
 RE_SEE_HERE = re.compile(r"You see here (?:an? |the )?([^.]*)\.")
 
@@ -320,6 +403,16 @@ class DiveAgent:
         self.door_giveup = set()
         self.door_target = None                 # cell of last open/kick attempt
         self.hunt_turns = {}                    # level key -> game turns spent hunting
+        # NH-E38 consumable economy state
+        self.wand_belief = {}       # inv-letter -> believed wand type (from engrave-ID)
+        self.engrave_tested = set() # inv-letters we have engrave-tested (don't retest)
+        self.pending_engrave = None # (letter, steps_remaining) awaiting ID message
+        self.zapped_at = {}         # (levelkey, monpos) -> zap count (anti-loop)
+        self.consumed_letters = set()  # potion/scroll letters we've used up (one-shot guard)
+        self.consume_kills = 0
+        self.gainlevel_used = 0
+        self.consume_detour = {}    # level key -> detour steps spent (no-stall budget)
+        self.safelevel_turns = {}               # NH_SAFELEVEL: level key -> steps spent safe-leveling
         self.fresh_kills = []                   # (cell, species, time)
         self.role = None
         self.race = None
@@ -370,6 +463,12 @@ class DiveAgent:
         self._floor_upgrade_steps = 0           # steps w/ a floor weapon beating current
         self._cur_wield_dpt_last = 0.0
         self.wieldacq_fires = 0                 # NH_WIELDACQ pickups
+        self.loot_fires = 0                     # NH_LOOT (s15) acquisitions (weapon+armor)
+        self.loot_wpn_fires = 0                 # NH_LOOT weapon grabs
+        self.loot_arm_fires = 0                 # NH_LOOT armor grabs
+        self._loot_budget = {}                  # A.key -> loot-detour steps spent this level
+        self._loot_target = None                 # (A.key, cell, kind, name, value): sticky loot goal
+        self._loot_progress = {}                 # (A.key,cell) -> min dist seen (give up only when STUCK, not while approaching)
         self._pickup_wpn_kw = None              # targeted weapon keyword for pickup menu
         # NH-ADVISORY (LLM-strategist) per-episode state
         self.advisory_consults = 0              # consults issued this episode
@@ -611,6 +710,33 @@ class DiveAgent:
             self.need_look = True      # terrain under agent is invisible
             self.retreat_ups = 0
             self.note(f"level -> {A.key} depth={A.depth}")
+
+        # NH-E38: attribute a kill to a recent wand-zap (mechanism metric).
+        if C2_CONSUME and getattr(self, "_pending_zap_kill", 0) > 0:
+            km = RE_KILLED.search(msg)
+            if km:
+                self.consume_kills += 1
+                self.note(f"CONSUME kill ({km.group(1)}) via zap")
+            self._pending_zap_kill -= 1
+
+        # NH-E38: engrave-ID result capture. After an engrave-test we watch the
+        # next few messages for the wand-signature; the first match resolves the
+        # letter's identity in our belief (self-IDing wands also update the
+        # inventory desc directly, caught by _consume_inv).
+        if C2_CONSUME and self.pending_engrave is not None:
+            pl, win = self.pending_engrave
+            for sub, wtype in ENGRAVE_ID_SIGS:
+                if sub in msg:
+                    self.wand_belief[pl] = wtype
+                    self.note(f"ENGRAVE-ID solved {pl}={wtype} ('{sub}')")
+                    self.pending_engrave = None
+                    break
+            else:
+                if win <= 1:
+                    self.wand_belief.setdefault(pl, "tested_unknown")
+                    self.pending_engrave = None
+                else:
+                    self.pending_engrave = (pl, win - 1)
 
         # message-driven terrain-under-agent knowledge (from 'look')
         low = msg.lower()
@@ -1085,6 +1211,230 @@ class DiveAgent:
             return step
         return None
 
+    # ================= NH-E38 CONSUMABLE ECONOMY ======================
+    def _consume_inv(self, obs):
+        """Bucket the inventory into usable consumables. A consumable is
+        'known' when its true type is already in the desc string (pre-ID'd
+        starting item, self-IDing wand, or price/use-ID'd) OR (for wands) when
+        our engrave-belief resolved it. Returns dict of letter-lists."""
+        out = {"off_wand": [], "heal_pot": [], "gainlevel": [], "enchant": [],
+               "identify": [], "unid_wand": []}
+        for letter, desc, oc in self._inv(obs):
+            d = desc.lower()
+            if oc == WAND_CLASS_INT:
+                if "(0:" in desc:               # empty wand
+                    continue
+                m = re.search(r"wand of ([a-z ]+?)(?: \(|$|,)", d)
+                wtype = m.group(1).strip() if m else self.wand_belief.get(letter)
+                if wtype in OFFENSIVE_WANDS:
+                    out["off_wand"].append((letter, wtype))
+                elif wtype is None and letter not in self.engrave_tested:
+                    out["unid_wand"].append((letter, desc))
+            elif oc == POTION_CLASS_INT and letter not in self.consumed_letters:
+                if any(h in d for h in HEAL_POTIONS) and "wand" not in d:
+                    out["heal_pot"].append((letter, d))
+                if any(g in d for g in GAINLEVEL_ITEMS):
+                    out["gainlevel"].append((letter, "quaff"))
+            elif oc == SCROLL_CLASS_INT and letter not in self.consumed_letters:
+                if any(g in d for g in GAINLEVEL_ITEMS):
+                    out["gainlevel"].append((letter, "read"))
+                if any(e in d for e in ENCHANT_SCROLLS):
+                    out["enchant"].append((letter, d))
+                if "identify" in d:
+                    out["identify"].append((letter, d))
+        return out
+
+    def _line_hostile(self, offensive=True, max_range=7):
+        """Nearest non-peaceful hostile on a clear straight (cardinal/diagonal)
+        line from us within max_range. Returns (monster, dirkey) or None."""
+        A = self.atlas
+        L = A.level
+        ax, ay = A.agent
+        best = None
+        bestd = 99
+        for m in L.monsters:
+            if m.pet or m.name in C.IMMOBILE or m.pos in L.no_attack:
+                continue
+            if m.name in CAST_NEVER or m.cls == "@" and not m.pet:
+                # never fire directional magic at peaceful-generating @-classes
+                if m.name in CAST_NEVER:
+                    continue
+            dx, dy = m.x - ax, m.y - ay
+            dist = max(abs(dx), abs(dy))
+            if dist < 1 or dist > max_range:
+                continue
+            if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+                continue
+            sx = (dx > 0) - (dx < 0)
+            sy = (dy > 0) - (dy < 0)
+            cx, cy = ax + sx, ay + sy
+            clear = True
+            while (cx, cy) != m.pos:
+                if not L.passable(cx, cy, bad_traps_ok=True) or \
+                        any(mm.pos == (cx, cy) for mm in L.monsters):
+                    clear = False
+                    break
+                cx, cy = cx + sx, cy + sy
+            if clear and dist < bestd:
+                best, bestd = (m, DIR_OF[(sx, sy)]), dist
+        return best
+
+    def _consume_zap(self, obs, crisis):
+        """Zap a KNOWN offensive/control wand at a threat in line. THE spike-
+        death counter: a wand of sleep/striking/death ends the unfleeable one-
+        exchange fight and yields a zero-exchange (safe) kill = free XP. In
+        crisis (low HP + adjacent) fire at any in-line hostile; proactively fire
+        only at fast/same-speed/tough threats (the ones that spike-kill us)."""
+        if not C2_CONSUME:
+            return None
+        inv = self._consume_inv(obs)
+        if not inv["off_wand"]:
+            return None
+        A = self.atlas
+        tgt = self._line_hostile(offensive=True, max_range=7)
+        if tgt is None:
+            return None
+        m, dirkey = tgt
+        adj = max(abs(m.x - A.agent[0]), abs(m.y - A.agent[1])) <= 1
+        fast = m.speed >= OUR_SPEED or m.name in FAST_THREATS
+        tough = m.difficulty >= max(3, A.xplvl)
+        if not (crisis or adj or fast or tough):
+            return None
+        key = (A.key, m.pos)
+        if self.zapped_at.get(key, 0) >= 4:
+            return None
+        # prefer striking (cheap/reliable) then rays; sleep/death end fights best
+        pref = {"sleep_or_death": 0, "death": 0, "sleep": 0, "striking": 1,
+                "magic missile": 2, "cold": 2, "fire": 2, "lightning": 3,
+                "slow monster": 4, "cancellation": 5, "polymorph": 6}
+        letter, wtype = sorted(inv["off_wand"],
+                               key=lambda lw: pref.get(lw[1], 9))[0]
+        self.zapped_at[key] = self.zapped_at.get(key, 0) + 1
+        self._pending_zap_kill = 3
+        self._goal("zap", f"{wtype} at {m.name} d{max(abs(m.x-A.agent[0]),abs(m.y-A.agent[1]))}")
+        self.note(f"CONSUME zap-offensive {wtype}({letter}) at {m.name} "
+                  f"(crisis={int(crisis)} fast={int(fast)} tough={int(tough)})")
+        self._ev(f"CONSUME zap {wtype} at {m.name}")
+        self.queue = [letter, dirkey]
+        self.queue_tag = "zap"
+        return "zap"
+
+    def _consume_heal(self, obs):
+        """Quaff a KNOWN healing potion at HP crisis (secondary to the wand —
+        a heal can't outrun a spike, but recovers a survivable band)."""
+        if not C2_CONSUME:
+            return None
+        A = self.atlas
+        if A.hp > 0.40 * A.hpmax:
+            return None
+        inv = self._consume_inv(obs)
+        if not inv["heal_pot"]:
+            return None
+        letter, d = inv["heal_pot"][0]
+        self.consumed_letters.add(letter)
+        self._goal("quaff", f"heal {d[:24]}")
+        self.note(f"CONSUME quaff-heal {letter} ({d[:30]}) hp {A.hp}/{A.hpmax}")
+        self._ev(f"CONSUME quaff-heal hp {A.hp}/{A.hpmax}")
+        self.queue = [letter]
+        self.queue_tag = "quaff"
+        return "quaff"
+
+    def _consume_safe(self, obs):
+        """Non-crisis, no-hostile: use KNOWN gain-level (direct safe XP —
+        highest-value single item, but supply-limited) + enchant armor/weapon +
+        read-identify to resolve an unknown consumable."""
+        if not C2_CONSUME or self._adjacent_hostiles():
+            return None
+        A = self.atlas
+        if A.hunger >= C.WEAK:
+            return None
+        inv = self._consume_inv(obs)
+        if inv["gainlevel"]:
+            letter, how = inv["gainlevel"][0]
+            self.consumed_letters.add(letter)
+            self.gainlevel_used += 1
+            self._goal(how, "gain level")
+            self.note(f"CONSUME gainlevel {how} {letter} (xp {A.xplvl})")
+            self._ev(f"CONSUME gainlevel {how} xp {A.xplvl}")
+            self.queue = [letter]
+            self.queue_tag = how
+            return how
+        if inv["enchant"]:
+            letter, d = inv["enchant"][0]
+            self.consumed_letters.add(letter)
+            self._goal("read", f"enchant {d[:20]}")
+            self.note(f"CONSUME enchant read {letter} ({d[:26]})")
+            self.queue = [letter]
+            self.queue_tag = "read"
+            return "read"
+        return None
+
+    def _engrave_id(self, obs):
+        """Low-risk wand identification: engrave-test an unidentified wand
+        (write in dust with the wand as the tool -> the discharge message
+        reveals the class, NO zap-effect risk). One test per wand. Safe-gated."""
+        if not C2_CONSUME or self.pending_engrave is not None:
+            return None
+        A = self.atlas
+        if self._adjacent_hostiles() or A.hunger >= C.WEAK or \
+                "blind" in A.message.lower():
+            return None
+        inv = self._consume_inv(obs)
+        if not inv["unid_wand"]:
+            return None
+        letter, desc = inv["unid_wand"][0]
+        self.engrave_tested.add(letter)
+        self.pending_engrave = (letter, 3)
+        self._goal("engrave", f"ID-test wand {letter}")
+        self.note(f"ENGRAVE-ID test wand {letter} ({desc[:26]})")
+        self._ev(f"ENGRAVE-ID test {letter}")
+        # mirror the validated Elbereth engrave queue (also lays protection):
+        self.queue = [letter] + list("Elbereth") + ["more"]
+        self.queue_tag = "engrave"
+        return "engrave"
+
+    def _consume_acquire(self, obs):
+        """Bounded detour to a floor CONSUMABLE (wand>scroll>potion) so the
+        engrave-ID + use policy has ammunition — the offensive wand that ends
+        the spike fight is on the FLOOR, not in the starting kit. Same no-stall
+        discipline as _weapon_acquire: per-cell tries cap + radius cap + a
+        per-LEVEL detour budget so descent never stalls (the s13/FOODACQ
+        lesson). Underfoot pickup completes it. Fail-safe -> None."""
+        try:
+            if P is None:
+                return None
+            A = self.atlas
+            L = A.level
+            spent = self.consume_detour.get(A.key, 0)
+            if spent >= CONSUME_LEVEL_BUDGET:
+                return None
+            tgts = P.consumable_targets(obs["obs"]["glyphs"], A.agent,
+                                        radius=CONSUME_RADIUS)
+            if not tgts:
+                return None
+            _pr, cell, kind = tgts[0]
+            tk = (A.key, cell)
+            if self.loot_tries.get(tk, 0) >= 6:
+                # try the next target if the best is stuck
+                nxt = [t for t in tgts if self.loot_tries.get((A.key, t[1]), 0) < 6]
+                if not nxt:
+                    return None
+                _pr, cell, kind = nxt[0]
+                tk = (A.key, cell)
+            if cell == A.agent:
+                return None                 # underfoot handler picks it up
+            path = L.bfs(A.agent, [cell], avoid=self._travel_avoid({cell}))
+            if path and len(path) <= CONSUME_RADIUS:
+                self.consume_detour[A.key] = spent + 1
+                if len(path) <= 2:
+                    self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self._goal("acquire", f"{kind} d{len(path)}")
+                self.note(f"CONSUME walk to {kind} ({len(path)} steps)")
+                return self._step_path(path)
+            return None
+        except Exception:                   # noqa: BLE001 — never a gate
+            return None
+
     def _c2_prethrow(self, obs):
         """Ranged-first: soften fast/pack threats before contact."""
         if not self.ammo_letters:
@@ -1136,8 +1486,9 @@ class DiveAgent:
         food/ammo/armor. pre_descent=True limits to urgent/cheap grabs."""
         A = self.atlas
         L = A.level
-        # wear what we carry (multi-turn: only when safe)
-        if C2_ARMOR and self.wearable:
+        # wear what we carry (multi-turn: only when safe). NH_LOOT reuses this
+        # as its armor-USE step (wear what was looted).
+        if (C2_ARMOR or C2_LOOT) and self.wearable:
             danger_near = any(
                 (not m.pet) and m.name not in C.IMMOBILE and
                 max(abs(m.x - A.agent[0]), abs(m.y - A.agent[1])) <= 4
@@ -1241,7 +1592,7 @@ class DiveAgent:
     def _decide(self, obs, msg):
         A = self.atlas
         L = A.level
-        if C2_RANGED or C2_ARMOR:
+        if C2_RANGED or C2_ARMOR or C2_LOOT:
             self._c2_scan_inv(obs)
             if "burdened" in msg.lower():
                 self.burdened = True
@@ -1316,6 +1667,18 @@ class DiveAgent:
 
         # ---- P3: emergency survival --------------------------------------
         adj = self._adjacent_hostiles()
+        # NH-E38 CRISIS consumable: a spike fight (hostile adjacent, HP falling)
+        # is exactly where a wand of sleep/striking/death ENDS it in one action
+        # (the counter to the unfleeable one-exchange death). Fire it above
+        # prayer/melee; then quaff-heal to recover a survivable band.
+        if C2_CONSUME and adj and A.hp < 0.60 * A.hpmax:
+            za = self._consume_zap(obs, crisis=True)
+            if za is not None:
+                return za
+        if C2_CONSUME:
+            ha = self._consume_heal(obs)
+            if ha is not None:
+                return ha
         # prayer heals only in "major trouble" (hp < hpmax/7): fire it there
         if A.hp <= max(A.hpmax // 7, 5) and \
                 self._pray_ok(last_resort=bool(adj) and A.hp <= 4):
@@ -1462,6 +1825,16 @@ class DiveAgent:
         if WIELD_DIAG:                         # read-only floor-weapon diagnosis
             self._wield_diag(obs)
 
+        # EFFICIENT LOOTING (NH_LOOT, Phase L s15) — the acquisition-bound
+        # meta-finding as a lever. Value floor weapons(dpt)+armor(AC) and grab
+        # the best under a value/detour threshold + per-level detour budget; the
+        # NH_WIELD/NH_ARMOR USE levers below then fire on the acquisition. Safe/
+        # non-crisis gated (hunger < WEAK, no adjacent hostile).
+        if C2_LOOT and A.hunger < C.WEAK and not self._adjacent_hostiles():
+            la = self._efficient_loot(obs)
+            if la is not None:
+                return la
+
         # WEAPON ACQUISITION (NH_WIELDACQ, s13 pivot) — close the loot gap so a
         # floor weapon that upgrades melee is actually taken; the NH_WIELD lever
         # then wields it. Safe/non-crisis gated; bounded detour.
@@ -1474,7 +1847,9 @@ class DiveAgent:
         # injection. Non-crisis capability upkeep: swap to a strictly better
         # carried weapon while safe. Gated on hunger < WEAK (crisis eats win
         # below) and no adjacent hostile (never be caught mid-swap weaponless).
-        if C2_WIELD and A.hunger < C.WEAK and not self._adjacent_hostiles():
+        # NH_LOOT reuses this as its weapon-USE step (wield what was looted).
+        if (C2_WIELD or C2_LOOT) and A.hunger < C.WEAK \
+                and not self._adjacent_hostiles():
             wa = self._wield_upgrade(obs)
             if wa is not None:
                 return wa
@@ -1572,6 +1947,16 @@ class DiveAgent:
                         if d in DIR_OF:
                             return DIR_OF[d]
 
+        # ---- P4.85: NH-E38 proactive offensive-wand zap --------------------
+        # Zap a fast/same-speed/tough threat in line BEFORE trading melee (a
+        # zero-exchange kill = the safe XP that raises arrival-XP@D5, and it
+        # pre-empts the spike). Non-crisis: only fires at threats that are the
+        # ones that spike-kill us (gated inside _consume_zap).
+        if C2_CONSUME:
+            za = self._consume_zap(obs, crisis=False)
+            if za is not None:
+                return za
+
         # ---- P4.9: Phase L attack-spell casting (CAST_ATTACK_V1) ----------
         if C2_CAST:
             # stale in-flight cast (prompt never arrived): clear + learn
@@ -1650,6 +2035,47 @@ class DiveAgent:
                     self.hunt_turns[A.key] = t0 + 1
                     return self._step_path(path)
 
+        # ---- P5.8: SAFE EARLY LEVELING (NH_SAFELEVEL, Phase L s16) ----------
+        # RULE CARD [SAFELEVEL] (layer: PROGRESSION; model: claude-opus-4-8[max]).
+        # The bootstrap-breaker. s13-s15 characterized the mean as ACQUISITION-
+        # bound: gear is locked behind depth, the agent hits the D5-6 kill-zone at
+        # xp 1-3 and dies to trash, and looting nulls on the mean because there is
+        # nothing worth looting at the shallow depths where runs die (yet seed 700,
+        # already at D9, saw looting compound D9->D12). XP is the OTHER unused
+        # capability (the direct parallel to the WIELD/food-acquisition levers).
+        # So on the early floors (D1..SAFELEVEL_MAXDEPTH), BEFORE committing to the
+        # stairs, route to an ISOLATED, SAFE, weak monster and kill it for XP, so
+        # we arrive at D5-6 at xp>=TARGET instead of xp 1-3 — arriving stronger to
+        # survive shallow combat, reach the depth where gear exists, and let
+        # acquisition compound (seed 700 proves compounding works once deep).
+        # SAFE = exchange-model gated (the offline species model as safety oracle):
+        # expected HP lost to the kill (species_dpt * species_ttk) <= MARGIN*hp AND
+        # per-turn dpt <= MAX_DPT AND not never-melee AND not faster than us AND low
+        # difficulty. ISOLATED = no OTHER hostile within ISO_R of the prey (never
+        # wade into a pack). HP-healthy gated (only start a fight near full hp).
+        # BOUNDED so it does NOT become the food-farm/loot-detour stall (s11/s13
+        # descent-stall confound): stop at xplvl>=TARGET_XP OR when the per-level
+        # SAFELEVEL_BUDGET of hunt-steps is spent, whichever first, then descend.
+        # Adjacent safe monsters are already fought by the P5 combat layer (the
+        # agent gains that XP in REF too); this layer's counterfactual is ROUTING
+        # to DISTANT safe prey instead of beelining the stairs. Default OFF
+        # (bit-identical when off — gated entirely on C2_SAFELEVEL).
+        # provenance: insight-origin=OP (bootstrap wall: capability locked behind
+        # depth, XP = the unused lever) + knowledge=our own s11-s15 acquisition-
+        # bound corpus + the offline exchange model (species_dpt/ttk). KPI =
+        # arrival-xp at D5 -> combat-survival -> PROGRESSION MEAN, paired on the
+        # trash-melee combat-death corpus.
+        if (C2_SAFELEVEL and A.depth <= SAFELEVEL_MAXDEPTH
+                and A.xplvl < SAFELEVEL_TARGET_XP
+                and A.hunger < C.WEAK
+                and A.hp >= SAFELEVEL_HP_FRAC * A.hpmax
+                and not self._adjacent_hostiles()
+                and self.safelevel_turns.get(A.key, 0) < SAFELEVEL_BUDGET
+                and P is not None):
+            sl = self._safe_level(obs)
+            if sl is not None:
+                return sl
+
         # ---- P6.5: urgent/cheap item grabs before committing to descent ----
         # NH-ADVISORY DESCEND bias skips the loot detour: head straight down.
         if C2_ANY and not (C2_ADVISORY and self.steps < self._adv_descend_until):
@@ -1673,6 +2099,22 @@ class DiveAgent:
             if act:
                 return act
 
+        # ---- P8.55: NH-E38 safe consumables + engrave-ID -------------------
+        # When safe (no adjacent hostile, not weak): use gain-level (direct XP),
+        # enchant armor/weapon; and engrave-test an unidentified wand to unlock
+        # the offensive-wand branch (deterministic, zap-risk-free ID).
+        if C2_CONSUME:
+            act = self._consume_safe(obs)
+            if act:
+                return act
+            act = self._engrave_id(obs)
+            if act:
+                return act
+            if A.hunger < C.WEAK and not adj:
+                act = self._consume_acquire(obs)
+                if act:
+                    return act
+
         # opportunistic floor pickup via the message channel (an item under
         # the agent is INVISIBLE in glyphs — the @ covers it; "You see
         # here" is the only on-cell item sensor)
@@ -1689,12 +2131,18 @@ class DiveAgent:
                 self.note(f"picking up food: {it}")
                 self.queue_tag = "pickup"
                 return "pickup"
-            if C2_ARMOR and any(k in it for k in
+            if (C2_ARMOR or C2_LOOT) and any(k in it for k in
                                 P.BODY_ARMOR + P.HELMETS + P.SHIELDS +
-                                P.BOOTS_GLOVES):
+                                P.BOOTS_GLOVES) and (
+                    C2_ARMOR or self._armor_slot(it) not in
+                    (set(self.worn_slots) | {s for _, s, _ in self.wearable})):
                 self.note(f"picking up armor: {it}")
                 self._goal("loot", f"armor here: {it[:30]}")
                 self.pickup_kind = "armor"
+                if C2_LOOT:
+                    self.loot_fires += 1
+                    self.loot_arm_fires += 1
+                    self._loot_target = None
                 self.queue_tag = "pickup"
                 return "pickup"
             if C2_RANGED and len(self.ammo_letters) < 10 and \
@@ -1704,19 +2152,35 @@ class DiveAgent:
                 self.pickup_kind = "ammo"
                 self.queue_tag = "pickup"
                 return "pickup"
-            if C2_WIELDACQ:
+            if C2_WIELDACQ or C2_LOOT:
                 wn = self._weapon_upgrade_underfoot(obs, it)
                 if wn:
                     # item-under-@ blind spot: complete the weapon-acquire the
                     # moment we stand on the upgrade (the glyph is hidden under
                     # @, so _weapon_acquire's cell==agent branch can't fire).
-                    self.note(f"WIELDACQ pickup {wn} (underfoot, via message)")
+                    self.note(f"LOOT pickup {wn} (underfoot weapon, via message)")
                     self._goal("acquire", f"weapon here: {it[:30]}")
                     self.pickup_kind = "weapon"
                     self._pickup_wpn_kw = wn
                     self.wieldacq_fires += 1
+                    if C2_LOOT:
+                        self.loot_fires += 1
+                        self.loot_wpn_fires += 1
+                        self._loot_target = None
                     self.queue_tag = "pickup"
                     return "pickup"
+            # NH-E38: grab a floor CONSUMABLE underfoot (wand/potion/scroll) so
+            # the engrave-ID + use policy has something to act on (the offensive
+            # wand that ends the spike fight is on the FLOOR, not in the starting
+            # kit for most roles). Underfoot-only (zero detour) = no descent
+            # stall; wands are light, potions/scrolls minor. Skip when burdened.
+            if C2_CONSUME and not self.burdened and \
+                    any(k in it for k in ("wand", "potion", "scroll")):
+                self.note(f"CONSUME pickup (underfoot): {it}")
+                self._goal("acquire", f"consumable here: {it[:30]}")
+                self.pickup_kind = "consumable"
+                self.queue_tag = "pickup"
+                return "pickup"
 
         # ---- P8.9: repeated-layout stair goal (REPEAT_LAYOUT_STAIRS V2) ----
         # V1 (explore_target hint) was INERT: _explore only honors a target
@@ -2174,6 +2638,8 @@ class DiveAgent:
                     P.BOOTS_GLOVES if P else kws
             elif self.pickup_kind == "weapon" and self._pickup_wpn_kw:
                 kws = kws + (self._pickup_wpn_kw,)
+            elif self.pickup_kind == "consumable":
+                kws = kws + ("wand", "potion", "scroll")   # NH-E38
             letter = self._menu_letter_for(obs, kws)
             if letter and self.queue_tag == "pickup":
                 self.pickup_kind = None
@@ -2740,6 +3206,189 @@ class DiveAgent:
         except Exception:               # noqa: BLE001 — fail-safe, never a gate
             return None
 
+    def _armor_slot(self, name):
+        """Classify an armor name into a body-slot (mirror of _c2_scan_inv),
+        or None if not wearable armor we model."""
+        n = name.lower()
+        if any(a in n for a in P.BODY_ARMOR):
+            return "body"
+        if any(a in n for a in P.HELMETS):
+            return "helmet"
+        if any(a in n for a in P.SHIELDS):
+            return "shield"
+        if "boots" in n or "iron shoes" in n:
+            return "boots"
+        if "gloves" in n or "gauntlets" in n:
+            return "gloves"
+        return None
+
+    def _best_floor_armor(self, obs):
+        """NH_LOOT (s15): (ac_bonus, name, slot, (x,y), dist) of the best floor
+        armor glyph in view whose slot we DON'T already have filled (worn or
+        already carried) — grabbing armor for an occupied slot is wasted weight.
+        Pure glyph read + frozen armor AC table. Returns None if none. Failsafe:
+        any error -> None (never a gate)."""
+        try:
+            import numpy as _np
+            import nh_sheet
+            A = self.atlas
+            ga = _np.asarray(obs["obs"]["glyphs"])
+            ax, ay = A.agent
+            have = set(self.worn_slots) | {s for _, s, _ in self.wearable}
+            best = None
+            for g, (nm, ocl) in P._OBJ_NAME.items():
+                if ocl != P.ARMOR_CLASS or not nm:
+                    continue
+                slot = self._armor_slot(nm)
+                if slot is None or slot in have:
+                    continue
+                al = nh_sheet.armor_lookup(nm)
+                if not al:
+                    continue
+                acb = al[1].get("ac", 0)
+                if acb <= 0:
+                    continue
+                ys, xs = _np.nonzero(ga == g)
+                if not len(ys):
+                    continue
+                for y, x in zip(ys.tolist(), xs.tolist()):
+                    dist = max(abs(x - ax), abs(y - ay))
+                    if best is None or acb > best[0] or (
+                            acb == best[0] and dist < best[4]):
+                        best = (acb, nm, slot, (x, y), dist)
+            return best
+        except Exception:               # noqa: BLE001 — fail-safe, never a gate
+            return None
+
+    def _efficient_loot(self, obs):
+        """NH_LOOT (s15): the acquisition-bound meta-finding as a lever. Value
+        every floor WEAPON (melee dpt gain vs current wield) and ARMOR (AC bonus
+        for an unfilled slot); grab the best one IFF value/detour_cost clears
+        LOOT_EFF_THRESH, under a per-LEVEL detour budget (LOOT_LEVEL_BUDGET) so
+        descent never stalls (the s13 WIELDACQ confound). Underfoot/adjacent
+        grabs are free. Returns a pickup / step action or None. The NH_WIELD
+        (wield) + NH_ARMOR (wear) USE levers fire on the acquisition next cycles.
+        Caller has gated safety (no adjacent hostile) + non-crisis hunger.
+        Failsafe: any error -> None (never a gate)."""
+        try:
+            import nh_sheet
+            A = self.atlas
+            L = A.level
+            # current melee dpt (best available now) for the weapon counterfactual
+            inv = self._inv(obs)
+            opts = nh_sheet.attack_options(self.role, A.xplvl, inv,
+                                           spells=None, pw=A.pw)
+            cur = [o for o in opts if o[0] == "wield-current"]
+            un = [o for o in opts if o[0] == "unarmed"]
+            cur_dpt = cur[0][3] if cur else (un[0][3] if un else 0.0)
+
+            budget = self._loot_budget.get(A.key, 0)
+
+            # STICKY TARGET (s15): commit to the chosen loot cell until reached,
+            # unreachable, or loot_tries-capped. Without this, two comparable
+            # items flickering in/out of LOS make the agent zigzag between them
+            # and never actually pick either up (seed 16: two-handed sword vs
+            # morning star -> 31 walk-steps, 0 pickups). The final grab happens
+            # via the message-channel underfoot path once we stand on the cell.
+            tgt = self._loot_target
+            if tgt and tgt[0] == A.key:
+                cell = tgt[1]
+                tk = (A.key, cell)
+                if cell != A.agent and self.loot_tries.get(tk, 0) < 8 \
+                        and budget < LOOT_LEVEL_BUDGET:
+                    path = L.bfs(A.agent, [cell],
+                                 avoid=self._travel_avoid({cell}))
+                    if path and len(path) <= LOOT_MAX_DETOUR:
+                        prev = self._loot_progress.get(tk, 99)
+                        if len(path) < prev:
+                            self._loot_progress[tk] = len(path)   # progress
+                        else:
+                            self.loot_tries[tk] = \
+                                self.loot_tries.get(tk, 0) + 1     # stuck
+                        self._loot_budget[A.key] = budget + 1
+                        self._goal("loot", f"walk {tgt[2]} {tgt[3]} d{len(path)}")
+                        self.note(f"LOOT walk to {tgt[2]} {tgt[3]} "
+                                  f"({len(path)} steps, value {tgt[4]:.2f}, "
+                                  f"sticky, budget {budget + 1}/"
+                                  f"{LOOT_LEVEL_BUDGET})")
+                        return self._step_path(path)
+                # reached / unreachable / capped: release and re-choose below
+                self._loot_target = None
+
+            cands = []   # (value, kind, name, cell)
+            if self.role != "Monk":              # Monk: martial arts > weapon
+                bf = self._best_floor_weapon(obs, melee_only=True)
+                if bf:
+                    dpt, wname, wcell, _ = bf
+                    gain = dpt - cur_dpt
+                    if gain >= WIELD_MARGIN:
+                        cands.append((gain, "weapon", wname, wcell))
+            ba = self._best_floor_armor(obs)
+            if ba:
+                acb, aname, _slot, acell, _ = ba
+                cands.append((acb * LOOT_AC_WEIGHT, "armor", aname, acell))
+            if not cands:
+                return None
+            best = None   # (value, kind, name, cell, path)  path=[] means underfoot
+            for value, kind, name, cell in cands:
+                tk = (A.key, cell)
+                if self.loot_tries.get(tk, 0) >= 8:
+                    continue          # unreachable/refused: stop thrashing
+                if cell == A.agent:
+                    path = []         # underfoot: free grab
+                else:
+                    path = L.bfs(A.agent, [cell],
+                                 avoid=self._travel_avoid({cell}))
+                    if not path:
+                        continue
+                    dist = len(path)
+                    if dist > LOOT_MAX_DETOUR:
+                        continue
+                    if value / dist < LOOT_EFF_THRESH:
+                        continue      # not worth the steps-off-descent
+                    if budget >= LOOT_LEVEL_BUDGET:
+                        continue      # level detour budget spent: descend
+                if best is None or value > best[0]:
+                    best = (value, kind, name, cell, path)
+            if best is None:
+                return None
+            value, kind, name, cell, path = best
+            tk = (A.key, cell)
+            pk = "weapon" if kind == "weapon" else "armor"
+            if not path:                         # underfoot pickup
+                self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self.pickup_kind = pk
+                if kind == "weapon":
+                    self._pickup_wpn_kw = name
+                    self.wieldacq_fires += 1
+                    self.loot_wpn_fires += 1
+                else:
+                    self.loot_arm_fires += 1
+                self.loot_fires += 1
+                self._loot_target = None
+                self.queue_tag = "pickup"
+                self._goal("loot", f"{kind} {name} v{value:.2f}")
+                self.note(f"LOOT pickup {kind} {name} "
+                          f"(value {value:.2f}, underfoot)")
+                return "pickup"
+            # walk one step toward the target; commit to it (sticky) so LOS
+            # flicker can't make us zigzag, and charge the level detour budget.
+            # Give up only when STUCK (dist not decreasing), not while approaching.
+            self._loot_target = (A.key, cell, kind, name, value)
+            prev = self._loot_progress.get(tk, 99)
+            if len(path) < prev:
+                self._loot_progress[tk] = len(path)
+            else:
+                self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+            self._loot_budget[A.key] = budget + 1
+            self._goal("loot", f"walk {kind} {name} d{len(path)}")
+            self.note(f"LOOT walk to {kind} {name} ({len(path)} steps, "
+                      f"value {value:.2f}, budget {budget + 1}/"
+                      f"{LOOT_LEVEL_BUDGET})")
+            return self._step_path(path)
+        except Exception:               # noqa: BLE001 — fail-safe, never a gate
+            return None
+
     def _best_floor_weapon(self, obs, melee_only=True):
         """(dpt, name, (x,y), dist) of the highest-priced weapon glyph in view,
         or None. melee_only drops ammo/thrown-primary (we don't detour for an
@@ -2985,6 +3634,65 @@ class DiveAgent:
                 return self._step_path(path)
         # otherwise rest/wait for spawns (search also reveals hidden ways)
         return "search"
+
+    def _safe_level(self, obs):
+        """NH_SAFELEVEL (s16): route to the nearest ISOLATED SAFE weak monster
+        to farm early XP. Returns a step action or None. Pre-gated by the caller
+        (early depth, xp<target, hp healthy, no adjacent hostile, budget left).
+        The exchange model is the safety oracle: expected HP loss to the kill =
+        species_dpt * species_ttk; we only engage monsters where that is a small
+        fraction of current HP AND the per-turn dpt is low AND the prey is alone."""
+        A = self.atlas
+        L = A.level
+        hostiles = self._mobile_hostiles()
+        if not hostiles:
+            return None
+
+        def isolated(prey):
+            return not any(
+                o is not prey and
+                max(abs(o.x - prey.x), abs(o.y - prey.y)) <= SAFELEVEL_ISO_R
+                for o in hostiles)
+
+        cand = []
+        for m in hostiles:
+            # never the dangerous species (never-melee), never same-speed-or-
+            # faster hitters we cannot disengage from
+            if self._never_melee(m) or m.speed > OUR_SPEED:
+                continue
+            # low-difficulty only (belt-and-suspenders on top of the dpt gate)
+            if m.difficulty > max(2, A.xplvl):
+                continue
+            dpt = P.species_dpt(m.name, m.difficulty)
+            if dpt > SAFELEVEL_MAX_DPT:
+                continue
+            ttk = P.species_ttk(m.name, m.difficulty,
+                                role=self.role, xplvl=A.xplvl)
+            exp_loss = dpt * ttk               # expected HP lost to kill it
+            if exp_loss > SAFELEVEL_MARGIN * A.hp:
+                continue
+            if not isolated(m):
+                continue
+            cand.append((m, exp_loss))
+        if not cand:
+            return None
+        # nearest safe prey first (cheapest detour off the descent line)
+        cand.sort(key=lambda t: max(abs(t[0].x - A.agent[0]),
+                                    abs(t[0].y - A.agent[1])))
+        for m, exp_loss in cand:
+            path = L.bfs(A.agent, [m.pos],
+                         avoid=self._suspects() | (self._mcells() - {m.pos}))
+            if path and len(path) <= SAFELEVEL_RADIUS:
+                t0 = self.safelevel_turns.get(A.key, 0)
+                self.safelevel_turns[A.key] = t0 + 1
+                if t0 == 0:
+                    self.note(f"SAFELEVEL engage {m.name} d{A.depth} "
+                              f"xp{A.xplvl} exp_loss {exp_loss:.1f}/hp {A.hp} "
+                              f"(safe early leveling)")
+                self._goal("safelevel",
+                           f"{m.name} xp{A.xplvl}->{SAFELEVEL_TARGET_XP}")
+                return self._step_path(path)
+        return None
 
     def _descend(self, obs):
         A = self.atlas

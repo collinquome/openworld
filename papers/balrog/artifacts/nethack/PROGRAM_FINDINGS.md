@@ -74,5 +74,41 @@ So E37 tested the one un-tested COMPOSITION: per-class SUBSET stacking (each rol
 
 **The honest read (the operator's "RELIABLE" ask, answered):** even human-optimal, demonstration-derived, class-tailored early play does not reliably move our mean — it fires, changes behavior, buys a little survival-time/HP buffer, but does not deepen progression, and multi-lever stacks regress depth. The gap to experts is not a missing OPENING ROUTINE (we have every piece) but the CAPABILITY to execute those pieces well under the benchmark's action-space/budget — the 12th converging angle on capability/acquisition-boundedness, now closing the DEMONSTRATION-learning path the 11th angle named. Demonstration's repeatedly-confirmed value remains AIMING (it told us exactly which behaviors matter, cheaply and unambiguously, and confirmed the WIELD null on foreign data); it has still not MOVED the mean, because where it aims the deeper bottleneck is execution-capability, not the decision. NH_OPENING ships flag-OFF (bit-identical, agent untouched) as a validated scaffold + the per-class playbook (E37_PLAYBOOK.md).
 
+## THE CONSUMABLE ECONOMY (NH-E38) [EMERGING — the 13th angle: win-items acquired + identified + USED, mean still null -> EXECUTION-bound]
+The largest untouched capability frontier — potions/scrolls/wands, the game's
+actual game-changers — was built behind NH_CONSUME (default-OFF, bit-identical):
+low-risk engrave-ID (NetHack 3.6.7 src/engrave.c table, disclosed) + zap a KNOWN
+offensive/control wand at a spike-threat (the coordinator's #1: the mechanistic
+counter to the unfleeable one-exchange death) + quaff KNOWN heal + gain-level/
+enchant when safe + bounded-detour floor-consumable acquisition. Plus leveling-
+wall instrumentation (xp/hp_max/ac/str-at-death). **Leveling wall, quantified
+(1183 trajectories):** death peaks SHALLOW (depth_max median 5), hpmax median 22,
+XP-at-end median 2, and 45% of episodes end with >30% HP -> SPIKE deaths (one
+exchange), NOT attrition. The only counter to an unfleeable spike is ending the
+fight in ONE action -> the offensive-wand branch.
+
+**Pilot (n=8 paired dev seeds, cap 3000, TEST-only vs reused deterministic REF):
+progression Δ +0.0038, 95% CI [-0.0149,+0.0209] — NULL.** The FIRED-SPLIT is the
+finding: on the 4 seeds where the ID/use machinery FIRED, Δ **-0.0123** CI
+[-0.0369,+0.000] (null-to-negative); the apparent positive aggregate is entirely
+acquisition-DETOUR route-perturbation on NON-fired seeds (the s13 loot confound —
+leave-one-out collapses it, drop16->-0.0030). **MONEY DATUM (seed 4):** the agent
+engrave-IDENTIFIED a wand, ZAPPED it 3x and KILLED 2 monsters — the win-item was
+acquired, identified, and used effectively in combat — yet reached the SAME max
+depth (D8) as REF and died anyway (Δ=0), to a self-reflected "bolt of lightning"
+(a NEW death class — offensive-wand zap in corridor geometry self-harms). Quaff-
+heal (3x, seed 104) inert — "a heal can't outrun a spike." So consumables were IN
+HAND early, acquired + identified + used + killing monsters, and using them STILL
+did not move the mean — per the pre-registered discriminating prediction, the
+strongest evidence yet that the wall is EXECUTION, not bootstrapping/acquisition.
+The 13th converging angle. Honest caveats: pilot n=8 (4 fired, 1 real zap-seed);
+the USE layer under-fires because acquired potions/scrolls stay UNIDENTIFIED
+(engrave-ID is wands-only; read-identify/price-ID not yet acted on) — a fuller ID
+game would raise the fire rate, but seed 4 shows a fully-identified, used, monster-
+killing wand already fails to convert, so more fires deepen the execution-wall
+evidence rather than overturn it. NH_CONSUME ships flag-OFF (bit-identical) as a
+validated scaffold + the leveling-wall instrumentation; a zap reflection/line-of-
+fire guard is required before any use-deployment (DOCTRINE_CARDS_E38.md, HANDOFF_E38.md).
+
 ## THE META-FINDING (both programs)
 The synthesis-model + verified-code + planning recipe is twice-proven across two programs on 6+ environments. Its BOUNDARY is exactly where VERIFICATION stops: opaque procedural goals (ARC-3) and irreducible stochasticity/missing-capability (NetHack). That boundary is the research frontier — and the intuition layer + memory + goal-inference-bridge are the instruments aimed at it.

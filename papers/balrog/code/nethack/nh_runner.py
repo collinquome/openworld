@@ -68,7 +68,8 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
 
     traj = {"task": tag, "episode": ep, "seed": seed, "condition": condition,
             "actions": [], "frames": [], "frame_steps": [], "positions": [],
-            "hp": [], "depth": [], "hunger": [], "messages": [], "notes": [],
+            "hp": [], "depth": [], "xplvl": [], "hunger": [], "ac": [], "str": [],
+            "messages": [], "notes": [],
             "mem_fired": [], "subgoals": [], "plans": [], "evs": [],
             "beliefs": [], "monsters": []}
 
@@ -156,7 +157,10 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
         traj["positions"].append(list(A.agent))
         traj["hp"].append([A.hp, A.hpmax])
         traj["depth"].append(A.depth)
+        traj["xplvl"].append(A.xplvl)
         traj["hunger"].append(A.hunger)
+        traj["ac"].append(A.ac)          # NH-E38 leveling-wall instrumentation
+        traj["str"].append(A.str)
         traj["messages"].append(A.message[:150])
         if want_frame(steps, agent, dchg, A.hp / max(1, A.hpmax)):
             snap(obs, steps)

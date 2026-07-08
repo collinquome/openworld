@@ -449,6 +449,7 @@ class Atlas:
         self.hunger = 1
         self.condition = 0
         self.ac = 10
+        self.str = 10          # NH-E38 instrumentation (STR25 scale)
         self.message = ""
         self.swallowed = False
         self.level_changed = False
@@ -470,6 +471,7 @@ class Atlas:
         self.hunger = int(bl[nh.NLE_BL_HUNGER])
         self.condition = int(bl[nh.NLE_BL_CONDITION])
         self.ac = int(bl[nh.NLE_BL_AC])
+        self.str = int(bl[nh.NLE_BL_STR25])   # NH-E38 instrumentation
         self.message = message_of(obs)
         key = (self.dnum, self.dlevel)
         self.level_changed = (key != self.key)
