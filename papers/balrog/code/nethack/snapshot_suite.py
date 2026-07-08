@@ -599,6 +599,118 @@ def fx7_armor_ac_column():
                   f"{old_lj} (regression-flip holds); 33/66 rows fixed s4")
 
 
+# ---- Fixture 8: item-on-perceived-wall pickup (s14, claude-opus-4-8[max]) --
+# RULE CARD [ITEM_ON_PERCEIVED_WALL]: the dark-adjacent negative-inference
+# guard in LevelMap.integrate() marks every still-unseen neighbour of the
+# agent a WALL (inferred_wall=True). When such a cell is LATER revealed to
+# hold a floor item (or corpse), the object-glyph branch only corrected
+# terrain from UNKNOWN -> FLOOR, so the stale WALL belief survived: the item's
+# cell stayed unwalkable-into. passable() returned False, the loot policy
+# could path TOWARD the item but pickup never completed (blocked the s13
+# loot-then-wield pivot on seed 746 -- the +1.44-dpt mace cell was a
+# perceived wall). Same class as A1 (item-under-@) and A2 (corpse-on-victim-
+# cell). Fix site: nh_common.py LevelMap.integrate(), object-glyph branch
+# (~line 306) + boulder branch (~line 302): correct terrain in (UNKNOWN,WALL).
+# This fixture drives the REAL integrate() over a two-frame sequence and
+# includes a discriminating CONTROL cell (inferred WALL that never shows an
+# item) which MUST stay a wall -- so the fixture flips red if the correction
+# is either missing (bug) or over-broad (clobbering real walls).
+def fx8_item_on_perceived_wall():
+    import numpy as np
+    import nh_common as C
+
+    L = C.LevelMap((0, 1))
+    ax, ay = 5, 5
+    ix, iy = 6, 5          # item cell: directly east of the agent
+    cx, cy = 5, 4          # CONTROL cell: directly north, never shows an item
+
+    def floor_glyph():
+        floors = [k for k, v in C._CMAP_TO_TERRAIN.items() if v == C.FLOOR]
+        return C.GLYPH_CMAP_OFF + floors[0]
+
+    # FRAME 1 -- all-stone frame: the dark-adjacent guard marks every unseen
+    # neighbour (incl. the item cell AND the control cell) an inferred WALL.
+    g1 = np.full((C.ROWS, C.COLS), C.GLYPH_CMAP_OFF, dtype=np.int32)
+    g1[ay][ax] = floor_glyph()
+    L.integrate(g1, None, (ax, ay))
+    if not (L.terrain[iy][ix] == C.WALL and L.inferred_wall[iy][ix]):
+        return False, ("setup: negative-inference did not mark the item cell "
+                       f"an inferred WALL (terrain={L.terrain[iy][ix]})")
+    if L.terrain[cy][cx] != C.WALL:
+        return False, "setup: control cell was not marked a WALL"
+    if L.passable(ix, iy):
+        return False, "setup: item cell unexpectedly passable before reveal"
+
+    # FRAME 2 -- the item cell now shows a floor OBJECT glyph; the control
+    # cell stays stone/unseen.
+    g2 = g1.copy()
+    g2[iy][ix] = C.GLYPH_OBJ_OFF     # first object glyph = a floor item
+    L.integrate(g2, None, (ax, ay))
+
+    if (ix, iy) not in L.items:
+        return False, "item glyph not registered in L.items"
+    if L.terrain[iy][ix] != C.FLOOR:
+        return False, (f"item cell terrain NOT corrected WALL->FLOOR: "
+                       f"{L.terrain[iy][ix]} (the load-bearing bug)")
+    if not L.passable(ix, iy):
+        return False, "item cell still not passable after reveal (pickup blocked)"
+    # discrimination: the control WALL (never shown an item) MUST remain a wall
+    if L.terrain[cy][cx] != C.WALL or L.passable(cx, cy):
+        return False, (f"over-broad correction: control wall at {(cx,cy)} was "
+                       f"clobbered (terrain={L.terrain[cy][cx]})")
+    return True, (f"inferred WALL at item cell {(ix,iy)} corrected WALL->FLOOR "
+                  f"on object-glyph reveal (passable now True, in L.items); "
+                  f"control wall {(cx,cy)} preserved (still impassable) -- "
+                  f"discrimination holds")
+
+
+# ---- Fixture 9: item-under-@ weapon variant (s14, claude-opus-4-8[max]) ----
+# RULE CARD [ITEM_UNDER_@ / weapon]: an item on the agent's OWN cell is hidden
+# beneath the @ glyph, so _best_floor_weapon (a pure glyph read) goes blind the
+# instant the agent steps onto a floor weapon -- exactly when it should pick it
+# up. On seed 746 the weapon-acquire detour walked the Healer ONTO the mace and
+# then oscillated OFF it forever (11 walks, 0 pickups) because the cell==agent
+# pickup branch never saw the underfoot mace. Fix: complete the pickup from the
+# authoritative "You see here <weapon>." MESSAGE channel (same sensor the
+# food/armor/ammo underfoot pickups already use). Fix site: nh_agent.py
+# _weapon_upgrade_underfoot() + the message-channel pickup branch in _decide().
+# This fixture drives the REAL _weapon_upgrade_underfoot decision: a melee
+# UPGRADE name returns the pickup keyword; ammo / thrown-primary / non-weapon
+# names return None (so the branch never grabs junk).
+def fx9_weapon_under_at():
+    import numpy as np
+    import nh_common as C
+    from nh_agent import DiveAgent
+    agent = DiveAgent(log=lambda *a, **k: None)
+    A = agent.atlas
+    agent.role = "Healer"          # starts with a weak blade (low melee dpt)
+    A.xplvl = 1
+    A.pw = 0
+    # empty inventory -> _inv() == [] -> attack_options falls to the unarmed
+    # baseline, so a mace/long sword is unambiguously a melee upgrade.
+    obs = {"obs": {"inv_letters": np.zeros(55, dtype=np.uint8),
+                   "inv_strs": np.zeros((55, 80), dtype=np.uint8),
+                   "inv_oclasses": np.zeros(55, dtype=np.uint8)}}
+    checks = [
+        ("mace is a melee upgrade -> pickup 'mace'",
+         agent._weapon_upgrade_underfoot(obs, "mace") == "mace"),
+        ("long sword is a melee upgrade -> pickup 'long sword'",
+         agent._weapon_upgrade_underfoot(obs, "long sword") == "long sword"),
+        ("arrow (ammo) is skipped -> None",
+         agent._weapon_upgrade_underfoot(obs, "arrow") is None),
+        ("dagger (thrown-primary) is skipped -> None",
+         agent._weapon_upgrade_underfoot(obs, "dagger") is None),
+        ("non-weapon 'food ration' is skipped -> None",
+         agent._weapon_upgrade_underfoot(obs, "food ration") is None),
+    ]
+    bad = [name for name, ok in checks if not ok]
+    if bad:
+        return False, f"underfoot-weapon decision wrong for: {bad}"
+    return True, ("message-channel underfoot pickup: mace/long sword -> "
+                  "grab (melee upgrade); arrow/dagger/food ration -> skip "
+                  "(ammo / thrown-primary / non-weapon)")
+
+
 def main():
     t0 = time.time()
     emit("=" * 78)
@@ -645,6 +757,10 @@ def main():
        fx6_stale_door, H, AG, C, rec)
     run("A7 armor AC column (build_armor_table col-4 vs KB truth)",
        fx7_armor_ac_column)
+    run("A8 item-on-perceived-wall pickup (integrate WALL->FLOOR correction)",
+       fx8_item_on_perceived_wall)
+    run("A9 item-under-@ weapon variant (message-channel underfoot pickup)",
+       fx9_weapon_under_at)
 
     emit("")
     emit("---- Part B: E16 probe records as replay fixtures ----")

@@ -301,12 +301,23 @@ class LevelMap:
                             self.holes.add((x, y))
                 elif g == BOULDER_GLYPH:
                     self.boulders.add((x, y))
-                    if self.terrain[y][x] == UNKNOWN:
+                    # A boulder rests on passable ground -- correct a stale
+                    # WALL belief too (see the item branch below).
+                    if self.terrain[y][x] in (UNKNOWN, WALL):
                         self.terrain[y][x] = FLOOR
                 elif GLYPH_OBJ_OFF <= g < GLYPH_CMAP_OFF or \
                         GLYPH_BODY_OFF <= g < GLYPH_RIDDEN_OFF:
                     self.items.add((x, y))
-                    if self.terrain[y][x] == UNKNOWN:
+                    # LOAD-BEARING [ITEM_ON_PERCEIVED_WALL, s13/seed-746 mace]:
+                    # a floor item (or corpse) can NEVER rest on a wall cell,
+                    # so an object glyph here is positive proof the cell is
+                    # passable. Correct a stale/inferred WALL belief too, not
+                    # only UNKNOWN. Otherwise the dark-adjacent negative-
+                    # inference guard below (which marks unseen neighbours
+                    # WALL) leaves a later-revealed item's cell unwalkable-
+                    # into: the loot policy paths TOWARD the item but pickup
+                    # never completes (blocked the loot-then-wield pivot).
+                    if self.terrain[y][x] in (UNKNOWN, WALL):
                         self.terrain[y][x] = FLOOR
                 elif is_monster_glyph(g):
                     if (x, y) != (ax, ay):

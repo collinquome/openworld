@@ -1704,6 +1704,19 @@ class DiveAgent:
                 self.pickup_kind = "ammo"
                 self.queue_tag = "pickup"
                 return "pickup"
+            if C2_WIELDACQ:
+                wn = self._weapon_upgrade_underfoot(obs, it)
+                if wn:
+                    # item-under-@ blind spot: complete the weapon-acquire the
+                    # moment we stand on the upgrade (the glyph is hidden under
+                    # @, so _weapon_acquire's cell==agent branch can't fire).
+                    self.note(f"WIELDACQ pickup {wn} (underfoot, via message)")
+                    self._goal("acquire", f"weapon here: {it[:30]}")
+                    self.pickup_kind = "weapon"
+                    self._pickup_wpn_kw = wn
+                    self.wieldacq_fires += 1
+                    self.queue_tag = "pickup"
+                    return "pickup"
 
         # ---- P8.9: repeated-layout stair goal (REPEAT_LAYOUT_STAIRS V2) ----
         # V1 (explore_target hint) was INERT: _explore only honors a target
@@ -2690,6 +2703,42 @@ class DiveAgent:
 
     _ACQ_AMMO = {"arrow", "elven arrow", "orcish arrow", "silver arrow", "ya",
                  "crossbow bolt", "rock", "flint stone", "boomerang"}
+
+    def _weapon_upgrade_underfoot(self, obs, it):
+        """Return the canonical weapon name to pick up if `it` (a name parsed
+        from a "You see here ..." message) is a MELEE weapon that upgrades the
+        current wield by WIELD_MARGIN, else None.
+
+        LOAD-BEARING [ITEM_UNDER_@, weapon variant]: an item on the agent's OWN
+        cell is hidden beneath the @ glyph, so _best_floor_weapon (a pure glyph
+        read) goes blind the instant the agent steps onto the weapon -- exactly
+        when it should pick it up. The "You see here <weapon>." message is the
+        authoritative on-cell item sensor (same channel the food/armor/ammo
+        underfoot pickups already use). Without this, a weapon-acquire detour
+        walks the agent ONTO the mace and then oscillates off it forever
+        (seed 746: 11 walks, 0 pickups)."""
+        try:
+            import nh_sheet
+            A = self.atlas
+            wl = nh_sheet.weapon_lookup(it)
+            if not wl:
+                return None
+            name, row = wl
+            if name in self._ACQ_AMMO or row["skill"] in nh_sheet.THROWN_SKILLS:
+                return None
+            ph = nh_sheet._p_hit_melee(A.xplvl, self.role)
+            dpt = round(row["dsmall"] * ph, 2)
+            inv = self._inv(obs)
+            opts = nh_sheet.attack_options(self.role, A.xplvl, inv,
+                                           spells=None, pw=A.pw)
+            cur = [o for o in opts if o[0] == "wield-current"]
+            un = [o for o in opts if o[0] == "unarmed"]
+            cur_dpt = cur[0][3] if cur else (un[0][3] if un else 0.0)
+            if dpt - cur_dpt < WIELD_MARGIN:
+                return None
+            return name
+        except Exception:               # noqa: BLE001 — fail-safe, never a gate
+            return None
 
     def _best_floor_weapon(self, obs, melee_only=True):
         """(dpt, name, (x,y), dist) of the highest-priced weapon glyph in view,
