@@ -7,7 +7,7 @@ aimed capability lever at the #1 death class) + formalize the DOOM-MOMENT LOOP.
 
 ---
 
-## CARD S10-1 — ANTI-FAINT PAIRED BLOCK (rule [ANTI_FAINT], flag NH_ANTIFAINT)  [VERDICT: __FILL__]
+## CARD S10-1 — ANTI-FAINT PAIRED BLOCK (rule [ANTI_FAINT], flag NH_ANTIFAINT)  [VERDICT: NULL on fainting-incidence — capability-bound. Do NOT ship default-ON; keep flag-OFF.]
 provenance: knowledge=DEMONSTRATION (S9-2 expert hunger law, alt.org ttyrecs) +
 insight-origin=OP (DEATH_TO_CAPABILITY Tier-1) + precedent CAST_HUNGER. layer:
 LOGISTICS. model: claude-opus-4-8[max].
@@ -27,18 +27,57 @@ prior corpus. Selection inflates the shared baseline, but the PAIRED REF-vs-TEST
 delta at the same seeds is an unbiased treatment-effect estimate (both arms equally
 selected) — the pre-registered "does the guard prevent faints" test.
 
-**Result (n=__FILL__ paired seeds, hunger-enriched):**
-- Fainting-incidence: REF __FILL__ -> TEST __FILL__ ; DELTA __FILL__ [95% CI __FILL__]
-- Hunger-death rate (starved+fainted end): REF __FILL__ -> TEST __FILL__
-- Guard fired in __FILL__/n episodes; PREVENTED (REF faint -> TEST no-faint) __FILL__.
-- Per-role table + per-seed detail in results/antifaint_enriched.jsonl.
+**Result (n=7 paired seeds, hunger-enriched fast-fainting corpus seeds, cap 2000,
+serial one-seed-per-process; results/antifaint_faint.jsonl):**
+- **Fainting-incidence: REF 0.571 (4/7) -> TEST 0.571 (4/7). DELTA = +0.000,
+  95% paired-bootstrap CI [+0.000, +0.000]** (zero discordant pairs — every seed
+  has identical faint-status across arms).
+- Hunger-death rate: REF 0.143 (1/7) -> TEST 0.286 (2/7) (the one difference is
+  seed 912, where TEST died within the 2000-step horizon while REF truncated at
+  2000 — both reached Fainting; noise, not a real regression).
+- **Guard fired in 4/7 TEST episodes, 29 fires total; PREVENTED 0 faints.**
+- Per-role: Wizard REF 2/3 TEST 2/3 (29 fires); Rogue 1/1=1/1 (0 fires); Caveman
+  1/1=1/1 (0 fires); Cavewoman 0/1=0/1; Samurai 712 Weak=Weak (6 fires, no faint
+  either arm).
 
-**Verdict: __FILL__.** Mechanism: __FILL__ (does the guard fire and hold hunger
-at/above Hungry?).
+**Verdict: NULL on the KPI, and the MECHANISM says why — the lever is CAPABILITY-
+bound, not decision-bound.** The guard fires exactly as designed at Hungry, but:
+- On 2 of 4 REF-faint seeds (737 Rogue, 754 Caveman) it fired **0 times** despite
+  reaching Hungry — because there was **NO readily-available food to bank** (these
+  roles carry none; no fresh corpse in reach). "Eat now" is a no-op with an empty
+  larder.
+- On 769/912 (Wizards) it fired 1-4x (banked what little was there) but the agent
+  **still fainted** — insufficient food.
+- On the food-carriers (712 Samurai 6 fires, 980 Wizard 18 fires) it fired a LOT
+  but **neither arm fainted anyway** — active but non-differentiating.
+The expert "never below Hungry" law (S9-2) holds for experts because they have
+ACQUIRED food; our hunger-prone roles reach Hungry with nothing to eat. **The
+binding constraint is food ACQUISITION, not eat-timing.** Demonstration correctly
+AIMED the lever (which the 7 intuition levers never did) but the aimed lever is
+itself capability-bound — an 8th converging angle on capability-boundedness, now
+at the RESOURCE layer. Redirects Tier-1 to the food-ACQUISITION levers
+(corpse-eating aggressiveness / food pickup+hunting / gold->food), NOT eat-timing.
 
-**Replication recipe:** `./run_antifaint_block.sh results/antifaint_enriched.jsonl
-<seeds...>` (PYTHONPATH=pylib, one-seed-per-process, resumable) then
-`python3 analyze_antifaint.py results/antifaint_enriched.jsonl`.
+**Honest caveats.** n=7 is modest: fainting seeds are inherently deep survivors
+(slow episodes), the shared VM was overloaded (load ~5-6/4cores) causing wall-
+timeout losses (728/918 both arms, 781 TEST), and cap was lowered to 2000 (from
+the pre-reg 6000, applied equally to both arms so the paired delta stays valid) to
+fit compute. Seeds are hunger-enriched (selected for prior Fainting), so the PAIRED
+delta is the valid estimand, not the absolute rate. Zero discordant pairs gives a
+tight [0,0] CI but low power to detect a *small* effect — however the mechanism
+(guard fires 0x when no food; fires a lot but doesn't prevent when food is scarce)
+is a stronger read than n: it is not seed luck, it is food-unavailability.
+
+**Regression/ship:** flag-off is bit-identical (confirmed: seed 782 + dev 101/102
+REF==TEST when hunger stays below Hungry). Drop-rule => do NOT ship default-ON.
+NH_ANTIFAINT stays default-OFF (unchanged). The guard is a correct, bit-identical
+scaffold that only becomes a mean-mover once food-acquisition capability lands.
+
+**Replication recipe:** `./run_antifaint_block.sh results/antifaint_faint.jsonl
+<seeds...>` (PYTHONPATH=pylib, one-seed-per-process, SERIAL to avoid VM-contention
+timeouts, cap via NH_STEPCAP) then `python3 analyze_antifaint.py
+results/antifaint_faint.jsonl`. Fast-fainting seeds via the corpus scan in the s10
+log (trajectories with peak hunger>=4, ranked by first-Fainting step).
 
 ---
 
@@ -103,10 +142,17 @@ fresh safe corpses per episode before expanding the table. Not shipped.
 ---
 
 ## Session queue for s11
-1. If S10-1 shipped: watch for the terminal hunger-death-rate move on a fresh
-   eval block; consider the next Tier-1 hunger piece (food-paced descent / nutrition
-   as first-class dossier resource).
-2. PET UTILIZATION (Tier-2, zero prior use) — the untried trash-attrition lever.
-3. General doom-moment loop with real-env backward replay on the trash-attrition
+1. **FOOD ACQUISITION is the real Tier-1 lever** (S10-1 redirect — eat-timing is
+   solved-but-inert; the gap is having food to eat). Build + paired-test, in order:
+   (a) AGGRESSIVE SAFE-CORPSE EATING — eat every safe fresh corpse the agent walks
+   over/kills (bank nutrition proactively, not just at Hungry); instrument how often
+   a safe corpse is passed up. (b) FOOD PICKUP — pick up floor food/rations always.
+   (c) gold→food shopping (Tourists). KPI: does the agent ARRIVE at Hungry with food
+   in inventory? (the precondition the anti-faint guard needs). Then re-run S10-1 with
+   acquisition ON — the guard should go live.
+2. Bigger, faster anti-faint block when the VM is not overloaded: n>=20 paired,
+   SERIAL, cap>=3500 (this session got n=7 due to load + timeout losses).
+3. PET UTILIZATION (Tier-2, zero prior use) — the untried trash-attrition lever.
+4. General doom-moment loop with real-env backward replay on the trash-attrition
    corpus (the stochastic death classes S10-2 deferred).
-4. Deeper ttyrec: a past-D21 ascension game to extend S9-1 world-model validation.
+5. Deeper ttyrec: a past-D21 ascension game to extend S9-1 world-model validation.
