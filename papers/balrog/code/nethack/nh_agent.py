@@ -80,6 +80,7 @@ C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
 C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
 C2_ANTIFAINT = _flag("NH_ANTIFAINT")  # Phase L s9: eat-at-HUNGRY anti-faint guard
+C2_FOODACQ = _flag("NH_FOODACQ")  # Phase L s11: proactive safe-corpse banking
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -155,7 +156,8 @@ PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
-              C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT))
+              C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT,
+              C2_FOODACQ))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -174,6 +176,11 @@ WD_DISENGAGE = int(_os.environ.get("NH_WD_DISENGAGE", "80"))  # env steps
 # survival-to-depth via TRASH-death rate (see KPI_TREE.md). Paired-block gate.
 CRISIS_HP = float(_os.environ.get("NH_CRISIS_HP", "0.28"))    # flee below hp-frac
 CRISIS_EXCH = float(_os.environ.get("NH_CRISIS_EXCH", "2.0"))  # flee if maxhit*x>=hp
+FOODACQ_COOLDOWN = int(_os.environ.get("NH_FOODACQ_COOLDOWN", "8"))  # s11 bank rate
+# ^ cd=8 is the RECONCILED value (s11): moderate banking that removes the hunger
+# death-class (death-while-fainting 5/15->0/15, progression-neutral) without the
+# descent-stall that cd=0/routing caused (dev depth 15->1). cd=25 fired too little
+# (hunger effect null). See DOCTRINE_CARDS_s11.md CARD S11-1.
 # NH-E6 THROW-DISENGAGE lever (session 5, claude-opus-4-8[1m] max thinking):
 # the s4 REST-lever paired block DROPPED because the crisis-flee threshold
 # tune never reaches the failure mode — fatal TRASH deaths carry a SAME-SPEED
@@ -1308,6 +1315,57 @@ class DiveAgent:
         # s6 proactive no-threat top-up REMOVED (s7): it healed when safe and
         # perturbed otherwise-good runs (seed 900: D10 -> D4). The middle-band
         # UNDER-THREAT heal above is the replacement WHEN-trigger.
+
+        # FOOD-ACQUISITION: OPPORTUNISTIC SAFE-CORPSE BANKING (NH_FOODACQ, s11).
+        # RULE CARD [FOODACQ] (layer: LOGISTICS; model: claude-opus-4-8[max]).
+        # s10 mechanism finding (CARD S10-1): the anti-faint guard FIRED but had
+        # NOTHING to eat — hunger-prone roles reach Hungry with an empty larder
+        # because they never BANK the free nutrition from the corpses they have
+        # already made. Experts stay "never below Hungry" (S9-2) precisely because
+        # they have ACQUIRED food. So bank proactively: eat a safe fresh corpse we
+        # stand on, or step <=2 to one we just killed, whenever we are NOT already
+        # Satiated and no hostile is adjacent. Nutrition is free after a fight we
+        # already won; this fills the larder BEFORE the hunger cascade and gives
+        # the anti-faint guard (NH_ANTIFAINT) something to act on. Choke-safe:
+        # gated on hunger >= NotHungry (never eat at Satiated=0); once a bank
+        # pushes us to Satiated the guard self-disables until we drop back — a
+        # naturally self-limiting top-up. Corpse-only (inventory food + prayer
+        # stay with the ANTIFAINT/WEAK crisis blocks below).
+        # provenance: insight-origin=OP (DEATH_TO_CAPABILITY Tier-1 food-
+        # acquisition / corpse-aggressiveness) + knowledge=our own S10-1 death
+        # mechanism (guard-fired-empty-larder) + demonstration arbiter (S9-2:
+        # experts have ACQUIRED food). replication: NH_FOODACQ[+NH_ANTIFAINT]
+        # paired block vs REF on the hunger-enriched fainting corpus; KPI =
+        # nutrition-secured (arrive-at-Hungry-with-food) -> fainting-incidence.
+        # UNDERFOOT-ONLY (zero-diversion): eat a safe fresh corpse we are ALREADY
+        # standing on. We deliberately do NOT route TO corpses at NotHungry — an
+        # early build with a <=2-step walk-to-corpse leg turned the agent into a
+        # corpse-vacuum that looped near kills and never descended (dev seeds
+        # 101/102/110: depth 9/10/15 REF -> depth 1-2 TEST, ~650 fires). Active
+        # routing to remembered corpses stays in the Hungry/Weak crisis blocks
+        # below, where the detour is warranted. Here we only bank the free corpse
+        # under our feet (typically after we stepped onto a kill cell) — no path
+        # diversion, so descent is unaffected on non-hunger seeds.
+        # Rate-limit: bank at most once per FOODACQ_COOLDOWN turns. Without it,
+        # a NotHungry agent in a monster-dense pocket banks every corpse it steps
+        # on and farms in place instead of descending (dev seed 101: depth 9 REF
+        # -> depth 4 TEST, 559 fires). A single small corpse (newt=3 nutrition)
+        # does not raise the hunger TIER, so tier-gating alone re-fires endlessly;
+        # the cooldown caps the farm while still banking often enough to stay fed
+        # (one bank per ~25 turns tops up the ~1/turn depletion many times over
+        # the ~1400-turn Hungry->Fainting window).
+        if (C2_FOODACQ and A.hunger >= 1 and not self._adjacent_hostiles()
+                and A.time - getattr(self, "_foodacq_last", -9999)
+                >= FOODACQ_COOLDOWN):
+            corpse = self._fresh_corpse_here()
+            if corpse:
+                self._foodacq_last = A.time
+                self._goal("eat", f"foodacq bank {corpse}")
+                self.note(f"FOODACQ bank fresh corpse here ({corpse}, "
+                          f"hunger {A.hunger})")
+                self.queue = ["y"]
+                self.queue_tag = "eat_corpse"
+                return "eat"
 
         # ANTI-FAINT GUARD (NH_ANTIFAINT, Phase L s9). RULE CARD [ANTI_FAINT]
         # (layer: LOGISTICS; model: claude-opus-4-8[max]). Experts NEVER let

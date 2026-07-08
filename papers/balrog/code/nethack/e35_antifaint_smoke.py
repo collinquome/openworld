@@ -30,10 +30,15 @@ def run(arm, seed):
     notes = traj.get("notes", []) or []
     maxh = max(hung)
     fires = sum(1 for n in notes if "ANTIFAINT" in str(n))
+    facq = sum(1 for n in notes if "FOODACQ" in str(n))
+    # nutrition-secured proxy: did the agent ever reach Hungry (tier 2) while
+    # having banked food (>=1 FOODACQ eat) BEFORE it? Cheap proxy = any FOODACQ
+    # fire at all (the s10 gap was arriving at Hungry with an EMPTY larder).
     er = res.get("end_reason", "?")
     return {"seed": seed, "arm": arm, "end_reason": er, "maxhunger": maxh,
             "maxhunger_name": HUNGER_NAME.get(maxh, maxh),
-            "antifaint_fires": fires, "steps": res.get("steps"),
+            "antifaint_fires": fires, "foodacq_fires": facq,
+            "steps": res.get("steps"),
             "depth_max": res.get("depth_max"), "prog": res.get("progression"),
             "role": res.get("role"), "race": res.get("race")}
 
@@ -48,6 +53,7 @@ def main():
         r = run(arm, s)
         print(f"  seed {r['seed']:4d} end={r['end_reason'][:34]:34s} "
               f"maxHunger={r['maxhunger_name']:8s} antifaint_fires={r['antifaint_fires']:3d} "
+              f"foodacq_fires={r['foodacq_fires']:3d} "
               f"steps={r['steps']} depth={r['depth_max']} prog={r['prog']}")
         print("JSONL " + json.dumps(r))
 
