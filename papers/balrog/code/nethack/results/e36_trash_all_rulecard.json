@@ -1,0 +1,204 @@
+{
+ "id": "E36-TRASH-1",
+ "scenario": "TRASH crisis: mobile hostile adjacent, hp_frac<=0.55, D2-7",
+ "winner": "CORRIDOR",
+ "winner_policy_fn": "e36_candidates.pol_corridor",
+ "predicate_fn": "e36_compile.crisis_predicate",
+ "flag": "NH_E36",
+ "default": "OFF (bit-identical off \u2014 separate module, consulted only when NH_E36 set AND predicate fires)",
+ "survival_rate": 0.5,
+ "escape_rate": 0.0,
+ "distinct_seeds_won": 9,
+ "mean_depth_gain": 0.0,
+ "class_solve": true,
+ "vs_kite_hand_lever": 0.222,
+ "knowledge": "SYNTHESIS",
+ "insight_origin": "OP (scenario-strategy synthesis)",
+ "provenance": "SYNTHESIS",
+ "replication_recipe": "python3 e36_simulate.py --seeds <TRASH dev seeds> --backoff 40 --window 400 --budget 350 --out results/e36_trash.jsonl ; python3 e36_simulate.py --aggregate results/e36_trash.jsonl ; python3 e36_compile.py results/e36_trash_ranking.json",
+ "model": "claude-opus-4-8 (max thinking), NH-E36",
+ "when": "2026-07-08T15:42:29Z",
+ "n_adjudicated": 18,
+ "full_ranking": [
+  {
+   "name": "CORRIDOR",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.5,
+   "escape_rate": 0.0,
+   "seeds_won": 9,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "FIGHT_NEAREST",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.5,
+   "escape_rate": 0.0,
+   "seeds_won": 9,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "CORNER",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.444,
+   "escape_rate": 0.0,
+   "seeds_won": 8,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "THROW",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.444,
+   "escape_rate": 0.0,
+   "seeds_won": 8,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "THROW_THEN_FIGHT",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.444,
+   "escape_rate": 0.0,
+   "seeds_won": 8,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "ZAP_WAND",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.444,
+   "escape_rate": 0.0,
+   "seeds_won": 8,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "HYBRID_BEST",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.333,
+   "escape_rate": 0.167,
+   "seeds_won": 6,
+   "depth_gain": 0.167,
+   "class_solve": true
+  },
+  {
+   "name": "FIGHT_WEAKEST",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.333,
+   "escape_rate": 0.0,
+   "seeds_won": 6,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "FAR_FLEE",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.333,
+   "escape_rate": 0.0,
+   "seeds_won": 6,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "REST",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.333,
+   "escape_rate": 0.0,
+   "seeds_won": 6,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "STAIRS_OR_KITE",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.278,
+   "escape_rate": 0.111,
+   "seeds_won": 5,
+   "depth_gain": 0.111,
+   "class_solve": true
+  },
+  {
+   "name": "AGGRO_DESCENT",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.278,
+   "escape_rate": 0.111,
+   "seeds_won": 5,
+   "depth_gain": 0.111,
+   "class_solve": true
+  },
+  {
+   "name": "KITE",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.278,
+   "escape_rate": 0.0,
+   "seeds_won": 5,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "DOOR_KITE",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.278,
+   "escape_rate": 0.0,
+   "seeds_won": 5,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "PRAY",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.278,
+   "escape_rate": 0.0,
+   "seeds_won": 5,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "WAIT_PET",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.278,
+   "escape_rate": 0.0,
+   "seeds_won": 5,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "RETREAT",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.278,
+   "escape_rate": 0.0,
+   "seeds_won": 5,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "QUAFF_UNKNOWN",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.222,
+   "escape_rate": 0.0,
+   "seeds_won": 4,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "ELBERETH",
+   "prov": "SYNTHESIS",
+   "survival_rate": 0.167,
+   "escape_rate": 0.0,
+   "seeds_won": 3,
+   "depth_gain": 0.0,
+   "class_solve": true
+  },
+  {
+   "name": "STAIRS",
+   "prov": "DEMONSTRATION",
+   "survival_rate": 0.111,
+   "escape_rate": 0.611,
+   "seeds_won": 2,
+   "depth_gain": 0.111,
+   "class_solve": false
+  }
+ ]
+}
