@@ -1,0 +1,825 @@
+[
+  {
+    "file": "DaveT__2026-07-08.00_11_28.ttyrec",
+    "role": "Priest",
+    "race": "human",
+    "align": "lawful",
+    "window_turns": 2000,
+    "n_events": 690,
+    "max_depth_in_window": 5,
+    "dive_pacing_turn_to_depth": {
+      "D1": 1,
+      "D2": 158,
+      "D3": 460,
+      "D4": 729,
+      "D5": 1109
+    },
+    "worst_hunger_in_window": "Hungry",
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 701,
+        "depth": 3,
+        "hunger": null,
+        "what": "jackal corpse"
+      },
+      {
+        "T": 1077,
+        "depth": 3,
+        "hunger": null,
+        "what": "food ration"
+      },
+      {
+        "T": 1285,
+        "depth": 4,
+        "hunger": null,
+        "what": "lichen corpse"
+      },
+      {
+        "T": 1510,
+        "depth": 4,
+        "hunger": null,
+        "what": "giant rat corpse"
+      },
+      {
+        "T": 1526,
+        "depth": 5,
+        "hunger": null,
+        "what": "cave spider corp"
+      },
+      {
+        "T": 1542,
+        "depth": 5,
+        "hunger": null,
+        "what": "You consume the last bite of your meal. "
+      },
+      {
+        "T": 1597,
+        "depth": 5,
+        "hunger": null,
+        "what": "garter snake c"
+      },
+      {
+        "T": 1602,
+        "depth": 5,
+        "hunger": null,
+        "what": "garter snake corpse"
+      },
+      {
+        "T": 1607,
+        "depth": 5,
+        "hunger": null,
+        "what": "sewer rat corpse"
+      },
+      {
+        "T": 1677,
+        "depth": 5,
+        "hunger": null,
+        "what": "sewer rat corpse"
+      },
+      {
+        "T": 1821,
+        "depth": 5,
+        "hunger": null,
+        "what": "jackal corpse"
+      },
+      {
+        "T": 1843,
+        "depth": 5,
+        "hunger": null,
+        "what": "floating eye corpse"
+      }
+    ],
+    "n_eats": 13,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 182,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 186,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 196,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 198,
+        "depth": 2,
+        "msg": "You are now wearing a robe."
+      },
+      {
+        "T": 210,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 274,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      }
+    ],
+    "pray_events": [
+      {
+        "T": 1549,
+        "depth": 5,
+        "hunger": null,
+        "msg": "You begin praying to Tyr.  You are surrounded by a shimmerin"
+      },
+      {
+        "T": 1552,
+        "depth": 5,
+        "hunger": null,
+        "msg": "The sewer rat starts to attack you, but pulls back.  You fin"
+      },
+      {
+        "T": 1883,
+        "depth": 5,
+        "hunger": null,
+        "msg": "You begin praying to Tyr.  You are surrounded by a shimmerin"
+      },
+      {
+        "T": 1886,
+        "depth": 5,
+        "hunger": null,
+        "msg": "The kitten starts to attack you, but pulls back.  You finish"
+      }
+    ],
+    "n_pray": 4,
+    "altar_touch": [],
+    "engrave_elbereth": [],
+    "n_pet_interactions": 57,
+    "n_throws": 14,
+    "n_casts": 0,
+    "n_kills": 47,
+    "n_shop_msgs": 5,
+    "shop_samples": [
+      {
+        "T": 178,
+        "depth": 2,
+        "msg": "You see here a bronze plate mail (for sale, 533 zo"
+      },
+      {
+        "T": 179,
+        "depth": 2,
+        "msg": "You see here a tattered cape (for sale, 67 zorkmid"
+      },
+      {
+        "T": 180,
+        "depth": 2,
+        "msg": "You see here a crystal helmet (for sale, 89 zorkmi"
+      },
+      {
+        "T": 183,
+        "depth": 2,
+        "msg": "You see here a pair of hard shoes (for sale, 21 zo"
+      },
+      {
+        "T": 187,
+        "depth": 2,
+        "msg": "You see here a splint mail (for sale, 120 zorkmids"
+      }
+    ]
+  },
+  {
+    "file": "Langmuir__2026-07-08.00_50_17.ttyrec",
+    "role": "Knight",
+    "race": "human",
+    "align": "lawful male",
+    "window_turns": 2000,
+    "n_events": 229,
+    "max_depth_in_window": 4,
+    "dive_pacing_turn_to_depth": {
+      "D1": 1,
+      "D2": 208,
+      "D3": 457,
+      "D4": 567
+    },
+    "worst_hunger_in_window": null,
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 348,
+        "depth": 2,
+        "hunger": null,
+        "what": "newt corpse"
+      },
+      {
+        "T": 492,
+        "depth": 3,
+        "hunger": null,
+        "what": "brown mold corpse"
+      }
+    ],
+    "n_eats": 2,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 204,
+        "depth": 1,
+        "msg": "You finish your dressing maneuver."
+      }
+    ],
+    "pray_events": [],
+    "n_pray": 0,
+    "altar_touch": [],
+    "engrave_elbereth": [],
+    "n_pet_interactions": 40,
+    "n_throws": 2,
+    "n_casts": 0,
+    "n_kills": 8,
+    "n_shop_msgs": 0,
+    "shop_samples": []
+  },
+  {
+    "file": "Zapwai__2026-07-08.00_12_26.ttyrec",
+    "role": null,
+    "race": null,
+    "align": null,
+    "window_turns": 2000,
+    "n_events": 993,
+    "max_depth_in_window": 5,
+    "dive_pacing_turn_to_depth": {
+      "D3": 649,
+      "D4": 1168,
+      "D5": 1494
+    },
+    "worst_hunger_in_window": "Hungry",
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 665,
+        "depth": 3,
+        "hunger": null,
+        "what": "the"
+      },
+      {
+        "T": 845,
+        "depth": 3,
+        "hunger": null,
+        "what": "brown mold corpse"
+      },
+      {
+        "T": 1051,
+        "depth": 3,
+        "hunger": null,
+        "what": "food ration"
+      },
+      {
+        "T": 1299,
+        "depth": 4,
+        "hunger": "Satiated",
+        "what": "cram ration"
+      }
+    ],
+    "n_eats": 4,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 1540,
+        "depth": 4,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 1542,
+        "depth": 4,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 1544,
+        "depth": 4,
+        "msg": "You finish your dressing maneuver."
+      }
+    ],
+    "pray_events": [],
+    "n_pray": 0,
+    "altar_touch": [],
+    "engrave_elbereth": [
+      {
+        "T": 835,
+        "msg": "You write in the dust with your fingertip.--More--"
+      }
+    ],
+    "n_pet_interactions": 76,
+    "n_throws": 63,
+    "n_casts": 0,
+    "n_kills": 31,
+    "n_shop_msgs": 5,
+    "shop_samples": [
+      {
+        "T": 820,
+        "depth": 3,
+        "msg": "You see here a scale mail (for sale, 68 zorkmids)."
+      },
+      {
+        "T": 821,
+        "depth": 3,
+        "msg": "You see here a scroll labeled VENZAR BORGAVVE (for"
+      },
+      {
+        "T": 821,
+        "depth": 3,
+        "msg": "a pink potion (for sale, 225 zorkmids)"
+      },
+      {
+        "T": 821,
+        "depth": 3,
+        "msg": "a bubbly potion (for sale, 300 zorkmids)"
+      },
+      {
+        "T": 821,
+        "depth": 3,
+        "msg": "a pink potion (for sale, 225 zorkmids)"
+      }
+    ]
+  },
+  {
+    "file": "nnnet__2026-07-08.00_18_03.ttyrec",
+    "role": "Wizard",
+    "race": "gnomish",
+    "align": "neutral female",
+    "window_turns": 2000,
+    "n_events": 1406,
+    "max_depth_in_window": 5,
+    "dive_pacing_turn_to_depth": {
+      "D1": 1,
+      "D2": 656,
+      "D3": 754,
+      "D4": 1339,
+      "D5": 1505
+    },
+    "worst_hunger_in_window": null,
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 408,
+        "depth": 1,
+        "hunger": null,
+        "what": "newt corpse"
+      },
+      {
+        "T": 520,
+        "depth": 1,
+        "hunger": null,
+        "what": "jackal corpse"
+      },
+      {
+        "T": 983,
+        "depth": 2,
+        "hunger": "Satiated",
+        "what": "jackal corpse"
+      },
+      {
+        "T": 1584,
+        "depth": 5,
+        "hunger": "Satiated",
+        "what": "monkey corpse"
+      },
+      {
+        "T": 1689,
+        "depth": 5,
+        "hunger": "Satiated",
+        "what": "jackal corpse"
+      }
+    ],
+    "n_eats": 5,
+    "wield_events": [
+      {
+        "T": 1293,
+        "depth": 3,
+        "msg": "You now wield a pick-axe."
+      },
+      {
+        "T": 1293,
+        "depth": 3,
+        "msg": "You now wield a pick-axe.--More--"
+      }
+    ],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 731,
+        "depth": 2,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 1364,
+        "depth": 4,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 1621,
+        "depth": 5,
+        "msg": "You are now wearing a dented pot."
+      },
+      {
+        "T": 1773,
+        "depth": 5,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 1773,
+        "depth": 5,
+        "msg": "You are now wearing a dented pot."
+      },
+      {
+        "T": 1774,
+        "depth": 5,
+        "msg": "You are now wearing a dented pot."
+      }
+    ],
+    "pray_events": [
+      {
+        "T": 1522,
+        "depth": 5,
+        "hunger": "Satiated",
+        "msg": "You begin praying to Thoth."
+      },
+      {
+        "T": 1522,
+        "depth": 5,
+        "hunger": "Satiated",
+        "msg": "You begin praying to Thoth.  You are surrounded by a shimmer"
+      }
+    ],
+    "n_pray": 2,
+    "altar_touch": [
+      {
+        "T": 1764,
+        "depth": 5,
+        "msg": "A crude dagger lands on the altar.--More--"
+      },
+      {
+        "T": 1769,
+        "depth": 5,
+        "msg": "A +0 dented pot lands on the altar.--More--"
+      },
+      {
+        "T": 1770,
+        "depth": 5,
+        "msg": "A +1 pair of hard shoes lands on the altar."
+      },
+      {
+        "T": 1776,
+        "depth": 5,
+        "msg": "An uncursed monkey corpse lands on the altar."
+      }
+    ],
+    "engrave_elbereth": [
+      {
+        "T": 1051,
+        "msg": "You write in the dust with your fingertip.--More--"
+      },
+      {
+        "T": 1051,
+        "msg": "What do you want to write in the dust here? Elbere"
+      },
+      {
+        "T": 1074,
+        "msg": "What do you want to add to the writing in the dust"
+      },
+      {
+        "T": 1076,
+        "msg": "You write in the dust with your fingertip.--More--"
+      },
+      {
+        "T": 1076,
+        "msg": "What do you want to write in the dust here? Elbere"
+      }
+    ],
+    "n_pet_interactions": 103,
+    "n_throws": 54,
+    "n_casts": 2,
+    "n_kills": 29,
+    "n_shop_msgs": 5,
+    "shop_samples": [
+      {
+        "T": 214,
+        "depth": 1,
+        "msg": "There appears to be no shopkeeper here to receive "
+      },
+      {
+        "T": 1702,
+        "depth": 5,
+        "msg": "You see here 2 violet gems (for sale, 1600 zorkmid"
+      },
+      {
+        "T": 1707,
+        "depth": 5,
+        "msg": "You see here a yellowish brown gem (for sale, 1200"
+      },
+      {
+        "T": 1707,
+        "depth": 5,
+        "msg": "a brilliant blue potion (for sale, 133 zorkmids)"
+      },
+      {
+        "T": 1709,
+        "depth": 5,
+        "msg": "You see here a brilliant blue potion (for sale, 13"
+      }
+    ]
+  },
+  {
+    "file": "rschaff__2026-07-06.02_08_45.ttyrec",
+    "role": null,
+    "race": null,
+    "align": null,
+    "window_turns": 2000,
+    "n_events": 0,
+    "max_depth_in_window": null,
+    "dive_pacing_turn_to_depth": {
+      "D4": 5704,
+      "D5": 5741,
+      "D6": 5774
+    },
+    "worst_hunger_in_window": null,
+    "first_eat_at_hunger": null,
+    "eat_events": [],
+    "n_eats": 0,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [],
+    "pray_events": [],
+    "n_pray": 0,
+    "altar_touch": [],
+    "engrave_elbereth": [],
+    "n_pet_interactions": 0,
+    "n_throws": 0,
+    "n_casts": 0,
+    "n_kills": 0,
+    "n_shop_msgs": 0,
+    "shop_samples": []
+  },
+  {
+    "file": "rschaff__2026-07-06.02_42_54.ttyrec",
+    "role": "Samurai",
+    "race": "human",
+    "align": "lawful male",
+    "window_turns": 2000,
+    "n_events": 777,
+    "max_depth_in_window": 6,
+    "dive_pacing_turn_to_depth": {
+      "D1": 1,
+      "D2": 274,
+      "D3": 422,
+      "D4": 570,
+      "D5": 859,
+      "D6": 1134
+    },
+    "worst_hunger_in_window": "Hungry",
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 707,
+        "depth": 4,
+        "hunger": null,
+        "what": "the"
+      },
+      {
+        "T": 915,
+        "depth": 3,
+        "hunger": "Satiated",
+        "what": "gunyoki"
+      }
+    ],
+    "n_eats": 2,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 918,
+        "depth": 3,
+        "msg": "You finish your dressing maneuver."
+      },
+      {
+        "T": 919,
+        "depth": 3,
+        "msg": "You are now wearing an opera cloak."
+      }
+    ],
+    "pray_events": [
+      {
+        "T": 769,
+        "depth": 4,
+        "hunger": null,
+        "msg": "You begin praying to Amaterasu Omikami."
+      },
+      {
+        "T": 770,
+        "depth": 4,
+        "hunger": null,
+        "msg": "You begin praying to Amaterasu Omikami.  You are surrounded "
+      },
+      {
+        "T": 772,
+        "depth": 4,
+        "hunger": null,
+        "msg": "You begin praying to Amaterasu Omikami.  You are surrounded "
+      }
+    ],
+    "n_pray": 3,
+    "altar_touch": [],
+    "engrave_elbereth": [
+      {
+        "T": 920,
+        "msg": "You write in the dust with your fingertip.--More--"
+      },
+      {
+        "T": 920,
+        "msg": "What do you want to write in the dust here? Elbere"
+      },
+      {
+        "T": 922,
+        "msg": "What do you want to add to the writing in the dust"
+      },
+      {
+        "T": 923,
+        "msg": "The engraving on the floor vanishes!  You write in"
+      },
+      {
+        "T": 923,
+        "msg": "What do you want to write in the dust here? Elbere"
+      }
+    ],
+    "n_pet_interactions": 20,
+    "n_throws": 68,
+    "n_casts": 0,
+    "n_kills": 50,
+    "n_shop_msgs": 0,
+    "shop_samples": []
+  },
+  {
+    "file": "rschaff__2026-07-07.23_22_57.ttyrec",
+    "role": "Samurai",
+    "race": "human",
+    "align": "lawful male",
+    "window_turns": 2000,
+    "n_events": 875,
+    "max_depth_in_window": 4,
+    "dive_pacing_turn_to_depth": {
+      "D1": 1,
+      "D2": 204,
+      "D3": 631,
+      "D4": 779
+    },
+    "worst_hunger_in_window": null,
+    "first_eat_at_hunger": null,
+    "eat_events": [
+      {
+        "T": 236,
+        "depth": 2,
+        "hunger": null,
+        "what": "newt corpse"
+      },
+      {
+        "T": 339,
+        "depth": 2,
+        "hunger": null,
+        "what": "newt corpse"
+      },
+      {
+        "T": 360,
+        "depth": 2,
+        "hunger": null,
+        "what": "jackal corpse"
+      },
+      {
+        "T": 492,
+        "depth": 2,
+        "hunger": null,
+        "what": "newt corpse"
+      },
+      {
+        "T": 845,
+        "depth": 3,
+        "hunger": null,
+        "what": "jac"
+      },
+      {
+        "T": 892,
+        "depth": 2,
+        "hunger": null,
+        "what": "jackal corpse"
+      },
+      {
+        "T": 1093,
+        "depth": 3,
+        "hunger": "Satiated",
+        "what": "gunyoki"
+      },
+      {
+        "T": 1422,
+        "depth": 2,
+        "hunger": null,
+        "what": "brown mold corpse"
+      }
+    ],
+    "n_eats": 8,
+    "wield_events": [],
+    "two_weapon": false,
+    "wear_events": [
+      {
+        "T": 1809,
+        "depth": 4,
+        "msg": "You finish your dressing maneuver."
+      }
+    ],
+    "pray_events": [],
+    "n_pray": 0,
+    "altar_touch": [
+      {
+        "T": 784,
+        "depth": 4,
+        "msg": "There is an altar to Susanowo (chaotic) here.  You see here "
+      },
+      {
+        "T": 784,
+        "depth": 4,
+        "msg": "The altar glows white."
+      },
+      {
+        "T": 1180,
+        "depth": 4,
+        "msg": "A long sword lands on the altar.  4 gunyoki land on the alta"
+      },
+      {
+        "T": 1180,
+        "depth": 4,
+        "msg": "A scroll labeled THARR lands on the altar.  A scroll labeled"
+      },
+      {
+        "T": 1180,
+        "depth": 4,
+        "msg": "There is an amber flash as a smoky potion hits the altar.  A"
+      },
+      {
+        "T": 1181,
+        "depth": 4,
+        "msg": "A wand called polymorph lands on the altar.  A figurine of a"
+      }
+    ],
+    "engrave_elbereth": [
+      {
+        "T": 128,
+        "msg": "You write in the dust with your fingertip.--More--"
+      },
+      {
+        "T": 128,
+        "msg": "What do you want to write in the dust here? Elbere"
+      },
+      {
+        "T": 1670,
+        "msg": "You write in the dust with your fingertip.--More--"
+      },
+      {
+        "T": 1670,
+        "msg": "What do you want to write in the dust here? Elbere"
+      },
+      {
+        "T": 1671,
+        "msg": "What do you want to add to the writing in the dust"
+      }
+    ],
+    "n_pet_interactions": 49,
+    "n_throws": 25,
+    "n_casts": 0,
+    "n_kills": 44,
+    "n_shop_msgs": 5,
+    "shop_samples": [
+      {
+        "T": 259,
+        "depth": 2,
+        "msg": "You see here a studded leather armor (for sale, 23"
+      },
+      {
+        "T": 260,
+        "depth": 2,
+        "msg": "You see here a splint mail (for sale, 120 zorkmids"
+      },
+      {
+        "T": 261,
+        "depth": 2,
+        "msg": "You see here an elven mithril-coat (for sale, 360 "
+      },
+      {
+        "T": 262,
+        "depth": 2,
+        "msg": "You see here a scroll labeled GARVEN DEH (for sale"
+      },
+      {
+        "T": 263,
+        "depth": 2,
+        "msg": "You see here an elven mithril-coat (for sale, 360 "
+      }
+    ]
+  }
+]
