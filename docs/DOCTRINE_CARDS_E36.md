@@ -93,11 +93,57 @@ DEPLOY (e36_paired.py): E36Agent subclass injected via monkeypatch — ZERO edit
 to shared/parallel-owned nh_agent.py / nh_runner.py. Flag-OFF BIT-IDENTICAL
 VERIFIED (base DiveAgent REF prog 0.021221378364235505 == subclass REF, exact,
 seed 712). Paired block REF vs REF+NH_E36, one-seed-per-process, cap 1500.
-RESULT: [FILLED AFTER BLOCK — prog mean Δ + 95% CI + fire counts]
+RESULT (paired REF vs REF+NH_E36, one-seed-per-process, cap 1500):
+  seed 707: REF 0.0265 == TEST 0.0265  (fires 0, bit-identical)
+  seed 712: REF 0.2061 == TEST 0.2061  (fires 0, bit-identical; reaches D12)
+  seed 714: REF 0.0     (TEST not needed — verdict already decisive)
+  **prog Δ = +0.000 exact, 0 discordant, NH_E36 e36_fires = 0 across all TEST.**
+MECHANICAL NULL — but NOT because CORRIDOR is bad: the compiled SCENARIO
+SIGNATURE (crisis_predicate) NEVER FIRES in live play. Diagnosis on 712: 82
+steps satisfied hp_frac<=0.55 AND depth 2-7, yet 0 fired → the ADJACENCY
+conjunct (mobile hostile at chebyshev 1) never co-occurred with low HP. Root
+cause = the current strong REF config (GUARD + heal + E15 kite) already
+DISENGAGES on damage, so at hp<=55% the agent has already stepped off the
+adjacent cell — the synthesized-for state is one the shipped agent already
+vacates. Plus DISTRIBUTION SHIFT: the replay corpus scenarios are OLD-config
+trajectories branched 40 steps pre-death; under the current config those same
+seeds play very differently (712: shallow corpus death → live D12). The
+counterfactual is EMPTY — the exact PET/WIELD/READY_GATE empty-counterfactual
+family, now at the synthesized-strategy layer.
 
-## HONEST READ
-[FILLED after block. Provisional from the replay matrix: the synthesis MECHANISM
-works as a discriminator (found a NEW +0.22-survival direction hand-design
-missed) BUT (a) a null control ties the winner and (b) the hardest instances are
-strategy-invariantly unwinnable — the live-mean result decides whether the
-replay edge survives the model-fidelity gap (the s6 THROW over-credit precedent).]
+## HONEST READ — does strategy-synthesis break the bootstrapping wall or confirm it?
+It CONFIRMS the wall for this scenario, while proving the pipeline works and
+surfacing a sharp new methodological lesson.
+1. The synthesis MECHANISM works as an OFFLINE DISCRIMINATOR: a robust 18-seed
+   best-of-20 search found CORRIDOR (a NEW attacker-count-management strategy,
+   never a hand lever) beats the shipped KITE lever +0.22 in replay survival —
+   a genuinely new direction hand-design missed. It also correctly demoted the
+   hand-composed HYBRID (best-of-N > hand-composition) and re-found the ELBERETH
+   interface limit. So "did we just not try the right strategy?" is answered:
+   in replay, stand/funnel-and-fight beats flee — but a NULL CONTROL (just
+   attack) ties the winner, so the edge is "flee is bad here", not a clever win.
+2. The DEPLOYED result is a MECHANICAL NULL on the mean (Δ+0.000, fires 0). Two
+   independent reasons, both decisive: (a) 3/18 replay seeds have 0 survivors
+   across ALL 20 strategies → those instances are BOOTSTRAPPING-UNWINNABLE (no
+   strategy in a 20-wide seeded search survives an under-geared trash fight —
+   the definitive answer the operator wanted: it is NOT a missing strategy);
+   (b) the winnable-remainder win does NOT transfer live because the compiled
+   SIGNATURE doesn't fire — the current agent already handles the adjacent-low-
+   HP state, and the historical death corpus has distribution-shifted from
+   current live play.
+3. THE NEW LESSON (the transferable contribution): the s6 model-fidelity gap
+   (replay over-credits a strategy) now has a SIBLING — the SIGNATURE-fidelity
+   gap: an offline pipeline can crown a winner whose SCENARIO SIGNATURE, tuned
+   on a historical corpus, does not match live current-config states. The
+   SELECTOR's classifier must be calibrated on LIVE play from the CURRENT
+   config, not the death corpus. Next iteration: re-mine the hard scenario from
+   CURRENT-config live deaths (not the stale corpus), and fire the predicate on
+   the DEVELOPING crisis (hostile within 2 at hp<=0.7, before existing levers
+   disengage) — but that re-tunes into the shipped kite/GUARD levers' territory,
+   which the empty-counterfactual pattern predicts will also be inert.
+NET: the systematic large-search version of the levers reaches the SAME wall —
+now with proof that it is a wall (0/20 on the hardest instances) and not a
+search failure, plus the signature-fidelity methodological finding. NH_E36
+ships flag-OFF (bit-identical verified) as a validated scaffold + the pipeline
+is reusable for any future scenario (swap the corpus + regenerate the pool;
+Fable-ready diverse-generation step).

@@ -1,0 +1,5 @@
+{"seed": 707, "arm": "REF", "nh_e36": false, "end_reason": "DEATH: died. Killed by a giant bat.", "steps": 628, "depth_max": 5, "prog": 0.026482449457437766, "e36_fires": 0, "role": "Rogue"}
+{"seed": 707, "arm": "TEST", "nh_e36": true, "end_reason": "DEATH: died. Killed by a giant bat.", "steps": 628, "depth_max": 5, "prog": 0.026482449457437766, "e36_fires": 0, "role": "Rogue"}
+{"seed": 712, "arm": "REF", "nh_e36": false, "end_reason": "DEATH: died. Killed by a giant ant, while taking off clothes.", "steps": 1445, "depth_max": 12, "prog": 0.20612854836308672, "e36_fires": 0, "role": "Samurai"}
+{"seed": 712, "arm": "TEST", "nh_e36": true, "end_reason": "DEATH: died. Killed by a giant ant, while taking off clothes.", "steps": 1445, "depth_max": 12, "prog": 0.20612854836308672, "e36_fires": 0, "role": "Samurai"}
+{"seed": 714, "arm": "REF", "nh_e36": false, "end_reason": "DEATH: died. Killed by a sewer rat.", "steps": 948, "depth_max": 1, "prog": 0.0, "e36_fires": 0, "role": "Tourist"}
