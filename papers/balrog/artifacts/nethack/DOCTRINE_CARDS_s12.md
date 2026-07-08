@@ -80,6 +80,28 @@ final-frame "Killed by <trash>" scan (144 candidates); block used 4/16/21/37/104
 111/115/702/706/720/721/739/746/761/766/4031/4054 (709 timed out, excluded).
 Analyze with the paired-bootstrap block in the s12 log.
 
+**KPI-DASH — per-role (PET block, TEST=+NH_PET vs REF, n=17):**
+```
+role        n  Δdepth_mean  petw_tot  pet_preserved_deeper
+Cavewoman   1     +5.00         4          0/1     <- big gain (deepest run)
+Priest      1     +2.00        12          1/1
+Priestess   1     +1.00        12          1/1
+Wizard      2     -0.50         4          2/2
+Barbarian   1     -1.00         3          1/1
+Healer      2     -1.50        11          1/2     <- the 746 regression (5->2)
+Knight      3     +0.00         0          0/3     <- pet paces natively (petw=0)
+Monk        1     +0.00         0          0/1     <- "
+Ranger      1     +0.00         0          0/1     <- "
+Rogue       2     +0.00         0          0/2     <- "
+Tourist     2     +0.00         0          0/2     <- "
+```
+The lever ONLY touches the 6 roles whose pets LAG at the stairs (fire petw>0);
+the 5 roles whose pets keep pace natively (Knight/Monk/Ranger/Rogue/Tourist) are
+bit-identical (petw=0, Δ0). Among the affected roles the sign is MIXED (Cavewoman
++5, Priest +2 vs Healer −1.5, Barbarian −1) — the gains net against the losses to
+the null. This is the mechanism made role-legible: the counterfactual is narrow AND
+capability-bound.
+
 ---
 
 ## CARD S12-2 — FOODACQ(cd=8) n≈30 CONFIRMATORY  [ATTEMPTED, BLOCKED by episode wall-time this session — carry to s13]
