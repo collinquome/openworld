@@ -2070,3 +2070,29 @@ a7679c5079376c0607e8b6aba1eeb2e5  nh_agent.py (post-s7; flag-off bit-identical t
 23:08:29 S7-3 HEALER MIDDLE-HP-BAND (WHEN-refinement) VERDICT: DROP. n=20 role-strat, ref=standing vs test=+NH_ROLE_PROFILE (band 0.30-0.55 under-threat). WIKI-attributable Healer delta -0.63 CI95 [-1.76,-0.02] (2.57->1.93, CI excludes 0). survival@D5 40%->20%. 18 heal casts (mechanism MET), 15/20 bit-identical. The middle-band WHEN-fix did NOT rescue it: seed 900 regresses IDENTICALLY to s6 (D10/12.56 -> D4/2.12, -10.44); heal-cast is net-negative across all 3 triggers tested (s6 crisis-late, s6 proactive-safe, s7 mid-band) — cast-turn opportunity cost dominates HP restored. Ships flag-OFF (no revert). HEAL_MIDBAND rule retained ADVISORY-only for the intuition layer.
 23:08:29 KPI-DASH Healer-midband-s7: prog(Healer) 2.57->1.93 (-0.63) | surv@D5 40%->20% ↓ | heal_fires 18 | death-class TRASH 14/14 unchanged | proximal (Healer mean + surv@D5) BOTH negative -> DROP
 23:08:29 S7 CLOSE: 2 mean-movers DROPPED (door-kite@gate, healer-band), 1 HEADLINE architecture BUILT (rule base), 1 safety gate BUILT (kick). Snapshot 19/19; rulebase_equiv 130/130; flag-off + NH_RULEBASE 0-vs-1 bit-identical. Standing config UNCHANGED (both levers default-off). nh_agent.py md5 a7679c5079376c0607e8b6aba1eeb2e5.
+
+
+================= PHASE L SESSION 8 (claude-opus-4-8[max]) =================
+S8-1 ADVISORY-PUSH (NH_ADVISORY) — the never-run LLM-in-loop test on REAL
+  NetHack. Paired advisory off/on, ONE seed/process, cap 1800, n=5 mixed-fragile
+  (831/812/807/833/839). paired Δ prog = -0.0011 (3 bit-identical, 833 D5->D6,
+  812 D6->D4), maxD 5.80->5.60, 29 consults @5.8/ep, 100% parsed. Mechanism
+  VERIFIED (pushed HEAL_MIDBAND rule read+cited by the LLM). VERDICT: NULL,
+  ships flag-OFF. Read: compiled agent already at the intuition ceiling for
+  early NetHack; strategic objective selection is not where capability-bound
+  deaths are decided.
+S8-2 READINESS GATE (NH_READY_GATE) — role-conditioned rest-to-buffer before
+  descend (nh_sheet RR(d+1)<thresh, digger-exempt). n=9 Tourist/Wizard/Rogue.
+  block Δ +0.0055 = ONE seed (847), proven a cross-seed process-order artifact
+  by A/A test; heavy-fire seeds prog-identical. VERDICT: DROP (inert — existing
+  rest gate already tops fragile roles to 85-92% HP; deficit is RR~0.07-0.16,
+  unfixable pre-descent). SIXTH converging local/arrival drop.
+METHOD NOTE: cross-seed state leakage in multi-seed capblock processes — run
+  paired blocks ONE SEED PER PROCESS.
+
+KPI-DASH s8-advisory: prog ref 0.0369/test 0.0358 | maxD ref 5.80/test 5.60 |
+  paired Δ -0.0011 | consults 5.8/ep (100% parsed) | proximal (decision quality
+  at triggers): strategist reads pushed reminders (verified) but net-null on
+  outcome. [cap 1800, n=5 mixed fragile, one-seed/process]
+KPI-DASH s8-readygate: block Δ +0.0055 (artifact; true ~0.00) | reach@D8 0->11%
+  (same artifact seed) | heavy-fire seeds prog-identical | DROP.

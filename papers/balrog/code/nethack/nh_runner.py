@@ -182,6 +182,8 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
     traj["pred_dmg"] = [list(x) for x in getattr(agent, "pred_log", [])]
     if getattr(agent, "store", None) is not None:
         traj["store"] = agent.store.to_dict()   # NH-E18 substrate
+    if getattr(agent, "advisory_log", None):
+        traj["advisory_consults"] = agent.advisory_log   # NH-ADVISORY verbatim
 
     result = {
         "task": tag,
@@ -215,6 +217,8 @@ def run_episode(ep, seed, condition="A", label="clean_A", memory=None,
                            if str(e).startswith("THROW_DISENGAGE")),
         "heal_fires": getattr(agent, "heal_fires", 0),
         "cast_fires": getattr(agent, "cast_fires", 0),
+        "ready_gate_fires": getattr(agent, "ready_gate_fires", 0),
+        "advisory_consults": getattr(agent, "advisory_consults", 0),
     }
     if memory is not None:
         memory.end_episode(result, steps)

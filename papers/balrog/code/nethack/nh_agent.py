@@ -110,6 +110,41 @@ C2_KICK_GATE = _flag("NH_KICK_GATE")
 # band) through the base (behavior-preserving: rule conditions are exact ports).
 # Flag OFF -> base never consulted, bit-identical to the s6 baseline.
 C2_RULEBASE = _flag("NH_RULEBASE")
+# NH-READY_GATE — role-conditioned READINESS gate before descending (Phase L
+# session 8, claude-opus-4-8[max]). Diagnosis (NH-E12 backfill): 59% of combat
+# deaths are ARRIVAL_CONSTRAINT (under-prepared arrival), agents descend at ~35%
+# HP into a rising-threat floor (KPI death-shape). XP-grinding is INVALIDATED
+# (PRIORS) and the s4 XP-pace-gate hurt diggers, so the ONLY realizable
+# pre-descent prep is HP buffer. This gate is threat-conditional REST DEPTH: for
+# a FRAGILE role (DIGGER-EXEMPT) about to take the '>' into a floor whose
+# empirical threat band leaves readiness-ratio(d+1) below a per-role threshold,
+# rest to fuller HP than the default rest gate — buy arrival buffer ONLY for
+# dangerous descents. When RR(d+1) >= thresh (we are ready), the gate is inert.
+# Bounded by the rest budget (never stalls to starvation). Default OFF =>
+# bit-identical (flag-off regression). Proximal KPI = survival@D-next
+# (KPI_TREE.md), not local. Role-conditional (validated role-stratified).
+C2_READY_GATE = _flag("NH_READY_GATE")
+READY_RR_THRESH = float(_os.environ.get("NH_READY_RR", "1.0"))    # RR(d+1) floor
+READY_HP_TARGET = float(_os.environ.get("NH_READY_HP", "0.92"))   # rest-to frac
+READY_GATE_ROLES = set(filter(None, _os.environ.get(
+    "NH_READY_ROLES",
+    "Tourist,Healer,Wizard,Priest,Priestess,Rogue").split(",")))
+# NH-ADVISORY — the ADVISORY-PUSH / LLM-strategist consult (Phase L session 8,
+# claude-opus-4-8[max]) — the never-run test of the intuition thesis on REAL
+# NetHack (all prior intuition results are composition-worlds). At LOW-frequency
+# STRATEGIC triggers (level-entry / impasse / novelty / low-HP crisis) the agent
+# consults a live LLM strategist with the CONTEXT_SPEC package (map + memory +
+# story) PLUS the rule base's pushed ADVISORY reminders (RB.reminders_text) and
+# receives a structured strategy choice the code then executes (biases the
+# decision cascade). Consults are capped/episode + min-spaced (cost) and logged
+# VERBATIM. Requires NH_STORE + NH_RULEBASE (the context + reminder sources).
+# Default OFF => bit-identical (flag-off regression). This is the Phase-E gate:
+# does live intuition + the rule base beat pure compiled code on real NetHack?
+C2_ADVISORY = _flag("NH_ADVISORY")
+ADVISORY_MAX = int(_os.environ.get("NH_ADVISORY_MAX", "6"))       # consults/ep
+ADVISORY_GAP = int(_os.environ.get("NH_ADVISORY_GAP", "40"))      # min env steps
+ADVISORY_MODEL = _os.environ.get("NH_ADVISORY_MODEL", "")         # "" = default
+ADVISORY_MINDEPTH = int(_os.environ.get("NH_ADVISORY_MINDEPTH", "2"))
 KICK_MIN_HP = float(_os.environ.get("NH_KICK_MIN_HP", "0.5"))  # skip kick below
 KICK_FRAGILE_ROLES = set(filter(None, _os.environ.get(
     "NH_KICK_FRAGILE", "Tourist,Wizard,Archeologist").split(",")))
@@ -119,7 +154,7 @@ PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
-              C2_RULEBASE))
+              C2_RULEBASE, C2_READY_GATE, C2_ADVISORY))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -278,6 +313,18 @@ class DiveAgent:
         self.cast_hunger_blocked = False
         self.cast_hunger_events = 0
         self.rest_budget = {}                   # level key -> turns rested
+        self.ready_gate_fires = 0               # NH-READY_GATE rest-to-buffer
+        # NH-ADVISORY (LLM-strategist) per-episode state
+        self.advisory_consults = 0              # consults issued this episode
+        self.advisory_last_step = -10 ** 9      # min-gap throttle
+        self.advisory_log = []                  # verbatim consult records
+        self.advisory_depth_seen = set()        # level-entry consult de-dupe
+        self._adv_descend_until = 0             # DESCEND bias window (env step)
+        self._adv_explore_until = 0             # EXPLORE bias window
+        self._adv_rest_until = 0                # REST bias window
+        self._adv_novel = None                  # novel species seen this step
+        self._adv_wd_seen = 0                   # watchdog-fire count consumed
+        self._adv_crisis_active = False         # low-HP crisis edge tracker
         self.dig_attempts = {}                  # level key -> attempts
         self.no_dig_cells = set()               # (key, cell)
         self.pickup_wanted = None               # letter to verify after pickup
@@ -370,6 +417,7 @@ class DiveAgent:
             v = P.exchange()["species"].get(m.name)
             if v is None or v.get("n_rows", 0) < NOVELTY_MIN_ROWS:
                 self._novelty_seen.add(m.name)
+                self._adv_novel = m.name        # NH-ADVISORY novelty trigger
                 self._ev(f"NOVEL species adjacent: {m.name} "
                          f"(rows {0 if v is None else v.get('n_rows', 0)}, "
                          f"diff {m.difficulty})")
@@ -1395,6 +1443,15 @@ class DiveAgent:
         if A.blind:
             return "search"
 
+        # ---- NH-ADVISORY: LLM-strategist consult at strategic triggers ------
+        # placed AFTER the safety cascade (crisis/hunger/combat/ranged) so the
+        # strategist never overrides a tactical emergency — it only redirects
+        # the strategic explore/descend/rest/disengage choice below.
+        if C2_ADVISORY:
+            act = self._advisory(obs, msg)
+            if act:
+                return act
+
         # global rest gate: badly hurt, nothing visible hunting us -> heal
         if A.hp < 0.35 * A.hpmax and self._rest_here_ok() and \
                 self.rest_budget.get(A.key, 0) < 900:
@@ -1423,7 +1480,8 @@ class DiveAgent:
                     return self._step_path(path)
 
         # ---- P6.5: urgent/cheap item grabs before committing to descent ----
-        if C2_ANY:
+        # NH-ADVISORY DESCEND bias skips the loot detour: head straight down.
+        if C2_ANY and not (C2_ADVISORY and self.steps < self._adv_descend_until):
             act = self._c2_items(obs, pre_descent=True)
             if act:
                 return act
@@ -2252,6 +2310,160 @@ class DiveAgent:
             lo, hi = 0.9, 0.95
         return lo, hi
 
+    # -------------------------------------------- NH-ADVISORY (LLM strategist)
+    def _advisory_trigger(self):
+        """Return a (trigger_name) if a strategic trigger fires THIS step, else
+        None. Triggers: level-entry / impasse (watchdog) / novelty / low-HP
+        crisis. Cheap edge-detection over already-tracked state."""
+        A = self.atlas
+        # (a) new depth we have not strategized about yet. Robust level-entry:
+        # the first advisory-REACHED step at a new max depth (the exact
+        # level_changed step is often spent in combat, so keying on the depth
+        # rather than the one-step flag is what actually fires). Marked seen in
+        # _advisory only on an issued consult, so a throttled miss retries.
+        if A.depth >= ADVISORY_MINDEPTH and \
+                A.depth not in self.advisory_depth_seen:
+            return f"level: first strategy at depth {A.depth} " \
+                   f"(hp {A.hp}/{A.hpmax} xp {A.xplvl})"
+        # (b) impasse: the stall watchdog fired since we last looked
+        if len(self.wd_fires) > self._adv_wd_seen:
+            self._adv_wd_seen = len(self.wd_fires)
+            return f"impasse: stall watchdog fired at depth {A.depth}"
+        # (c) novelty: a thin-evidence species just became adjacent
+        if self._adv_novel is not None:
+            nm = self._adv_novel
+            return f"novelty: unfamiliar species '{nm}' adjacent at " \
+                   f"depth {A.depth}"
+        # (d) low-HP crisis onset (rising edge)
+        crisis = A.hp <= max(A.hpmax * CRISIS_HP, 6)
+        if crisis and not self._adv_crisis_active:
+            self._adv_crisis_active = True
+            return f"low-HP crisis: hp {A.hp}/{A.hpmax} at depth {A.depth}"
+        if not crisis:
+            self._adv_crisis_active = False
+        return None
+
+    def _advisory(self, obs, msg):
+        """The advisory-push dispatcher (NH_ADVISORY). Applies any active
+        strategy bias, then (throttled) detects a strategic trigger and
+        consults the live LLM strategist with the CONTEXT_SPEC package + pushed
+        rule-base reminders. Sets a bias window the decision cascade honors.
+        Returns an immediate action only for an active REST bias; else None.
+        Safety layers (P0-P5) run BEFORE this — the strategist never overrides
+        a tactical emergency, only the strategic explore/descend/rest/disengage
+        choice."""
+        A = self.atlas
+        # ---- apply an active REST bias (immediate, only when safe) ----
+        if self.steps < self._adv_rest_until and self._rest_here_ok() and \
+                A.hp < 0.9 * A.hpmax:
+            return "search"
+        # ---- trigger + throttle ----
+        trig = self._advisory_trigger()
+        self._adv_novel = None
+        if trig is None:
+            return None
+        if self.advisory_consults >= ADVISORY_MAX:
+            return None
+        if self.steps - self.advisory_last_step < ADVISORY_GAP:
+            return None
+        if self.store is None or RULEBASE is None:
+            return None                          # no context / no reminders
+        # ---- build the context package + pushed reminders ----
+        import nh_store
+        import nh_strategist
+        try:
+            context = nh_store.ctx_package(self, self.store)
+        except Exception:                        # noqa: BLE001
+            return None
+        adj = self._adjacent_hostiles()
+        rb_state = self._rb_state(
+            monster_name=(adj[0].name if adj else None),
+            adj_mobile=bool([m for m in adj if m.name not in C.IMMOBILE]))
+        reminders = RULEBASE.reminders_text(rb_state)
+        rec = nh_strategist.consult(context, reminders, trig,
+                                    model=ADVISORY_MODEL)
+        self.advisory_consults += 1
+        self.advisory_last_step = self.steps
+        self.advisory_depth_seen.add(A.depth)   # mark this depth strategized
+        rec["step"] = self.steps
+        rec["depth"] = A.depth
+        rec["reminders"] = reminders
+        self.advisory_log.append(rec)
+        strat = rec.get("strategy")
+        self._ev(f"ADVISORY consult#{self.advisory_consults} "
+                 f"[{trig[:40]}] -> {strat or 'FAIL'} "
+                 f"({rec.get('rationale', '')[:80]})")
+        # ---- install the bias window the cascade honors ----
+        win = self.steps + ADVISORY_GAP
+        if strat == "DISENGAGE":
+            self.wd_disengage_until = self.steps + WD_DISENGAGE
+        elif strat == "REST":
+            self._adv_rest_until = win
+            if self._rest_here_ok() and A.hp < 0.9 * A.hpmax:
+                return "search"
+        elif strat == "DESCEND":
+            self._adv_descend_until = win
+        elif strat == "EXPLORE":
+            self._adv_explore_until = win
+        # FIGHT / PRESS_ON / FAIL -> no strategic redirect
+        return None
+
+    def _readiness_ratio(self, obs, depth):
+        """RR(depth) via nh_sheet: (best_dpt*hp)/(band_dpt_p75*band_hp).
+        Returns None on any error (fail-safe: a None never gates)."""
+        try:
+            import nh_sheet
+            A = self.atlas
+            sheet = nh_sheet.character_sheet(
+                self.role, A.xplvl, A.ac, A.hp, A.hpmax,
+                self._inv(obs), depth, spells=None, pw=A.pw)
+            return sheet["readiness_ratio"]
+        except Exception:              # noqa: BLE001 — fail-safe, never a gate
+            return None
+
+    def _ready_gate(self, obs, digger):
+        """NH-READY_GATE: threat-conditional rest-to-buffer before descending.
+        Fires only for a FRAGILE (non-digger) role about to drop into a floor
+        where RR(d+1) < threshold, HP is still recoverable, and it is safe to
+        rest. Returns 'search' (rest one turn) or None (proceed to descend).
+        Bounded by the level rest budget so it can never stall to starvation."""
+        if not C2_READY_GATE or digger or self.role not in READY_GATE_ROLES:
+            return None
+        A = self.atlas
+        _dbg = _os.environ.get("NH_READY_DEBUG") == "1"
+        if A.hp >= READY_HP_TARGET * A.hpmax:
+            if _dbg:
+                import sys as _s
+                print(f"RG hp-full hp={A.hp}/{A.hpmax}", file=_s.stderr)
+            return None                          # already buffered; descend
+        if not self._rest_here_ok():
+            if _dbg:
+                import sys as _s
+                print(f"RG unsafe hp={A.hp}/{A.hpmax} "
+                      f"mob={len(self._mobile_hostiles())} "
+                      f"hunger={A.hunger}", file=_s.stderr)
+            return None                          # a mobile hostile / weak; go
+        used = self.rest_budget.get(A.key, 0)
+        cap = 800 if (self._mem_danger_depth is not None and
+                      A.depth >= self._mem_danger_depth - 1) else 400
+        if used >= cap:
+            return None                          # bounded: never starve waiting
+        rr = self._readiness_ratio(obs, A.depth + 1)
+        if _dbg:
+            import sys as _s
+            print(f"RG check hp={A.hp}/{A.hpmax} rr={rr} used={used}",
+                  file=_s.stderr)
+        if rr is None or rr >= READY_RR_THRESH:
+            return None                          # ready (or unknown); descend
+        self.rest_budget[A.key] = used + 1
+        self.ready_gate_fires += 1
+        if used == 0:
+            self._ev(f"READY_GATE: rest before D{A.depth + 1} "
+                     f"(rr={rr:.2f}<{READY_RR_THRESH} hp {A.hp}/{A.hpmax} "
+                     f"role {self.role})")
+        self._goal("ready-rest", f"rr {rr:.2f} for D{A.depth + 1}")
+        return "search"
+
     def _should_rest(self):
         A = self.atlas
         lo, hi = self._rest_threshold()
@@ -2308,6 +2520,13 @@ class DiveAgent:
     def _descend(self, obs):
         A = self.atlas
         L = A.level
+
+        # NH-ADVISORY EXPLORE bias: strategist wants this level explored first.
+        # Defer descent (let the P9 explore layer run) UNLESS already standing
+        # on a down-stair — don't wrestle the agent off the stairs.
+        if C2_ADVISORY and self.steps < self._adv_explore_until:
+            if A.agent not in (set(L.stairs_down) | set(L.holes)):
+                return None
 
         act = self._pace_gate()
         if act:
@@ -2419,6 +2638,9 @@ class DiveAgent:
                          bad_traps_ok=True)
         if path == []:
             # standing on the goal
+            ra = self._ready_gate(obs, digger)   # NH-READY_GATE (session 8)
+            if ra:
+                return ra
             if self._should_rest() and self._rest_here_ok():
                 self.rest_budget[A.key] = self.rest_budget.get(A.key, 0) + 1
                 self._goal("rest", f"hp {A.hp}/{A.hpmax} on stairs")

@@ -1,0 +1,70 @@
+{
+ "label": "advb",
+ "flags": {
+  "NH_ADVISORY": "1",
+  "NH_STEPCAP": "1800",
+  "NH_ADVISORY_MAX": "6",
+  "NH_CASTHUNGER": "1",
+  "NH_RULEBASE": "1",
+  "NH_ADVISORY_GAP": "25",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 1800,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 831,
+   "seed": 831,
+   "condition": "dev",
+   "steps": 340,
+   "illegal": 0,
+   "progression": 0.0695812141543123,
+   "highest_achievement": "Dlvl:8",
+   "depth_max": 8,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6",
+    "Dlvl:7",
+    "Dlvl:8"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant spider.",
+   "depth_max_blstats": 8,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Healer",
+   "race": "gnomish",
+   "role_source": "welcome",
+   "wallclock_s": 91.2,
+   "transitions_file": "transitions/advb/NetHackChallenge-v0__ep831.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.6161,
+    "descend": 0.3661,
+    "loot": 0.0179,
+    "_final": "explore",
+    "_final_reason": "32 frontier cells"
+   },
+   "ev_fired": 6,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 0,
+   "ready_gate_fires": 0,
+   "advisory_consults": 6
+  }
+ ]
+}

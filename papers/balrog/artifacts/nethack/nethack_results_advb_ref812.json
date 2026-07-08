@@ -1,0 +1,70 @@
+{
+ "label": "advb",
+ "flags": {
+  "NH_ADVISORY": "0",
+  "NH_STEPCAP": "1800",
+  "NH_ADVISORY_MAX": "6",
+  "NH_CASTHUNGER": "1",
+  "NH_RULEBASE": "1",
+  "NH_ADVISORY_GAP": "25",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 1800,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 812,
+   "seed": 812,
+   "condition": "dev",
+   "steps": 752,
+   "illegal": 0,
+   "progression": 0.035428686118173014,
+   "highest_achievement": "Dlvl:6",
+   "depth_max": 6,
+   "xplvl_max": 1,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5",
+    "Dlvl:6"
+   ],
+   "xplvl_list": [
+    "Xp:1"
+   ],
+   "end_reason": "DEATH: died. Killed by a giant rat.",
+   "depth_max_blstats": 6,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Tourist",
+   "race": "human",
+   "role_source": "welcome",
+   "wallclock_s": 36.4,
+   "transitions_file": "transitions/advb/NetHackChallenge-v0__ep812.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "explore": 0.7244,
+    "find-stairs": 0.1625,
+    "rest": 0.0639,
+    "descend": 0.0426,
+    "survive": 0.0067,
+    "_final": "explore",
+    "_final_reason": "2 frontier cells"
+   },
+   "ev_fired": 0,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 0,
+   "ready_gate_fires": 0,
+   "advisory_consults": 0
+  }
+ ]
+}

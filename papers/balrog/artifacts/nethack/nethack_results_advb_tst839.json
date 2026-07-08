@@ -1,0 +1,74 @@
+{
+ "label": "advb",
+ "flags": {
+  "NH_ADVISORY": "1",
+  "NH_STEPCAP": "1800",
+  "NH_ADVISORY_MAX": "6",
+  "NH_CASTHUNGER": "1",
+  "NH_RULEBASE": "1",
+  "NH_ADVISORY_GAP": "25",
+  "NH_PRAYFIX": "1",
+  "NH_LOS": "1",
+  "NH_CAST": "1",
+  "NH_E15": "1",
+  "NH_FOOD2": "1",
+  "NH_GUARD": "1",
+  "NH_TOPO": "1"
+ },
+ "stepcap": 1800,
+ "episodes": [
+  {
+   "task": "NetHackChallenge-v0",
+   "episode": 839,
+   "seed": 839,
+   "condition": "dev",
+   "steps": 1800,
+   "illegal": 0,
+   "progression": 0.026482449457437766,
+   "highest_achievement": "Dlvl:5",
+   "depth_max": 5,
+   "xplvl_max": 4,
+   "dlvl_list": [
+    "Dlvl:1",
+    "Dlvl:2",
+    "Dlvl:3",
+    "Dlvl:4",
+    "Dlvl:5"
+   ],
+   "xplvl_list": [
+    "Xp:1",
+    "Xp:2",
+    "Xp:3",
+    "Xp:4"
+   ],
+   "end_reason": "RUNNER_TRUNCATED@1800 (None)",
+   "depth_max_blstats": 5,
+   "belief_depth_mismatch": 0,
+   "belief_snap_errors": 0,
+   "role": "Wizard",
+   "race": "elven",
+   "role_source": "welcome",
+   "wallclock_s": 354.9,
+   "transitions_file": "transitions/advb/NetHackChallenge-v0__ep839.jsonl.gz",
+   "mem_fired": [],
+   "subgoal_summary": {
+    "find-stairs": 0.6843,
+    "explore": 0.2601,
+    "fight": 0.0456,
+    "descend": 0.0067,
+    "eat": 0.0022,
+    "loot": 0.0011,
+    "survive": 0.0,
+    "_final": "find-stairs",
+    "_final_reason": "hidden-passage search"
+   },
+   "ev_fired": 6,
+   "emergency_fired": 0,
+   "throw_fires": 0,
+   "heal_fires": 0,
+   "cast_fires": 26,
+   "ready_gate_fires": 0,
+   "advisory_consults": 6
+  }
+ ]
+}
