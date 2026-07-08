@@ -1,0 +1,8 @@
+{"seed": 712, "arm": "REF", "end_reason": "DEATH: died. Killed by a giant ant, while taking off clothes.", "maxhunger": 3, "maxhunger_name": "Weak", "antifaint_fires": 0, "steps": 1445, "depth_max": 12, "prog": 0.20612854836308672, "role": "Samurai", "race": "human"}
+{"seed": 712, "arm": "TEST", "end_reason": "DEATH: died. Killed by an invisible hill giant.", "maxhunger": 3, "maxhunger_name": "Weak", "antifaint_fires": 6, "steps": 1944, "depth_max": 16, "prog": 0.3249071349317381, "role": "Samurai", "race": "human"}
+{"seed": 715, "arm": "REF", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}
+{"seed": 700, "arm": "REF", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}
+{"seed": 700, "arm": "TEST", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}
+{"seed": 715, "arm": "TEST", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}
+{"seed": 701, "arm": "REF", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}
+{"seed": 716, "arm": "REF", "end_reason": "TIMEOUT_OR_FAIL", "maxhunger": -1}

@@ -79,6 +79,7 @@ C2_CAST = _flag("NH_CAST")        # Phase L: attack-spell combat casting
 C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
 C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
+C2_ANTIFAINT = _flag("NH_ANTIFAINT")  # Phase L s9: eat-at-HUNGRY anti-faint guard
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -154,7 +155,7 @@ PACE_BUDGET = int(_os.environ.get("NH_PACE_BUDGET", "900"))
 C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
-              C2_RULEBASE, C2_READY_GATE, C2_ADVISORY))
+              C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -1307,6 +1308,47 @@ class DiveAgent:
         # s6 proactive no-threat top-up REMOVED (s7): it healed when safe and
         # perturbed otherwise-good runs (seed 900: D10 -> D4). The middle-band
         # UNDER-THREAT heal above is the replacement WHEN-trigger.
+
+        # ANTI-FAINT GUARD (NH_ANTIFAINT, Phase L s9). RULE CARD [ANTI_FAINT]
+        # (layer: LOGISTICS; model: claude-opus-4-8[max]). Experts NEVER let
+        # hunger drop below Hungry — E35c ttyrec evidence: 4 alt.org games /
+        # ~35k turns, 0 frames below Hungry; they eat one tier EARLIER than our
+        # WEAK trigger. The 52 faint deaths come from the short Weak->Fainting->
+        # Fainted cascade outrunning food-acquisition once already at Weak. So
+        # bank READILY-available food at HUNGRY (inventory food / corpse-here /
+        # <=3-step safe corpse), BEFORE the cascade. Elective, so gate on no
+        # adjacent hostile (don't donate a free attack for a non-crisis eat);
+        # prayer + longer detours stay in the WEAK+ block below.
+        # provenance: knowledge=DEMONSTRATION (alt.org expert hunger policy,
+        # E35c) + insight-origin=OP (DEATH_TO_CAPABILITY Tier-1 anti-faint
+        # guard) + precedent rule CAST_HUNGER ("casters eat at HUNGRY not Weak").
+        # replication: NH_ANTIFAINT=1 paired block vs off; KPI = faint-death rate.
+        if C2_ANTIFAINT and A.hunger == C.HUNGRY and not self._adjacent_hostiles():
+            fl = self._food_letter(obs)
+            if fl:
+                self._goal("eat", f"antifaint hunger {A.hunger}")
+                self.note(f"ANTIFAINT eat inventory food {fl} (hunger {A.hunger})")
+                self.queue = [fl]
+                self.queue_tag = "eat"
+                return "eat"
+            corpse = self._fresh_corpse_here()
+            if corpse:
+                self._goal("eat", f"antifaint corpse {corpse}")
+                self.note(f"ANTIFAINT eat fresh corpse here ({corpse})")
+                self.queue = ["y"]
+                self.queue_tag = "eat_corpse"
+                return "eat"
+            cells = [k[0] for k in self.fresh_kills
+                     if k[1] in C.SAFE_CORPSES and not self._cannibal(k[1])
+                     and k[0] != A.agent]
+            if cells:
+                path = A.level.bfs(A.agent, cells,
+                                   avoid=self._suspects() | self._mcells())
+                if path and len(path) <= 3:
+                    self._goal("eat", "antifaint walk-to-corpse")
+                    self.note("ANTIFAINT walk to safe corpse "
+                              f"(hunger {A.hunger}, {len(path)} steps)")
+                    return self._step_path(path)
 
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:

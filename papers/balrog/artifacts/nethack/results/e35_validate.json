@@ -1,0 +1,736 @@
+{
+  "games": [
+    {
+      "file": "nnnet__2026-07-08.00_18_03.ttyrec",
+      "records": 5984,
+      "parsed": 5688,
+      "steps": 2580,
+      "maxDlvl": 5,
+      "rules": {
+        "V_TIME": {
+          "checked": 2579,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_HP": {
+          "checked": 2580,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_XP": {
+          "checked": 2579,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_DEPTH": {
+          "checked": 2406,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_MOVE": {
+          "checked": 2131,
+          "viol": 168,
+          "rate": 0.07883622712341623,
+          "samples": [
+            {
+              "step": 6,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 6,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  14,
+                  8
+                ]
+              },
+              "cur": {
+                "time": 7,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  12,
+                  8
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 12,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 17,
+                "depth": 1,
+                "hp": 10,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  6,
+                  5
+                ]
+              },
+              "cur": {
+                "time": 18,
+                "depth": 1,
+                "hp": 10,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  7,
+                  7
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 22,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 27,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  8,
+                  15
+                ]
+              },
+              "cur": {
+                "time": 28,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  8,
+                  17
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 28,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 33,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  11,
+                  18
+                ]
+              },
+              "cur": {
+                "time": 34,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  13,
+                  18
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 31,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 36,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  14,
+                  18
+                ]
+              },
+              "cur": {
+                "time": 37,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 11,
+                "xp": 1,
+                "pos": [
+                  16,
+                  18
+                ]
+              },
+              "msg": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "rschaff__2026-07-06.02_08_45.ttyrec",
+      "records": 6703,
+      "parsed": 6611,
+      "steps": 2684,
+      "maxDlvl": 13,
+      "rules": {
+        "V_TIME": {
+          "checked": 2683,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_HP": {
+          "checked": 2684,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_XP": {
+          "checked": 2683,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_DEPTH": {
+          "checked": 2074,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_MOVE": {
+          "checked": 1940,
+          "viol": 539,
+          "rate": 0.27783505154639176,
+          "samples": [
+            {
+              "step": 9,
+              "why": "hero moved chebyshev=6 in 1 turn",
+              "prev": {
+                "time": 5714,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  76,
+                  9
+                ]
+              },
+              "cur": {
+                "time": 5715,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  79,
+                  3
+                ]
+              },
+              "msg": "                                                            "
+            },
+            {
+              "step": 10,
+              "why": "hero moved chebyshev=5 in 1 turn",
+              "prev": {
+                "time": 5715,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  79,
+                  3
+                ]
+              },
+              "cur": {
+                "time": 5716,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  79,
+                  8
+                ]
+              },
+              "msg": "                                                            "
+            },
+            {
+              "step": 11,
+              "why": "hero moved chebyshev=3 in 1 turn",
+              "prev": {
+                "time": 5716,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  79,
+                  8
+                ]
+              },
+              "cur": {
+                "time": 5717,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  76,
+                  9
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 13,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 5718,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  76,
+                  9
+                ]
+              },
+              "cur": {
+                "time": 5719,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  74,
+                  9
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 14,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 5719,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  74,
+                  9
+                ]
+              },
+              "cur": {
+                "time": 5720,
+                "depth": 4,
+                "hp": 86,
+                "hpmax": 86,
+                "xp": 9,
+                "pos": [
+                  72,
+                  9
+                ]
+              },
+              "msg": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "rschaff__2026-07-06.02_42_54.ttyrec",
+      "records": 2613,
+      "parsed": 2437,
+      "steps": 1002,
+      "maxDlvl": 6,
+      "rules": {
+        "V_TIME": {
+          "checked": 1001,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_HP": {
+          "checked": 1002,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_XP": {
+          "checked": 1001,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_DEPTH": {
+          "checked": 897,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_MOVE": {
+          "checked": 865,
+          "viol": 236,
+          "rate": 0.2728323699421965,
+          "samples": [
+            {
+              "step": 3,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 3,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  3
+                ]
+              },
+              "cur": {
+                "time": 4,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  5
+                ]
+              },
+              "msg": "you swap places with hachi."
+            },
+            {
+              "step": 4,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 4,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  5
+                ]
+              },
+              "cur": {
+                "time": 5,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  7
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 6,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 6,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  8
+                ]
+              },
+              "cur": {
+                "time": 7,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  11,
+                  10
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 12,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 14,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  8,
+                  13
+                ]
+              },
+              "cur": {
+                "time": 15,
+                "depth": 1,
+                "hp": 11,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  8,
+                  15
+                ]
+              },
+              "msg": "the fox bites!"
+            },
+            {
+              "step": 26,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 33,
+                "depth": 1,
+                "hp": 9,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  22,
+                  19
+                ]
+              },
+              "cur": {
+                "time": 34,
+                "depth": 1,
+                "hp": 9,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  24,
+                  19
+                ]
+              },
+              "msg": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "file": "rschaff__2026-07-07.23_22_57.ttyrec",
+      "records": 21034,
+      "parsed": 20604,
+      "steps": 8498,
+      "maxDlvl": 12,
+      "rules": {
+        "V_TIME": {
+          "checked": 8497,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_HP": {
+          "checked": 8498,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_XP": {
+          "checked": 8497,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_DEPTH": {
+          "checked": 6746,
+          "viol": 0,
+          "rate": 0.0,
+          "samples": []
+        },
+        "V_MOVE": {
+          "checked": 6347,
+          "viol": 1663,
+          "rate": 0.2620135497085237,
+          "samples": [
+            {
+              "step": 4,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 4,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  19,
+                  4
+                ]
+              },
+              "cur": {
+                "time": 5,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  17,
+                  4
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 7,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 7,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  16,
+                  4
+                ]
+              },
+              "cur": {
+                "time": 8,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  14,
+                  4
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 8,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 8,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  14,
+                  4
+                ]
+              },
+              "cur": {
+                "time": 9,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  14,
+                  6
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 14,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 18,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  15,
+                  15
+                ]
+              },
+              "cur": {
+                "time": 19,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  15,
+                  17
+                ]
+              },
+              "msg": ""
+            },
+            {
+              "step": 24,
+              "why": "hero moved chebyshev=2 in 1 turn",
+              "prev": {
+                "time": 28,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  11,
+                  14
+                ]
+              },
+              "cur": {
+                "time": 29,
+                "depth": 1,
+                "hp": 15,
+                "hpmax": 15,
+                "xp": 1,
+                "pos": [
+                  10,
+                  16
+                ]
+              },
+              "msg": ""
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "by_rule": {
+      "V_TIME": {
+        "checked": 14760,
+        "viol": 0,
+        "rate": 0.0
+      },
+      "V_HP": {
+        "checked": 14764,
+        "viol": 0,
+        "rate": 0.0
+      },
+      "V_XP": {
+        "checked": 14760,
+        "viol": 0,
+        "rate": 0.0
+      },
+      "V_DEPTH": {
+        "checked": 12123,
+        "viol": 0,
+        "rate": 0.0
+      },
+      "V_MOVE": {
+        "checked": 11283,
+        "viol": 2606,
+        "rate": 0.23096694141628998
+      }
+    },
+    "total_checked": 67690,
+    "total_viol": 2606,
+    "overall_rate": 0.03849903973999114
+  }
+}
