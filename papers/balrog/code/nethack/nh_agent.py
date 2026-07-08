@@ -82,6 +82,8 @@ C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
 C2_ANTIFAINT = _flag("NH_ANTIFAINT")  # Phase L s9: eat-at-HUNGRY anti-faint guard
 C2_FOODACQ = _flag("NH_FOODACQ")  # Phase L s11: proactive safe-corpse banking
 C2_PET = _flag("NH_PET")          # Phase L s12: pet utilization (preserve-on-descent)
+C2_WIELD = _flag("NH_WIELD")      # Phase L s13: wield best-in-inventory weapon (direct combat-capability injection)
+C2_WIELDACQ = _flag("NH_WIELDACQ")  # Phase L s13: ACQUIRE a floor weapon that upgrades melee, then wield it
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -158,7 +160,7 @@ C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_THREAT, C2_TOPO, C2_PACE, C2_ELBERETH, C2_GUARD, C2_CAST,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
               C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT,
-              C2_FOODACQ, C2_PET))
+              C2_FOODACQ, C2_PET, C2_WIELD, C2_WIELDACQ))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -192,6 +194,35 @@ FOODACQ_COOLDOWN = int(_os.environ.get("NH_FOODACQ_COOLDOWN", "8"))  # s11 bank 
 # PET_WAIT_RADIUS = only wait if the pet is close enough to plausibly catch up.
 PET_WAIT_MAX = int(_os.environ.get("NH_PET_WAIT_MAX", "8"))     # turns per stair
 PET_WAIT_RADIUS = int(_os.environ.get("NH_PET_WAIT_RADIUS", "5"))  # only wait if <=
+# WIELD UPGRADE (NH_WIELD, Phase L s13): the CAPABILITY-side combat lever the s12
+# PET null points to (presence side inert -> try the capability side). Before a
+# non-crisis turn, if a carried (not-wielded) NON-thrown weapon beats the current
+# wielded (or unarmed) melee dpt by WIELD_MARGIN and it is safe (no adjacent
+# hostile -> we won't be caught mid-swap weaponless), wield it. Thrown-primary
+# weapons (darts/daggers used for ranged) are EXCLUDED so we don't disarm the
+# ranged game. Monk excluded (martial arts > any early weapon). dpt from the
+# nh_sheet character sheet (counterfactual_power / attack_options). Zero wield
+# actions have EVER been taken in program history -> cleanest direct combat-
+# capability injection. Ships DEFAULT-OFF, bit-identical when off.
+WIELD_MARGIN = float(_os.environ.get("NH_WIELD_MARGIN", "0.5"))  # min dpt gain to swap
+# NH_WIELD_DIAG (s13): READ-ONLY diagnosis of WHY wield never fires. Distinguishes
+# (a) acquisition-bound [a better weapon is ON THE FLOOR but the agent has no
+# floor-weapon perception / never loots it] from (c) already-optimal [no better
+# weapon exists anywhere]. Scans visible glyphs for WEAPON_CLASS objects, prices
+# them via the character sheet, and tracks the best floor-weapon dpt seen vs the
+# current wielded dpt. Pure observation -> emits notes only, never an action, so
+# arms stay bit-identical.
+WIELD_DIAG = _os.environ.get("NH_WIELD_DIAG") == "1"
+# NH_WIELDACQ (s13 PIVOT): the diagnosis showed wield never fires because weak-
+# weapon roles (Healer scalpel, Tourist) walk PAST a better weapon on the floor
+# (seed 746 Healer: a mace, dpt +1.44, in view 25+ steps, never taken) — the
+# agent has the wield mechanism but no LOOT behavior. This is the acquisition-
+# bound meta-finding (the exact parallel to the anti-faint "no food to eat"
+# null). NH_WIELDACQ closes the loop: detour up to WIELDACQ_RADIUS to a floor
+# weapon that beats the current melee dpt by WIELD_MARGIN, pick it up (then the
+# NH_WIELD lever wields it). Bounded detour + loot_tries cap = the FOODACQ
+# no-stall discipline (CARD S11-2). Ammo/thrown-primary excluded (melee only).
+WIELDACQ_RADIUS = int(_os.environ.get("NH_WIELDACQ_RADIUS", "8"))  # max detour steps
 # NH-E6 THROW-DISENGAGE lever (session 5, claude-opus-4-8[1m] max thinking):
 # the s4 REST-lever paired block DROPPED because the crisis-flee threshold
 # tune never reaches the failure mode — fatal TRASH deaths carry a SAME-SPEED
@@ -333,6 +364,13 @@ class DiveAgent:
         self.cast_hunger_events = 0
         self.rest_budget = {}                   # level key -> turns rested
         self.ready_gate_fires = 0               # NH-READY_GATE rest-to-buffer
+        self.wield_fires = 0                    # NH_WIELD (s13) upgrade swaps
+        self._floor_wpn_max = 0.0               # NH_WIELD_DIAG: best floor-weapon dpt seen
+        self._floor_wpn_name = None
+        self._floor_upgrade_steps = 0           # steps w/ a floor weapon beating current
+        self._cur_wield_dpt_last = 0.0
+        self.wieldacq_fires = 0                 # NH_WIELDACQ pickups
+        self._pickup_wpn_kw = None              # targeted weapon keyword for pickup menu
         # NH-ADVISORY (LLM-strategist) per-episode state
         self.advisory_consults = 0              # consults issued this episode
         self.advisory_last_step = -10 ** 9      # min-gap throttle
@@ -1421,6 +1459,26 @@ class DiveAgent:
                               f"(hunger {A.hunger}, {len(path)} steps)")
                     return self._step_path(path)
 
+        if WIELD_DIAG:                         # read-only floor-weapon diagnosis
+            self._wield_diag(obs)
+
+        # WEAPON ACQUISITION (NH_WIELDACQ, s13 pivot) — close the loot gap so a
+        # floor weapon that upgrades melee is actually taken; the NH_WIELD lever
+        # then wields it. Safe/non-crisis gated; bounded detour.
+        if C2_WIELDACQ and A.hunger < C.WEAK and not self._adjacent_hostiles():
+            aa = self._weapon_acquire(obs)
+            if aa is not None:
+                return aa
+
+        # WIELD UPGRADE (NH_WIELD, Phase L s13) — direct combat-capability
+        # injection. Non-crisis capability upkeep: swap to a strictly better
+        # carried weapon while safe. Gated on hunger < WEAK (crisis eats win
+        # below) and no adjacent hostile (never be caught mid-swap weaponless).
+        if C2_WIELD and A.hunger < C.WEAK and not self._adjacent_hostiles():
+            wa = self._wield_upgrade(obs)
+            if wa is not None:
+                return wa
+
         # hunger crisis handled with priority right below emergencies
         if A.hunger >= C.WEAK:
             self._goal("eat", f"hunger {A.hunger}")
@@ -2101,6 +2159,8 @@ class DiveAgent:
             elif self.pickup_kind in ("armor", "armor2"):
                 kws = kws + P.BODY_ARMOR + P.HELMETS + P.SHIELDS + \
                     P.BOOTS_GLOVES if P else kws
+            elif self.pickup_kind == "weapon" and self._pickup_wpn_kw:
+                kws = kws + (self._pickup_wpn_kw,)
             letter = self._menu_letter_for(obs, kws)
             if letter and self.queue_tag == "pickup":
                 self.pickup_kind = None
@@ -2573,6 +2633,200 @@ class DiveAgent:
             self._adv_explore_until = win
         # FIGHT / PRESS_ON / FAIL -> no strategic redirect
         return None
+
+    def _wield_diag(self, obs):
+        """NH_WIELD_DIAG (s13): READ-ONLY. Scan the visible map for floor
+        weapons, price each via the sheet, and track the best floor-weapon dpt
+        seen vs the current wielded dpt across the episode. Distinguishes
+        acquisition-bound (a better weapon lies on the floor, unlooted) from
+        already-optimal (none exists). Emits notes only; returns nothing."""
+        try:
+            import numpy as _np
+            import nh_sheet
+            A = self.atlas
+            if self.steps % 5 != 0:          # bound cost over long episodes
+                return
+            inv = self._inv(obs)
+            opts = nh_sheet.attack_options(self.role, A.xplvl, inv,
+                                           spells=None, pw=A.pw)
+            cur = [o for o in opts if o[0] == "wield-current"]
+            unarmed = [o for o in opts if o[0] == "unarmed"]
+            cur_dpt = cur[0][3] if cur else (unarmed[0][3] if unarmed else 0.0)
+            self._cur_wield_dpt_last = cur_dpt
+            ph = nh_sheet._p_hit_melee(A.xplvl, self.role)
+            W = nh_sheet.weapons()
+            ga = _np.asarray(obs["obs"]["glyphs"])
+            ax, ay = A.agent
+            best_dpt, best_name, best_dist = 0.0, None, 99
+            for g, (nm, ocl) in P._OBJ_NAME.items():
+                if ocl != P.WEAPON_CLASS or not nm:
+                    continue
+                ys, xs = _np.nonzero(ga == g)
+                if not len(ys):
+                    continue
+                wl = nh_sheet.weapon_lookup(nm)
+                if not wl:
+                    continue
+                dpt = round(wl[1]["dsmall"] * ph, 2)
+                for y, x in zip(ys.tolist(), xs.tolist()):
+                    dist = max(abs(x - ax), abs(y - ay))
+                    if dpt > best_dpt or (dpt == best_dpt and dist < best_dist):
+                        best_dpt, best_name, best_dist = dpt, wl[0], dist
+            if best_name is None:
+                return
+            if best_dpt > self._floor_wpn_max + 1e-9:
+                self._floor_wpn_max = best_dpt
+                self._floor_wpn_name = best_name
+                self.note(f"FLOORWPN see {best_name} dpt {best_dpt} "
+                          f"(cur wield {cur_dpt:.2f}, dist {best_dist})")
+            if best_dpt - cur_dpt >= WIELD_MARGIN:
+                self._floor_upgrade_steps += 1
+                if self._floor_upgrade_steps in (1, 5, 25, 100):
+                    self.note(f"FLOORWPN UPGRADE {best_name} dpt {best_dpt} > "
+                              f"cur {cur_dpt:.2f} (dist {best_dist}, "
+                              f"n={self._floor_upgrade_steps})")
+        except Exception:               # noqa: BLE001 — pure diagnostic
+            return
+
+    _ACQ_AMMO = {"arrow", "elven arrow", "orcish arrow", "silver arrow", "ya",
+                 "crossbow bolt", "rock", "flint stone", "boomerang"}
+
+    def _best_floor_weapon(self, obs, melee_only=True):
+        """(dpt, name, (x,y), dist) of the highest-priced weapon glyph in view,
+        or None. melee_only drops ammo/thrown-primary (we don't detour for an
+        arrow). Pure read of the served glyphs + frozen weapon table."""
+        try:
+            import numpy as _np
+            import nh_sheet
+            A = self.atlas
+            ph = nh_sheet._p_hit_melee(A.xplvl, self.role)
+            W = nh_sheet.weapons()
+            ga = _np.asarray(obs["obs"]["glyphs"])
+            ax, ay = A.agent
+            best = None
+            for g, (nm, ocl) in P._OBJ_NAME.items():
+                if ocl != P.WEAPON_CLASS or not nm:
+                    continue
+                wl = nh_sheet.weapon_lookup(nm)
+                if not wl:
+                    continue
+                name, row = wl
+                if melee_only and (name in self._ACQ_AMMO
+                                   or row["skill"] in nh_sheet.THROWN_SKILLS):
+                    continue
+                ys, xs = _np.nonzero(ga == g)
+                if not len(ys):
+                    continue
+                dpt = round(row["dsmall"] * ph, 2)
+                for y, x in zip(ys.tolist(), xs.tolist()):
+                    dist = max(abs(x - ax), abs(y - ay))
+                    if best is None or dpt > best[0] or (
+                            dpt == best[0] and dist < best[3]):
+                        best = (dpt, name, (x, y), dist)
+            return best
+        except Exception:               # noqa: BLE001
+            return None
+
+    def _weapon_acquire(self, obs):
+        """NH_WIELDACQ (s13 pivot): close the acquisition gap. If a floor weapon
+        beats the current melee dpt by WIELD_MARGIN and is reachable within
+        WIELDACQ_RADIUS while safe, detour to it and pick it up; the NH_WIELD
+        lever then wields it next cycle. Bounded detour + loot_tries cap =
+        no-stall discipline (FOODACQ CARD S11-2). Returns an action or None."""
+        try:
+            import nh_sheet
+            A = self.atlas
+            L = A.level
+            inv = self._inv(obs)
+            opts = nh_sheet.attack_options(self.role, A.xplvl, inv,
+                                           spells=None, pw=A.pw)
+            cur = [o for o in opts if o[0] == "wield-current"]
+            un = [o for o in opts if o[0] == "unarmed"]
+            cur_dpt = cur[0][3] if cur else (un[0][3] if un else 0.0)
+            bf = self._best_floor_weapon(obs, melee_only=True)
+            if not bf:
+                return None
+            dpt, name, cell, dist = bf
+            if dpt - cur_dpt < WIELD_MARGIN or dist > WIELDACQ_RADIUS:
+                return None
+            tk = (A.key, cell)
+            if self.loot_tries.get(tk, 0) >= 8:
+                return None
+            if cell == A.agent:
+                self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self.wieldacq_fires += 1
+                self.pickup_kind = "weapon"
+                self._pickup_wpn_kw = name
+                self.queue_tag = "pickup"
+                self._goal("acquire", f"weapon {name} {cur_dpt:.2f}->{dpt:.2f}")
+                self.note(f"WIELDACQ pickup {name} (melee dpt "
+                          f"{cur_dpt:.2f}->{dpt:.2f}, +{dpt - cur_dpt:.2f})")
+                return "pickup"
+            path = L.bfs(A.agent, [cell], avoid=self._travel_avoid({cell}))
+            if path and len(path) <= WIELDACQ_RADIUS:
+                if len(path) <= 2:
+                    self.loot_tries[tk] = self.loot_tries.get(tk, 0) + 1
+                self._goal("acquire", f"walk to {name} d{len(path)}")
+                self.note(f"WIELDACQ walk to {name} ({len(path)} steps, "
+                          f"dpt +{dpt - cur_dpt:.2f})")
+                return self._step_path(path)
+            return None
+        except Exception:               # noqa: BLE001 — fail-safe, never a gate
+            return None
+
+    def _wield_upgrade(self, obs):
+        """NH_WIELD (s13): wield the best CARRIED weapon when its melee dpt
+        beats the current wielded (or unarmed) melee dpt by WIELD_MARGIN.
+        Returns a "wield" action (with the item letter queued for the follow-up
+        prompt, mirroring the wear action) or None. Fail-safe: any error -> None
+        (never a gate). Excludes Monk (martial arts) and thrown-primary weapons
+        (darts/daggers we keep for the ranged game). Caller has already gated on
+        safety (no adjacent hostile) + non-crisis hunger.
+
+        Program note (s13): this lever's counterfactual is EMPTY on the corpus
+        (and across all 15 roles, 77/77 role-episodes) because NetHack roles
+        start wielding their best in-inventory weapon -> zero upgrades exist in
+        inventory. The mechanism is nonetheless correct and fires on a synthetic
+        scalpel+long-sword inventory (snapshot fixture); the 0-fire-in-play is a
+        WORLD property (no better weapon is carried), not a broken lever. See
+        DOCTRINE_CARDS_s13 / PROGRAM_FINDINGS 11th angle."""
+        try:
+            import nh_sheet
+            A = self.atlas
+            if self.role == "Monk":
+                return None
+            inv = self._inv(obs)
+            opts = nh_sheet.attack_options(self.role, A.xplvl, inv,
+                                           spells=None, pw=A.pw)
+            cur = [o for o in opts if o[0] == "wield-current"]
+            unarmed = [o for o in opts if o[0] == "unarmed"]
+            cur_dpt = cur[0][3] if cur else (unarmed[0][3] if unarmed else 0.0)
+            W = nh_sheet.weapons()
+
+            def _thrown(name):
+                wl = W.get(name)
+                return bool(wl and wl["skill"] in nh_sheet.THROWN_SKILLS)
+            # best carried NON-thrown-primary wield candidate
+            cand = None
+            for o in opts:                       # opts sorted desc by dpt
+                if o[0] == "wield-carried" and not _thrown(o[2]):
+                    cand = o
+                    break
+            if cand is None:
+                return None
+            gain = cand[3] - cur_dpt
+            if gain < WIELD_MARGIN:
+                return None
+            letter = cand[1]
+            self.wield_fires = getattr(self, "wield_fires", 0) + 1
+            self._goal("wield", f"{cand[2]} (dpt {cur_dpt:.2f}->{cand[3]:.2f})")
+            self.note(f"WIELD upgrade to {cand[2]} letter {letter} "
+                      f"(melee dpt {cur_dpt:.2f}->{cand[3]:.2f}, +{gain:.2f})")
+            self.queue = [letter]
+            self.queue_tag = "wield"
+            return "wield"
+        except Exception:               # noqa: BLE001 — fail-safe, never a gate
+            return None
 
     def _readiness_ratio(self, obs, depth):
         """RR(depth) via nh_sheet: (best_dpt*hp)/(band_dpt_p75*band_hp).

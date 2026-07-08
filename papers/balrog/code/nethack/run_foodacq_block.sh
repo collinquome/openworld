@@ -8,6 +8,10 @@ cd /data/doh/teams/researchy/work/fable_nethack
 export PYTHONPATH=pylib
 REF_FLAGS="NH_FOOD2=1 NH_PRAYFIX=1 NH_LOS=1 NH_TOPO=1 NH_GUARD=1 NH_CAST=1 NH_CASTHUNGER=1 NH_E15=1"
 CAP=${NH_STEPCAP:-2500}
+# s12 lesson (CARD S12-2): the hardcoded 280s timeout SIGKILLed slow FAINTING-
+# corpus episodes (REF survivors run the full cap) -> TIMEOUT_OR_FAIL, unusable.
+# Fix: NH_EP_TIMEOUT>=500 (or cap<=1600). Default raised to 500.
+TIMEOUT=${NH_EP_TIMEOUT:-500}
 OUT=$1; shift
 touch "$OUT"
 for seed in "$@"; do
@@ -16,7 +20,7 @@ for seed in "$@"; do
       echo "skip $arm $seed (done)"; continue
     fi
     EXTRA=""; [ "$arm" = "TEST" ] && EXTRA="NH_FOODACQ=1 NH_ANTIFAINT=1"
-    line=$(env NH_STEPCAP=$CAP $REF_FLAGS $EXTRA timeout 280 \
+    line=$(env NH_STEPCAP=$CAP $REF_FLAGS $EXTRA timeout $TIMEOUT \
            python3 e35_antifaint_smoke.py "$arm" "$seed" 2>/dev/null | grep "^JSONL ")
     if [ -z "$line" ]; then
       echo "FAIL/timeout $arm $seed"

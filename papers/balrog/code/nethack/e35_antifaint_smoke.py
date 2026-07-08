@@ -9,6 +9,7 @@ Usage: NH_FOOD2=1 ... [NH_ANTIFAINT=1] python3 e35_antifaint_smoke.py <arm> <see
 """
 import json
 import os
+import re
 import sys
 
 import nh_runner
@@ -32,6 +33,20 @@ def run(arm, seed):
     fires = sum(1 for n in notes if "ANTIFAINT" in str(n))
     facq = sum(1 for n in notes if "FOODACQ" in str(n))
     petw = sum(1 for n in notes if "PET wait" in str(n))
+    wield = sum(1 for n in notes if "WIELD upgrade" in str(n))
+    wacq = sum(1 for n in notes if "WIELDACQ pickup" in str(n))
+    wacq_walk = sum(1 for n in notes if "WIELDACQ walk" in str(n))
+    # NH_WIELD_DIAG extraction (acquisition-bound test): best floor-weapon dpt
+    # seen, its name, and how many steps a floor weapon beat the current wield.
+    floor_dpt, floor_name, floor_upg = 0.0, None, 0
+    for n in notes:
+        s = str(n)
+        m = re.search(r"FLOORWPN see (.+?) dpt ([\d.]+) \(cur wield ([\d.]+)", s)
+        if m and float(m.group(2)) > floor_dpt:
+            floor_dpt, floor_name = float(m.group(2)), m.group(1)
+        m2 = re.search(r"FLOORWPN UPGRADE .+ n=(\d+)", s)
+        if m2:
+            floor_upg = max(floor_upg, int(m2.group(1)))
     # pet survival: monsters snapshots = [[step, [[x,y,name,pet],...]], ...].
     # pet_start = a pet present in an early (<=step 50) snapshot; pet_end = a pet
     # present in the LAST snapshot (still with the agent at episode end/death).
@@ -53,6 +68,9 @@ def run(arm, seed):
     return {"seed": seed, "arm": arm, "end_reason": er, "maxhunger": maxh,
             "maxhunger_name": HUNGER_NAME.get(maxh, maxh),
             "antifaint_fires": fires, "foodacq_fires": facq,
+            "wield_fires": wield, "wieldacq_fires": wacq,
+            "wieldacq_walk": wacq_walk, "floor_wpn_dpt": floor_dpt,
+            "floor_wpn_name": floor_name, "floor_upgrade_steps": floor_upg,
             "pet_waits": petw, "pet_start": pet_start, "pet_end": pet_end,
             "pet_maxdepth_present": pet_maxdepth_present,
             "steps": res.get("steps"),
@@ -70,6 +88,7 @@ def main():
         r = run(arm, s)
         print(f"  seed {r['seed']:4d} end={r['end_reason'][:34]:34s} "
               f"maxHunger={r['maxhunger_name']:8s} facq={r['foodacq_fires']:3d} "
+              f"wield={r['wield_fires']:2d} "
               f"petw={r['pet_waits']:3d} pet_end={int(r['pet_end'])} "
               f"pet_dmax={r['pet_maxdepth_present']} "
               f"steps={r['steps']} depth={r['depth_max']} prog={r['prog']}")
