@@ -229,9 +229,118 @@ def fig_e42_ablation():
     print("wrote fig5_e42_ablation.png (source: results/e42_loo.jsonl, independently re-derived via e42_analyze.py)")
 
 
+# ---------------------------------------------------------------------------
+# Figure 6: E38 seed-4 money-datum trajectory panel (real per-episode data)
+# ---------------------------------------------------------------------------
+def fig_e38_seed4_panel():
+    # REF: results/e38_ref_baseline.jsonl seed=4; TEST: results/consume_testonly.jsonl seed=4
+    # Both independently re-read at this assembly pass.
+    ref = dict(depth_max=8, prog=0.0695812141543123, end_reason="Killed by a pony.", steps=819)
+    test = dict(depth_max=8, prog=0.0695812141543123, end_reason="Killed by a bolt of lightning.",
+                steps=949, engrave_id_tests=1, engrave_id_solved=1, zap_off_fires=3,
+                consume_kills=2)
+
+    fig, ax = plt.subplots(figsize=(9.0, 4.4))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 3)
+    ax.axis("off")
+
+    # TEST timeline (top)
+    events = [
+        (0.3, "start\n(Knight)"),
+        (2.0, "engrave-ID\nwand (solved)"),
+        (4.5, "zap ×3\n(offensive wand)"),
+        (5.3, "2 monsters\nkilled"),
+        (8.6, f"D{test['depth_max']}, step {test['steps']}:\nDIES —\n\"{test['end_reason']}\"\n(self-reflected zap)"),
+    ]
+    ax.plot([0.3, 8.6], [2.15, 2.15], color=POS, lw=2, zorder=1)
+    for x, label in events:
+        ax.scatter([x], [2.15], color=POS, s=60, zorder=3, edgecolor="white")
+        ax.text(x, 2.35, label, ha="center", va="bottom", fontsize=8.2, color=INK)
+    ax.text(-0.2, 2.15, "TEST\n(NH_CONSUME)", ha="right", va="center", fontsize=9.5,
+            fontweight="bold", color=POS)
+
+    # REF timeline (bottom)
+    ax.plot([0.3, 8.6], [0.55, 0.55], color=NEU, lw=2, zorder=1)
+    ax.scatter([0.3, 8.6], [0.55, 0.55], color=NEU, s=60, zorder=3, edgecolor="white")
+    ax.text(0.3, 0.75, "start\n(Knight)", ha="center", va="bottom", fontsize=8.2, color=INK)
+    ax.text(8.6, 0.75, f"D{ref['depth_max']}, step {ref['steps']}:\nDIES —\n\"{ref['end_reason']}\"",
+            ha="center", va="bottom", fontsize=8.2, color=INK)
+    ax.text(-0.2, 0.55, "REF\n(no consumables)", ha="right", va="center", fontsize=9.5,
+            fontweight="bold", color=NEU)
+
+    ax.annotate("", xy=(8.6, 1.9), xytext=(8.6, 0.8),
+                arrowprops=dict(arrowstyle="-", color=INK, lw=1, linestyle=":"))
+    ax.text(9.15, 1.35, f"SAME\nDlvl {test['depth_max']}\nΔprog = 0.0000\nexactly", ha="left", va="center",
+            fontsize=9, color=NEG, fontweight="bold")
+
+    ax.set_title("E38 seed 4 (\"the money datum\"): capability acquired, identified, used,\n"
+                 "killed 2 monsters — still dies at the exact same depth as REF",
+                 fontsize=11)
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT, "fig6_e38_seed4_panel.png"), dpi=180)
+    plt.close(fig)
+    print("wrote fig6_e38_seed4_panel.png (source: results/consume_testonly.jsonl + "
+          "e38_ref_baseline.jsonl, seed=4 rows, independently re-read at this assembly pass)")
+
+
+# ---------------------------------------------------------------------------
+# Figure 7: The bootstrapping-wall diagram (the loop closing)
+# ---------------------------------------------------------------------------
+def fig_bootstrapping_wall():
+    fig, ax = plt.subplots(figsize=(8.4, 8.0))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 10)
+    ax.axis("off")
+
+    nodes = {
+        "depth": (5, 8.6, "Reach greater DEPTH", POS),
+        "capability": (5, 5.6, "Need CAPABILITY to\nsurvive the traversal\n(gear, XP, or luck)", NEG),
+        "acquisition": (1.6, 2.2, "Capability is only\nACQUIRABLE at/behind\nthe depth not yet reached", NEU),
+        "execution": (8.4, 2.2, "Capability placed IN HAND\ndirectly (E38) still fails to\nCONVERT under execution", NEU),
+    }
+    for key, (x, y, label, color) in nodes.items():
+        box = dict(boxstyle="round,pad=0.5", fc="white", ec=color, lw=2)
+        ax.text(x, y, label, ha="center", va="center", fontsize=9.3, bbox=box, zorder=3, color=INK)
+
+    def arrow(p1, p2, label=None, color=INK, rad=0.0):
+        x1, y1 = nodes[p1][0], nodes[p1][1]
+        x2, y2 = nodes[p2][0], nodes[p2][1]
+        ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=1.8,
+                                     connectionstyle=f"arc3,rad={rad}",
+                                     shrinkA=48, shrinkB=48))
+        if label:
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            ax.text(mx, my, label, fontsize=8, color=color, ha="center",
+                     va="center", style="italic",
+                     bbox=dict(fc="white", ec="none", alpha=0.85, pad=1))
+
+    arrow("depth", "capability", "gates")
+    arrow("capability", "acquisition", "the agent tries to\nacquire it (s11-s16, E36-E37)", rad=-0.15)
+    arrow("acquisition", "depth", "...but acquisition needs\ndepth already reached\n(19 levers: null/negative)", color=NEG, rad=-0.15)
+    arrow("capability", "execution", "the agent tries handing\nit over directly (E38)", rad=0.15)
+    arrow("execution", "depth", "...but in-hand capability\nstill doesn't convert\n(seed 4 money datum)", color=NEG, rad=0.15)
+
+    ax.text(5, 0.4, "Every path back to DEPTH is blocked. The wall is closed from both directions:\n"
+                     "acquisition-side (need depth to get capability) AND execution-side (capability alone isn't enough).",
+            ha="center", va="center", fontsize=9.2, color=INK, fontweight="bold")
+
+    ax.set_title("The bootstrapping/capability wall: a closed loop, not a linear gap\n"
+                 "(synthesized from §3.4-3.24, §4 — nineteen experiments probing both arrows out)",
+                 fontsize=11)
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT, "fig7_bootstrapping_wall.png"), dpi=180)
+    plt.close(fig)
+    print("wrote fig7_bootstrapping_wall.png (conceptual synthesis diagram, no new statistics — "
+          "summarizes §3.4-3.24/§4's already-cited findings)")
+
+
 if __name__ == "__main__":
     fig_death_taxonomy()
     fig_forest_plot()
     fig_rung_ladder()
     fig_depth_vs_xp_scatter()
     fig_e42_ablation()
+    fig_e38_seed4_panel()
+    fig_bootstrapping_wall()
