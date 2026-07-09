@@ -121,6 +121,8 @@ C2_CLEAR = _flag("NH_CLEAR")      # NH-E45: MAXIMAL fight-for-XP — the proper 
 #   rung). If this still nulls, the XP axis is definitively closed. Default-OFF.
 CLEAR_RADIUS = int(_os.environ.get("NH_CLEAR_RADIUS", "10"))
 CLEAR_BUDGET = int(_os.environ.get("NH_CLEAR_BUDGET", "600"))
+BC_HP_FRAC = float(_os.environ.get("NH_BC_HP", "0.6"))   # NH-E46b: fire learned combat only when hp < this*hpmax (danger)
+BC_ALLFIGHTS = _flag("NH_BC_ALL")  # override: fire on every fight (the crude E46 pilot behavior)
 C2_BC = _flag("NH_BC")            # NH-E46: LEARNED combat — a behavioral-cloning
 #   policy trained on AutoAscend (NHC winner, Xp med 8 vs our 1-3) picks the
 #   attack/move direction among adjacent hostiles from the local 9x9 window
@@ -2401,7 +2403,12 @@ class DiveAgent:
         # NH-E46 combat-BC: learned AutoAscend attack direction (default-OFF,
         # bit-identical). Overrides only when the BC picks a direction pointing
         # at an ADJACENT mobile hostile (bump=attack); else falls through.
-        if C2_BC and adj and not wd_disengaged:
+        # NH-E46b: gate learned combat to DANGER only (low HP / crisis). The
+        # pilot showed overriding EVERY fight trades depth for combat (Valkyrie
+        # D9->D6); the deaths are spikes at low HP. Firing only when hurt
+        # preserves efficient descent AND adds learned combat where we die.
+        _bc_danger = (not BC_ALLFIGHTS) and (self.atlas.hp < BC_HP_FRAC * max(1, self.atlas.hpmax))
+        if C2_BC and adj and not wd_disengaged and (BC_ALLFIGHTS or _bc_danger):
             try:
                 import e46_policy as _bcp
                 _A = self.atlas
