@@ -24,6 +24,7 @@ Layers (checked in order every step):
 All decisions replan per step from the Atlas belief state.
 """
 
+import json
 import re
 
 import nh_common as C
@@ -80,6 +81,12 @@ C2_E15 = _flag("NH_E15")          # Phase L: stall watchdog (NH-E15)
 C2_REPEAT = _flag("NH_REPEAT")    # Phase L: repeated-layout stair predictor
 C2_CASTHUNGER = _flag("NH_CASTHUNGER")  # Phase L: cast-refusal latch (V1a)
 C2_ANTIFAINT = _flag("NH_ANTIFAINT")  # Phase L s9: eat-at-HUNGRY anti-faint guard
+C2_PRAYHUNGER = _flag("NH_PRAYHUNGER")  # E39: emergency prayer fires on HUNGER
+# crisis (Weak/Fainting), not only HP<=6. Diagnosis: 0/64 long starve-loop
+# deaths ever prayed because the last-resort prayer trigger only checked HP.
+# Prayer while Weak/Fainting from hunger => god feeds you (standard NetHack
+# starvation rescue). Refactors emergency-prayer from an HP-only guard into a
+# crisis-concern that BOTH hp-crisis and hunger-crisis feed (additive concern).
 C2_FOODACQ = _flag("NH_FOODACQ")  # Phase L s11: proactive safe-corpse banking
 C2_PET = _flag("NH_PET")          # Phase L s12: pet utilization (preserve-on-descent)
 C2_WIELD = _flag("NH_WIELD")      # Phase L s13: wield best-in-inventory weapon (direct combat-capability injection)
@@ -370,8 +377,36 @@ ENCHANT_SCROLLS = ("enchant armor", "enchant weapon")
 # these last / only when nothing better (fire burns floor items; lightning
 # blinds). Still worth IDing; we just note the cost.
 ENGRAVE_RISKY = {"fire", "lightning"}
+# NH-E38b REFLECTION GUARD: directional wands whose zap is a BUZZ RAY that
+# bounces off walls and can re-enter the zapper's cell (NetHack 3.6.7 zap.c
+# `buzz`: AD_MAGM/FIRE/COLD/SLEE/DISN/ELEC rays reflect off stone/walls). In a
+# dead-end corridor a reversed ray returns to @ (the seed-4 self-reflected
+# "bolt of lightning" death). Striking is a non-ray bolt but we guard it too
+# (brief; conservative — over-guarding only costs a corridor zap, never a
+# death). Provenance: knowledge=WIKI + src/zap.c buzz(), disclosed.
+BOUNCING_RAY_WANDS = {"striking", "sleep_or_death", "sleep", "death", "cold",
+                      "fire", "lightning", "magic missile", "cancellation",
+                      "slow monster", "polymorph", "speed monster"}
 CONSUME_RADIUS = int(_os.environ.get("NH_CONSUME_RADIUS", "10"))     # max detour to a floor consumable
 CONSUME_LEVEL_BUDGET = int(_os.environ.get("NH_CONSUME_BUDGET", "25"))  # max detour steps/level (no-stall)
+RAY_RANGE = int(_os.environ.get("NH_RAY_RANGE", "13"))  # buzz-ray max travel (rn1(7,7)=7..13; use the max for the guard)
+
+# NH-E38b PRICE-ID reference (base-cost -> candidate identities per object
+# class). Provenance: knowledge=WIKI (Price identification) via kb_prices.py
+# parse of the NH-E13 wiki KB (results/kb_prices.json), OFFLINE + disclosed.
+# A shop-priced unidentified item narrows to table[class][base_cost]; we only
+# ACT on an UNAMBIGUOUS single-candidate cost (charisma/BUC price variance
+# makes multi-candidate costs unreliable). Shops are floor-scarce on the
+# shallow dungeon the dev sample dies in, so this fires rarely by design.
+try:
+    _PRICE_KB = json.load(open(_os.path.join(
+        _os.path.dirname(_os.path.abspath(__file__)), "results",
+        "kb_prices.json"))) if _os.path.exists(_os.path.join(
+        _os.path.dirname(_os.path.abspath(__file__)), "results",
+        "kb_prices.json")) else {}
+except Exception:                       # noqa: BLE001 — never a gate
+    _PRICE_KB = {}
+RE_UNPAID = re.compile(r"\((?:unpaid|for sale)[^)]*?(\d+) zorkmid")
 
 RE_KILLED = re.compile(r"You (?:kill|destroy) the ([a-zA-Z' -]+?)!")
 RE_SEE_HERE = re.compile(r"You see here (?:an? |the )?([^.]*)\.")
@@ -412,6 +447,18 @@ class DiveAgent:
         self.consume_kills = 0
         self.gainlevel_used = 0
         self.consume_detour = {}    # level key -> detour steps spent (no-stall budget)
+        # NH-E38b: read-identify + price-ID (raise the USE fire-rate: turn
+        # floor-acquired UNIDENTIFIED potions/scrolls into usable known items)
+        # + zap reflection guard (seed-4 self-zap-lightning death class).
+        self.item_belief = {}       # inv-letter -> resolved identity substring
+                                    #   (price-ID belief for potions/scrolls;
+                                    #   real read-ID mutates the desc directly)
+        self.identify_in_flight = 0 # step budget while a read-identify's target
+                                    #   prompt is being answered
+        self.identify_scroll = None # letter of the identify scroll being read
+        self._id_selected = False   # a target letter already toggled in a
+                                    #   blessed multi-select identify menu
+        self.priced_letters = set() # letters already price-ID adjudicated
         self.safelevel_turns = {}               # NH_SAFELEVEL: level key -> steps spent safe-leveling
         self.fresh_kills = []                   # (cell, species, time)
         self.role = None
@@ -737,6 +784,12 @@ class DiveAgent:
                     self.pending_engrave = None
                 else:
                     self.pending_engrave = (pl, win - 1)
+
+        # NH-E38b: shop price-ID belief refresh (cheap; adjudicates each unid
+        # priced consumable once). Kept ahead of the crisis quaff so a narrowed
+        # heal is available when a spike hits.
+        if C2_CONSUME:
+            self._price_id(obs)
 
         # message-driven terrain-under-agent knowledge (from 'look')
         low = msg.lower()
@@ -1110,11 +1163,15 @@ class DiveAgent:
             self.emergency_fired += 1
             self._ev(f"VETO: upstairs escape (hp {A.hp}/{A.hpmax})")
             return "up"
-        if A.hp <= 6 and self._pray_ok(last_resort=True):
+        hp_crisis = A.hp <= 6
+        hunger_crisis = C2_PRAYHUNGER and A.hunger >= C.WEAK
+        if (hp_crisis or hunger_crisis) and self._pray_ok(last_resort=True):
             self.prayed_at = A.time
             self.pray_count += 1
             self.emergency_fired += 1
-            self._ev(f"VETO: last-resort prayer (hp {A.hp}/{A.hpmax})")
+            why = "hunger" if (hunger_crisis and not hp_crisis) else "hp"
+            self._ev(f"VETO: last-resort prayer ({why}; hp {A.hp}/{A.hpmax} "
+                     f"hunger {A.hunger})")
             self.queue = ["y"]
             self.queue_tag = "pray"
             return "pray"
@@ -1231,18 +1288,52 @@ class DiveAgent:
                 elif wtype is None and letter not in self.engrave_tested:
                     out["unid_wand"].append((letter, desc))
             elif oc == POTION_CLASS_INT and letter not in self.consumed_letters:
-                if any(h in d for h in HEAL_POTIONS) and "wand" not in d:
-                    out["heal_pot"].append((letter, d))
-                if any(g in d for g in GAINLEVEL_ITEMS):
+                # NH-E38b: a price-ID belief augments the game's own desc so a
+                # narrowed floor potion becomes usable (real read-ID mutates the
+                # desc directly and needs no belief).
+                dd = d + " " + self.item_belief.get(letter, "")
+                if any(h in dd for h in HEAL_POTIONS) and "wand" not in d:
+                    out["heal_pot"].append((letter, dd))
+                if any(g in dd for g in GAINLEVEL_ITEMS):
                     out["gainlevel"].append((letter, "quaff"))
             elif oc == SCROLL_CLASS_INT and letter not in self.consumed_letters:
-                if any(g in d for g in GAINLEVEL_ITEMS):
+                dd = d + " " + self.item_belief.get(letter, "")
+                if any(g in dd for g in GAINLEVEL_ITEMS):
                     out["gainlevel"].append((letter, "read"))
-                if any(e in d for e in ENCHANT_SCROLLS):
-                    out["enchant"].append((letter, d))
+                if any(e in dd for e in ENCHANT_SCROLLS):
+                    out["enchant"].append((letter, dd))
                 if "identify" in d:
                     out["identify"].append((letter, d))
         return out
+
+    def _is_unid(self, desc, oc):
+        """True if a potion/scroll/wand desc shows only its random APPEARANCE
+        (floor-acquired, not yet type-known) — the read-identify target set."""
+        d = desc.lower()
+        if oc == POTION_CLASS_INT:
+            return "potion of " not in d
+        if oc == SCROLL_CLASS_INT:
+            return "scroll of " not in d
+        if oc == WAND_CLASS_INT:
+            return "wand of " not in d
+        return False
+
+    def _unid_consumables(self, obs):
+        """Ordered read-identify targets: unidentified potions/scrolls first
+        (engrave-ID can't touch them — this is the whole point), unid wands
+        last (prefer the free engrave-test for those). Skips items we already
+        hold a price-ID belief for and letters we've consumed."""
+        pots_scrolls, wands = [], []
+        for letter, desc, oc in self._inv(obs):
+            if letter in self.consumed_letters or letter in self.item_belief:
+                continue
+            if oc in (POTION_CLASS_INT, SCROLL_CLASS_INT) and \
+                    self._is_unid(desc, oc):
+                pots_scrolls.append((letter, oc, desc))
+            elif oc == WAND_CLASS_INT and self._is_unid(desc, oc) and \
+                    letter not in self.wand_belief and "(0:" not in desc:
+                wands.append((letter, oc, desc))
+        return pots_scrolls + wands
 
     def _line_hostile(self, offensive=True, max_range=7):
         """Nearest non-peaceful hostile on a clear straight (cardinal/diagonal)
@@ -1279,6 +1370,54 @@ class DiveAgent:
                 best, bestd = (m, DIR_OF[(sx, sy)]), dist
         return best
 
+    def _ray_blocks(self, x, y):
+        """A cell that stops/reflects a buzz ray (wall/stone/bars/tree/closed
+        door). UNKNOWN (unexplored) is treated as blocking = stone: this is the
+        conservative choice that catches the dead-end-corridor return (the cell
+        past a corridor end is unexplored stone)."""
+        L = self.atlas.level
+        if not (0 <= x < C.COLS and 0 <= y < C.ROWS):
+            return True
+        return int(L.terrain[y][x]) in (C.WALL, C.IRONBARS, C.TREE, C.UNKNOWN,
+                                        C.DOOR_CLOSED)
+
+    def _ray_self_hit(self, sx, sy, max_range=None):
+        """Simulate a bouncing buzz ray fired from @ in direction (sx,sy) and
+        return True if it re-enters @'s own cell within range (self-hit). Bounce
+        model = NetHack src/zap.c buzz(): cardinal ray reverses off a head-on
+        wall; diagonal ray flips the blocked component (conservative: if either
+        diagonal bounce could return, we flag). One reversal then fizzle."""
+        if max_range is None:
+            max_range = RAY_RANGE
+        ax, ay = self.atlas.agent
+        x, y, dx, dy = ax, ay, sx, sy
+        for _ in range(max_range):
+            nx, ny = x + dx, y + dy
+            if self._ray_blocks(nx, ny):
+                if dx and dy:                       # diagonal
+                    vert_ok = not self._ray_blocks(x - dx, y + dy)  # flip dx
+                    horiz_ok = not self._ray_blocks(x + dx, y - dy)  # flip dy
+                    if vert_ok and not horiz_ok:
+                        dx = -dx
+                    elif horiz_ok and not vert_ok:
+                        dy = -dy
+                    elif vert_ok and horiz_ok:
+                        dx = -dx                    # corner: pick one
+                    else:
+                        dx, dy = -dx, -dy
+                else:                               # cardinal: reverse the axis
+                    if dx:
+                        dx = -dx
+                    else:
+                        dy = -dy
+                nx, ny = x + dx, y + dy
+                if self._ray_blocks(nx, ny):
+                    break                           # boxed in: ray fizzles
+            if (nx, ny) == (ax, ay):
+                return True
+            x, y = nx, ny
+        return False
+
     def _consume_zap(self, obs, crisis):
         """Zap a KNOWN offensive/control wand at a threat in line. THE spike-
         death counter: a wand of sleep/striking/death ends the unfleeable one-
@@ -1309,6 +1448,17 @@ class DiveAgent:
                 "slow monster": 4, "cancellation": 5, "polymorph": 6}
         letter, wtype = sorted(inv["off_wand"],
                                key=lambda lw: pref.get(lw[1], 9))[0]
+        # NH-E38b REFLECTION GUARD: a buzz ray fired down a dead-end corridor
+        # reverses off the far wall and returns to @ (the seed-4 self-reflected
+        # lightning death). Veto the zap if the ray path bounces back onto us;
+        # fall through to melee/flee. (In an open room the ray exits, no return
+        # -> zaps still fire.)
+        if wtype in BOUNCING_RAY_WANDS and self._ray_self_hit(*DIRS[dirkey]):
+            self.note(f"CONSUME zap-VETO reflect {wtype}({letter}) dir {dirkey} "
+                      f"at {m.name} d{max(abs(m.x-A.agent[0]),abs(m.y-A.agent[1]))} "
+                      f"(ray returns to @ in confined geometry)")
+            self._ev(f"CONSUME zap-VETO reflect {wtype}")
+            return None
         self.zapped_at[key] = self.zapped_at.get(key, 0) + 1
         self._pending_zap_kill = 3
         self._goal("zap", f"{wtype} at {m.name} d{max(abs(m.x-A.agent[0]),abs(m.y-A.agent[1]))}")
@@ -1367,7 +1517,65 @@ class DiveAgent:
             self.queue = [letter]
             self.queue_tag = "read"
             return "read"
+        # NH-E38b READ-IDENTIFY: spend a KNOWN scroll of identify on a floor-
+        # acquired UNIDENTIFIED potion/scroll (engrave-ID can only touch wands,
+        # so without this the USE layer never sees a picked-up potion/scroll ->
+        # the pilot's under-firing). Real ID: the game mutates the item's desc,
+        # so next step _consume_inv buckets it as usable (heal/gain-level/
+        # enchant). No zap risk, deterministic. "blind" blocks reading.
+        if inv["identify"] and self._unid_consumables(obs) and \
+                "blind" not in A.message.lower():
+            scroll_letter, _sd = inv["identify"][0]
+            tgt_letter, tgt_oc, tgt_desc = self._unid_consumables(obs)[0]
+            self.consumed_letters.add(scroll_letter)
+            self.identify_in_flight = 6      # step budget for the target prompt
+            self.identify_scroll = scroll_letter
+            self._id_selected = False
+            self._goal("read", f"identify {tgt_letter}")
+            self.note(f"CONSUME read-identify scroll {scroll_letter} -> target "
+                      f"{tgt_letter} ({tgt_desc[:24]})")
+            self._ev("CONSUME read-identify")
+            self.queue = [scroll_letter]     # answers 'What do you want to read?'
+            self.queue_tag = "read_id"
+            return "read"
         return None
+
+    def _price_id(self, obs):
+        """Shop PRICE-ID (NH-E38b): narrow an UNIDENTIFIED shop-priced potion/
+        scroll to a known identity when the base cost is UNAMBIGUOUS (a single
+        table candidate). Buy price = base * 4/3 (unid surcharge) at the Cha
+        11-15 x1 band; we invert conservatively and accept ONLY an exact single-
+        candidate hit so a mis-narrowed heal can't cause a bad quaff. Sets
+        item_belief[letter] (a belief, not a real ID). Fires only in a shop ->
+        rarely on the shallow dev sample (disclosed; charisma-band caveat)."""
+        if not C2_CONSUME or not _PRICE_KB:
+            return
+        try:
+            for letter, desc, oc in self._inv(obs):
+                if letter in self.priced_letters or letter in self.item_belief:
+                    continue
+                if oc not in (POTION_CLASS_INT, SCROLL_CLASS_INT) or \
+                        not self._is_unid(desc, oc):
+                    continue
+                m = RE_UNPAID.search(desc)
+                if not m:
+                    continue
+                self.priced_letters.add(letter)     # adjudicate once
+                price = int(m.group(1))
+                cls = "potion" if oc == POTION_CLASS_INT else "scroll"
+                names = set()
+                for cost_s, items in _PRICE_KB.get(cls, {}).items():
+                    base = int(cost_s)
+                    if base and round(base * 4 / 3) == price and len(items) == 1:
+                        names.add(items[0]["name"])
+                if len(names) == 1:
+                    name = next(iter(names))
+                    self.item_belief[letter] = f"{cls} of {name}"
+                    self.note(f"CONSUME price-id {letter}={cls} of {name} "
+                              f"(shop price {price})")
+                    self._ev(f"CONSUME price-id {cls} of {name}")
+        except Exception:                   # noqa: BLE001 — never a gate
+            return
 
     def _engrave_id(self, obs):
         """Low-risk wand identification: engrave-test an unidentified wand
@@ -1622,6 +1830,11 @@ class DiveAgent:
         else:
             self.last_prompt_sig = None
             self.prompt_repeats = 0
+            # NH-E38b: a read-identify interaction only lives across its
+            # consecutive prompts; once no prompt is open it is finished.
+            if C2_CONSUME and self.identify_in_flight:
+                self.identify_in_flight = 0
+                self._id_selected = False
             if not self.queue:
                 self.queue_tag = None   # tags only live into their prompt
 
@@ -1686,6 +1899,19 @@ class DiveAgent:
             self.pray_count += 1
             self.note(f"pray (hp {A.hp}/{A.hpmax})")
             self._goal("survive", f"pray hp {A.hp}/{A.hpmax}")
+            self.queue = ["y"]
+            self.queue_tag = "pray"
+            return "pray"
+        # E39 HUNGER-CRISIS PRAYER: pray when Weak/Fainting from hunger => god
+        # feeds you (the standard starvation rescue). Diagnosis: 0/64 long
+        # starve-loop deaths ever prayed because every prayer trigger checked
+        # only HP, never hunger. last_resort=True: imminent starvation waives
+        # the turn gates (an angry god beats starving). Default-OFF (bit-ident).
+        if C2_PRAYHUNGER and A.hunger >= C.WEAK and self._pray_ok(last_resort=True):
+            self.prayed_at = A.time
+            self.pray_count += 1
+            self.note(f"pray (hunger {A.hunger}, starvation rescue)")
+            self._goal("survive", f"pray hunger {A.hunger}")
             self.queue = ["y"]
             self.queue_tag = "pray"
             return "pray"
@@ -2110,7 +2336,12 @@ class DiveAgent:
             act = self._engrave_id(obs)
             if act:
                 return act
-            if A.hunger < C.WEAK and not adj:
+            # NH_CONSUME_NOACQ (E38b disentangle): use-only variant — skip the
+            # floor-consumable acquisition DETOUR to isolate consumable-USE effect
+            # from path-perturbation confound (the +2.64 on-fire signal was
+            # detour-driven: seed715 +7.92 had 0 use + 9 acq). Default unset =
+            # bit-identical to prior NH_CONSUME behavior.
+            if A.hunger < C.WEAK and not adj and not _os.environ.get("NH_CONSUME_NOACQ"):
                 act = self._consume_acquire(obs)
                 if act:
                     return act
@@ -2566,6 +2797,24 @@ class DiveAgent:
 
     def _answer_prompt(self, obs, msg, in_yn, in_getlin, waitspace):
         A = self.atlas
+        # NH-E38b READ-IDENTIFY target selection. After reading a known scroll
+        # of identify, the game asks "What would you like to identify?" — a
+        # getobj (single, uncursed) or a multi-select menu (blessed). Select an
+        # unidentified consumable letter; on a menu, toggle one then confirm.
+        # Bounded by identify_in_flight; the P0 repeat-escape covers any stall.
+        if C2_CONSUME and self.identify_in_flight > 0:
+            self.identify_in_flight -= 1
+            low = msg.lower()
+            tgts = self._unid_consumables(obs)
+            if (in_yn or in_getlin) and ("identify" in low or
+                                         "what would you like" in low):
+                return tgts[0][0] if tgts else "esc"
+            if waitspace and ("identify" in low or self._tty_has(obs, "identify")):
+                if tgts and not self._id_selected:
+                    self._id_selected = True
+                    return tgts[0][0]           # toggle in the multi-select menu
+                self._id_selected = False
+                return "more"                    # confirm selection / dismiss
         if in_getlin:
             return "esc"
         if in_yn:
