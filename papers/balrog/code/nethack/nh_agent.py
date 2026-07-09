@@ -102,6 +102,16 @@ C2_CONSUME = _flag("NH_CONSUME")  # NH-E38: CONSUMABLE ECONOMY — engrave-ID wa
 if not C2_CONSUME:
     C2_CONSUME = _flag("NH_IDGAME")
 C2_SAFELEVEL = _flag("NH_SAFELEVEL")  # Phase L s16: SAFE EARLY LEVELING — on D1-3, before diving, route to an ISOLATED SAFE weak monster to farm XP so we arrive at the D5-6 kill-zone stronger (the bootstrap-breaker: XP = the other unused capability)
+C2_ENGAGE = _flag("NH_ENGAGE")    # NH-E44: STOP AVOIDING WINNABLE MONSTERS. Diagnostic
+#   (E43): the agent reaches Dlvl 10 at XP LEVEL 1 (xp_by_depth={1:1..10:1}) — it
+#   treats EVERY hostile as a path-obstacle (_mcells) and routes around all of
+#   them, leaving huge XP unclaimed. SAFELEVEL nulled because it HUNTS isolated
+#   prey (rare, +0.4 lvl). This is different: exclude WINNABLE monsters (exchange
+#   model: catchable, low exp-loss) from the obstacle set so the agent walks
+#   through / bump-attacks the abundant IN-PATH trash for natural XP — no detour
+#   cost (avoidance costs steps too). Default-OFF, bit-identical when off.
+ENGAGE_LOSS_FRAC = float(_os.environ.get("NH_ENGAGE_LOSS", "0.30"))  # engage IFF exp HP-loss <= this*hp
+ENGAGE_HP_FRAC = float(_os.environ.get("NH_ENGAGE_HP", "0.6"))       # only when hp >= this*hpmax (don't pick fights while hurt)
 C2_FUNNEL = _flag("NH_FUNNEL")    # NH-E41: PROACTIVE anti-pack CHOKE-POINT
 #   combat. We die in SPIKES at ~Dlvl5 — killed in ~one exchange at ~35% HP.
 #   A big driver is BURST damage from a PACK (jackals/sewer rats/gnomes travel
@@ -960,9 +970,37 @@ class DiveAgent:
         """Monster cells to treat as path obstacles. Pets are NOT obstacles
         (moving into a pet swaps places) — treating them as walls let a
         following kitten box the agent into corridor dead-ends forever
-        (dev seeds 106/103: thousands of stationary searches)."""
+        (dev seeds 106/103: thousands of stationary searches).
+
+        NH-E44 NH_ENGAGE: winnable in-path monsters are ALSO not obstacles —
+        the agent paths through them (bump-attack) to claim natural XP instead
+        of routing around every hostile (the D10-at-XP1 pathology)."""
         L = self.atlas.level
-        return {m.pos for m in L.monsters if not (hostile_only and m.pet)}
+        cells = {m.pos for m in L.monsters if not (hostile_only and m.pet)}
+        if C2_ENGAGE:
+            cells -= {m.pos for m in L.monsters
+                      if not m.pet and self._winnable(m)}
+        return cells
+
+    def _winnable(self, m):
+        """NH-E44 exchange-model predicate: a monster we can safely bump-attack
+        for XP in-path — catchable (not faster), not a never-melee species, low
+        expected HP-loss, and we're not already hurt. Reuses the SAFELEVEL
+        oracle (species_dpt * species_ttk = expected HP lost to the kill)."""
+        A = self.atlas
+        if A.hp < ENGAGE_HP_FRAC * max(1, A.hpmax):
+            return False
+        if self._never_melee(m) or m.speed > OUR_SPEED:
+            return False
+        if m.difficulty > A.xplvl + 2:
+            return False
+        try:
+            dpt = P.species_dpt(m.name, m.difficulty)
+            ttk = P.species_ttk(m.name, m.difficulty,
+                                role=self.role, xplvl=A.xplvl)
+        except Exception:
+            return False
+        return dpt * ttk <= ENGAGE_LOSS_FRAC * max(1, A.hp)
 
     def _inv(self, obs):
         return C.inventory(obs)
