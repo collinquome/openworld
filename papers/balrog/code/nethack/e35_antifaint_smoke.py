@@ -33,6 +33,9 @@ def run(arm, seed):
     fires = sum(1 for n in notes if "ANTIFAINT" in str(n))
     facq = sum(1 for n in notes if "FOODACQ" in str(n))
     petw = sum(1 for n in notes if "PET wait" in str(n))
+    # NH-E40 DIVE-RUSH: one note per dungeon level where dive-rush drove
+    # behavior (descend/route/seek) => distinct-level fired count.
+    diverush = sum(1 for n in notes if "DIVERUSH" in str(n))
     wield = sum(1 for n in notes if "WIELD upgrade" in str(n))
     wacq = sum(1 for n in notes if "WIELDACQ pickup" in str(n))
     wacq_walk = sum(1 for n in notes if "WIELDACQ walk" in str(n))
@@ -124,6 +127,7 @@ def run(arm, seed):
             "loot_fires": loot_pick, "loot_walks": loot_walk,
             "floor_wpn_dpt": floor_dpt,
             "floor_wpn_name": floor_name, "floor_upgrade_steps": floor_upg,
+            "diverush_notes": diverush,
             "pet_waits": petw, "pet_start": pet_start, "pet_end": pet_end,
             "pet_maxdepth_present": pet_maxdepth_present,
             "steps": res.get("steps"),

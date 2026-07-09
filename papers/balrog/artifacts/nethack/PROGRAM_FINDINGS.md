@@ -110,5 +110,61 @@ evidence rather than overturn it. NH_CONSUME ships flag-OFF (bit-identical) as a
 validated scaffold + the leveling-wall instrumentation; a zap reflection/line-of-
 fire guard is required before any use-deployment (DOCTRINE_CARDS_E38.md, HANDOFF_E38.md).
 
+## THE DIVE-RUSH METRIC-EXPLOIT (NH-E40) [SOLID — the 14th angle: the FIRST mean-MOVER, and it moves the mean DOWN; the metric-shape tail-seeking prediction put to a paired test and REFUTED]
+All 13 prior levers were COMBAT/CAPABILITY/RESOURCE and nulled on the mean. E40
+tests the OPPOSITE lever class — PACING/AVOIDANCE — the strategy the Metric-shape
+finding predicted (progression rewards MAX DEPTH not survival ⇒ optimal policy is
+TAIL-SEEKING: buy cheap depth lottery tickets). NH_DIVERUSH (default-OFF, bit-
+identical, snapshot GREEN 21/21) biases the decision cascade HARD toward
+descend/find-stairs and AWAY from combat/loot/explore/rest: route to a known
+downstairs AROUND monsters and descend (skip the fight/loot/rest dawdles), explore
+toward FINDING stairs when unknown, fight ONLY when a hostile blocks the sole
+route; the P3 emergency-survival guards (crisis-flee/pray, hunger-crisis eat) stay
+above it — speed-over-safety, not suicide. The hypothesis: rush PAST the D3-6 kill-
+zone to reach D7-8 before dying, scoring higher than a careful death at D5.
+
+**Result (n=18 paired dev seeds 101-118, cap 2000, one-seed-per-process, REF=C2.1
+vs TEST=+NH_DIVERUSH; results/e40_diverush.jsonl):** progression mean REF 0.0644 →
+TEST 0.0270, **Δ −0.0374, 95% paired-bootstrap CI [−0.0737, −0.0086] — EXCLUDES 0,
+a ROBUST NEGATIVE** (3 TEST-better / 8 worse / 7 tie). depth_max REF 5.78 → TEST
+3.94 (**Δ −1.83**); TEST reached DEEPER on only 2/18, equal 9, SHALLOWER 7 — never
+robustly deeper, the whole hypothesis inverted. Leave-one-out is sign-stable (every
+drop keeps Δ ∈ [−0.040, −0.024]); dropping the single biggest loser (seed 110,
+Archeologist REF D15→TEST D7) still leaves Δ −0.024. Death-rate ≈ unchanged (REF
+14/18 → TEST 15/18). Fired-split: the lever is LIVE (dive-rush drove behavior on
+16/18 seeds, changed steps/level on 7/18) — not a mechanical/signature null; it
+FIRES, descends, and STILL loses.
+
+**The mechanism (the finding).** (1) **Avoiding combat ≠ avoiding damage** — same-
+speed/faster monsters land free hits as the agent slips past toward the stairs (the
+exact s4 REST-failure mode: you can't outrun what matches your speed), so
+under-leveled dive-rushers die to the FIRST kill-zone monster EARLIER and SHALLOWER
+(seed 101 Priest D9→D3, killed by a large kobold it tried to route around). (2)
+**Steps/level went UP, not down** (Δ +60.3): on the seeds that reach deep, REF is
+ALREADY the fast descender (Archeologists 102/108/110 reach D10/D11/D15 at ~9
+steps/level by FIGHTING THROUGH the kill-zone in seconds), and forcing "descent-
+first" on them made them die shallow after MORE wandering (110: 9.3→171 steps/lvl).
+This **paired-experimentally PROVES the correlational fast-descender signal (fast<150
+steps/lvl mean prog 7.36 vs slow 2.82) was REVERSE CAUSATION** — good runs descend
+fast; making a run descend fast does not make it good, it inverts the outcome. (3)
+You **cannot buy cheap depth lottery tickets because TRAVERSAL ITSELF requires the
+combat capability dive-rush skips** — reaching D_{n+1} means surviving the monsters
+of D_n, which is the same bind every prior lever hit.
+
+**Verdict — the 14th converging angle on capability-boundedness, from the OPPOSITE
+(pacing) lever class, and the strongest yet.** DIVE-RUSH is the program's FIRST
+mean-MOVER (13 nulls, now a robust non-zero) — decisive precisely because it moves
+the mean the WRONG way with a CI that excludes 0. The metric IS depth-shaped and
+the tail-seeking analysis was correct in the abstract, but the paired test refutes
+its policy corollary: **metric-aligned dive-rushing does not exploit the depth-
+reward — the shallow kill-zone gets you regardless of pace, in fact EARLIER, because
+the wall is survive-the-traversal CAPABILITY, not pacing.** Honest read on the
+operator's "improve avg score" ask: the fastest way DOWN is not the deepest — the
+deep runs are the ones that win the D3-6 fights, so the lever that would move the
+mean is still combat/leveling capability (or demonstration of it), not speed. No
+MILESTONE/GIF: no dive-rush run reached deep where baseline died shallow — the
+reverse happened on every deep seed. NH_DIVERUSH ships flag-OFF (bit-identical) as a
+validated scaffold + the paired block + analyzer (e40_block.py / e40_analyze.py).
+
 ## THE META-FINDING (both programs)
 The synthesis-model + verified-code + planning recipe is twice-proven across two programs on 6+ environments. Its BOUNDARY is exactly where VERIFICATION stops: opaque procedural goals (ARC-3) and irreducible stochasticity/missing-capability (NetHack). That boundary is the research frontier — and the intuition layer + memory + goal-inference-bridge are the instruments aimed at it.

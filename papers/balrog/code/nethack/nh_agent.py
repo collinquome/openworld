@@ -102,6 +102,20 @@ C2_CONSUME = _flag("NH_CONSUME")  # NH-E38: CONSUMABLE ECONOMY — engrave-ID wa
 if not C2_CONSUME:
     C2_CONSUME = _flag("NH_IDGAME")
 C2_SAFELEVEL = _flag("NH_SAFELEVEL")  # Phase L s16: SAFE EARLY LEVELING — on D1-3, before diving, route to an ISOLATED SAFE weak monster to farm XP so we arrive at the D5-6 kill-zone stronger (the bootstrap-breaker: XP = the other unused capability)
+C2_DIVERUSH = _flag("NH_DIVERUSH")  # NH-E40 DIVE-RUSH: the metric-EXPLOIT lever.
+#   BALROG progression rewards MAX DEPTH REACHED, not survival, and the metric-
+#   shape analysis (PROGRAM_FINDINGS §Metric shape) shows the optimal policy is
+#   TAIL-SEEKING (buy cheap depth lottery tickets). All 13 prior levers were
+#   combat/capability/resource and nulled on the mean; this is the OPPOSITE kind
+#   of lever — PACING/AVOIDANCE. Bias the decision cascade HARD toward
+#   descend/find-stairs and AWAY from combat/loot/explore/rest: when a downstairs
+#   is known+reachable, route to it (around monsters) and descend, skipping the
+#   fight/loot/rest detours; when unknown, explore toward FINDING it. Only fight
+#   when a hostile BLOCKS the sole route to the stairs (forced). Emergency
+#   survival (P3 crisis-flee/pray + hunger-crisis eat) stays ABOVE this block so
+#   it doesn't die instantly — dive-rush is speed-over-safety, not suicide. The
+#   hypothesis: rushing PAST the D3-6 kill-zone reaches D7-8 before dying,
+#   scoring HIGHER than a careful death at D5. Default OFF => bit-identical.
 C2_CASTHUNGER_EAT = _flag("NH_CASTHUNGER_EAT")  # V1b eat-early: DROPPED
 #   after CASTHUNGER-1 (clearly negative; kept behind sub-flag for the lab)
 #   (guard-class only; lets the guards ride even on an otherwise-v1.1
@@ -179,7 +193,7 @@ C2_ANY = any((C2_EXPMAX, C2_RANGED, C2_ARMOR, C2_FOOD2, C2_PRAYFIX, C2_LOS,
               C2_E15, C2_REPEAT, C2_CASTHUNGER, C2_ROLE_PROFILE, C2_KICK_GATE,
               C2_RULEBASE, C2_READY_GATE, C2_ADVISORY, C2_ANTIFAINT,
               C2_FOODACQ, C2_PET, C2_WIELD, C2_WIELDACQ, C2_LOOT,
-              C2_SAFELEVEL, C2_CONSUME))
+              C2_SAFELEVEL, C2_CONSUME, C2_DIVERUSH))
 if C2_RULEBASE:
     import nh_rulebase as _RB_MOD
     RULEBASE = _RB_MOD.build_default_base()
@@ -540,6 +554,8 @@ class DiveAgent:
         self.descended_from = None              # (key, cell) of last '>' taken
         self._pet_waits = {}                    # (key, stair cell) -> wait count
         self.pet_wait_fires = 0                 # NH_PET: total pet-follow waits
+        self.diverush_fires = 0                 # NH_DIVERUSH: descend/seek steps driven by dive-rush
+        self._diverush_levels = set()           # NH_DIVERUSH: A.key set noted (one note/level)
         self.mines_entrances = {}               # level key -> {cells}
         self.mines_avoid_since = {}             # level key -> game time
         self.commit_mines = False               # ban expired: stop retreating
@@ -2172,6 +2188,19 @@ class DiveAgent:
                         d = (m.x - A.agent[0], m.y - A.agent[1])
                         if d in DIR_OF:
                             return DIR_OF[d]
+
+        # ---- P4.95: DIVE-RUSH (NH_DIVERUSH, NH-E40) ------------------------
+        # The metric-EXPLOIT lever. Runs AFTER every emergency-survival guard
+        # (P3 crisis-flee/pray, hunger-crisis eat, sticky-monster) but BEFORE
+        # combat/ranged/hunt/safelevel/loot/rest: bias HARD toward descent.
+        # When a downstairs is known+reachable, route to it (around monsters)
+        # and descend, bypassing the fight/loot/rest dawdles; when unknown,
+        # explore toward FINDING it. Only fall through to combat when a hostile
+        # BLOCKS the sole route (forced). Flag-off => never called (bit-ident).
+        if C2_DIVERUSH:
+            da = self._diverush(obs, adj)
+            if da is not None:
+                return da
 
         # ---- P4.85: NH-E38 proactive offensive-wand zap --------------------
         # Zap a fast/same-speed/tough threat in line BEFORE trading melee (a
@@ -4083,6 +4112,63 @@ class DiveAgent:
             self._goal("descend", f"to > at depth {A.depth}")
             return self._step_path(path)
         return None
+
+    # ------------------------------------------------------- DIVE-RUSH (E40)
+    def _diverush(self, obs, adj):
+        """NH-E40 DIVE-RUSH: descend-first tail-seeker. Route to a known
+        downstairs (AROUND monsters) and descend; if unknown, explore to FIND
+        it. Returns None (=> fall through to combat/loot) only when a hostile
+        BLOCKS the sole route (forced) or nothing is reachable. Skips the
+        rest/ready/pet-wait dawdles the normal descent router runs on the
+        stairs cell — dive-rush trades those for speed. Emergency survival
+        already ran above (P3 crisis/pray + hunger-crisis eat + sticky-monster);
+        this is speed-over-safety, not suicide.
+        Provenance: insight-origin=OP (metric-shape TAIL-SEEKING, PROGRAM_
+        FINDINGS §Metric shape — progression rewards max depth, not survival)
+        + knowledge=our own kill-zone corpus (under-leveled SPIKE deaths at
+        D3-6). Flag-off => never called (bit-identical)."""
+        A = self.atlas
+        L = A.level
+        goals = set(L.stairs_down) | set(L.holes)
+        if goals:
+            # prefer a route that AVOIDS monster cells (go around, don't stop
+            # to fight); relax the avoid set only as far as needed for a path.
+            path = L.bfs(A.agent, goals, avoid=self._travel_avoid(goals))
+            if path is None:
+                path = L.bfs(A.agent, goals, avoid=self._suspects())
+            if path is None:
+                path = L.bfs(A.agent, goals, avoid=self._suspects(),
+                             bad_traps_ok=True)
+            if path == []:
+                # standing on the downstairs: descend NOW (skip the rest/ready/
+                # pet dawdles — the whole point is to not linger in the kill-
+                # zone). Emergencies already handled above.
+                self.descended_from = (A.key, A.agent)
+                self._note_diverush("descend")
+                self._goal("descend", f"diverush > depth {A.depth}")
+                return "down"
+            if path:
+                self._note_diverush("route")
+                self._goal("descend", f"diverush ->> depth {A.depth}")
+                return self._step_path(path)
+            # path None under all relaxations: stairs known but a monster/wall
+            # blocks the ONLY route -> forced fight. Fall through to combat.
+            return None
+        # no downstairs known: SEEK it via the frontier (find-stairs, not full
+        # explore/fight/loot). _explore already routes around monster cells.
+        ex = self._explore(obs)
+        if ex is not None:
+            self._note_diverush("seek")
+            return ex
+        return None
+
+    def _note_diverush(self, kind):
+        """Count dive-rush drives; note once per dungeon level (fired-split)."""
+        A = self.atlas
+        self.diverush_fires += 1
+        if A.key not in self._diverush_levels:
+            self._diverush_levels.add(A.key)
+            self.note(f"DIVERUSH {kind} L{A.key} depth {A.depth}")
 
     # ------------------------------------------------- digger acquisition
     def _acquire_digger(self, obs):
