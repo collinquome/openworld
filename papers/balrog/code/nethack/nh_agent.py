@@ -112,6 +112,15 @@ C2_ENGAGE = _flag("NH_ENGAGE")    # NH-E44: STOP AVOIDING WINNABLE MONSTERS. Dia
 #   cost (avoidance costs steps too). Default-OFF, bit-identical when off.
 ENGAGE_LOSS_FRAC = float(_os.environ.get("NH_ENGAGE_LOSS", "0.30"))  # engage IFF exp HP-loss <= this*hp
 ENGAGE_HP_FRAC = float(_os.environ.get("NH_ENGAGE_HP", "0.6"))       # only when hp >= this*hpmax (don't pick fights while hurt)
+C2_CLEAR = _flag("NH_CLEAR")      # NH-E45: MAXIMAL fight-for-XP — the proper test
+#   E43 (isolated-prey hunting) gained +0.4 lvl; E44 (passive not-avoid) was inert.
+#   NEITHER cleared the level. NH_CLEAR extends the P5.7 opportunistic hunt to ALL
+#   depths (not just D1-4), wider radius, big budget, using the _winnable oracle:
+#   route to and kill EVERY winnable monster on the level before descending, to
+#   gain SUBSTANTIAL XP (20-50 kills -> xp5-6, enough to beat the shallow depth
+#   rung). If this still nulls, the XP axis is definitively closed. Default-OFF.
+CLEAR_RADIUS = int(_os.environ.get("NH_CLEAR_RADIUS", "10"))
+CLEAR_BUDGET = int(_os.environ.get("NH_CLEAR_BUDGET", "600"))
 C2_FUNNEL = _flag("NH_FUNNEL")    # NH-E41: PROACTIVE anti-pack CHOKE-POINT
 #   combat. We die in SPIKES at ~Dlvl5 — killed in ~one exchange at ~35% HP.
 #   A big driver is BURST damage from a PACK (jackals/sewer rats/gnomes travel
@@ -2425,14 +2434,21 @@ class DiveAgent:
             return "search"
 
         # ---- P5.7: shallow opportunistic hunting (V1.1 L2) -----------------
-        if HUNT_SHALLOW and A.depth <= 4 and A.hp >= 0.6 * A.hpmax and \
-                not self.digger_letter and \
-                self.hunt_turns.get(A.key, 0) < 250:
+        # NH-E45 NH_CLEAR extends this to ALL depths, wider radius, big budget:
+        # clear every winnable monster on the level for substantial XP.
+        _hunt_shallow = (HUNT_SHALLOW and A.depth <= 4 and A.hp >= 0.6 * A.hpmax
+                         and not self.digger_letter
+                         and self.hunt_turns.get(A.key, 0) < 250)
+        _hunt_clear = (C2_CLEAR and A.hp >= ENGAGE_HP_FRAC * A.hpmax
+                       and not self.digger_letter
+                       and self.hunt_turns.get(A.key, 0) < CLEAR_BUDGET)
+        if _hunt_shallow or _hunt_clear:
+            _radius = CLEAR_RADIUS if _hunt_clear else 6
             prey = [m for m in self._mobile_hostiles()
                     if m.difficulty <= A.xplvl + 1 and m.speed <= OUR_SPEED
                     and not self._never_melee(m)
                     and max(abs(m.x - A.agent[0]),
-                            abs(m.y - A.agent[1])) <= 6]
+                            abs(m.y - A.agent[1])) <= _radius]
             if prey:
                 tgt = min(prey, key=lambda m: max(abs(m.x - A.agent[0]),
                                                   abs(m.y - A.agent[1])))
