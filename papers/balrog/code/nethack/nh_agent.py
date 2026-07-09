@@ -123,6 +123,15 @@ CLEAR_RADIUS = int(_os.environ.get("NH_CLEAR_RADIUS", "10"))
 CLEAR_BUDGET = int(_os.environ.get("NH_CLEAR_BUDGET", "600"))
 BC_HP_FRAC = float(_os.environ.get("NH_BC_HP", "0.6"))   # NH-E46b: fire learned combat only when hp < this*hpmax (danger)
 BC_ALLFIGHTS = _flag("NH_BC_ALL")  # override: fire on every fight (the crude E46 pilot behavior)
+C2_PRAYEARLY = _flag("NH_PRAYEARLY")  # NH-E48: forensic finding — 12% of deaths
+#   pray in their last actions and STILL die (median hp=3 when praying). Praying
+#   at hp<=3 with a hostile adjacent is too late: the prayer takes a turn (monster
+#   kills you first) OR the emergency prayer's >500-turn gate lets it fire while
+#   the god is still angry (~1000-turn real cooldown) so it can't heal. FIX: when
+#   a mobile hostile is adjacent AND the prayer is genuinely valid (real cooldown
+#   + past the initial timeout), pray EARLIER (higher HP) so a life-saving heal
+#   lands before the spike kills you. Default-OFF, bit-identical when off.
+PRAYEARLY_HP = float(_os.environ.get("NH_PRAYEARLY_HP", "0.34"))  # pray at hp <= this*hpmax when hostile adjacent
 C2_BC = _flag("NH_BC")            # NH-E46: LEARNED combat — a behavioral-cloning
 #   policy trained on AutoAscend (NHC winner, Xp med 8 vs our 1-3) picks the
 #   attack/move direction among adjacent hostiles from the local 9x9 window
@@ -1077,6 +1086,19 @@ class DiveAgent:
             # T>700 clears most of the distribution
             return A.time > 700
         return A.time - self.prayed_at > 1500
+
+    def _pray_valid(self):
+        """NH-E48: will a prayer ACTUALLY heal right now? (real cooldown, not
+        the last-resort 500-turn gamble). First prayer must be past the initial
+        timeout floor (~350); subsequent prayers need the real ~1000-turn gap.
+        Used to pray EARLY only when it will work, else fall through to flee/fight
+        instead of wasting the fatal turn on a prayer the god will reject."""
+        A = self.atlas
+        if self.pray_count >= 3:
+            return False
+        if self.prayed_at is None:
+            return A.time > 350
+        return A.time - self.prayed_at > 1000
 
     def _adjacent_hostiles(self):
         A = self.atlas
@@ -2071,6 +2093,18 @@ class DiveAgent:
             ha = self._consume_heal(obs)
             if ha is not None:
                 return ha
+        # NH-E48 PRAY-EARLY: with a hostile adjacent, praying at hp<=5 is too
+        # late (die during the prayer turn). If the prayer is genuinely valid,
+        # pray EARLIER (hp <= PRAYEARLY_HP*hpmax) so the heal lands first.
+        if C2_PRAYEARLY and adj and A.hp <= max(int(PRAYEARLY_HP * A.hpmax), 8) \
+                and A.hp > max(A.hpmax // 7, 5) and self._pray_valid():
+            self.prayed_at = A.time
+            self.pray_count += 1
+            self.note(f"pray-early (hp {A.hp}/{A.hpmax}, hostile adj)")
+            self._goal("survive", f"pray-early hp {A.hp}/{A.hpmax}")
+            self.queue = ["y"]
+            self.queue_tag = "pray"
+            return "pray"
         # prayer heals only in "major trouble" (hp < hpmax/7): fire it there
         if A.hp <= max(A.hpmax // 7, 5) and \
                 self._pray_ok(last_resort=bool(adj) and A.hp <= 4):
