@@ -121,6 +121,12 @@ C2_CLEAR = _flag("NH_CLEAR")      # NH-E45: MAXIMAL fight-for-XP — the proper 
 #   rung). If this still nulls, the XP axis is definitively closed. Default-OFF.
 CLEAR_RADIUS = int(_os.environ.get("NH_CLEAR_RADIUS", "10"))
 CLEAR_BUDGET = int(_os.environ.get("NH_CLEAR_BUDGET", "600"))
+C2_BC = _flag("NH_BC")            # NH-E46: LEARNED combat — a behavioral-cloning
+#   policy trained on AutoAscend (NHC winner, Xp med 8 vs our 1-3) picks the
+#   attack/move direction among adjacent hostiles from the local 9x9 window
+#   (val_acc 0.339 vs 0.198 base). The FIRST intervention attacking the actual
+#   bottleneck (learned execution) rather than another hand-written rule.
+#   Default-OFF, bit-identical when off; overrides only toward an adjacent mob.
 C2_FUNNEL = _flag("NH_FUNNEL")    # NH-E41: PROACTIVE anti-pack CHOKE-POINT
 #   combat. We die in SPIKES at ~Dlvl5 — killed in ~one exchange at ~35% HP.
 #   A big driver is BURST damage from a PACK (jackals/sewer rats/gnomes travel
@@ -1273,6 +1279,9 @@ class DiveAgent:
                   not self._never_melee(m) and m.pos not in L.no_attack]
         if not mobile:
             return None
+        # NH-E46 combat-BC: learned AutoAscend combat direction (default-OFF,
+        # bit-identical when off). Only overrides toward an ADJACENT mobile
+        # hostile (bump = attack); else falls through to the symbolic exchange.
         stats = sorted(((m, P.species_dpt(m.name, m.difficulty),
                          P.species_ttk(m.name, m.difficulty,
                                        role=self.role, xplvl=A.xplvl))
@@ -2389,6 +2398,24 @@ class DiveAgent:
         # skipped (descent/exploration layers take over); crisis handling
         # at P3 still runs first, so this never suppresses emergencies.
         wd_disengaged = C2_E15 and self.steps < self.wd_disengage_until
+        # NH-E46 combat-BC: learned AutoAscend attack direction (default-OFF,
+        # bit-identical). Overrides only when the BC picks a direction pointing
+        # at an ADJACENT mobile hostile (bump=attack); else falls through.
+        if C2_BC and adj and not wd_disengaged:
+            try:
+                import e46_policy as _bcp
+                _A = self.atlas
+                _d = _bcp.combat_direction(obs["obs"]["tty_chars"])
+                if _d in DIRS:
+                    _ddx, _ddy = DIRS[_d]
+                    _tgt = (_A.agent[0] + _ddx, _A.agent[1] + _ddy)
+                    _mob = [m for m in adj if m.name not in C.IMMOBILE
+                            and not self._never_melee(m)]
+                    if any(m.pos == _tgt for m in _mob):
+                        self.bc_fires = getattr(self, "bc_fires", 0) + 1
+                        return _d
+            except Exception:
+                pass
         if adj and not C2_EXPMAX and not wd_disengaged:
             act = self._combat(adj)
             if act:
