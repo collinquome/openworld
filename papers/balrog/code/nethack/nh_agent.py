@@ -102,6 +102,28 @@ C2_CONSUME = _flag("NH_CONSUME")  # NH-E38: CONSUMABLE ECONOMY — engrave-ID wa
 if not C2_CONSUME:
     C2_CONSUME = _flag("NH_IDGAME")
 C2_SAFELEVEL = _flag("NH_SAFELEVEL")  # Phase L s16: SAFE EARLY LEVELING — on D1-3, before diving, route to an ISOLATED SAFE weak monster to farm XP so we arrive at the D5-6 kill-zone stronger (the bootstrap-breaker: XP = the other unused capability)
+C2_FUNNEL = _flag("NH_FUNNEL")    # NH-E41: PROACTIVE anti-pack CHOKE-POINT
+#   combat. We die in SPIKES at ~Dlvl5 — killed in ~one exchange at ~35% HP.
+#   A big driver is BURST damage from a PACK (jackals/sewer rats/gnomes travel
+#   in groups) all attacking the same turn. NetHack's classic counter is choke-
+#   point fighting: retreat into a 1-tile-wide corridor / doorway so only ONE
+#   monster reaches us per turn -> burst collapses to single-attacker damage ->
+#   the unsurvivable multi-attacker spike becomes a survivable 1-on-1. E36's
+#   offline synthesis already found CORRIDOR (funnel-and-fight) BEATS the KITE
+#   lever in robust replay (survival 0.50 vs 0.28) but deployed as a MECHANICAL
+#   NULL: its signature (tuned on the historical corpus, gated on adjacency AT
+#   low HP) never fired live because the strong config already steps off the
+#   adjacent cell by then (the signature-fidelity gap). This lever fires
+#   PROACTIVELY on the DEVELOPING crisis — 2+ mobile hostiles near AND HP not
+#   full AND a choke reachable within a few steps — ABOVE the normal open-fight
+#   (pre-empting the multi-attacker exchange), calibrated on LIVE current-config
+#   states. Default OFF => bit-identical. Emergency pray/flee stay above it.
+# NH_FUNNEL tunables (calibrate the trigger on LIVE play, not the corpus):
+FUNNEL_HP_HI = float(_os.environ.get("NH_FUNNEL_HP_HI", "1.01"))  # hard HP-full veto (1.01=off; burst gate is primary — packs engage at full HP live, E36 gap)
+FUNNEL_RADIUS = int(_os.environ.get("NH_FUNNEL_RADIUS", "3"))     # pack = mobile hostiles within this Chebyshev radius
+FUNNEL_PACK = int(_os.environ.get("NH_FUNNEL_PACK", "2"))         # min pack size to funnel
+FUNNEL_BURST_FRAC = float(_os.environ.get("NH_FUNNEL_BURST_FRAC", "0.30"))  # funnel iff pack simultaneous-burst dpt >= this * current HP (the spike gate)
+FUNNEL_MAXDIST = int(_os.environ.get("NH_FUNNEL_MAXDIST", "4"))   # max steps to an acceptable choke
 C2_DIVERUSH = _flag("NH_DIVERUSH")  # NH-E40 DIVE-RUSH: the metric-EXPLOIT lever.
 #   BALROG progression rewards MAX DEPTH REACHED, not survival, and the metric-
 #   shape analysis (PROGRAM_FINDINGS §Metric shape) shows the optimal policy is
@@ -556,6 +578,8 @@ class DiveAgent:
         self.pet_wait_fires = 0                 # NH_PET: total pet-follow waits
         self.diverush_fires = 0                 # NH_DIVERUSH: descend/seek steps driven by dive-rush
         self._diverush_levels = set()           # NH_DIVERUSH: A.key set noted (one note/level)
+        self.funnel_fires = 0                    # NH_FUNNEL: total proactive choke-retreat steps
+        self._funnel_levels = set()              # NH_FUNNEL: A.key set where funnel fired
         self.mines_entrances = {}               # level key -> {cells}
         self.mines_avoid_since = {}             # level key -> game time
         self.commit_mines = False               # ban expired: stop retreating
@@ -1283,6 +1307,87 @@ class DiveAgent:
             self._goal("fight", f"cornered vs {target.name}")
             return step
         return None
+
+    def _funnel(self, obs, adj):
+        """NH-E41 PROACTIVE anti-pack CHOKE-POINT retreat. Fires when a PACK
+        (>=FUNNEL_PACK mobile hostiles within FUNNEL_RADIUS) threatens AND HP is
+        not full (hp_frac < FUNNEL_HP_HI) AND we are NOT already on a choke AND a
+        1-tile choke (doorway / narrow corridor cell) is reachable within
+        FUNNEL_MAXDIST steps: retreat to the choke so the pack QUEUES and only
+        one monster attacks per turn (burst -> single-attacker). Returns a step
+        action toward the choke, or None (fall through to normal open combat).
+
+        This PRE-EMPTS the open multi-attacker exchange even when that exchange
+        is nominally EV-winnable on the mean, because the mean-winnable pack
+        fight spike-kills on BURST variance (the ~Dlvl5 wall). Trigger is on the
+        DEVELOPING crisis (pack near + HP falling), not the low-HP+adjacency
+        conjunct E36 tuned on the historical corpus — that signature never fired
+        live because the strong config already disengages by then (the
+        signature-fidelity gap). Calibrated on LIVE current-config states."""
+        A = self.atlas
+        L = A.level
+        # hard upper HP sanity (default 1.01 = off): the mechanism REQUIRES
+        # firing at full HP — you go to the choke BEFORE the pack hits you, so a
+        # literal "hp<hpmax not-full" gate recreates the E36 signature-fidelity
+        # gap (packs engage at full HP under the strong config; diag: 18/18
+        # calls bailed hp_full). The real gate is BURST-SCALED below.
+        if A.hp >= FUNNEL_HP_HI * A.hpmax:
+            return None
+        # PACK = mobile hostiles within radius R (wider than adjacency so we
+        # catch the FORMING pack before every attacker is adjacent). At least
+        # one is adjacent already (caller gates on `adj`).
+        ax, ay = A.agent
+        pack = [m for m in L.monsters
+                if (not m.pet) and m.name not in C.IMMOBILE
+                and m.pos not in L.no_attack and not self._never_melee(m)
+                and max(abs(m.x - ax), abs(m.y - ay)) <= FUNNEL_RADIUS]
+        if len(pack) < FUNNEL_PACK:
+            return None
+        # BURST gate (the mechanism-faithful trigger): funnel only when the
+        # pack's SIMULTANEOUS-attacker burst is a dangerous fraction of CURRENT
+        # HP — that is exactly the spike we cannot survive in the open (mean-
+        # winnable, variance-lethal). This fires at FULL HP against a lethal
+        # pack (the actual Dlvl5 wall) but skips trivial 2-jackal encounters
+        # (burst tiny vs HP), and scales up as HP falls. Subsumes "HP not-full".
+        pack_burst = 0.0
+        if P is not None:
+            for m in pack:
+                try:
+                    pack_burst += P.species_dpt(m.name, m.difficulty)
+                except Exception:
+                    pass
+        if pack_burst < FUNNEL_BURST_FRAC * max(A.hp, 1):
+            return None
+        topo = self._topo()
+        chokes = topo.chokes
+        if not chokes:
+            return None
+        # already ON a choke -> hold and fight here (only one can reach us);
+        # retreating would donate turns. Let normal combat resolve the 1-on-1.
+        if A.agent in chokes:
+            return None
+        # nearest REACHABLE choke within a few steps (avoid stepping onto known
+        # suspect walls / other monster cells). Prefer the closest.
+        best = None
+        avoid = self._suspects() | self._mcells()
+        for cell in chokes:
+            dist = max(abs(cell[0] - ax), abs(cell[1] - ay))
+            if 0 < dist <= FUNNEL_MAXDIST:
+                p = L.bfs(A.agent, [cell], avoid=avoid)
+                if p and (best is None or len(p) < best[1]):
+                    best = (p, len(p), cell)
+        if best is None:
+            return None
+        self.funnel_fires += 1
+        self._funnel_levels.add(A.key)
+        adjn = len([m for m in adj if m.name not in C.IMMOBILE
+                    and not self._never_melee(m)])
+        self._goal("funnel", f"{len(pack)} pack -> choke {best[2]}")
+        self._ev(f"EV funnel: pack {len(pack)} adj {adjn} "
+                 f"hp {A.hp}/{A.hpmax} choke in {best[1]} steps")
+        self.note(f"FUNNEL retreat L{A.key} pack{len(pack)} adj{adjn} "
+                  f"hp{A.hp}/{A.hpmax} choke{best[2]} d{best[1]}")
+        return self._step_path(best[0])
 
     # ================= NH-E38 CONSUMABLE ECONOMY ======================
     def _consume_inv(self, obs):
@@ -2218,6 +2323,17 @@ class DiveAgent:
             if self.cast_dir and self.steps - self.cast_step > 3:
                 self.cast_dir = None
             act = self._cast_attack(adj)
+            if act:
+                return act
+
+        # ---- P4.97: NH-E41 PROACTIVE anti-pack FUNNEL ---------------------
+        # Retreat a forming pack into a 1-tile choke BEFORE fighting it in the
+        # open, so burst damage from simultaneous attackers collapses to a
+        # survivable 1-on-1. Fires ABOVE normal open combat (pre-empts the
+        # multi-attacker exchange) but BELOW every P3 emergency (crisis-zap/
+        # heal/pray/flee already ran). Default OFF => bit-identical.
+        if C2_FUNNEL and adj:
+            act = self._funnel(obs, adj)
             if act:
                 return act
 

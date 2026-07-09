@@ -166,5 +166,64 @@ MILESTONE/GIF: no dive-rush run reached deep where baseline died shallow — the
 reverse happened on every deep seed. NH_DIVERUSH ships flag-OFF (bit-identical) as a
 validated scaffold + the paired block + analyzer (e40_block.py / e40_analyze.py).
 
+## THE CORRIDOR-FUNNEL ANTI-PACK LEVER (NH-E41) [SOLID — the 15th angle: a mechanistically-sound anti-BURST lever that FIRES live (unlike E36) but nulls, because the multi-attacker-pack death mode it targets barely OCCURS under the current config]
+E36's offline synthesis crowned CORRIDOR (funnel-and-fight) over the shipped KITE
+lever in robust replay (survival 0.50 vs 0.28) but deployed as a MECHANICAL NULL:
+its signature (adjacency AT low HP) never fired live (the signature-fidelity gap).
+E41 re-attacks the SAME mechanism PROACTIVELY: NH_FUNNEL (default-OFF, bit-identical,
+snapshot GREEN 21/21) fires ABOVE normal open-combat when a PACK (≥2 mobile hostiles
+within radius 3) threatens and a 1-tile choke (corridor cell / doorway, from
+nh_common Topology.chokes) is reachable within a few steps — retreat to the choke so
+the pack QUEUES and only one attacks per turn (burst → single-attacker). The trigger
+is BURST-scaled (funnel iff the pack's simultaneous-attacker dpt ≥ frac·HP), and for
+the validation block it was calibrated MAX-FIRE (burst_frac 0.0, HP_HI off) to give
+the mechanism every chance to fire — the E36 anti-null mandate. P3 emergency
+pray/flee stay above it.
+
+**Result (n=16 paired dev seeds 101-116, cap 2000, one-seed-per-process, REF=C2.1 vs
+TEST=+NH_FUNNEL max-fire; results/e41_funnel.jsonl):** progression mean REF 0.0695 →
+TEST 0.0641, **Δ −0.0054, 95% paired-bootstrap CI [−0.0234, +0.0065] — INCLUDES 0, a
+NULL** (2 TEST-better / 2 worse / 12 tie). depth_max REF 6.06 → TEST 5.81 (Δ −0.25);
+death-rate identical 13/16 both. **Signature-fidelity: it FIRES — 7/16 seeds, 18
+total fires** (unlike E36's 0), so this is NOT a mechanical/signature null. But
+leave-one-out shows the slight negative is ONE-SEED: dropping seed 108 (Archeologist
+REF D11 → TEST D6, Δ −0.1258) FLIPS Δ positive — the +2.64/+7.36 on-fire mirage
+lesson, caught by LOO. Fired-split (endogenous): {108 −0.126, 103 −0.003, 106/115/116
+0.0, 111 +0.006, 112 +0.036} = mean −0.011, dominated by one catastrophe; non-fired
+seeds Δ EXACTLY 0.0 (bit-identical when it doesn't fire, 4-way verified).
+
+**Why a sound mechanism nulls (the finding — three quantified factors).** (1) **The
+addressable scenario is RARE.** Facing a pack (≥2 non-pet hostiles within radius 3)
+occurs on just **3.3% of snapshots (269/8232)**, and ≥2 ADJACENT is rarer still
+(0–8 moments/episode). Under the current strong config (NH_LOS line-of-fire avoid +
+NH_TOPO + corridor pathing + weakest-single-target combat) monsters are engaged
+ONE AT A TIME — they approach single-file and the agent does not wade into groups.
+The lethal spikes are **SINGLE strong/fast monsters** (giant spider, giant ant while
+praying, large kobold), not multi-attacker packs — the E41 premise is contradicted
+for this config. (2) **Even the one pack-heavy seed couldn't fire:** seed 113 (Wizard)
+had 19.7% faced-2 (184/936) yet funnel_fires=0 — no choke reachable in time (the
+"choke rarely reachable" factor). (3) **When it DOES fire it does NOT reduce
+simultaneous attackers — it INCREASES them:** multi-attacker rate REF 0.0091 → TEST
+0.0294 (Δ **+0.020**, wrong sign); seed 116 (Valkyrie) fired once and its
+multi-attacker rate EXPLODED 4.7% → 30.4% — the retreat backed it into a dead-end
+where the pack CONVERGED. Choke-retreat perturbs the trajectory into different
+(sometimes worse) RNG deaths (108: D11→D6) rather than cleanly collapsing burst to
+1-on-1.
+
+**Verdict — the 15th converging angle on capability-boundedness, at the tactical-
+positioning layer.** The classic choke-point-vs-pack doctrine is sound in vanilla
+NetHack, and NH_FUNNEL fires live (beating E36's signature-fidelity gap), yet it is
+INERT-to-slightly-harmful here for a structural reason the paired block + addressable-
+rate instrumentation make precise: **the multi-attacker-BURST death mode barely
+occurs under the current config (3.3% pack rate; single-file engagement already
+prevents surrounds), so a lever that only helps in that state cannot move the mean —
+and forcing choke retreats mostly perturbs trajectories, occasionally into worse
+swarms.** Honest read on the "improve avg score" ask: we do not die to packs, we die
+to the FIRST kill-zone monster an under-leveled character cannot out-trade — the same
+survive-the-traversal CAPABILITY wall E40 hit from the pacing side. No MILESTONE/GIF:
+no funnel-fight saved a run baseline lost (the reverse — 108, 116). NH_FUNNEL ships
+flag-OFF (bit-identical, snapshot GREEN) as a validated scaffold + the paired block +
+analyzer + firing diagnostic (e41_block.py / e41_analyze.py / diag_funnel.py).
+
 ## THE META-FINDING (both programs)
 The synthesis-model + verified-code + planning recipe is twice-proven across two programs on 6+ environments. Its BOUNDARY is exactly where VERIFICATION stops: opaque procedural goals (ARC-3) and irreducible stochasticity/missing-capability (NetHack). That boundary is the research frontier — and the intuition layer + memory + goal-inference-bridge are the instruments aimed at it.

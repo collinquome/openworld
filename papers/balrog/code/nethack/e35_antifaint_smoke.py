@@ -36,6 +36,11 @@ def run(arm, seed):
     # NH-E40 DIVE-RUSH: one note per dungeon level where dive-rush drove
     # behavior (descend/route/seek) => distinct-level fired count.
     diverush = sum(1 for n in notes if "DIVERUSH" in str(n))
+    # NH-E41 FUNNEL: one note per proactive choke-retreat step. funnel_fires =
+    # total retreat steps; funnel_levels = distinct dungeon levels it fired on.
+    funnel = sum(1 for n in notes if "FUNNEL" in str(n))
+    funnel_levels = len(set(re.findall(r"FUNNEL retreat (L\S+)", " ".join(
+        str(n) for n in notes))))
     wield = sum(1 for n in notes if "WIELD upgrade" in str(n))
     wacq = sum(1 for n in notes if "WIELDACQ pickup" in str(n))
     wacq_walk = sum(1 for n in notes if "WIELDACQ walk" in str(n))
@@ -60,6 +65,23 @@ def run(arm, seed):
     # pet_start = a pet present in an early (<=step 50) snapshot; pet_end = a pet
     # present in the LAST snapshot (still with the agent at episode end/death).
     mon = traj.get("monsters", []) or []
+    # NH-E41 MULTI-ATTACKER EXCHANGE rate: among monster snapshots, the fraction
+    # where >=2 non-pet hostiles are ADJACENT (Chebyshev 1) to the agent — the
+    # burst-damage state the funnel is meant to collapse to 1-on-1. Same snapshot
+    # sampling for REF and TEST => comparable rate. positions is per-step.
+    positions = traj.get("positions", []) or []
+    ma_snaps, ma_multi, ma_adj_sum = 0, 0, 0
+    for fr in mon:
+        step, mlist = fr[0], fr[1]
+        if step < 1 or step > len(positions):
+            continue
+        ax, ay = positions[step - 1]
+        nadj = sum(1 for m in mlist if not (len(m) > 3 and m[3])
+                   and max(abs(m[0] - ax), abs(m[1] - ay)) == 1)
+        ma_snaps += 1
+        ma_adj_sum += nadj
+        if nadj >= 2:
+            ma_multi += 1
     def _has_pet(frame):
         return any(len(m) > 3 and m[3] for m in frame[1])
     pet_start = any(_has_pet(f) for f in mon if f[0] <= 50)
@@ -128,6 +150,8 @@ def run(arm, seed):
             "floor_wpn_dpt": floor_dpt,
             "floor_wpn_name": floor_name, "floor_upgrade_steps": floor_upg,
             "diverush_notes": diverush,
+            "funnel_fires": funnel, "funnel_levels": funnel_levels,
+            "ma_snaps": ma_snaps, "ma_multi": ma_multi, "ma_adj_sum": ma_adj_sum,
             "pet_waits": petw, "pet_start": pet_start, "pet_end": pet_end,
             "pet_maxdepth_present": pet_maxdepth_present,
             "steps": res.get("steps"),
